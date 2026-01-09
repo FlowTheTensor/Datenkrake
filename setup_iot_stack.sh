@@ -31,6 +31,13 @@ install_docker() {
     log "Docker Compose plugin already installed"
   fi
 
+  if ! command -v mosquitto_passwd >/dev/null 2>&1; then
+    log "Installing Mosquitto clients for password management"
+    apt-get install -y mosquitto-clients
+  else
+    log "Mosquitto clients already installed"
+  fi
+
   if [[ ${TARGET_USER} != "root" ]] && ! id -nG "${TARGET_USER}" | grep -qw docker; then
     log "Adding ${TARGET_USER} to docker group"
     usermod -aG docker "${TARGET_USER}"
@@ -60,7 +67,7 @@ create_mqtt_password() {
     read -p "Enter MQTT username: " mqtt_user
     read -s -p "Enter MQTT password: " mqtt_pass
     echo
-    docker run --user root --rm -v "${SCRIPT_DIR}/mosquitto/config:/mosquitto/config" eclipse-mosquitto:2.0 mosquitto_passwd -b /mosquitto/config/passwd "${mqtt_user}" "${mqtt_pass}"
+    mosquitto_passwd -b "${SCRIPT_DIR}/mosquitto/config/passwd" "${mqtt_user}" "${mqtt_pass}"
     chown "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto/config/passwd"
   else
     log "MQTT password file already exists"
