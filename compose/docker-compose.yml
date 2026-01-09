@@ -1,0 +1,31 @@
+services:
+  mqtt:
+    build: ../mosquitto
+    container_name: mqtt-broker
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ../mosquitto/data:/mosquitto/data
+      - ../mosquitto/log:/mosquitto/log
+      - ../mosquitto/config:/mosquitto/config
+
+  db:
+    build: ../mariadb
+    container_name: mqtt-sql
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: changeMeRoot
+      MARIADB_DATABASE: telemetry
+      MARIADB_USER: sensor
+      MARIADB_PASSWORD: changeMeSensor
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../mariadb/data:/var/lib/mysql
+      - ../mariadb/init:/docker-entrypoint-initdb.d
+
+networks:
+  default:
+    name: iot-net
