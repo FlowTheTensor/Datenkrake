@@ -54,6 +54,19 @@ prepare_directories() {
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mariadb"
 }
 
+create_mqtt_password() {
+  if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/passwd" ]]; then
+    log "Creating MQTT password file"
+    read -p "Enter MQTT username: " mqtt_user
+    read -s -p "Enter MQTT password: " mqtt_pass
+    echo
+    docker run --rm -v "${SCRIPT_DIR}/mosquitto/config:/mosquitto/config" eclipse-mosquitto:2.0 mosquitto_passwd -b /mosquitto/config/passwd "${mqtt_user}" "${mqtt_pass}"
+    chown "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto/config/passwd"
+  else
+    log "MQTT password file already exists"
+  fi
+}
+
 build_and_start() {
   if [[ ! -d "${COMPOSE_DIR}" ]] || [[ ! -f "${COMPOSE_DIR}/docker-compose.yml" ]]; then
     log "Compose directory or file missing; aborting"
@@ -71,8 +84,6 @@ post_install_notes() {
   echo
   echo "MQTT broker, database and web server are starting via docker compose."
   echo "Next steps:"
-  echo "  - Create or update mosquitto password file with:"
-  echo "    docker run --rm -it -v ${SCRIPT_DIR}/mosquitto/config:/mosquitto/config eclipse-mosquitto:2.0 mosquitto_passwd -c /mosquitto/config/passwd <username>"
   echo "  - Verify containers with: (cd ${COMPOSE_DIR} && docker compose ps)"
   echo "  - Access the web interface at: http://localhost:8080"
   if [[ ${NEED_RELOGIN} -eq 1 ]]; then
@@ -82,5 +93,6 @@ post_install_notes() {
 
 install_docker
 prepare_directories
+create_mqtt_password
 build_and_start
 post_install_notes
