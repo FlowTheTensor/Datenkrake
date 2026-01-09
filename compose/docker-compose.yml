@@ -26,6 +26,15 @@ services:
       - ../mariadb/data:/var/lib/mysql
       - ../mariadb/init:/docker-entrypoint-initdb.d
 
+  web:
+    build: ../web
+    container_name: web-server
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
 networks:
   default:
     name: iot-net
