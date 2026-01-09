@@ -69,11 +69,12 @@ build_and_start() {
 
 post_install_notes() {
   echo
-  echo "MQTT broker and database are starting via docker compose."
+  echo "MQTT broker, database and web server are starting via docker compose."
   echo "Next steps:"
   echo "  - Create or update mosquitto password file with:"
   echo "    docker run --rm -it -v ${SCRIPT_DIR}/mosquitto/config:/mosquitto/config eclipse-mosquitto:2.0 mosquitto_passwd -c /mosquitto/config/passwd <username>"
   echo "  - Verify containers with: (cd ${COMPOSE_DIR} && docker compose ps)"
+  echo "  - Access the web interface at: http://localhost:8080"
   if [[ ${NEED_RELOGIN} -eq 1 ]]; then
     echo "  - Log out and back in so ${TARGET_USER} can use docker without sudo."
   fi
