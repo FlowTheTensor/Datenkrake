@@ -64,6 +64,7 @@ prepare_directories() {
 create_mqtt_password() {
   if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/passwd" ]]; then
     log "Creating MQTT password file"
+    mkdir -p "${SCRIPT_DIR}/mosquitto/config"
     read -p "Enter MQTT username: " mqtt_user
     read -s -p "Enter MQTT password: " mqtt_pass
     echo
