@@ -60,7 +60,7 @@ create_mqtt_password() {
     read -p "Enter MQTT username: " mqtt_user
     read -s -p "Enter MQTT password: " mqtt_pass
     echo
-    docker run --rm -v "${SCRIPT_DIR}/mosquitto/config:/mosquitto/config" eclipse-mosquitto:2.0 mosquitto_passwd -b /mosquitto/config/passwd "${mqtt_user}" "${mqtt_pass}"
+    docker run --user root --rm -v "${SCRIPT_DIR}/mosquitto/config:/mosquitto/config" eclipse-mosquitto:2.0 mosquitto_passwd -b /mosquitto/config/passwd "${mqtt_user}" "${mqtt_pass}"
     chown "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto/config/passwd"
   else
     log "MQTT password file already exists"
