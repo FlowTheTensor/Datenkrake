@@ -31,13 +31,6 @@ install_docker() {
     log "Docker Compose plugin already installed"
   fi
 
-  if ! command -v mosquitto_passwd >/dev/null 2>&1; then
-    log "Installing Mosquitto clients for password management"
-    apt-get install -y mosquitto-clients
-  else
-    log "Mosquitto clients already installed"
-  fi
-
   if [[ ${TARGET_USER} != "root" ]] && ! id -nG "${TARGET_USER}" | grep -qw docker; then
     log "Adding ${TARGET_USER} to docker group"
     usermod -aG docker "${TARGET_USER}"
