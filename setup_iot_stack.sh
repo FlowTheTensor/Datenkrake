@@ -99,6 +99,35 @@ post_install_notes() {
   fi
 }
 
+setup_systemd_service() {
+  log "Setting up systemd service for automatic container startup"
+  local service_file="/etc/systemd/system/iot-stack.service"
+  local user_home
+  user_home=$(eval echo "~${TARGET_USER}")
+
+  cat > "${service_file}" << EOF
+[Unit]
+Description=IoT Stack (MQTT, DB, Web)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=${user_home}/Datenkrake-Container/compose
+ExecStart=/usr/bin/docker compose up -d
+ExecStop=/usr/bin/docker compose down
+TimeoutStartSec=300
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+  systemctl daemon-reload
+  systemctl enable iot-stack.service
+  log "Systemd service enabled for automatic startup"
+}
+
 install_docker
 prepare_directories
 create_mqtt_password
