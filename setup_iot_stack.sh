@@ -54,24 +54,6 @@ prepare_directories() {
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mariadb"
 }
 
-create_mqtt_password() {
-  if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/passwd" ]]; then
-    log "Creating MQTT password file using Docker container"
-    mkdir -p "${SCRIPT_DIR}/mosquitto/config"
-    read -p "Enter MQTT username: " mqtt_user
-    read -s -p "Enter MQTT password: " mqtt_pass
-    echo
-    if ! docker run --user root --rm -v "${SCRIPT_DIR}/mosquitto/config:/mosquitto/config" eclipse-mosquitto:2.0 mosquitto_passwd -b /mosquitto/config/passwd "${mqtt_user}" "${mqtt_pass}"; then
-      log "Failed to create password file with Docker. Trying alternative method."
-      # Fallback: Erstelle eine einfache Passwortdatei manuell (nicht empfohlen für Produktion)
-      echo "${mqtt_user}:$(openssl passwd -5 "${mqtt_pass}")" > "${SCRIPT_DIR}/mosquitto/config/passwd"
-    fi
-    chown "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto/config/passwd"
-  else
-    log "MQTT password file already exists"
-  fi
-}
-
 build_and_start() {
   if [[ ! -d "${COMPOSE_DIR}" ]] || [[ ! -f "${COMPOSE_DIR}/docker-compose.yml" ]]; then
     log "Compose directory or file missing; aborting"
@@ -127,6 +109,5 @@ EOF
 
 install_docker
 prepare_directories
-create_mqtt_password
 build_and_start
 post_install_notes
