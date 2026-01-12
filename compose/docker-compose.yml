@@ -27,9 +27,10 @@ services:
       - ../mariadb/init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "sensor", "-pchangeMeSensor"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 5s
+      timeout: 10s
+      retries: 15
+      start_period: 30s
 
   web:
     build: ../web
