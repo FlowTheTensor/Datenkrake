@@ -25,12 +25,6 @@ services:
     volumes:
       - ../mariadb/data:/var/lib/mysql
       - ../mariadb/init:/docker-entrypoint-initdb.d
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "sensor", "-pchangeMeSensor"]
-      interval: 5s
-      timeout: 10s
-      retries: 15
-      start_period: 30s
 
   web:
     build: ../web
@@ -39,8 +33,7 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
 networks:
   default:
