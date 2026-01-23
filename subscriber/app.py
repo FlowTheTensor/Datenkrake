@@ -15,6 +15,22 @@ DB_USER = "sensor"
 DB_PASSWORD = "changeMeSensor"
 DB_NAME = "telemetry"
 
+def wait_for_db():
+    while True:
+        try:
+            conn = mysql.connector.connect(
+                host=DB_HOST,
+                user=DB_USER,
+                password=DB_PASSWORD,
+                database=DB_NAME
+            )
+            conn.close()
+            print("DB is ready")
+            break
+        except mysql.connector.Error:
+            print("DB not ready, waiting...")
+            time.sleep(5)
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to MQTT Broker")
     client.subscribe(MQTT_TOPIC)
@@ -56,6 +72,7 @@ def on_message(client, userdata, msg):
         print(f"Error processing message: {e}")
 
 def main():
+    wait_for_db()  # Warte auf DB
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
