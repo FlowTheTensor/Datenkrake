@@ -26,6 +26,14 @@ services:
       - ../mariadb/data:/var/lib/mysql
       - ../mariadb/init:/docker-entrypoint-initdb.d
 
+  subscriber:
+    build: ../subscriber
+    container_name: mqtt-subscriber
+    restart: unless-stopped
+    depends_on:
+      - mqtt
+      - db
+
   web:
     build: ../web
     container_name: web-server
