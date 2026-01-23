@@ -1,8 +1,10 @@
 import paho.mqtt.client as mqtt
-import mysql.connector
+import pymysql
 import json
 import time
 from datetime import datetime
+
+print("Starting subscriber...")
 
 # MQTT settings
 MQTT_BROKER = "mqtt"
@@ -16,9 +18,10 @@ DB_PASSWORD = "changeMeSensor"
 DB_NAME = "telemetry"
 
 def wait_for_db():
+    print("Waiting for DB...")
     while True:
         try:
-            conn = mysql.connector.connect(
+            conn = pymysql.connect(
                 host=DB_HOST,
                 user=DB_USER,
                 password=DB_PASSWORD,
@@ -27,8 +30,8 @@ def wait_for_db():
             conn.close()
             print("DB is ready")
             break
-        except mysql.connector.Error:
-            print("DB not ready, waiting...")
+        except pymysql.Error as e:
+            print(f"DB not ready: {e}, waiting...")
             time.sleep(5)
 
 def on_connect(client, userdata, flags, rc):
@@ -53,7 +56,7 @@ def on_message(client, userdata, msg):
         anomaly_flag = payload.get("anomaly_flag", 0)
 
         # Insert into DB
-        conn = mysql.connector.connect(
+        conn = pymysql.connect(
             host=DB_HOST,
             user=DB_USER,
             password=DB_PASSWORD,
@@ -77,7 +80,9 @@ def main():
     client.on_connect = on_connect
     client.on_message = on_message
 
+    print("Connecting to MQTT...")
     client.connect(MQTT_BROKER, MQTT_PORT, 60)
+    print("Starting loop...")
     client.loop_forever()
 
 if __name__ == "__main__":
