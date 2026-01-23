@@ -9,7 +9,7 @@ print("Starting subscriber...")
 # MQTT settings
 MQTT_BROKER = "mqtt"
 MQTT_PORT = 1883
-MQTT_TOPIC = "sensors/data"
+MQTT_TOPIC = "factory/motor1/gyro"
 
 # DB settings
 DB_HOST = "db"
