@@ -15,3 +15,8 @@ CREATE TABLE IF NOT EXISTS measurements (
     anomaly_score REAL,
     anomaly_flag INTEGER DEFAULT 0
 );
+
+-- Read-only user for MCP server access.
+CREATE USER IF NOT EXISTS 'mcp_read'@'%' IDENTIFIED BY 'changeMeMcp';
+GRANT SELECT ON telemetry.* TO 'mcp_read'@'%';
+FLUSH PRIVILEGES;
