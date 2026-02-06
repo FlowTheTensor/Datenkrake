@@ -16,79 +16,85 @@ const DB_USER = process.env.DB_USER || "mcp_read";
 const DB_PASSWORD = process.env.DB_PASSWORD || "changeMeMcp";
 const DB_NAME = process.env.DB_NAME || "telemetry";
 
-const server = new Server(
-  {
-    name: "mcp-mariadb",
-    version: "0.1.0"
-  },
-  {
-    capabilities: {
-      tools: {}
-    }
-  }
-);
-
-server.setRequestHandler(ListToolsRequestSchema, async () => {
-  return {
-    tools: [
-      {
-        name: "sql_query",
-        description: "Run a read-only SELECT query against the telemetry database.",
-        inputSchema: {
-          type: "object",
-          properties: {
-            query: { type: "string" }
-          },
-          required: ["query"]
-        }
+const createServer = () => {
+  const server = new Server(
+    {
+      name: "mcp-mariadb",
+      version: "0.1.0"
+    },
+    {
+      capabilities: {
+        tools: {}
       }
-    ]
-  };
-});
+    }
+  );
 
-server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  if (request.params.name !== "sql_query") {
+  server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
-      content: [{ type: "text", text: "Unknown tool." }],
-      isError: true
+      tools: [
+        {
+          name: "sql_query",
+          description: "Run a read-only SELECT query against the telemetry database.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: { type: "string" }
+            },
+            required: ["query"]
+          }
+        }
+      ]
     };
-  }
+  });
 
-  const query = request.params.arguments?.query || "";
-  if (!/^\s*select\b/i.test(query)) {
-    return {
-      content: [{ type: "text", text: "Only SELECT queries are allowed." }],
-      isError: true
-    };
-  }
+  server.setRequestHandler(CallToolRequestSchema, async (request) => {
+    if (request.params.name !== "sql_query") {
+      return {
+        content: [{ type: "text", text: "Unknown tool." }],
+        isError: true
+      };
+    }
 
-  try {
-    const connection = await mysql.createConnection({
-      host: DB_HOST,
-      user: DB_USER,
-      password: DB_PASSWORD,
-      database: DB_NAME
-    });
+    const query = request.params.arguments?.query || "";
+    if (!/^\s*select\b/i.test(query)) {
+      return {
+        content: [{ type: "text", text: "Only SELECT queries are allowed." }],
+        isError: true
+      };
+    }
 
-    const [rows] = await connection.query(query);
-    await connection.end();
+    try {
+      const connection = await mysql.createConnection({
+        host: DB_HOST,
+        user: DB_USER,
+        password: DB_PASSWORD,
+        database: DB_NAME
+      });
 
-    return {
-      content: [{ type: "text", text: JSON.stringify(rows, null, 2) }]
-    };
-  } catch (error) {
-    return {
-      content: [{ type: "text", text: `Query failed: ${error.message}` }],
-      isError: true
-    };
-  }
-});
+      const [rows] = await connection.query(query);
+      await connection.end();
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(rows, null, 2) }]
+      };
+    } catch (error) {
+      return {
+        content: [{ type: "text", text: `Query failed: ${error.message}` }],
+        isError: true
+      };
+    }
+  });
+
+  return server;
+};
 
 const transports = new Map();
 
 app.get("/sse", async (req, res) => {
   const transport = new SSEServerTransport("/messages", res);
   transports.set(transport.sessionId, transport);
+
+  const server = createServer();
 
   res.on("close", () => {
     transports.delete(transport.sessionId);
