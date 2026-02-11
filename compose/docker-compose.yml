@@ -25,14 +25,22 @@ services:
     volumes:
       - ../mariadb/data:/var/lib/mysql
       - ../mariadb/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   subscriber:
     build: ../subscriber
     container_name: mqtt-subscriber
     restart: unless-stopped
     depends_on:
-      - mqtt
-      - db
+      mqtt:
+        condition: service_started
+      db:
+        condition: service_healthy
 
   mcp:
     build: ../mcp-server
@@ -46,7 +54,8 @@ services:
       DB_PASSWORD: changeMeMcp
       DB_NAME: telemetry
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   web:
     build: ../web
@@ -55,7 +64,8 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 networks:
   default:
