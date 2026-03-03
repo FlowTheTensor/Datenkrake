@@ -221,12 +221,16 @@ Der `mcp_read`-User wird automatisch beim ersten Start des IoT-Stacks durch das 
 
 ```mermaid
 flowchart LR
+subgraph WIN["Windows PC"]
   CD["Claude Desktop (Windows)"]
   MCP["mcpserver.py (lokaler Prozess)"]
+end
+subgraph RPI["Raspberry Datenkrake"]
   DB[("MariaDB datenkrake.local")]
 
   CD <-->|MCP stdio| MCP
   MCP -->|pymysql Port 3306| DB
+end
 ```
 
 ## Troubleshooting
