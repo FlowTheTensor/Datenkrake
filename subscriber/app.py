@@ -4,12 +4,12 @@ import json
 import time
 from datetime import datetime
 
-print("Starting subscriber...")
+print("Starting audio spectrum subscriber...")
 
 # MQTT settings
 MQTT_BROKER = "mqtt"
 MQTT_PORT = 1883
-MQTT_TOPIC = "factory/motor1/gyro"
+MQTT_TOPIC = "audio/spectrum"
 
 # DB settings
 DB_HOST = "db"
@@ -37,23 +37,19 @@ def wait_for_db():
 def on_connect(client, userdata, flags, rc):
     print("Connected to MQTT Broker")
     client.subscribe(MQTT_TOPIC)
+    print(f"Subscribed to topic: {MQTT_TOPIC}")
 
 def on_message(client, userdata, msg):
     try:
         payload = json.loads(msg.payload.decode())
-        print(f"Received message: {payload}")
+        print(f"Received audio spectrum: peak_freq={payload.get('peak_freq', 0):.1f}Hz, label={payload.get('label', 'unknown')}")
 
         # Extract data
-        sensor = payload.get("sensor", "default_sensor")
-        ax = payload["ax"]
-        ay = payload["ay"]
-        az = payload["az"]
-        gx = payload["gx"]
-        gy = payload["gy"]
-        gz = payload["gz"]
-        temperature = payload.get("temperature")
-        anomaly_score = payload.get("anomaly_score")
-        anomaly_flag = payload.get("anomaly_flag", 0)
+        label = payload.get("label", "gut")
+        peak_freq = payload.get("peak_freq", 0)
+        peak_db = payload.get("peak_db", 0)
+        spectrum = payload.get("spectrum", [])
+        sample_rate = payload.get("sample_rate", 16000)
 
         # Insert into DB
         conn = pymysql.connect(
@@ -63,19 +59,19 @@ def on_message(client, userdata, msg):
             database=DB_NAME
         )
         cursor = conn.cursor()
-        sql = """INSERT INTO measurements (ts, sensor, ax, ay, az, gx, gy, gz, temperature, anomaly_score, anomaly_flag)
-                 VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        cursor.execute(sql, (sensor, ax, ay, az, gx, gy, gz, temperature, anomaly_score, anomaly_flag))
+        sql = """INSERT INTO audio_spectrum (ts, label, peak_freq, peak_db, spectrum, sample_rate)
+                 VALUES (NOW(), %s, %s, %s, %s, %s)"""
+        cursor.execute(sql, (label, peak_freq, peak_db, json.dumps(spectrum), sample_rate))
         conn.commit()
         cursor.close()
         conn.close()
-        print("Data inserted into database")
+        print(f"Audio spectrum saved: {label}, {peak_freq:.1f}Hz")
 
     except Exception as e:
         print(f"Error processing message: {e}")
 
 def main():
-    wait_for_db()  # Warte auf DB
+    wait_for_db()
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message

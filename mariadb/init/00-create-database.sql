@@ -1,20 +1,19 @@
 -- Initialization script for MariaDB.
--- Creates the measurements table for sensor data.
+-- Creates the audio_spectrum table for audio spectrum data.
 
-CREATE TABLE IF NOT EXISTS measurements (
+CREATE TABLE IF NOT EXISTS audio_spectrum (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     ts DATETIME NOT NULL,
-    sensor TEXT NOT NULL,
-    ax REAL NOT NULL,
-    ay REAL NOT NULL,
-    az REAL NOT NULL,
-    gx REAL NOT NULL,
-    gy REAL NOT NULL,
-    gz REAL NOT NULL,
-    temperature REAL,
-    anomaly_score REAL,
-    anomaly_flag INTEGER DEFAULT 0
+    label VARCHAR(20) NOT NULL DEFAULT 'gut',
+    peak_freq REAL NOT NULL,
+    peak_db REAL NOT NULL,
+    spectrum JSON,
+    sample_rate INT DEFAULT 16000
 );
+
+-- Index für schnelle Abfragen nach Label und Zeit
+CREATE INDEX idx_label ON audio_spectrum(label);
+CREATE INDEX idx_ts ON audio_spectrum(ts);
 
 -- Read-only user for MCP server access.
 CREATE USER IF NOT EXISTS 'mcp_read'@'%' IDENTIFIED BY 'changeMeMcp';
