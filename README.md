@@ -64,13 +64,19 @@ subgraph AQ["🎤 Arduino UNO Q"]
 end
 MQTT -->|JSON Spektrumdaten| MQ
 subgraph RPi["Raspberry Pi (Datenkrake)"]
-MQ["Container Mosquitto Broker"]
-WEBS["Container Webserver zur Datenbankkontrolle http://datenkrake.local"]
-MQ -->|Topic audio/spectrum| SUB["Container Python Subscriber"]
-SUB -->|INSERT| DB[("Container MariaDB")]
-DB --> WEBS
+  MQ["Mosquitto Broker (Container)"]
+  WEBS["Webserver (Container) zur Datenbankkontrolle http://datenkrake.local"]
+  MQ -->|Topic audio/spectrum| SUB["Python Subscriber (Container)"]
+  SUB -->|INSERT| DB[("MariaDB (Container)")]
+  DB --> WEBS
 end
 DB -->|Trainingsdaten abrufen| ML
+subgraph WIN["Windows PC"]
+  CL["Claude Desktop"]
+  MCPS["mcpserver.py"]
+  CL <--> MCPS
+  MCPS <--> DB
+end
 ```
 
 ## MQTT Topics
