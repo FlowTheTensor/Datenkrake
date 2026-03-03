@@ -146,6 +146,97 @@ audio_spectrum {
   mosquitto_pub -h <pi-ip> -p 1883 -t "audio/spectrum" -m '{"label":"gut","peak_freq":1250.5,"peak_db":-25.3,"spectrum":[0.1,0.2,0.3],"sample_rate":16000}'
   ```
 
+# Datenkrake MCP-Server für Claude Desktop
+
+Dieser MCP-Server (Model Context Protocol) ermöglicht Claude Desktop auf einem Windows-PC den lesenden Zugriff auf die MariaDB-Datenbank der Datenkrake (Raspberry Pi).
+
+## Voraussetzungen
+
+- Python 3.10+
+- Claude Desktop installiert
+- Raspberry Pi mit laufendem IoT-Stack (`datenkrake.local` erreichbar)
+- MariaDB Port 3306 im Netzwerk erreichbar
+
+## Installation
+
+```powershell
+pip install mcp[cli] pymysql
+```
+
+## Claude Desktop konfigurieren
+
+Datei öffnen: `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "datenkrake": {
+      "command": "python",
+      "args": [
+        "???/ArduinoQ/Datenkrake-Container/MCPLokalClaudDesktop/mcpserver.py"
+      ]
+    }
+  }
+}
+```
+
+Pfad ggf. auf das eigene System anpassen. Danach Claude Desktop neu starten.
+
+## Verbindungseinstellungen
+
+Die Verbindungsdaten stehen oben in `mcpserver.py`:
+
+| Variable | Standardwert | Beschreibung |
+|----------|-------------|-------------|
+| `DB_HOST` | `datenkrake.local` | Hostname des Raspberry Pi |
+| `DB_PORT` | `3306` | MariaDB-Port |
+| `DB_USER` | `mcp_read` | Nur-Lese-Benutzer |
+| `DB_PASSWORD` | `changeMeMcp` | Passwort (bitte ändern!) |
+| `DB_NAME` | `telemetry` | Datenbankname |
+
+Der `mcp_read`-User wird automatisch beim ersten Start des IoT-Stacks durch das Init-Skript angelegt (`mariadb/init/00-create-database.sql`).
+
+## Verfügbare Tools
+
+| Tool | Parameter | Beschreibung |
+|------|-----------|-------------|
+| `get_recent` | `limit` (Standard: 20) | Letzte N Einträge (ohne Spektrum-Array) |
+| `get_stats` | – | Statistiken pro Label: Anzahl, Ø Frequenz, Ø Lautstärke, Zeitraum |
+| `get_spectrum` | `record_id` | Vollständiger Datensatz inkl. FFT-Array für eine ID |
+| `get_table_info` | – | Tabellenstruktur von `audio_spectrum` |
+| `query` | `sql` | Freie SELECT/SHOW/DESCRIBE-Abfrage (kein Schreiben möglich) |
+
+## Beispieldialoge mit Claude
+
+> „Zeig mir die letzten 10 Messungen"  
+> → Claude ruft `get_recent(limit=10)` auf
+
+> „Wie viele 'gut'- und 'schlecht'-Aufnahmen gibt es?"  
+> → Claude ruft `get_stats()` auf
+
+> „Was ist die durchschnittliche Peakfrequenz bei schlechten Aufnahmen?"  
+> → Claude nutzt `query()` mit einer passenden SQL-Abfrage
+
+## Architektur
+
+```mermaid
+flowchart LR
+  CD["Claude Desktop\n(Windows)"]
+  MCP["mcpserver.py\n(lokaler Prozess)"]
+  DB[("MariaDB\ndatenkrake.local")]
+
+  CD <-->|MCP stdio| MCP
+  MCP -->|pymysql Port 3306| DB
+```
+
+## Troubleshooting
+
+| Problem | Lösung |
+|---------|--------|
+| `Can't connect to MySQL server` | Pi erreichbar? `ping datenkrake.local` testen |
+| `Access denied for user mcp_read` | Passwort in `mcpserver.py` und DB prüfen |
+| MCP-Server erscheint nicht in Claude | `claude_desktop_config.json` Syntax prüfen; Claude neu starten |
+| `ModuleNotFoundError: mcp` | `pip install mcp[cli]` ausführen |
 
 
 ## Nächste Schritte
