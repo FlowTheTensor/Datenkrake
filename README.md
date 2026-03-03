@@ -146,7 +146,7 @@ audio_spectrum {
   mosquitto_pub -h <pi-ip> -p 1883 -t "audio/spectrum" -m '{"label":"gut","peak_freq":1250.5,"peak_db":-25.3,"spectrum":[0.1,0.2,0.3],"sample_rate":16000}'
   ```
 
-# Datenkrake MCP-Server für Claude Desktop
+# Datenkrake MariaDB MCP-Server für Claude Desktop
 
 Dieser MCP-Server (Model Context Protocol) ermöglicht Claude Desktop auf einem Windows-PC den lesenden Zugriff auf die MariaDB-Datenbank der Datenkrake (Raspberry Pi).
 
@@ -221,9 +221,9 @@ Der `mcp_read`-User wird automatisch beim ersten Start des IoT-Stacks durch das 
 
 ```mermaid
 flowchart LR
-  CD["Claude Desktop\n(Windows)"]
-  MCP["mcpserver.py\n(lokaler Prozess)"]
-  DB[("MariaDB\ndatenkrake.local")]
+  CD["Claude Desktop (Windows)"]
+  MCP["mcpserver.py (lokaler Prozess)"]
+  DB[("MariaDB datenkrake.local")]
 
   CD <-->|MCP stdio| MCP
   MCP -->|pymysql Port 3306| DB
