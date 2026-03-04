@@ -44,6 +44,22 @@ if (isset($_GET['api']) && $_GET['api'] === 'data') {
     exit;
 }
 
+// Datenbank leeren
+if (isset($_GET['api']) && $_GET['api'] === 'clear_database' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
+    $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
+    if ($conn->connect_error) {
+        echo json_encode(['error' => $conn->connect_error]);
+        exit;
+    }
+    $result = $conn->query("SELECT COUNT(*) as cnt FROM audio_spectrum");
+    $count = (int)$result->fetch_assoc()['cnt'];
+    $conn->query("TRUNCATE TABLE audio_spectrum");
+    $conn->close();
+    echo json_encode(['success' => true, 'deleted' => $count]);
+    exit;
+}
+
 // Statistik-Endpoint
 if (isset($_GET['api']) && $_GET['api'] === 'stats') {
     header('Content-Type: application/json');
@@ -122,6 +138,8 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
         .table-wrapper { max-height: 300px; overflow-y: auto; }
         .label-gut { background: #d4edda; color: #155724; padding: 2px 8px; border-radius: 3px; }
         .label-schlecht { background: #f8d7da; color: #721c24; padding: 2px 8px; border-radius: 3px; }
+        .btn-danger { padding: 8px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin-left: 15px; }
+        .btn-danger:hover { background: #c82333; }
         
         @media (max-width: 900px) {
             .charts-container { grid-template-columns: 1fr; }
@@ -151,6 +169,7 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
         <button class="filter-btn all active" onclick="setFilter(null)">Alle</button>
         <button class="filter-btn gut" onclick="setFilter('gut')">Nur Gut</button>
         <button class="filter-btn schlecht" onclick="setFilter('schlecht')">Nur Schlecht</button>
+        <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
     </div>
     
     <div class="charts-container">
@@ -229,6 +248,23 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
                     }
                 }
             });
+        }
+
+        async function clearDatabase() {
+            if (!confirm('Wirklich ALLE Daten aus der Datenbank löschen? Dies kann nicht rückgängig gemacht werden!')) return;
+            try {
+                const response = await fetch('?api=clear_database', { method: 'POST' });
+                const data = await response.json();
+                if (data.error) {
+                    alert('Fehler: ' + data.error);
+                } else {
+                    alert(data.deleted + ' Einträge gelöscht.');
+                    loadStats();
+                    loadData();
+                }
+            } catch (e) {
+                alert('Fehler: ' + e.message);
+            }
         }
 
         function setFilter(label) {

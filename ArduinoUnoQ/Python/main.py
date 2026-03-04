@@ -7,7 +7,6 @@ import paho.mqtt.client as mqtt
 from flask import Flask, jsonify, request
 from datetime import datetime
 import re
-import pymysql
 
 # Konfiguration
 SAMPLE_RATE = 16000  # Webcam-Mikrofone unterstützen oft nur 16kHz
@@ -294,9 +293,9 @@ HTML = '''
                 const response = await fetch('/api/training_data');
                 const data = await response.json();
                 
-                // Fehlerprüfung
-                if (data.error) {
-                    document.getElementById('trainStatus').textContent = 'DB-Fehler: ' + data.error;
+                // Fehlerprüfung (auch bei HTTP 500)
+                if (!response.ok || data.error || !Array.isArray(data)) {
+                    document.getElementById('trainStatus').textContent = 'DB-Fehler: ' + (data.error || 'Unbekannter Fehler');
                     document.getElementById('trainStatus').style.color = '#dc3545';
                     return;
                 }
@@ -574,26 +573,32 @@ def api_predict():
 def api_training_data():
     """Holt alle Trainingsdaten direkt aus der MySQL-Datenbank"""
     try:
-        conn = pymysql.connect(
+        import mysql.connector
+        conn = mysql.connector.connect(
             host=DB_HOST,
             user=DB_USER,
             password=DB_PASSWORD,
-            database=DB_NAME,
-            cursorclass=pymysql.cursors.DictCursor
+            database=DB_NAME
         )
-        
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT label, spectrum FROM audio_spectrum ORDER BY ts ASC")
-            rows = cursor.fetchall()
-        
+        cursor = conn.cursor()
+        cursor.execute("SELECT label, spectrum FROM audio_spectrum ORDER BY ts ASC")
+        columns = [col[0] for col in cursor.description]
+        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        cursor.close()
         conn.close()
         
-        # Spectrum JSON dekodieren
+        # Spectrum JSON dekodieren (PyMySQL liefert JSON-Spalten je nach Version als str oder dict)
         data = []
         for row in rows:
+            spectrum = row['spectrum']
+            if spectrum is None:
+                spectrum = []
+            elif isinstance(spectrum, str):
+                spectrum = json.loads(spectrum)
+            # sonst: bereits als list/dict geparsed -> direkt verwenden
             data.append({
                 'label': row['label'],
-                'spectrum': json.loads(row['spectrum'])
+                'spectrum': spectrum
             })
         
         return jsonify(data)
