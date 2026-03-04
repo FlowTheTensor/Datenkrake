@@ -42,21 +42,6 @@ services:
       db:
         condition: service_healthy
 
-  mcp:
-    build: ../mcp-server
-    container_name: mcp-server
-    restart: unless-stopped
-    ports:
-      - "3001:3001"
-    environment:
-      DB_HOST: db
-      DB_USER: mcp_read
-      DB_PASSWORD: changeMeMcp
-      DB_NAME: telemetry
-    depends_on:
-      db:
-        condition: service_healthy
-
   web:
     build: ../web
     container_name: web-server
