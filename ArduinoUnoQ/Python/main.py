@@ -14,12 +14,12 @@ CHUNK_SIZE = 2048    # Samples pro FFT (bessere Frequenzauflösung)
 MAX_FREQ = 5000      # Hz
 
 # MQTT Konfiguration
-MQTT_BROKER = '172.29.0.174'#"datenkrake.local"  # Alternativ: IP-Adresse falls mDNS nicht funktioniert
+MQTT_BROKER = '172.29.0.67'#"datenkrake.local"  # Alternativ: IP-Adresse falls mDNS nicht funktioniert
 MQTT_PORT = 1883
 MQTT_TOPIC = "audio/spectrum"
 
 # MySQL Datenbank Konfiguration
-DB_HOST = '172.29.0.174'#"datenkrake.local"
+DB_HOST = '172.29.0.67'#"datenkrake.local"
 DB_USER = "sensor"
 DB_PASSWORD = "changeMeSensor"
 DB_NAME = "telemetry"
@@ -269,6 +269,20 @@ HTML = '''
         let isRecording = false;
         let currentTab = 'collect';
         let trainingData = [];
+        let trainedModelSpectrumLength = 0;
+
+        function normalizeSpectrum(spec) {
+            const mean = spec.reduce((a, b) => a + b, 0) / spec.length;
+            const variance = spec.reduce((a, b) => a + (b - mean) ** 2, 0) / spec.length;
+            const std = Math.sqrt(variance) || 1;
+            return spec.map(v => (v - mean) / std);
+        }
+
+        function resizeSpectrum(spec, targetLen) {
+            if (spec.length === targetLen) return spec;
+            if (spec.length > targetLen) return spec.slice(0, targetLen);
+            return spec.concat(new Array(targetLen - spec.length).fill(0));
+        }
         let trainedModel = null;
         
         function showTab(tab) {
@@ -337,7 +351,8 @@ HTML = '''
             
             // Daten vorbereiten
             const spectrumLength = trainingData[0].spectrum.length;
-            const xs = tf.tensor2d(trainingData.map(d => d.spectrum));
+            trainedModelSpectrumLength = spectrumLength;
+            const xs = tf.tensor2d(trainingData.map(d => normalizeSpectrum(resizeSpectrum(d.spectrum, spectrumLength))));
             const ys = tf.tensor2d(trainingData.map(d => d.label === 'gut' ? [1, 0] : [0, 1]));
             
             // Modell erstellen
@@ -390,13 +405,15 @@ HTML = '''
         
         async function predictWithModel(spectrum) {
             if (!trainedModel) return { prediction: 'unknown', confidence: 0 };
-            
-            const input = tf.tensor2d([spectrum]);
+
+            const adjusted = resizeSpectrum(spectrum, trainedModelSpectrumLength);
+            const normalized = normalizeSpectrum(adjusted);
+            const input = tf.tensor2d([normalized]);
             const prediction = trainedModel.predict(input);
             const probs = await prediction.data();
             input.dispose();
             prediction.dispose();
-            
+
             if (probs[0] > probs[1]) {
                 return { prediction: 'gut', confidence: probs[0] };
             } else {
