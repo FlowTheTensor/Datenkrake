@@ -14,12 +14,12 @@ CHUNK_SIZE = 2048    # Samples pro FFT (bessere Frequenzauflösung)
 MAX_FREQ = 5000      # Hz
 
 # MQTT Konfiguration
-MQTT_BROKER = "datenkrake.local"  # Alternativ: IP-Adresse falls mDNS nicht funktioniert
+MQTT_BROKER = '172.29.0.174'#"datenkrake.local"  # Alternativ: IP-Adresse falls mDNS nicht funktioniert
 MQTT_PORT = 1883
 MQTT_TOPIC = "audio/spectrum"
 
 # MySQL Datenbank Konfiguration
-DB_HOST = "datenkrake.local"
+DB_HOST = '172.29.0.174'#"datenkrake.local"
 DB_USER = "sensor"
 DB_PASSWORD = "changeMeSensor"
 DB_NAME = "telemetry"

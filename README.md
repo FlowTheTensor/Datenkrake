@@ -177,9 +177,9 @@ Datei öffnen: `%APPDATA%\Claude\claude_desktop_config.json`
 {
   "mcpServers": {
     "datenkrake": {
-      "command": "python",
+      "command": "??\\Datenkrake-Container\\MCPLokalClaudDesktop\\venv\\Scripts\\python.exe",
       "args": [
-        "???/ArduinoQ/Datenkrake-Container/MCPLokalClaudDesktop/mcpserver.py"
+        "???\\Datenkrake-Container\\MCPLokalClaudDesktop\\mcpserver.py"
       ]
     }
   }
