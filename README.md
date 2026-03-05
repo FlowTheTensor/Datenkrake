@@ -171,6 +171,8 @@ pip install mcp[cli] pymysql
 
 ## Claude Desktop konfigurieren
 
+Lokal ein venv anlegen und Pakete aus der requirements.txt installieren.
+
 Datei öffnen: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
