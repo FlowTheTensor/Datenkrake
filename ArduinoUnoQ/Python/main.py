@@ -205,45 +205,107 @@ HTML = '''
     
     <!-- Tab 2: Modell trainieren -->
     <div id="tab-train" class="tab-content">
-        <div class="controls">
-            <h2>KI-Modell trainieren</h2>
-            <p>Lade die gesammelten Daten und trainiere ein neuronales Netz direkt im Browser.</p>
-            
-            <div style="margin-bottom: 20px;">
-                <button onclick="loadTrainingData()" class="record-btn start">📥 Daten aus Datenbank laden</button>
+        <div class="controls" style="display: flex; gap: 28px; align-items: flex-start;">
+            <div style="flex: 1; min-width: 0;">
+                <h2>KI-Modell trainieren</h2>
+                <p>Lade die gesammelten Daten und trainiere ein neuronales Netz direkt im Browser.</p>
+
+                <div style="margin-bottom: 20px;">
+                    <button onclick="loadTrainingData()" class="record-btn start">📥 Daten aus Datenbank laden</button>
+                </div>
+
+                <div id="dataStats" style="background: #e9f7ef; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none;">
+                    <strong>Geladene Daten:</strong>
+                    <span id="dataStatsGut" style="color: #28a745; margin-left: 20px;">Gut: 0</span>
+                    <span id="dataStatsSchlecht" style="color: #dc3545; margin-left: 20px;">Schlecht: 0</span>
+                    <span id="dataStatsTotal" style="color: #333; margin-left: 20px;">Gesamt: 0</span>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label>Epochen: </label>
+                    <input type="number" id="epochs" value="50" min="1" max="500" style="padding: 8px; width: 80px; border: 1px solid #ddd; border-radius: 4px;">
+                    <label style="margin-left: 20px;">Learning Rate: </label>
+                    <input type="number" id="learningRate" value="0.001" step="0.0001" min="0.0001" max="0.1" style="padding: 8px; width: 100px; border: 1px solid #ddd; border-radius: 4px;">
+                    <label style="margin-left: 20px;">Optimierer: </label>
+                    <select id="optimizerType" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-left: 6px;">
+                        <option value="adam">Adam</option>
+                        <option value="rmsprop">RMSprop</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 14px;">
+                    <strong style="color: #8b1a1a;">Netzwerk-Architektur</strong>
+                    <div style="display: flex; gap: 30px; margin-top: 10px; flex-wrap: wrap;">
+                        <div>
+                            <label style="font-size: 13px; color: #555;">Schicht 1 – Neuronen:</label><br>
+                            <input type="number" id="layer1Units" value="64" min="4" max="512" style="padding: 6px; width: 75px; border: 1px solid #ddd; border-radius: 4px; margin-top: 4px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #555;">Schicht 1 – Dropout:</label><br>
+                            <input type="number" id="layer1Dropout" value="0.3" step="0.05" min="0" max="0.9" style="padding: 6px; width: 75px; border: 1px solid #ddd; border-radius: 4px; margin-top: 4px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #555;">Schicht 1 – Aktivierung:</label><br>
+                            <select id="layer1Act" style="padding: 6px; border: 1px solid #ddd; border-radius: 4px; margin-top: 4px;">
+                                <option value="relu">ReLU</option>
+                                <option value="tanh">Tanh</option>
+                                <option value="sigmoid">Sigmoid</option>
+                                <option value="elu">ELU</option>
+                                <option value="selu">SELU</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #555;">Schicht 2 – Neuronen:</label><br>
+                            <input type="number" id="layer2Units" value="32" min="4" max="512" style="padding: 6px; width: 75px; border: 1px solid #ddd; border-radius: 4px; margin-top: 4px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #555;">Schicht 2 – Dropout:</label><br>
+                            <input type="number" id="layer2Dropout" value="0.2" step="0.05" min="0" max="0.9" style="padding: 6px; width: 75px; border: 1px solid #ddd; border-radius: 4px; margin-top: 4px;">
+                        </div>
+                        <div>
+                            <label style="font-size: 13px; color: #555;">Schicht 2 – Aktivierung:</label><br>
+                            <select id="layer2Act" style="padding: 6px; border: 1px solid #ddd; border-radius: 4px; margin-top: 4px;">
+                                <option value="relu">ReLU</option>
+                                <option value="tanh">Tanh</option>
+                                <option value="sigmoid">Sigmoid</option>
+                                <option value="elu">ELU</option>
+                                <option value="selu">SELU</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="trainBtn" onclick="startTraining()" class="record-btn start" disabled>🧠 Training starten</button>
+                <span id="trainStatus" style="margin-left: 15px;">Erst Daten laden</span>
             </div>
-            
-            <div id="dataStats" style="background: #e9f7ef; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none;">
-                <strong>Geladene Daten:</strong>
-                <span id="dataStatsGut" style="color: #28a745; margin-left: 20px;">Gut: 0</span>
-                <span id="dataStatsSchlecht" style="color: #dc3545; margin-left: 20px;">Schlecht: 0</span>
-                <span id="dataStatsTotal" style="color: #333; margin-left: 20px;">Gesamt: 0</span>
+
+            <div style="width: 370px; min-width: 220px; flex-shrink: 0;">
+                <h3 style="color: #8b1a1a; margin-top: 0;">Loss &amp; Accuracy</h3>
+                <div style="position: relative; height: 260px; background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 6px;">
+                    <canvas id="lossChart"></canvas>
+                </div>
+                <div id="trainingProgressInline" style="display: none; margin-top: 10px;">
+                    <div style="background: #e0e0e0; border-radius: 4px; height: 8px;">
+                        <div id="progressBar" style="background: #8b1a1a; height: 100%; border-radius: 4px; width: 0%; transition: width 0.3s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: #555;">
+                        <span id="progressText">Epoche 0 / 0</span>
+                        <span id="lossText">Loss: --</span>
+                    </div>
+                </div>
             </div>
-            
-            <div style="margin-bottom: 20px;">
-                <label>Epochen: </label>
-                <input type="number" id="epochs" value="50" min="1" max="500" style="padding: 8px; width: 80px; border: 1px solid #ddd; border-radius: 4px;">
-                <label style="margin-left: 20px;">Learning Rate: </label>
-                <input type="number" id="learningRate" value="0.001" step="0.0001" min="0.0001" max="0.1" style="padding: 8px; width: 100px; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-            
-            <button id="trainBtn" onclick="startTraining()" class="record-btn start" disabled>🧠 Training starten</button>
-            <span id="trainStatus" style="margin-left: 15px;">Erst Daten laden</span>
         </div>
-        
-        <div id="trainingProgress" style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #ddd; display: none;">
-            <h3 style="color: #8b1a1a; margin-top: 0;">Training-Fortschritt</h3>
-            <div style="background: #ddd; border-radius: 4px; height: 30px; margin-bottom: 10px;">
-                <div id="progressBar" style="background: #8b1a1a; height: 100%; border-radius: 4px; width: 0%; transition: width 0.3s;"></div>
-            </div>
-            <div id="progressText">Epoche 0 / 0</div>
-            <div id="lossText" style="margin-top: 10px;">Loss: -- | Accuracy: --</div>
-        </div>
-        
+
         <div id="trainingComplete" style="background: #d4edda; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #c3e6cb; display: none;">
             <h3 style="color: #155724; margin-top: 0;">✓ Training abgeschlossen!</h3>
             <p id="finalAccuracy">Finale Genauigkeit: --%</p>
             <p>Das Modell ist jetzt im Tab "Modell anwenden" aktiv.</p>
+        </div>
+
+        <div id="nnVizBox" style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #ddd; display: none;">
+            <h3 style="color: #8b1a1a; margin-top: 0;">Netzwerk-Architektur</h3>
+            <p style="color: #666; font-size: 13px; margin-top: -10px;">Farbe der Eingabe-Neuronen zeigt Gewichts-Wichtigkeit (blau = niedrig, rot = hoch)</p>
+            <canvas id="nnViz" style="display: block; width: 100%; height: 320px;"></canvas>
         </div>
     </div>
     
@@ -270,6 +332,7 @@ HTML = '''
         let currentTab = 'collect';
         let trainingData = [];
         let trainedModelSpectrumLength = 0;
+        let lossChart = null;
 
         function normalizeSpectrum(spec) {
             const mean = spec.reduce((a, b) => a + b, 0) / spec.length;
@@ -345,26 +408,77 @@ HTML = '''
             const learningRate = parseFloat(document.getElementById('learningRate').value);
             
             document.getElementById('trainBtn').disabled = true;
-            document.getElementById('trainingProgress').style.display = 'block';
+            document.getElementById('trainingProgressInline').style.display = 'block';
             document.getElementById('trainingComplete').style.display = 'none';
             document.getElementById('trainStatus').textContent = 'Training läuft...';
+
+            // Loss-Chart initialisieren
+            if (lossChart) { lossChart.destroy(); }
+            lossChart = new Chart(document.getElementById('lossChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        { label: 'Train Loss', data: [], borderColor: '#8b1a1a', backgroundColor: 'rgba(139,26,26,0.08)', fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2.5, yAxisID: 'y' },
+                        { label: 'Accuracy',   data: [], borderColor: '#28a745', backgroundColor: 'rgba(40,167,69,0.08)', fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2.5, yAxisID: 'y1' }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Epoche', font: { size: 12 } },
+                            ticks: { maxTicksLimit: 10, font: { size: 11 } },
+                            grid: { color: 'rgba(0,0,0,0.06)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Loss', font: { size: 12 } },
+                            suggestedMin: 0,
+                            ticks: { font: { size: 11 }, callback: v => v.toFixed(3) },
+                            grid: { color: 'rgba(0,0,0,0.06)' }
+                        },
+                        y1: {
+                            position: 'right',
+                            title: { display: true, text: 'Accuracy (%)', font: { size: 12 }, color: '#28a745' },
+                            min: 0,
+                            max: 100,
+                            ticks: { font: { size: 11 }, color: '#28a745', callback: v => v + '%' },
+                            grid: { drawOnChartArea: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 20 } },
+                        tooltip: { callbacks: { label: ctx => ctx.datasetIndex === 0 ? ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(4) : ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' } }
+                    }
+                }
+            });
             
             // Daten vorbereiten
             const spectrumLength = trainingData[0].spectrum.length;
             trainedModelSpectrumLength = spectrumLength;
             const xs = tf.tensor2d(trainingData.map(d => normalizeSpectrum(resizeSpectrum(d.spectrum, spectrumLength))));
             const ys = tf.tensor2d(trainingData.map(d => d.label === 'gut' ? [1, 0] : [0, 1]));
+
+            const layer1Units   = Math.max(4, parseInt(document.getElementById('layer1Units').value)   || 64);
+            const layer1Dropout = Math.min(0.9, parseFloat(document.getElementById('layer1Dropout').value) || 0.3);
+            const layer1Act     = document.getElementById('layer1Act').value || 'relu';
+            const layer2Units   = Math.max(4, parseInt(document.getElementById('layer2Units').value)   || 32);
+            const layer2Dropout = Math.min(0.9, parseFloat(document.getElementById('layer2Dropout').value) || 0.2);
+            const layer2Act     = document.getElementById('layer2Act').value || 'relu';
+            const optimizerType = document.getElementById('optimizerType').value;
             
             // Modell erstellen
             const model = tf.sequential();
-            model.add(tf.layers.dense({units: 64, activation: 'relu', inputShape: [spectrumLength]}));
-            model.add(tf.layers.dropout({rate: 0.3}));
-            model.add(tf.layers.dense({units: 32, activation: 'relu'}));
-            model.add(tf.layers.dropout({rate: 0.2}));
+            model.add(tf.layers.dense({units: layer1Units, activation: layer1Act, inputShape: [spectrumLength]}));
+            model.add(tf.layers.dropout({rate: layer1Dropout}));
+            model.add(tf.layers.dense({units: layer2Units, activation: layer2Act}));
+            model.add(tf.layers.dropout({rate: layer2Dropout}));
             model.add(tf.layers.dense({units: 2, activation: 'softmax'}));
             
+            const optimizer = optimizerType === 'rmsprop' ? tf.train.rmsprop(learningRate) : tf.train.adam(learningRate);
             model.compile({
-                optimizer: tf.train.adam(learningRate),
+                optimizer: optimizer,
                 loss: 'categoricalCrossentropy',
                 metrics: ['accuracy']
             });
@@ -379,14 +493,20 @@ HTML = '''
                         const progress = ((epoch + 1) / epochs * 100).toFixed(0);
                         document.getElementById('progressBar').style.width = progress + '%';
                         document.getElementById('progressText').textContent = 'Epoche ' + (epoch + 1) + ' / ' + epochs;
-                        document.getElementById('lossText').textContent = 
-                            'Loss: ' + logs.loss.toFixed(4) + ' | Accuracy: ' + (logs.acc * 100).toFixed(1) + '%';
+                        document.getElementById('lossText').textContent =
+                            logs.loss.toFixed(4) + ' | ' + (logs.acc * 100).toFixed(1) + '% Acc';
+                        // Chart aktualisieren
+                        lossChart.data.labels.push(epoch + 1);
+                        lossChart.data.datasets[0].data.push(logs.loss);
+                        lossChart.data.datasets[1].data.push(logs.acc != null ? logs.acc * 100 : null);
+                        lossChart.update('none');
                     }
                 }
             });
             
             // Modell speichern
             trainedModel = model;
+            visualizeNetwork(model, spectrumLength, layer1Units, layer2Units, layer1Act, layer2Act);
             
             // Finale Evaluation
             const evalResult = model.evaluate(xs, ys);
@@ -401,6 +521,145 @@ HTML = '''
             // Speicher freigeben
             xs.dispose();
             ys.dispose();
+        }
+        
+        async function visualizeNetwork(model, spectrumLen, l1Units = 64, l2Units = 32, l1Act = 'relu', l2Act = 'relu') {
+            const box = document.getElementById('nnVizBox');
+            box.style.display = 'block';
+            const canvas = document.getElementById('nnViz');
+            canvas.width = canvas.offsetWidth || 700;
+            canvas.height = 380;
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width, H = canvas.height;
+            ctx.clearRect(0, 0, W, H);
+
+            const MAX_SHOW = 10;
+            const layers = [
+                { name: 'Eingabe', total: spectrumLen, color: '#546e7a', sub: spectrumLen + '\u00a0FFT-Bins' },
+                { name: 'Dense\u00a0' + l1Units, total: l1Units, color: '#8b1a1a', sub: l1Act.toUpperCase() },
+                { name: 'Dense\u00a0' + l2Units, total: l2Units, color: '#8b1a1a', sub: l2Act.toUpperCase() },
+                { name: 'Ausgabe', total: 2, color: '#28a745', sub: 'Softmax',
+                  nodeColors: ['#28a745', '#dc3545'], nodeLabels: ['gut', 'schlecht'] }
+            ];
+            const xs = [W * 0.10, W * 0.37, W * 0.63, W * 0.87];
+            const nr = 12;
+
+            function nodeYs(total) {
+                const n = Math.min(total, MAX_SHOW);
+                const spacing = Math.min(38, (H - 120) / (n + 1));
+                const start = (H - 60) / 2 - (n - 1) * spacing / 2;
+                return Array.from({ length: n }, (_, i) => start + i * spacing);
+            }
+
+            // Gewichts-Wichtigkeit aus erster Schicht berechnen
+            let inputImportance = null;
+            try {
+                const wData = await model.layers[0].getWeights()[0].data();
+                const importance = new Array(spectrumLen).fill(0);
+                for (let i = 0; i < spectrumLen; i++)
+                    for (let j = 0; j < l1Units; j++)
+                        importance[i] += Math.abs(wData[i * l1Units + j]);
+                const maxImp = Math.max(...importance) || 1;
+                inputImportance = importance.map(v => v / maxImp);
+            } catch (e) {}
+
+            // Verbindungen zeichnen
+            for (let li = 0; li < layers.length - 1; li++) {
+                const fromYs = nodeYs(layers[li].total);
+                const toYs = nodeYs(layers[li + 1].total);
+                ctx.lineWidth = 0.7;
+                ctx.strokeStyle = 'rgba(140,140,140,0.13)';
+                for (const fy of fromYs)
+                    for (const ty of toYs) {
+                        ctx.beginPath();
+                        ctx.moveTo(xs[li], fy);
+                        ctx.lineTo(xs[li + 1], ty);
+                        ctx.stroke();
+                    }
+            }
+
+            // Neuronen zeichnen
+            for (let li = 0; li < layers.length; li++) {
+                const layer = layers[li];
+                const ys = nodeYs(layer.total);
+                const hasMore = layer.total > MAX_SHOW;
+                const midIdx = Math.floor(ys.length / 2);
+
+                for (let ni = 0; ni < ys.length; ni++) {
+                    const y = ys[ni];
+                    if (hasMore && ni === midIdx) {
+                        ctx.fillStyle = '#aaa';
+                        ctx.font = 'bold 24px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('\u22ef', xs[li], y);
+                        continue;
+                    }
+
+                    let fillColor = layer.nodeColors ? layer.nodeColors[ni] : layer.color;
+                    if (li === 0 && inputImportance) {
+                        const dataIdx = ni < midIdx ? ni : spectrumLen - (ys.length - ni);
+                        const t = inputImportance[Math.min(dataIdx, inputImportance.length - 1)];
+                        const rr = Math.round(84 + t * 171);
+                        const gg = Math.round(110 - t * 84);
+                        const bb = Math.round(122 - t * 120);
+                        fillColor = `rgb(${rr},${gg},${bb})`;
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(xs[li], y, nr, 0, Math.PI * 2);
+                    ctx.fillStyle = fillColor;
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    if (layer.nodeLabels) {
+                        ctx.fillStyle = fillColor;
+                        ctx.font = 'bold 15px Arial';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(layer.nodeLabels[ni], xs[li] + nr + 7, y);
+                    }
+                }
+
+                // Schicht-Bezeichnung
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'alphabetic';
+                if (hasMore) {
+                    ctx.fillStyle = '#999';
+                    ctx.font = '13px Arial';
+                    ctx.fillText('(' + layer.total + ')', xs[li], H - 52);
+                }
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 15px Arial';
+                ctx.fillText(layer.name, xs[li], H - 32);
+                ctx.fillStyle = '#777';
+                ctx.font = '13px Arial';
+                ctx.fillText(layer.sub, xs[li], H - 13);
+            }
+
+            // Legende (Eingabe-Farben)
+            if (inputImportance) {
+                const legX = W * 0.01, legY = 16, legW = 130, legH = 14;
+                const grad = ctx.createLinearGradient(legX, 0, legX + legW, 0);
+                grad.addColorStop(0, 'rgb(84,110,122)');
+                grad.addColorStop(1, 'rgb(255,26,2)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(legX, legY, legW, legH);
+                ctx.strokeStyle = '#ccc';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(legX, legY, legW, legH);
+                ctx.fillStyle = '#555';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.fillText('niedrig', legX, legY + legH + 3);
+                ctx.textAlign = 'right';
+                ctx.fillText('hoch', legX + legW, legY + legH + 3);
+                ctx.textAlign = 'center';
+                ctx.fillText('Wichtigkeit', legX + legW / 2, legY + legH + 3);
+            }
         }
         
         async function predictWithModel(spectrum) {
