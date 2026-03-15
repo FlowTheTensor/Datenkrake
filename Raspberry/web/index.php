@@ -147,6 +147,171 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1 style="margin: 0;">Audio-Spektrum Dashboard <span class="live-indicator" title="Live-Aktualisierung aktiv"></span></h1>
+        <div class="logo">
+            <span class="logo-underline">jakob</span>-<span class="logo-underline-red">pr<span class="red-dot">e</span>h</span>-<span class="logo-underline">schule</span><span class="red-dot">!</span>
+        </div>
+    </div>
+    <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>
+    
+    <div class="stats-container">
+        <div class="stat-card total">
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-label">Gesamt</div>
+        </div>
+        <div class="stat-card gut">
+            <div class="stat-value" id="statGut">0</div>
+            <div class="stat-label">Gut</div>
+        </div>
+        <div class="stat-card schlecht">
+            <div class="stat-value" id="statSchlecht">0</div>
+            <div class="stat-label">Schlecht</div>
+        </div>
+    </div>
+    
+    <div class="filter-container">
+        <button class="filter-btn all active" onclick="setFilter(null)">Alle</button>
+        <button class="filter-btn gut" onclick="setFilter('gut')">Nur Gut</button>
+        <button class="filter-btn schlecht" onclick="setFilter('schlecht')">Nur Schlecht</button>
+        <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
+    </div>
+    
+    <div class="main-data-container">
+        <div class="charts-container">
+            <div class="chart-box">
+                <h2>Peak-Frequenz über Zeit</h2>
+                <div class="chart-container"><canvas id="freqChart"></canvas></div>
+            </div>
+            <div class="chart-box">
+                <h2>Aktuelles Spektrum</h2>
+                <div class="chart-container"><canvas id="spectrumChart"></canvas></div>
+            </div>
+        </div>
+        <div class="table-section">
+            <h2>Letzte Messungen</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>ID</th><th>Zeitstempel</th><th>Label</th><th>Peak Freq (Hz)</th><th>Peak dB</th><th>Sample Rate</th></tr>
+                    </thead>
+                    <tbody id="dataTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-family: 'Times New Roman', serif;
+            font-size: 28px;
+            font-weight: normal;
+            color: #333;
+            letter-spacing: 1px;
+            margin-left: 20px;
+            margin-bottom: 0;
+            margin-top: 0;
+            text-align: right;
+            line-height: 1.1;
+        }
+        .logo .red-dot {
+            color: #c00;
+        }
+        .logo-underline {
+            display: inline-block;
+            border-bottom: 2px solid #333;
+            padding-bottom: 2px;
+        }
+        .logo-underline-red {
+            display: inline-block;
+            border-bottom: 2px solid #c00;
+            padding-bottom: 2px;
+        }
+        @media (max-width: 600px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .logo { margin-left: 0; text-align: left; font-size: 22px; }
+        }
+        .main-data-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 100%;
+        }
+        .chart-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1 1 0;
+            min-width: 250px;
+            max-width: 50%;
+            box-sizing: border-box;
+        }
+        .chart-box h2 {
+            margin-top: 0;
+            color: #8b1a1a;
+            font-size: 16px;
+        }
+        .chart-container {
+            height: 250px;
+            width: 100%;
+            min-width: 0;
+        }
+        .table-section {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .table-section h2 {
+            margin-top: 0;
+            color: #8b1a1a;
+        }
+        @media (max-width: 900px) {
+            .charts-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .chart-box {
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 600px) {
+            .main-data-container {
+                padding: 0 2px;
+            }
+            .chart-box, .table-section {
+                padding: 6px;
+            }
+            .chart-container {
+                height: 160px;
+            }
+            th, td {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
     <h1>Audio-Spektrum Dashboard <span class="live-indicator" title="Live-Aktualisierung aktiv"></span></h1>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>
     
@@ -172,26 +337,27 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
         <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
     </div>
     
-    <div class="charts-container">
-        <div class="chart-box">
-            <h2>Peak-Frequenz über Zeit</h2>
-            <div class="chart-container"><canvas id="freqChart"></canvas></div>
+    <div class="main-data-container">
+        <div class="charts-container">
+            <div class="chart-box">
+                <h2>Peak-Frequenz über Zeit</h2>
+                <div class="chart-container"><canvas id="freqChart"></canvas></div>
+            </div>
+            <div class="chart-box">
+                <h2>Aktuelles Spektrum</h2>
+                <div class="chart-container"><canvas id="spectrumChart"></canvas></div>
+            </div>
         </div>
-        <div class="chart-box">
-            <h2>Aktuelles Spektrum</h2>
-            <div class="chart-container"><canvas id="spectrumChart"></canvas></div>
-        </div>
-    </div>
-    
-    <div class="table-section">
-        <h2>Letzte Messungen</h2>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr><th>ID</th><th>Zeitstempel</th><th>Label</th><th>Peak Freq (Hz)</th><th>Peak dB</th><th>Sample Rate</th></tr>
-                </thead>
-                <tbody id="dataTable"></tbody>
-            </table>
+        <div class="table-section">
+            <h2>Letzte Messungen</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>ID</th><th>Zeitstempel</th><th>Label</th><th>Peak Freq (Hz)</th><th>Peak dB</th><th>Sample Rate</th></tr>
+                    </thead>
+                    <tbody id="dataTable"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -227,15 +393,18 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
 
             const ctxSpectrum = document.getElementById('spectrumChart').getContext('2d');
             spectrumChart = new Chart(ctxSpectrum, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: [],
                     datasets: [{
                         label: 'Amplitude (dB)',
                         data: [],
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
+                        borderColor: '#c00',
+                        backgroundColor: 'rgba(220,0,0,0.08)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: false,
+                        tension: 0.1
                     }]
                 },
                 options: {

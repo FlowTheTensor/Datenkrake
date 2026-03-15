@@ -96,68 +96,106 @@ HTML = '''
 <html>
 <head>
     <title>Audio-Spektrum Sammler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <style>
-        body { font-family: Arial; background: #fff; color: #333; margin: 20px; }
-        h1 { color: #8b1a1a; margin-left: 20px; }
-        
-        .header { display: flex; align-items: center; margin-bottom: 20px; }
-        .logo { font-family: 'Times New Roman', serif; font-size: 28px; font-weight: normal; color: #333; letter-spacing: 1px; }
-        .logo .red-dot { color: #c00; }
-        .logo-underline { display: inline-block; border-bottom: 2px solid #333; padding-bottom: 2px; }
-        .logo-underline-red { display: inline-block; border-bottom: 2px solid #c00; padding-bottom: 2px; }
-        
-        .tabs { display: flex; gap: 5px; margin-bottom: 20px; }
+        body { font-family: Arial; background: #fff; color: #333; margin: 20px; max-width: 100vw; overflow-x: hidden; }
+        h1 { color: #8b1a1a; margin: 0; }
+        .header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-family: 'Times New Roman', serif;
+            font-size: 28px;
+            font-weight: normal;
+            color: #333;
+            letter-spacing: 1px;
+            margin-left: 20px;
+            margin-bottom: 0;
+            margin-top: 0;
+            text-align: right;
+            line-height: 1.1;
+        }
+        .logo .red-dot {
+            color: #c00;
+        }
+        .logo-underline {
+            display: inline-block;
+            border-bottom: 2px solid #333;
+            padding-bottom: 2px;
+        }
+        .logo-underline-red {
+            display: inline-block;
+            border-bottom: 2px solid #c00;
+            padding-bottom: 2px;
+        }
+        @media (max-width: 600px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .logo { margin-left: 0; text-align: left; font-size: 22px; }
+        }
+        .tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn { padding: 12px 30px; font-size: 16px; border: none; border-radius: 8px 8px 0 0; cursor: pointer; background: #f0f0f0; color: #666; }
         .tab-btn.active { background: #8b1a1a; color: #fff; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        .main-layout { display: flex; gap: 15px; }
-        .main-content { flex: 1; }
+        .main-layout { display: flex; gap: 15px; flex-wrap: wrap; }
+        .main-content { flex: 1; min-width: 0; }
         .info { background: #f8f8f8; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 30px; flex-wrap: wrap; align-items: center; border: 1px solid #ddd; }
         .peak { color: #8b1a1a; font-size: 24px; font-weight: bold; }
         .label { color: #666; }
         .status { color: #c00; }
-        #chart-box, #chart-box-inference { background: #f8f8f8; padding: 15px; border-radius: 8px; margin-bottom: 20px; height: 300px; border: 1px solid #ddd; }
-        
+        #chart-box, #chart-box-inference { background: #f8f8f8; padding: 15px; border-radius: 8px; margin-bottom: 20px; height: 300px; border: 1px solid #ddd; width: 100%; box-sizing: border-box; }
         .controls { background: #f8f8f8; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; }
         .controls h2 { color: #8b1a1a; margin-top: 0; }
-        
-        .label-buttons { display: flex; gap: 15px; margin-bottom: 20px; }
+        .label-buttons { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .label-btn { padding: 15px 40px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
         .label-btn.gut { background: #d4edda; color: #155724; border: 2px solid #c3e6cb; }
         .label-btn.gut.active { background: #28a745; color: #fff; box-shadow: 0 0 10px rgba(40,167,69,0.5); }
         .label-btn.schlecht { background: #f8d7da; color: #721c24; border: 2px solid #f5c6cb; }
         .label-btn.schlecht.active { background: #dc3545; color: #fff; box-shadow: 0 0 10px rgba(220,53,69,0.5); }
-        
         .record-btn { padding: 15px 40px; font-size: 18px; border: none; border-radius: 8px; cursor: pointer; margin-right: 15px; }
         .record-btn.start { background: #8b1a1a; color: #fff; }
         .record-btn.stop { background: #dc3545; color: #fff; }
-        
-        .stats { background: #f8f8f8; padding: 10px; border-radius: 8px; width: 120px; text-align: center; border: 1px solid #ddd; }
+        .stats { background: #f8f8f8; padding: 10px; border-radius: 8px; width: 120px; text-align: center; border: 1px solid #ddd; min-width: 100px; }
         .stats h4 { color: #8b1a1a; margin: 0 0 10px 0; font-size: 11px; }
         .stat-row { display: flex; justify-content: space-between; margin: 5px 0; font-size: 12px; }
         .stat-value { font-weight: bold; }
         .stat-gut { color: #28a745; }
         .stat-schlecht { color: #dc3545; }
         .stat-total { color: #8b1a1a; }
-        
         .prediction-box { background: #f8f8f8; padding: 30px; border-radius: 8px; text-align: center; margin-bottom: 20px; border: 1px solid #ddd; }
         .prediction-result { font-size: 48px; font-weight: bold; margin: 20px 0; }
         .prediction-result.gut { color: #28a745; }
         .prediction-result.schlecht { color: #dc3545; }
         .prediction-result.unknown { color: #999; }
         .confidence { font-size: 18px; color: #666; }
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; }
+            .stats { width: 100%; margin-top: 10px; }
+        }
+        @media (max-width: 600px) {
+            body { margin: 5px; }
+            .header { flex-direction: column; gap: 8px; }
+            .main-layout { gap: 5px; }
+            .controls, .info, .prediction-box { padding: 10px; }
+            .stats { font-size: 11px; min-width: 0; width: 100%; }
+            .label-btn { padding: 10px 15px; font-size: 15px; }
+            .record-btn { padding: 10px 15px; font-size: 15px; }
+        }
     </style>
 </head>
 <body>
     <div class="header">
+        <h1 style="margin: 0;">Audio-Spektrum Sammler für KI-Training</h1>
         <div class="logo">
             <span class="logo-underline">jakob</span>-<span class="logo-underline-red">pr<span class="red-dot">e</span>h</span>-<span class="logo-underline">schule</span><span class="red-dot">!</span>
         </div>
-        <h1>Audio-Spektrum Sammler für KI-Training</h1>
     </div>
     
     <div class="tabs">
@@ -170,35 +208,32 @@ HTML = '''
     <div id="tab-collect" class="tab-content active">
         <div class="main-layout">
             <div class="main-content">
-                <div class="controls">
-                    <h2>Daten-Aufnahme</h2>
-                    
-                    <p>1. Wähle den Zustand:</p>
-                    <div class="label-buttons">
-                        <button class="label-btn gut active" onclick="setLabel('gut')">✓ Guter Zustand</button>
-                        <button class="label-btn schlecht" onclick="setLabel('schlecht')">✗ Schlechter Zustand</button>
+                <div class="controls" style="display: flex; flex-direction: row; gap: 24px; align-items: flex-start;">
+                    <div style="flex: 1 1 0; min-width: 0;">
+                        <h2>Daten-Aufnahme</h2>
+                        <p>1. Wähle den Zustand:</p>
+                        <div class="label-buttons">
+                            <button class="label-btn gut active" onclick="setLabel('gut')">✓ Guter Zustand</button>
+                            <button class="label-btn schlecht" onclick="setLabel('schlecht')">✗ Schlechter Zustand</button>
+                        </div>
+                        <p>2. Starte die Aufnahme:</p>
+                        <button id="recordBtn" class="record-btn start" onclick="toggleRecording()">▶ Aufnahme starten</button>
+                        <span id="recordStatus">Bereit</span>
                     </div>
-                    
-                    <p>2. Starte die Aufnahme:</p>
-                    <button id="recordBtn" class="record-btn start" onclick="toggleRecording()">▶ Aufnahme starten</button>
-                    <span id="recordStatus">Bereit</span>
+                    <div class="stats" style="margin-top: 0; min-width: 110px;">
+                        <h4>MQTT gesendet</h4>
+                        <div class="stat-row"><span>Gut:</span><span class="stat-value stat-gut" id="statGut">0</span></div>
+                        <div class="stat-row"><span>Schlecht:</span><span class="stat-value stat-schlecht" id="statSchlecht">0</span></div>
+                        <div class="stat-row"><span>Gesamt:</span><span class="stat-value stat-total" id="statTotal">0</span></div>
+                    </div>
                 </div>
-                
                 <div class="info">
                     <div>Peak: <span class="peak" id="peak">-- Hz</span></div>
                     <div>Magnitude: <span class="peak" id="db">-- dB</span></div>
                     <div><span class="label">Sample-Rate:</span> <span id="rate">--</span> Hz</div>
                     <div><span class="label">Status:</span> <span id="status" class="status">Warte auf Audio...</span></div>
                 </div>
-                
                 <div id="chart-box"><canvas id="chart"></canvas></div>
-            </div>
-            
-            <div class="stats">
-                <h4>MQTT gesendet</h4>
-                <div class="stat-row"><span>Gut:</span><span class="stat-value stat-gut" id="statGut">0</span></div>
-                <div class="stat-row"><span>Schlecht:</span><span class="stat-value stat-schlecht" id="statSchlecht">0</span></div>
-                <div class="stat-row"><span>Gesamt:</span><span class="stat-value stat-total" id="statTotal">0</span></div>
             </div>
         </div>
     </div>
@@ -327,6 +362,41 @@ HTML = '''
     </div>
     
     <script>
+                // Anime.js Animationen
+                function animateTabs() {
+                    anime({
+                        targets: '.tab-btn',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        delay: anime.stagger(100),
+                        duration: 700,
+                        easing: 'easeOutCubic'
+                    });
+                }
+                function animateStats() {
+                    anime({
+                        targets: '.stat-value',
+                        scale: [0.7, 1],
+                        color: [
+                            '#8b1a1a',
+                            '#28a745',
+                            '#dc3545',
+                            '#8b1a1a'
+                        ],
+                        delay: anime.stagger(120),
+                        duration: 900,
+                        easing: 'easeOutBack'
+                    });
+                }
+                function animateHeader() {
+                    anime({
+                        targets: '.logo',
+                        scale: [0.8, 1],
+                        opacity: [0, 1],
+                        duration: 900,
+                        easing: 'easeOutExpo'
+                    });
+                }
         let currentLabel = 'gut';
         let isRecording = false;
         let currentTab = 'collect';
@@ -780,15 +850,45 @@ HTML = '''
                 // Vorhersage aktualisieren (wenn Tab aktiv und Modell trainiert)
                 if (currentTab === 'inference' && d.fft_db && d.fft_db.length > 0) {
                     const resultEl = document.getElementById('predictionResult');
+                    const confEl = document.getElementById('predictionConf');
+                    const predBox = document.querySelector('.prediction-box');
                     if (trainedModel) {
                         const p = await predictWithModel(d.fft_db);
+                        // Letzten Prediction-Status merken (Closure über window)
+                        if (typeof window.lastPrediction === 'undefined') {
+                            window.lastPrediction = null;
+                        }
+                        const prevPrediction = window.lastPrediction;
                         resultEl.textContent = p.prediction === 'gut' ? '✓ Gut' : '✗ Schlecht';
                         resultEl.className = 'prediction-result ' + p.prediction;
-                        document.getElementById('predictionConf').textContent = (p.confidence * 100).toFixed(1);
+                        confEl.textContent = (p.confidence * 100).toFixed(1);
+
+                        // Animation NUR bei Wechsel von gut <-> schlecht
+                        if (prevPrediction !== p.prediction && (prevPrediction === 'gut' || prevPrediction === 'schlecht')) {
+                            anime({
+                                targets: resultEl,
+                                scale: [1.2, 1],
+                                color: p.prediction === 'gut' ? '#28a745' : '#dc3545',
+                                duration: 500,
+                                easing: 'easeOutElastic(1, .7)'
+                            });
+                            anime({
+                                targets: predBox,
+                                backgroundColor: [
+                                    p.prediction === 'gut' ? '#e9f7ef' : '#f8d7da',
+                                    '#f8f8f8'
+                                ],
+                                duration: 900,
+                                easing: 'easeOutQuad'
+                            });
+                        }
+                        window.lastPrediction = p.prediction;
+                        // Keine Animation für confEl mehr
                     } else {
                         resultEl.textContent = 'Kein Modell';
                         resultEl.className = 'prediction-result unknown';
-                        document.getElementById('predictionConf').textContent = '--';
+                        confEl.textContent = '--';
+                        window.lastPrediction = null;
                     }
                 }
                 
@@ -796,6 +896,9 @@ HTML = '''
                 document.getElementById('status').textContent = 'Fehler: ' + e;
             }
         }
+        animateHeader();
+        animateTabs();
+        animateStats();
         setInterval(update, 100);
     </script>
 </body>
