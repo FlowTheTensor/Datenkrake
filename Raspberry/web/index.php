@@ -311,54 +311,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
     </style>
 </head>
 <body>
-    <h1>Audio-Spektrum Dashboard <span class="live-indicator" title="Live-Aktualisierung aktiv"></span></h1>
-    <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>
     
-    <div class="stats-container">
-        <div class="stat-card total">
-            <div class="stat-value" id="statTotal">0</div>
-            <div class="stat-label">Gesamt</div>
-        </div>
-        <div class="stat-card gut">
-            <div class="stat-value" id="statGut">0</div>
-            <div class="stat-label">Gut</div>
-        </div>
-        <div class="stat-card schlecht">
-            <div class="stat-value" id="statSchlecht">0</div>
-            <div class="stat-label">Schlecht</div>
-        </div>
-    </div>
-    
-    <div class="filter-container">
-        <button class="filter-btn all active" onclick="setFilter(null)">Alle</button>
-        <button class="filter-btn gut" onclick="setFilter('gut')">Nur Gut</button>
-        <button class="filter-btn schlecht" onclick="setFilter('schlecht')">Nur Schlecht</button>
-        <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
-    </div>
-    
-    <div class="main-data-container">
-        <div class="charts-container">
-            <div class="chart-box">
-                <h2>Peak-Frequenz über Zeit</h2>
-                <div class="chart-container"><canvas id="freqChart"></canvas></div>
-            </div>
-            <div class="chart-box">
-                <h2>Aktuelles Spektrum</h2>
-                <div class="chart-container"><canvas id="spectrumChart"></canvas></div>
-            </div>
-        </div>
-        <div class="table-section">
-            <h2>Letzte Messungen</h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr><th>ID</th><th>Zeitstempel</th><th>Label</th><th>Peak Freq (Hz)</th><th>Peak dB</th><th>Sample Rate</th></tr>
-                    </thead>
-                    <tbody id="dataTable"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
     <script>
         let freqChart, spectrumChart;
