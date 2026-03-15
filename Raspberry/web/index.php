@@ -92,6 +92,10 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
     exit;
 }
 ?>
+<?php // Prevent duplicate HTML output
+if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
+    $GLOBALS['__DASHBOARD_RENDERED__'] = true;
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -99,14 +103,12 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
     <title>Audio-Spektrum Dashboard - Live</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f8f8f8; }
         h1 { display: flex; align-items: center; gap: 10px; color: #8b1a1a; }
         .live-indicator { width: 12px; height: 12px; background: #28a745; border-radius: 50%; animation: pulse 1s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        
         .status { padding: 10px; margin-bottom: 15px; border-radius: 5px; background: #d4edda; color: #155724; }
         .status.error { background: #f8d7da; color: #721c24; }
-        
         .stats-container { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 150px; text-align: center; }
         .stat-card.gut { border-left: 4px solid #28a745; }
@@ -114,7 +116,6 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
         .stat-card.total { border-left: 4px solid #007bff; }
         .stat-value { font-size: 32px; font-weight: bold; color: #333; }
         .stat-label { color: #666; margin-top: 5px; }
-        
         .filter-container { margin-bottom: 15px; }
         .filter-btn { padding: 8px 20px; margin-right: 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
         .filter-btn.active { color: white; }
@@ -124,12 +125,10 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
         .filter-btn.gut.active { background: #28a745; color: white; }
         .filter-btn.schlecht { background: #f8d7da; color: #721c24; }
         .filter-btn.schlecht.active { background: #dc3545; color: white; }
-        
         .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
         .chart-box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .chart-box h2 { margin-top: 0; color: #8b1a1a; font-size: 16px; }
         .chart-container { height: 250px; }
-        
         .table-section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .table-section h2 { margin-top: 0; color: #8b1a1a; }
         table { border-collapse: collapse; width: 100%; }
@@ -140,17 +139,17 @@ if (isset($_GET['api']) && $_GET['api'] === 'stats') {
         .label-schlecht { background: #f8d7da; color: #721c24; padding: 2px 8px; border-radius: 3px; }
         .btn-danger { padding: 8px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin-left: 15px; }
         .btn-danger:hover { background: #c82333; }
-        
         @media (max-width: 900px) {
             .charts-container { grid-template-columns: 1fr; }
         }
     </style>
+<?php } // End prevent duplicate HTML ?>
 </head>
 <body>
     <div class="header">
         <h1 style="margin: 0;">Audio-Spektrum Dashboard <span class="live-indicator" title="Live-Aktualisierung aktiv"></span></h1>
         <div class="logo">
-            <span class="logo-underline">jakob</span>-<span class="logo-underline-red">pr<span class="red-dot">e</span>h</span>-<span class="logo-underline">schule</span><span class="red-dot">!</span>
+            <span class="logo-underline"><span class="red-dot">j</span>akob</span><span class="red-dot">-</span><span class="logo-underline-red">preh</span><span class="red-dot">-</span><span class="logo-underline">schule</span><span class="red-dot">!</span>
         </div>
     </div>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>

@@ -194,7 +194,7 @@ HTML = '''
     <div class="header">
         <h1 style="margin: 0;">Audio-Spektrum Sammler für KI-Training</h1>
         <div class="logo">
-            <span class="logo-underline">jakob</span>-<span class="logo-underline-red">pr<span class="red-dot">e</span>h</span>-<span class="logo-underline">schule</span><span class="red-dot">!</span>
+            <span class="logo-underline"><span class="red-dot">j</span>akob</span><span class="red-dot">-</span><span class="logo-underline-red">preh</span><span class="red-dot">-</span><span class="logo-underline">schule</span><span class="red-dot">!</span>
         </div>
     </div>
     
@@ -337,7 +337,7 @@ HTML = '''
             <p>Das Modell ist jetzt im Tab "Modell anwenden" aktiv.</p>
         </div>
 
-        <div id="nnVizBox" style="background: #f8f8f8; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #ddd; display: none;">
+        <div id="nnVizBox" style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border: none; display: none;">
             <h3 style="color: #8b1a1a; margin-top: 0;">Netzwerk-Architektur</h3>
             <p style="color: #666; font-size: 13px; margin-top: -10px;">Farbe der Eingabe-Neuronen zeigt Gewichts-Wichtigkeit (blau = niedrig, rot = hoch)</p>
             <canvas id="nnViz" style="display: block; width: 100%; height: 320px;"></canvas>
