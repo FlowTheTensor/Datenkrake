@@ -6,6 +6,7 @@ Nur lesender Zugriff ueber den mcp_read User.
 """
 
 import json
+import statistics
 import pymysql
 from datetime import datetime
 from mcp.server.fastmcp import FastMCP
@@ -160,6 +161,108 @@ def get_table_info() -> str:
         return json.dumps(rows, ensure_ascii=False, indent=2)
     finally:
         conn.close()
+
+
+# ============================================================
+# Agentensystem-Erweiterung (MCP/A2A/LAP, siehe Agentensystem/README.md)
+# ============================================================
+@mcp.tool()
+def pruefe_akustik_anomalie(fenster: int = 20) -> str:
+    """
+    Statistische Ausreisser-Pruefung auf peak_db der letzten Messwerte
+    (Mittelwert + Standardabweichung). Bewusst kein trainiertes Modell -
+    das ist laut "Naechste Schritte" oben noch offen ("Anomalie-Modell
+    trainieren", "Echtzeit-Inferenz"). Dient als nachvollziehbarer
+    Platzhalter, bis dieses Modell steht - dieselbe Funktion nutzt auch
+    Agentensystem/anomalie_poller/poller.py.
+
+    Args:
+        fenster: wie viele der letzten Messwerte betrachtet werden (Standard: 20)
+    """
+    conn = get_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "SELECT id, peak_db FROM audio_spectrum ORDER BY ts DESC LIMIT %s",
+                (fenster,),
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+
+    if len(rows) < 6:
+        return json.dumps({"anomalie": False, "grund": "zu wenige Datenpunkte"})
+
+    rows = rows[::-1]  # chronologisch
+    referenz = [r["peak_db"] for r in rows[:-1]]
+    aktuell = rows[-1]
+    mittel = statistics.mean(referenz)
+    std = statistics.pstdev(referenz) or 0.01
+    anomalie = abs(aktuell["peak_db"] - mittel) > 2.5 * std
+
+    return json.dumps(
+        {
+            "anomalie": anomalie,
+            "bezug_id": aktuell["id"],
+            "aktuell_peak_db": round(aktuell["peak_db"], 2),
+            "referenz_mittel": round(mittel, 2),
+            "referenz_std": round(std, 2),
+        },
+        ensure_ascii=False,
+    )
+
+
+@mcp.resource("schema://overview")
+def schema_overview() -> str:
+    """Read-only Uebersicht aller Tabellen - inkl. der beiden neuen Tabellen
+    des Agentensystems (audio_anomalien, wartungsereignisse)."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SHOW TABLES")
+            tabellen = [list(row.values())[0] for row in cur.fetchall()]
+            lines = []
+            for tabelle in tabellen:
+                cur.execute(f"DESCRIBE `{tabelle}`")
+                cols = ", ".join(r["Field"] for r in cur.fetchall())
+                lines.append(f"{tabelle}: {cols}")
+        return "\n".join(lines)
+    finally:
+        conn.close()
+
+
+@mcp.resource("anomalien://offen")
+def offene_anomalien() -> str:
+    """Read-only Liste noch nicht erledigter Akustik-Anomalien."""
+    conn = get_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                "SELECT id, bezug_id, peak_db, referenz_mittel, erkannt_am "
+                "FROM audio_anomalien WHERE erledigt = FALSE ORDER BY erkannt_am DESC"
+            )
+            rows = cur.fetchall()
+    finally:
+        conn.close()
+    if not rows:
+        return "Keine offenen Anomalien."
+    return "\n".join(
+        f"Anomalie #{r['id']} (Messung #{r['bezug_id']}): "
+        f"{r['peak_db']} dB vs. Referenz {r['referenz_mittel']} dB ({r['erkannt_am']})"
+        for r in rows
+    )
+
+
+@mcp.prompt()
+def anomalie_analysieren() -> str:
+    """Vorlage: aktuelle Akustik-Anomalien einordnen."""
+    return (
+        "Prüfe den aktuellen Zustand der Akustiküberwachung.\n"
+        "1. Nutze 'pruefe_akustik_anomalie', um die letzten Messwerte zu prüfen.\n"
+        "2. Lies die Resource 'anomalien://offen' für bereits erkannte, "
+        "noch nicht bearbeitete Fälle.\n"
+        "3. Ordne ein, ob eine vorausschauende Wartung sinnvoll wäre, und warum."
+    )
 
 
 if __name__ == "__main__":
