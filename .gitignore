@@ -1,2 +1,4 @@
 
 *jahresbericht*
+__pycache__/
+*.pyc

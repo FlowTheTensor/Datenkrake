@@ -262,7 +262,7 @@ Projekts gegenüberstellt:
 - **A2A** – ein Orchestrator-, DB- und Report-Agent, die per Agent-to-Agent-Protokoll zusammenarbeiten
 - **LAP** – ein Wartungs-Agent, der bei erkannten Akustik-Anomalien ein eigenes Diagnose-/Schmiergerät ansteuert (Lab Agent Protocol – steuert dabei nie die eigentliche Datenerfassung)
 
-Dazu ein zweites Web-Dashboard unter `Raspberry/web/leitstand.html`
+Dazu ein zweites Web-Dashboard unter [`leitstand.html`](leitstand.html)
 (verlinkt vom bestehenden Dashboard aus) mit Agent-/Instrument-Cards,
 Architekturdiagramm, LLM-Chat und A2A-Konsole.
 

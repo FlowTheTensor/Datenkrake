@@ -43,7 +43,9 @@ services:
         condition: service_healthy
 
   web:
-    build: ../web
+    build:
+      context: ../..
+      dockerfile: Raspberry/web/Dockerfile
     container_name: web-server
     restart: unless-stopped
     ports:
