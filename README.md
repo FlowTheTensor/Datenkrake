@@ -252,6 +252,22 @@ end
 | `ModuleNotFoundError: mcp` | `pip install mcp[cli]` ausführen |
 
 
+## Agentensystem (MCP, A2A, LAP)
+
+Ergänzend zum MCP-Server oben gibt es in [`Agentensystem/`](Agentensystem/README.md)
+ein Lern-Agentensystem, das drei Agentenprotokolle am Beispiel dieses
+Projekts gegenüberstellt:
+
+- **MCP** – der obige `mcpserver.py` für Claude Desktop (erweitert um Resources, Prompt, ein Anomalie-Tool)
+- **A2A** – ein Orchestrator-, DB- und Report-Agent, die per Agent-to-Agent-Protokoll zusammenarbeiten
+- **LAP** – ein Wartungs-Agent, der bei erkannten Akustik-Anomalien ein eigenes Diagnose-/Schmiergerät ansteuert (Lab Agent Protocol – steuert dabei nie die eigentliche Datenerfassung)
+
+Dazu ein zweites Web-Dashboard unter `Raspberry/web/leitstand.html`
+(verlinkt vom bestehenden Dashboard aus) mit Agent-/Instrument-Cards,
+Architekturdiagramm, LLM-Chat und A2A-Konsole.
+
+Details, Setup und ehrliche Einschränkungen: siehe [`Agentensystem/README.md`](Agentensystem/README.md).
+
 ## Nächste Schritte
 - Anomalie-Modell mit gesammelten Spektrumdaten trainieren
 - Echtzeit-Inferenz auf Arduino implementieren
