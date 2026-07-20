@@ -152,6 +152,9 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
             <span class="logo-underline"><span class="red-dot">j</span>akob</span><span class="red-dot">-</span><span class="logo-underline-red">preh</span><span class="red-dot">-</span><span class="logo-underline">schule</span><span class="red-dot">!</span>
         </div>
     </div>
+    <div style="margin-bottom: 15px;">
+        <a href="leitstand.html" style="color:#8b1a1a; font-size: 13px;">→ Agentensystem-Leitstand (MCP · A2A · LAP)</a>
+    </div>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>
     
     <div class="stats-container">

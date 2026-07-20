@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenkrake Leitstand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF9F5;
+    --surface:#FFFFFF;
+    --surface-2:#F3EEE6;
+    --ink:#1D1D1C;
+    --ink-soft:#5B5852;
+    --ink-faint:#7D7A72;
+    --accent:#C81E3A;
+    --accent-bright:#E4002B;
+    --accent-2:#B87A1C;
+    --line:#E7E1D6;
+    --line-soft:#EFEAE1;
+    --r:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);}
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  h1,h2,h3{font-family:"Quicksand",sans-serif; margin:0; font-weight:700; letter-spacing:-.008em; color:var(--ink);}
+  ::selection{background:var(--accent-bright); color:#fff;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  /* ---------- Header ---------- */
+  header{
+    padding:26px clamp(16px,4vw,48px) 0;
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:20px; flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:14px;}
+  .brand img{height:40px; width:auto; display:block;}
+  .brand .titles h1{font-size:clamp(20px,2.8vw,27px);}
+  .brand .titles h1 i{font-style:normal; color:var(--accent);}
+  .brand .titles .eyebrow{margin-top:4px;}
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-soft);
+    border:1px solid var(--line); border-radius:999px;
+    padding:7px 14px 7px 10px; background:var(--surface);
+    white-space:nowrap;
+  }
+  .status-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);}
+  .status-pill .dot.live{background:var(--accent-bright); animation:blip 1.6s ease-in-out infinite;}
+  .gear-btn{
+    border:1px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:8px; padding:7px 12px; font-family:"JetBrains Mono",monospace; font-size:12px;
+    cursor:pointer;
+  }
+  .gear-btn:hover{border-color:var(--accent);}
+
+  /* ---------- Signatur: Punkte/Striche wie im Logo ---------- */
+  .sig-rail{
+    margin:20px clamp(16px,4vw,48px) 0;
+    height:26px;
+    display:flex; align-items:center; gap:10px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+    overflow:hidden;
+  }
+  .sig-rail .dot{width:5px; height:5px; border-radius:50%; background:var(--accent-bright); flex:none;}
+  .sig-rail .dash{width:14px; height:2px; background:var(--ink-soft); flex:none; transform:rotate(-30deg);}
+  .sig-rail span{animation:blip 2.6s ease-in-out infinite;}
+  @keyframes blip{
+    0%,100%{opacity:.25;}
+    50%{opacity:1;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sig-rail span, .status-pill .dot.live{animation:none; opacity:.75;}
+  }
+
+  /* ---------- Settings drawer ---------- */
+  #settingsDrawer{
+    display:none;
+    margin:16px clamp(16px,4vw,48px) 0;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    padding:18px 20px;
+  }
+  #settingsDrawer.open{display:block;}
+  #settingsDrawer h3{font-size:13px; margin-bottom:12px; font-family:"JetBrains Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:500;}
+  .settings-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px 20px;}
+  .field label{display:block; font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint); letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px;}
+  .field input{
+    width:100%; background:var(--surface-2); border:1px solid var(--line); color:var(--ink);
+    border-radius:6px; padding:8px 10px; font-family:"JetBrains Mono",monospace; font-size:12.5px;
+  }
+  .field input:focus{border-color:var(--accent);}
+  .settings-note{margin-top:14px; font-size:12px; color:var(--ink-faint); line-height:1.6;}
+
+  main{padding:24px clamp(16px,4vw,48px) 60px; display:flex; flex-direction:column; gap:28px;}
+
+  section .eyebrow{margin-bottom:12px; display:block;}
+
+  .panel{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:18px 20px;}
+  .panel-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .panel-head h2{font-size:15px;}
+
+  /* ---------- Chat / Konsole (jetzt oben) ---------- */
+  .tabs{display:flex; gap:6px; margin-bottom:14px;}
+  .tab-btn{
+    font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    background:var(--surface); border:1px solid var(--line); color:var(--ink-soft);
+    padding:7px 13px; border-radius:7px; cursor:pointer;
+  }
+  .tab-btn.active{color:#fff; background:var(--accent); border-color:var(--accent);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  @media (max-width:820px){.tab-panel.active{grid-template-columns:1fr;}}
+
+  .chat-log{
+    height:230px; overflow-y:auto; background:var(--surface-2); border:1px solid var(--line);
+    border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:10px; font-size:13px;
+  }
+  .msg{max-width:88%; padding:8px 11px; border-radius:8px; line-height:1.45;}
+  .msg.user{align-self:flex-end; background:var(--accent); color:#fff;}
+  .msg.bot{align-self:flex-start; background:var(--surface); border:1px solid var(--line); color:var(--ink);}
+  .msg.sys{align-self:center; color:var(--ink-faint); font-family:"JetBrains Mono",monospace; font-size:11px; background:none; max-width:100%; text-align:center;}
+  .chat-row{display:flex; gap:8px; margin-top:10px;}
+  .chat-row input, .chat-row select{
+    flex:1; background:var(--surface-2); border:1px solid var(--line); color:var(--ink);
+    border-radius:7px; padding:9px 11px; font-family:"Inter",sans-serif; font-size:13px;
+  }
+  .chat-row select{flex:0 0 170px; font-family:"JetBrains Mono",monospace; font-size:11px;}
+  .send-btn{
+    background:var(--accent); color:#fff; border:none; border-radius:7px; padding:0 16px;
+    font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:700; cursor:pointer;
+  }
+  .send-btn:hover{background:var(--accent-bright);}
+  .send-btn:disabled{opacity:.5; cursor:default;}
+  .hint{font-size:11px; color:var(--ink-faint); margin-top:8px; line-height:1.6;}
+  .chat-side{display:flex; flex-direction:column;}
+
+  /* ---------- Agent / Instrument cards ---------- */
+  .cards-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    padding:16px 16px 14px; display:flex; flex-direction:column; gap:10px;
+    transition:border-color .2s;
+  }
+  .card:hover{border-color:var(--accent);}
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+  .card .kind{font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.1em; color:var(--ink-faint); text-transform:uppercase;}
+  .card .name{font-family:"Quicksand",sans-serif; font-weight:700; font-size:16px; margin-top:3px; color:var(--ink);}
+  .badge{
+    display:flex; align-items:center; gap:5px;
+    font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
+    padding:3px 9px 3px 7px; border-radius:999px; white-space:nowrap; border:1px solid var(--line);
+  }
+  .badge .d{width:5px;height:5px;border-radius:50%;background:var(--ink-faint);}
+  .badge.live{color:var(--accent); border-color:var(--accent);}
+  .badge.live .d{background:var(--accent-bright); animation:blip 1.6s ease-in-out infinite;}
+  .card .desc{font-size:12.5px; color:var(--ink-soft); line-height:1.55;}
+  .card .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px;}
+  .card .tag{
+    font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--ink);
+    background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:3px 7px;
+  }
+  .card .url{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint); word-break:break-all; margin-top:auto; padding-top:6px; border-top:1px dashed var(--line);}
+
+  /* ---------- Chart + KI-System-Zeile ---------- */
+  .grid-2{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
+  @media (max-width:880px){.grid-2{grid-template-columns:1fr;}}
+  .chart-note{font-size:11.5px; color:var(--ink-faint); margin-top:8px; line-height:1.6;}
+  #procChart{width:100%; max-height:220px;}
+
+  .ki-links{display:flex; flex-direction:column; gap:12px;}
+  .ki-card{border:1px solid var(--line); border-radius:8px; padding:12px 14px; background:var(--surface-2);}
+  .ki-card .name{font-family:"Quicksand",sans-serif; font-weight:600; font-size:13.5px; margin-bottom:8px; color:var(--ink);}
+  .ki-card input{width:100%; margin-bottom:8px; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:5px; padding:6px 8px; font-family:"JetBrains Mono",monospace; font-size:11px;}
+  .ki-card a.open-btn{
+    display:inline-block; font-family:"JetBrains Mono",monospace; font-size:11px; text-decoration:none;
+    color:#fff; background:var(--accent); padding:6px 12px; border-radius:6px; font-weight:600;
+  }
+  .ki-card a.open-btn:hover{background:var(--accent-bright);}
+
+  /* ---------- MCP panel ---------- */
+  .mcp-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:18px;}
+  @media (max-width:780px){.mcp-grid{grid-template-columns:1fr;}}
+  .mcp-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .mcp-list li{border:1px solid var(--line); border-radius:7px; padding:9px 11px; background:var(--surface-2);}
+  .mcp-list .k{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--accent);}
+  .mcp-list .v{font-size:11.5px; color:var(--ink-soft); margin-top:3px;}
+  .mcp-sub{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;}
+
+  /* ---------- Technology grid ---------- */
+  .tech-groups{display:flex; flex-direction:column; gap:22px;}
+  .tech-group h3{font-size:11px; color:var(--ink-faint); letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; font-family:"JetBrains Mono",monospace; font-weight:500;}
+  .tech-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px;}
+  .tech-card{border:1px solid var(--line); border-radius:8px; padding:11px 13px; background:var(--surface-2);}
+  .tech-card .t{font-family:"JetBrains Mono",monospace; font-size:12.5px; color:var(--accent); margin-bottom:5px;}
+  .tech-card .d{font-size:11.5px; color:var(--ink-soft); line-height:1.5;}
+
+  footer{
+    padding:20px clamp(16px,4vw,48px) 40px; color:var(--ink-faint); font-size:11.5px;
+    font-family:"JetBrains Mono",monospace; border-top:1px solid var(--line);
+  }
+  footer a{color:var(--ink-faint); text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="data:image/png;base64,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" alt="jakob·preh·schule! Logo">
+    <div class="titles">
+      <h1>Daten<i>krake</i> Leitstand</h1>
+      <div class="eyebrow">Agentensystem — MCP · A2A · LAP</div>
+    </div>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div class="status-pill"><span class="dot" id="statusDot"></span><span id="statusText">prüfe Verbindungen …</span></div>
+    <button class="gear-btn" id="settingsToggle" aria-expanded="false" aria-controls="settingsDrawer">⚙ Einstellungen</button>
+  </div>
+</header>
+
+<div class="sig-rail" id="sigRail" aria-hidden="true"></div>
+
+<div id="settingsDrawer">
+  <h3>Endpunkte (nur für diese Sitzung gespeichert, kein localStorage)</h3>
+  <div class="settings-grid">
+    <div class="field"><label for="urlOrchestrator">Orchestrator-Agent</label><input id="urlOrchestrator" value="http://localhost:9200"></div>
+    <div class="field"><label for="urlDb">DB-Agent</label><input id="urlDb" value="http://localhost:9999"></div>
+    <div class="field"><label for="urlReport">Report-Agent</label><input id="urlReport" value="http://localhost:9201"></div>
+    <div class="field"><label for="urlWartung">Wartungs-Agent (LAP)</label><input id="urlWartung" value="http://localhost:9101"></div>
+    <div class="field"><label for="urlLmStudio">LM Studio Endpunkt</label><input id="urlLmStudio" value="http://localhost:1234"></div>
+    <div class="field"><label for="lmModel">LM Studio Modellname</label><input id="lmModel" placeholder="z.B. llama-3-8b-instruct"></div>
+    <div class="field"><label for="lmKey">API-Key (optional)</label><input id="lmKey" type="password" placeholder="nur falls Endpunkt einen verlangt"></div>
+  </div>
+  <div class="settings-note">Live-Abrufe funktionieren nur, wenn diese Seite von einem Rechner mit Netzzugriff auf die Agenten geöffnet wird, und wenn die Agenten CORS für diesen Ursprung erlauben. Schlägt ein Abruf fehl, zeigen Cards und Konsole "demo"-Daten bzw. eine Fehlermeldung statt leer zu bleiben.</div>
+</div>
+
+<main>
+
+  <section class="panel" aria-labelledby="chatHeading">
+    <div class="panel-head"><h2 id="chatHeading">Chat &amp; Konsole</h2></div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="llm">LLM-Chat</button>
+      <button class="tab-btn" data-tab="agents">Agenten-Konsole</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-llm">
+      <div class="chat-side">
+        <div class="chat-log" id="llmLog">
+          <div class="msg sys">Verbunden mit lokalem LLM über LM Studio (OpenAI-kompatibel). Endpunkt in ⚙ Einstellungen anpassen.</div>
+        </div>
+        <div class="chat-row">
+          <input id="llmInput" placeholder="Frage an das lokale LLM…" autocomplete="off">
+          <button class="send-btn" id="llmSend">Senden</button>
+        </div>
+      </div>
+      <div class="hint">Erwartet einen laufenden lokalen Server unter LM Studio → "Local Server" → Start. Antworten laufen über einen Systemprompt mit Kontext zum Datenkrake-Agentensystem.</div>
+    </div>
+
+    <div class="tab-panel" id="tab-agents">
+      <div class="chat-side">
+        <div class="chat-log" id="agentLog">
+          <div class="msg sys">Sendet eine Textnachricht per A2A (JSON-RPC "message/send") an den gewählten Agenten.</div>
+        </div>
+        <div class="chat-row">
+          <select id="agentSelect">
+            <option value="urlOrchestrator">Orchestrator-Agent</option>
+            <option value="urlDb">DB-Agent</option>
+            <option value="urlReport">Report-Agent</option>
+          </select>
+          <input id="agentInput" placeholder="z.B. 'Offene Anomalien?'" autocomplete="off">
+          <button class="send-btn" id="agentSend">Senden</button>
+        </div>
+      </div>
+      <div class="hint">Genauer RPC-Pfad kann je nach a2a-sdk-Version abweichen — bei Fehlern zuerst mit curl gegen die Agent Card prüfen.</div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="archHeading">
+    <div class="panel-head"><h2 id="archHeading">Architektur</h2></div>
+    <svg viewBox="0 0 780 470" width="100%" role="img" style="max-width:100%; height:auto; display:block;">
+      <title>Systemarchitektur: MCP, A2A und LAP im Zusammenspiel</title>
+      <desc>Der Orchestrator-Agent delegiert per LAP an den Wartungs-Agent, per A2A an den DB-Agent und den Report-Agent. Der DB-Agent liest die Datenkrake-MariaDB, in die Akustik-KI und YOLO-System per MQTT einspeisen. Ein separater MCP-Server liest dieselbe Datenbank für Claude Desktop.</desc>
+      <defs>
+        <marker id="arMcp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--accent)"/>
+        </marker>
+        <marker id="arA2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--ink-soft)"/>
+        </marker>
+        <marker id="arLap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--accent-bright)"/>
+        </marker>
+        <marker id="arFeed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--ink-faint)"/>
+        </marker>
+      </defs>
+
+      <!-- Verbindungen -->
+      <path d="M340,78 L160,140" fill="none" stroke="var(--accent-bright)" stroke-width="1.6" marker-end="url(#arLap)"/>
+      <text x="228" y="103" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="var(--accent-bright)">LAP</text>
+
+      <path d="M390,78 L390,140" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arA2a)"/>
+      <text x="408" y="112" font-family="JetBrains Mono" font-size="10.5" fill="var(--ink-soft)">A2A</text>
+
+      <path d="M440,78 L620,140" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arA2a)"/>
+      <text x="548" y="103" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="var(--ink-soft)">A2A</text>
+
+      <path d="M390,198 L390,250" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="408" y="228" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">liest</text>
+
+      <path d="M235,360 L350,308" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="248" y="340" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">MQTT</text>
+
+      <path d="M425,360 L440,308" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arFeed)"/>
+      <text x="455" y="340" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">geplant</text>
+
+      <path d="M485,279 L550,279" fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arMcp)"/>
+      <text x="517" y="271" text-anchor="middle" font-family="JetBrains Mono" font-size="10.5" fill="var(--accent)">MCP</text>
+
+      <path d="M645,308 L645,360" fill="none" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arMcp)"/>
+      <text x="663" y="337" font-family="JetBrains Mono" font-size="10.5" fill="var(--accent)">MCP</text>
+
+      <!-- Boxen -->
+      <g>
+        <rect x="290" y="20" width="200" height="58" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="390" y="45" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Orchestrator-Agent</text>
+        <text x="390" y="62" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">A2A-Server + -Client</text>
+      </g>
+
+      <g>
+        <rect x="40" y="140" width="190" height="58" rx="10" fill="var(--surface)" stroke="var(--accent-bright)" stroke-width="1.4"/>
+        <text x="135" y="165" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Wartungs-Agent</text>
+        <text x="135" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">LAP-Instrument</text>
+      </g>
+
+      <g>
+        <rect x="295" y="140" width="190" height="58" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"/>
+        <text x="390" y="165" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">DB-Agent</text>
+        <text x="390" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">A2A-Server</text>
+      </g>
+
+      <g>
+        <rect x="550" y="140" width="190" height="58" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"/>
+        <text x="645" y="165" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Report-Agent</text>
+        <text x="645" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">A2A-Server</text>
+      </g>
+
+      <g>
+        <rect x="295" y="250" width="190" height="58" rx="10" fill="var(--surface-2)" stroke="var(--line)" stroke-width="1.4"/>
+        <text x="390" y="275" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">MariaDB</text>
+        <text x="390" y="292" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">Datenkrake (Telemetrie)</text>
+      </g>
+
+      <g>
+        <rect x="150" y="360" width="170" height="56" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="235" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Akustik-KI</text>
+        <text x="235" y="400" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q</text>
+      </g>
+
+      <g>
+        <rect x="340" y="360" width="170" height="56" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="425" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">YOLO-System</text>
+        <text x="425" y="400" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q</text>
+      </g>
+
+      <g>
+        <rect x="550" y="250" width="190" height="58" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"/>
+        <text x="645" y="275" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">MCP-Server</text>
+        <text x="645" y="292" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">mcpserver.py</text>
+      </g>
+
+      <g>
+        <rect x="550" y="360" width="190" height="56" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="1.4"/>
+        <text x="645" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Claude Desktop</text>
+        <text x="645" y="400" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Mensch + LLM</text>
+      </g>
+
+      <!-- Legende -->
+      <g font-family="JetBrains Mono" font-size="10.5" fill="var(--ink-soft)">
+        <circle cx="46" cy="445" r="4" fill="var(--accent)"/><text x="56" y="449">MCP</text>
+        <circle cx="130" cy="445" r="4" fill="var(--ink-soft)"/><text x="140" y="449">A2A</text>
+        <circle cx="210" cy="445" r="4" fill="var(--accent-bright)"/><text x="220" y="449">LAP</text>
+        <circle cx="290" cy="445" r="4" fill="var(--ink-faint)"/><text x="300" y="449">Datenfluss (MQTT/SQL)</text>
+      </g>
+    </svg>
+    <div class="chart-note">Der Orchestrator-Agent überwacht die Datenkrake und greift bei Bedarf per LAP auf sein eigenes Zusatzgerät zu — nie auf eine Produktionssteuerung. Das YOLO-System ist im Schema als "geplant" markiert, siehe README zur aktuellen Datenlage.</div>
+  </section>
+
+  <section aria-labelledby="cardsHeading">
+    <span class="eyebrow" id="cardsHeading">Agent- &amp; Instrument-Cards</span>
+    <div class="cards-row" id="cardsRow"></div>
+  </section>
+
+  <section class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h2>Prozessdaten — peak_db (audio_spectrum)</h2></div>
+      <canvas id="procChart"></canvas>
+      <div class="chart-note">Demo-Daten mit einer eingebauten Anomalie zur Veranschaulichung — für echte Werte an eine Abfrage gegen die Datenkrake-DB anbinden (z. B. über den DB-Agent).</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>KI-Systeme</h2></div>
+      <div class="ki-links">
+        <div class="ki-card">
+          <div class="name">🎤 Akustik-KI (Arduino UNO Q)</div>
+          <input id="akustikUrl" placeholder="http://&lt;arduino-ip&gt;">
+          <a class="open-btn" id="akustikOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+        </div>
+        <div class="ki-card">
+          <div class="name">📷 YOLO-System (Arduino UNO Q)</div>
+          <input id="yoloUrl" placeholder="http://&lt;arduino-ip&gt;">
+          <a class="open-btn" id="yoloOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>MCP-Werkzeuge <span style="font-family:'JetBrains Mono',monospace; font-weight:400; font-size:11px; color:var(--ink-faint); text-transform:none; letter-spacing:0;">(mcpserver.py, lokal via stdio in Claude Desktop — Referenz, nicht live abrufbar)</span></h2></div>
+    <div class="mcp-grid">
+      <div>
+        <div class="mcp-sub">Tools</div>
+        <ul class="mcp-list">
+          <li><div class="k">get_recent(limit)</div><div class="v">Neueste Einträge aus audio_spectrum</div></li>
+          <li><div class="k">get_stats()</div><div class="v">Kennzahlen je Label (gut/schlecht)</div></li>
+          <li><div class="k">get_spectrum(record_id)</div><div class="v">Vollständiger Datensatz inkl. FFT-Array</div></li>
+          <li><div class="k">query(sql)</div><div class="v">Freie SELECT/SHOW/DESCRIBE-Abfrage</div></li>
+          <li><div class="k">get_table_info()</div><div class="v">Tabellenstruktur von audio_spectrum</div></li>
+          <li><div class="k">pruefe_akustik_anomalie(fenster)</div><div class="v">Statistische Ausreißerprüfung auf peak_db</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="mcp-sub">Resources</div>
+        <ul class="mcp-list">
+          <li><div class="k">schema://overview</div><div class="v">Read-only Tabellenübersicht</div></li>
+          <li><div class="k">anomalien://offen</div><div class="v">Noch nicht erledigte Anomalien</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="mcp-sub">Prompt</div>
+        <ul class="mcp-list">
+          <li><div class="k">anomalie_analysieren()</div><div class="v">Vorlage zur Einordnung des aktuellen Zustands</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">Verwendete Technologien</span>
+    <div class="panel">
+      <div class="tech-groups" id="techGroups"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <a href="index.php">← zurück zum Live-Dashboard</a> · Datenkrake Leitstand · Jakob-Preh-Schule · statische HTML-Seite, keine Daten verlassen euer Netz · gebaut auf <a href="https://github.com/FlowTheTensor/Datenkrake-Container" target="_blank" rel="noopener">github.com/FlowTheTensor/Datenkrake-Container</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Signatur-Leiste (Punkte/Striche) ---------------- */
+  var rail = document.getElementById('sigRail');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var shapes = ['dot','dot','dash'];
+  for (var i=0; i<26; i++){
+    var el = document.createElement('span');
+    el.className = shapes[i % shapes.length];
+    if(!reduceMotion){
+      el.style.animationDelay = (Math.random()*2.6).toFixed(2)+'s';
+    }
+    rail.appendChild(el);
+  }
+
+  /* ---------------- Settings drawer ---------------- */
+  var toggle = document.getElementById('settingsToggle');
+  var drawer = document.getElementById('settingsDrawer');
+  toggle.addEventListener('click', function(){
+    var open = drawer.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  function urlOf(fieldId){ return document.getElementById(fieldId).value.replace(/\/$/,''); }
+
+  /* ---------------- KI-System links ---------------- */
+  function wireKiLink(inputId, linkId){
+    var input = document.getElementById(inputId);
+    var link = document.getElementById(linkId);
+    function update(){ link.href = input.value || '#'; }
+    input.addEventListener('input', update);
+    update();
+  }
+  wireKiLink('akustikUrl','akustikOpen');
+  wireKiLink('yoloUrl','yoloOpen');
+
+  /* ---------------- Agent / Instrument Cards ---------------- */
+  var CARD_DEFS = [
+    { kind:'A2A-AGENT', field:'urlOrchestrator', path:'/.well-known/agent-card.json',
+      fallback:{ name:'Orchestrator-Agent', description:'Überwacht die Datenkrake und delegiert Wartung per LAP.',
+                 skills:[{name:'wartungsstatus_melden'}] } },
+    { kind:'A2A-AGENT', field:'urlDb', path:'/.well-known/agent-card.json',
+      fallback:{ name:'DB-Agent (Datenkrake)', description:'Liest Akustik-Telemetrie und Anomalien aus der MariaDB.',
+                 skills:[{name:'telemetrie_abfragen'}] } },
+    { kind:'A2A-AGENT', field:'urlReport', path:'/.well-known/agent-card.json',
+      fallback:{ name:'Report-Agent', description:'Formuliert Meldungen zu Wartungs- und Nachschubereignissen.',
+                 skills:[{name:'bericht_erstellen'}] } },
+    { kind:'LAP-INSTRUMENT', field:'urlWartung', path:'/.well-known/instrument-card.json',
+      fallback:{ name:'Wartungsgeraet-Akustik', description:'Mobiles Diagnose- und Schmiergerät für den überwachten Motor.',
+                 capabilities:['diagnosefahrt','schmierzyklus'] } }
+  ];
+
+  async function fetchWithTimeout(url, ms){
+    var ctrl = new AbortController();
+    var t = setTimeout(function(){ ctrl.abort(); }, ms);
+    try{
+      var res = await fetch(url, {signal: ctrl.signal});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      return await res.json();
+    } finally { clearTimeout(t); }
+  }
+
+  function renderCard(def, data, isLive){
+    var card = document.createElement('div');
+    card.className = 'card';
+    var tags = (data.skills || (data.capabilities||[]).map(function(c){return {name:c};}) || [])
+      .map(function(s){ return '<span class="tag">'+ (s.name||s) +'</span>'; }).join('');
+    card.innerHTML =
+      '<div class="card-top">'+
+        '<div><div class="kind">'+def.kind+'</div><div class="name">'+(data.name||'—')+'</div></div>'+
+        '<span class="badge '+(isLive?'live':'')+'"><span class="d"></span>'+(isLive?'live':'demo')+'</span>'+
+      '</div>'+
+      '<div class="desc">'+(data.description||'')+'</div>'+
+      '<div class="tags">'+tags+'</div>'+
+      '<div class="url">'+urlOf(def.field)+def.path+'</div>';
+    return card;
+  }
+
+  async function loadCards(){
+    var row = document.getElementById('cardsRow');
+    row.innerHTML = '';
+    var liveCount = 0;
+    for (var i=0;i<CARD_DEFS.length;i++){
+      var def = CARD_DEFS[i];
+      var base = urlOf(def.field);
+      try{
+        var data = await fetchWithTimeout(base+def.path, 2000);
+        row.appendChild(renderCard(def, data, true));
+        liveCount++;
+      } catch(e){
+        row.appendChild(renderCard(def, def.fallback, false));
+      }
+    }
+    var dot = document.getElementById('statusDot');
+    var text = document.getElementById('statusText');
+    dot.classList.toggle('live', liveCount>0);
+    if(liveCount===0){
+      text.textContent = 'keine Agenten erreichbar — zeige Demo-Daten';
+    } else if (liveCount < CARD_DEFS.length){
+      text.textContent = liveCount+' von '+CARD_DEFS.length+' Agenten live';
+    } else {
+      text.textContent = 'alle '+CARD_DEFS.length+' Agenten live';
+    }
+  }
+  loadCards();
+  ['urlOrchestrator','urlDb','urlReport','urlWartung'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', loadCards);
+  });
+
+  /* ---------------- Prozessdaten-Chart (Demo) ---------------- */
+  function demoSeries(){
+    var labels = [], values = [], anomalyIdx = 42;
+    var t = new Date(); t.setMinutes(t.getMinutes() - 60);
+    for (var i=0;i<60;i++){
+      var ts = new Date(t.getTime() + i*60000);
+      labels.push(ts.getHours()+':'+String(ts.getMinutes()).padStart(2,'0'));
+      var base = -32 + Math.sin(i/7)*1.5 + (Math.random()-0.5)*1.2;
+      if (i===anomalyIdx) base += 9.5;
+      values.push(Math.round(base*100)/100);
+    }
+    return {labels:labels, values:values, anomalyIdx:anomalyIdx};
+  }
+  var series = demoSeries();
+  var ctx = document.getElementById('procChart').getContext('2d');
+  new Chart(ctx, {
+    type:'line',
+    data:{
+      labels:series.labels,
+      datasets:[{
+        label:'peak_db',
+        data:series.values,
+        borderColor:'#C81E3A',
+        backgroundColor:'rgba(200,30,58,0.06)',
+        pointRadius:series.values.map(function(_,i){return i===series.anomalyIdx?5:0;}),
+        pointBackgroundColor:'#E4002B',
+        borderWidth:1.6,
+        tension:0.25,
+        fill:true
+      }]
+    },
+    options:{
+      responsive:true,
+      plugins:{ legend:{display:false} },
+      scales:{
+        x:{ ticks:{ color:'#7D7A72', maxTicksLimit:8, font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#E7E1D6' } },
+        y:{ ticks:{ color:'#7D7A72', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#E7E1D6' } }
+      }
+    }
+  });
+
+  /* ---------------- Tabs ---------------- */
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+      document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ---------------- LLM-Chat (LM Studio, OpenAI-kompatibel) ---------------- */
+  var llmHistory = [];
+  function addMsg(logEl, role, text){
+    var div = document.createElement('div');
+    div.className = 'msg '+role;
+    div.textContent = text;
+    logEl.appendChild(div);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function sendLlm(){
+    var input = document.getElementById('llmInput');
+    var text = input.value.trim();
+    if(!text) return;
+    var log = document.getElementById('llmLog');
+    addMsg(log, 'user', text);
+    input.value = '';
+    llmHistory.push({role:'user', content:text});
+    var btn = document.getElementById('llmSend');
+    btn.disabled = true;
+    try{
+      var endpoint = urlOf('urlLmStudio') + '/v1/chat/completions';
+      var headers = {'Content-Type':'application/json'};
+      var key = document.getElementById('lmKey').value.trim();
+      if(key) headers['Authorization'] = 'Bearer '+key;
+      var model = document.getElementById('lmModel').value.trim() || 'local-model';
+      var res = await fetch(endpoint, {
+        method:'POST', headers:headers,
+        body: JSON.stringify({
+          model: model,
+          messages: [{role:'system', content:'Du hilfst beim Betrieb des Datenkrake-Agentensystems (MCP/A2A/LAP) an einer Berufsschule. Antworte kurz und konkret.'}]
+            .concat(llmHistory),
+          temperature:0.6
+        })
+      });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      var data = await res.json();
+      var reply = data.choices && data.choices[0] && data.choices[0].message
+        ? data.choices[0].message.content : '(keine Antwort erhalten)';
+      addMsg(log, 'bot', reply);
+      llmHistory.push({role:'assistant', content:reply});
+    } catch(e){
+      addMsg(log, 'sys', 'Fehler: '+e.message+' — läuft der LM-Studio-Server unter '+urlOf('urlLmStudio')+' ?');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  document.getElementById('llmSend').addEventListener('click', sendLlm);
+  document.getElementById('llmInput').addEventListener('keydown', function(e){ if(e.key==='Enter') sendLlm(); });
+
+  /* ---------------- Agenten-Konsole (A2A best effort) ---------------- */
+  async function sendAgent(){
+    var select = document.getElementById('agentSelect');
+    var input = document.getElementById('agentInput');
+    var text = input.value.trim();
+    if(!text) return;
+    var log = document.getElementById('agentLog');
+    addMsg(log, 'user', text);
+    input.value = '';
+    var btn = document.getElementById('agentSend');
+    btn.disabled = true;
+    try{
+      var base = urlOf(select.value);
+      var payload = {
+        jsonrpc:'2.0',
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+        method:'message/send',
+        params:{ message:{ role:'user', parts:[{type:'text', text:text}], messageId: String(Date.now()) } }
+      };
+      var res = await fetch(base+'/', {
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+      });
+      var data = await res.json();
+      addMsg(log, 'bot', JSON.stringify(data, null, 2));
+    } catch(e){
+      addMsg(log, 'sys', 'Fehler: '+e.message+' — RPC-Pfad/Format ggf. an eure a2a-sdk-Version anpassen.');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  document.getElementById('agentSend').addEventListener('click', sendAgent);
+  document.getElementById('agentInput').addEventListener('keydown', function(e){ if(e.key==='Enter') sendAgent(); });
+
+  /* ---------------- Technologie-Übersicht ---------------- */
+  var TECH = [
+    { group:'Protokolle & Kommunikation', items:[
+      ['MCP','Verbindet ein KI-Modell mit externen Werkzeugen und Daten — Tools, Resources, Prompts. Die "vertikale" Kante.'],
+      ['JSON-RPC','Leichtgewichtiges Aufrufprotokoll über JSON — technische Basis von MCP und A2A.'],
+      ['A2A','Verbindet mehrere eigenständige Agenten über Agent Cards, Skills und Tasks. Die "horizontale" Kante.'],
+      ['LAP','Verbindet einen Agenten mit einem physischen Gerät — Reservation, Safety-Fence, MeasurementResult.'],
+      ['MQTT','Publish/Subscribe-Protokoll für IoT-Geräte — verbindet Arduino und Raspberry Pi.']
+    ]},
+    { group:'Daten & KI', items:[
+      ['Neuronale Netze','Lernen aus Beispieldaten (z. B. Audiospektren), um Muster wie Anomalien zu erkennen.'],
+      ['YOLO','Echtzeit-Objekterkennung auf Kamerabildern, hier zur Erkennung des Werkstückträger-Durchlaufs.'],
+      ['SQL','Abfragesprache für relationale Datenbanken wie die MariaDB der Datenkrake.'],
+      ['Operational Historian','Spezialisierte Zeitreihen-Datenbank für Prozess- und Sensordaten.'],
+      ['Kafka','Verteiltes Streaming-System für hohe Datenmengen in Echtzeit.'],
+      ['MinIO','S3-kompatibler Objektspeicher, z. B. für Rohdaten oder Modelldateien.'],
+      ['Nessie','Git-artige Versionierung für Data-Lake-Tabellen.'],
+      ['Spark','Verteiltes Framework für die Verarbeitung großer Datenmengen.']
+    ]},
+    { group:'Hardware & Infrastruktur', items:[
+      ['RFID','Funkbasierte Kennzeichnung, hier zur Rückverfolgung der Werkstückträger.'],
+      ['Docker','Containerisierung — jeder Dienst läuft isoliert und reproduzierbar.'],
+      ['Arduino UNO Q','Mikrocontroller mit Linux-Anteil, erfasst hier Audio und rechnet KI-Inferenz.'],
+      ['Raspberry Pi','Kleincomputer, hier als "Datenkrake" — sammelt und speichert Sensordaten.'],
+      ['IoT','Vernetzte Sensoren und Geräte, die Daten automatisiert austauschen.']
+    ]},
+    { group:'Sprachmodelle & Zugriff', items:[
+      ['Lokale LLMs (LM Studio)','Sprachmodelle, die auf eigener Hardware laufen statt in der Cloud.'],
+      ['API-Key','Geheimer Schlüssel zur Authentifizierung gegenüber einer Schnittstelle.']
+    ]}
+  ];
+  var techEl = document.getElementById('techGroups');
+  TECH.forEach(function(g){
+    var wrap = document.createElement('div');
+    wrap.className = 'tech-group';
+    var grid = g.items.map(function(it){
+      return '<div class="tech-card"><div class="t">'+it[0]+'</div><div class="d">'+it[1]+'</div></div>';
+    }).join('');
+    wrap.innerHTML = '<h3>'+g.group+'</h3><div class="tech-grid">'+grid+'</div>';
+    techEl.appendChild(wrap);
+  });
+
+})();
+</script>
+</body>
+</html>
