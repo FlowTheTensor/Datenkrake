@@ -1,0 +1,8 @@
+mcp
+a2a-sdk
+uvicorn
+httpx
+fastapi
+pydantic
+pymysql
+typing_extensions
