@@ -54,6 +54,69 @@ services:
       db:
         condition: service_healthy
 
+  # --- Operational Historian ---------------------------------------------
+  # Speichert dieselben audio_spectrum-Messwerte zusätzlich in einer auf
+  # Zeitreihen spezialisierten Datenbank (InfluxDB) statt der relationalen
+  # MariaDB. Rührt die bestehende Pipeline nicht an - reine Ergänzung.
+  # Siehe Raspberry/historian/README.md für die didaktische Einordnung
+  # "Historian vs. relationale DB".
+  historian:
+    image: influxdb:2.7
+    container_name: historian
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: changeMeHistorian
+      DOCKER_INFLUXDB_INIT_ORG: datenkrake
+      DOCKER_INFLUXDB_INIT_BUCKET: telemetrie
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: changeMeHistorianToken
+    volumes:
+      - ../historian/data:/var/lib/influxdb2
+
+  historian_bridge:
+    build: ../historian_bridge
+    container_name: historian-bridge
+    restart: unless-stopped
+    environment:
+      MQTT_BROKER: mqtt
+      INFLUX_URL: http://historian:8086
+      INFLUX_TOKEN: changeMeHistorianToken
+      INFLUX_ORG: datenkrake
+      INFLUX_BUCKET: telemetrie
+    depends_on:
+      mqtt:
+        condition: service_started
+      historian:
+        condition: service_started
+
+  # --- OPC-UA -> Node-RED -> MQTT -----------------------------------------
+  # Node-RED liest Tags von einem OPC-UA-Server (S7-1500/ET200SP) und
+  # veröffentlicht sie als JSON auf dem bestehenden Mosquitto-Broker.
+  # Ohne echte SPS im Netz gegen opcua_demo_server testbar (siehe dort).
+  nodered:
+    build: ../nodered
+    container_name: nodered
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - ../nodered/data:/data
+    depends_on:
+      mqtt:
+        condition: service_started
+
+  # Simulierter OPC-UA-Server für den Unterricht, falls keine echte
+  # S7-1500/ET200SP im Netz erreichbar ist. Siehe Raspberry/opcua_demo_server/.
+  opcua_demo_server:
+    build: ../opcua_demo_server
+    container_name: opcua-demo-server
+    restart: unless-stopped
+    ports:
+      - "4840:4840"
+
 networks:
   default:
     name: iot-net

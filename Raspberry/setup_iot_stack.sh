@@ -45,13 +45,24 @@ prepare_directories() {
   mkdir -p "${SCRIPT_DIR}/mosquitto/config"
   mkdir -p "${SCRIPT_DIR}/mariadb/data"
   mkdir -p "${SCRIPT_DIR}/mariadb/init"
+  mkdir -p "${SCRIPT_DIR}/historian/data"
+  mkdir -p "${SCRIPT_DIR}/nodered/data"
 
   if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf" ]] && [[ -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" ]]; then
     cp "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf"
   fi
 
+  # Node-RED läuft mit --userDir /data (Bind-Mount) - eine ins Image kopierte
+  # flows.json würde davon überdeckt. Die Vorlage deshalb hier einmalig an
+  # den tatsächlichen userDir-Pfad kopieren, wenn dort noch keine existiert.
+  if [[ ! -f "${SCRIPT_DIR}/nodered/data/flows.json" ]] && [[ -f "${SCRIPT_DIR}/nodered/flows/flows.json" ]]; then
+    cp "${SCRIPT_DIR}/nodered/flows/flows.json" "${SCRIPT_DIR}/nodered/data/flows.json"
+  fi
+
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mariadb"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/historian"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/nodered"
 }
 
 build_and_start() {

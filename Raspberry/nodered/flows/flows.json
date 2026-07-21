@@ -1,0 +1,155 @@
+[
+  {
+    "id": "tab-opcua-mqtt",
+    "type": "tab",
+    "label": "OPC-UA -> MQTT",
+    "disabled": false,
+    "info": "Beispiel-Flow: liest einen Tag per OPC-UA und veroeffentlicht ihn per MQTT.\nEndpoint zeigt standardmaessig auf den mitgelieferten opcua_demo_server.\nFuer eine echte S7-1500/ET200SP: Endpoint-Node 'SPS-Endpoint' und die\nNode-ID im Item-Node 'Zykluszeit lesen' anpassen. Diesen Ast (Item + Client\n+ Funktion + MQTT-Out) pro zusaetzlichem Tag/Station duplizieren.",
+    "env": []
+  },
+  {
+    "id": "cfg-endpoint",
+    "type": "OpcUa-Endpoint",
+    "endpoint": "opc.tcp://opcua-demo-server:4840/freeopcua/server/",
+    "secpol": "None",
+    "secmode": "None",
+    "login": false
+  },
+  {
+    "id": "cfg-mqtt-broker",
+    "type": "mqtt-broker",
+    "name": "Mosquitto (Datenkrake)",
+    "broker": "mqtt",
+    "port": "1883",
+    "clientid": "nodered-opcua-bridge",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": "4",
+    "keepalive": "60",
+    "cleansession": true
+  },
+  {
+    "id": "inject-poll",
+    "type": "inject",
+    "z": "tab-opcua-mqtt",
+    "name": "Alle 5s abfragen",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "5",
+    "crontab": "",
+    "once": true,
+    "onceDelay": 2,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 160,
+    "y": 160,
+    "wires": [
+      [
+        "item-zykluszeit"
+      ]
+    ]
+  },
+  {
+    "id": "item-zykluszeit",
+    "type": "OpcUa-Item",
+    "z": "tab-opcua-mqtt",
+    "item": "ns=2;s=Station1.Zykluszeit",
+    "datatype": "Double",
+    "value": "",
+    "name": "Zykluszeit lesen (Node-ID anpassen!)",
+    "x": 400,
+    "y": 160,
+    "wires": [
+      [
+        "client-read"
+      ]
+    ]
+  },
+  {
+    "id": "client-read",
+    "type": "OpcUa-Client",
+    "z": "tab-opcua-mqtt",
+    "endpoint": "cfg-endpoint",
+    "action": "read",
+    "deadbandtype": "a",
+    "deadbandvalue": 1,
+    "time": 10,
+    "timeUnit": "s",
+    "certificate": "n",
+    "localfile": "",
+    "localkeyfile": "",
+    "securitymode": "None",
+    "securitypolicy": "None",
+    "name": "SPS-Endpoint (Adresse anpassen!)",
+    "x": 660,
+    "y": 160,
+    "wires": [
+      [
+        "fn-to-mqtt-json",
+        "debug-raw"
+      ]
+    ]
+  },
+  {
+    "id": "fn-to-mqtt-json",
+    "type": "function",
+    "z": "tab-opcua-mqtt",
+    "name": "In MQTT-JSON umwandeln",
+    "func": "// OPC-UA-Ausgabe in unser MQTT-JSON-Format bringen.\n// WICHTIG: beim ersten Test über den Debug-Node prüfen, welche Form\n// msg.payload tatsächlich hat (kann je nach node-red-contrib-opcua-\n// Version variieren) und diese Funktion bei Bedarf anpassen.\nlet wert = msg.payload;\nif (Array.isArray(wert) && wert.length > 0) {\n    wert = (wert[0] && wert[0].value !== undefined) ? wert[0].value : wert[0];\n}\nmsg.payload = JSON.stringify({\n    station: \"station01\",\n    tag: \"zykluszeit\",\n    wert: wert,\n    zeitstempel: new Date().toISOString()\n});\nmsg.topic = \"plc/station01/zykluszeit\";\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 660,
+    "y": 240,
+    "wires": [
+      [
+        "mqtt-out-plc"
+      ]
+    ]
+  },
+  {
+    "id": "mqtt-out-plc",
+    "type": "mqtt out",
+    "z": "tab-opcua-mqtt",
+    "name": "-> plc/station01/zykluszeit",
+    "topic": "",
+    "qos": "0",
+    "retain": "false",
+    "respTopic": "",
+    "contentType": "",
+    "userProps": "",
+    "correl": "",
+    "expiry": "",
+    "broker": "cfg-mqtt-broker",
+    "x": 900,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "debug-raw",
+    "type": "debug",
+    "z": "tab-opcua-mqtt",
+    "name": "OPC-UA Rohantwort (zum Testen)",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 900,
+    "y": 160,
+    "wires": []
+  }
+]
