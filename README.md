@@ -63,12 +63,19 @@ subgraph AQ["🎤 Arduino UNO Q"]
   ML <--> WEB
   WEB <--> MQTT
 end
+subgraph SPS["🏭 S7-1500/ET200SP (oder opcua_demo_server)"]
+  OPCUA["OPC-UA-Server"]
+end
 MQTT -->|JSON Spektrumdaten| MQ
+OPCUA -->|OPC-UA| NR["Node-RED (Container)"]
+NR -->|Topic plc/...| MQ
 subgraph RPi["Raspberry Pi (Datenkrake)"]
   MQ["Mosquitto Broker (Container)"]
-  WEBS["Webserver (Container) zur Datenbankkontrolle http://datenkrake.local"]
+  WEBS["Webserver (Container) http://datenkrake.local"]
   MQ -->|Topic audio/spectrum| SUB["Python Subscriber (Container)"]
+  MQ -->|Topic audio/spectrum| HB["Historian-Bridge (Container)"]
   SUB -->|INSERT| DB[("MariaDB (Container)")]
+  HB -->|Write| HIST[("InfluxDB Operational Historian (Container)")]
   DB --> WEBS
 end
 DB -->|Trainingsdaten abrufen| ML
@@ -78,10 +85,19 @@ subgraph WIN["Windows PC"]
   CL <--> MCPS
   MCPS <--> DB
 end
+subgraph AGENTS["Agentensystem (MCP · A2A · LAP), siehe Agentensystem/"]
+  ORC["Orchestrator-Agent"]
+end
+DB <-.-> ORC
+subgraph LAKE["Data Lake, separater Rechner, siehe DataLake/"]
+  SPARK["Spark/Jupyter + Nessie + MinIO"]
+end
+DB -.->|Batch-Import| SPARK
 ```
 
 ## MQTT Topics
 - `audio/spectrum` - Spektrumdaten (JSON mit label, peak_freq, peak_db, spectrum, sample_rate)
+- `plc/<station>/<tag>` - von Node-RED aus OPC-UA veröffentlichte SPS-Werte (siehe `Raspberry/nodered/README.md`)
 
 ## Audio-Datenformat
 ```json
@@ -261,6 +277,7 @@ Projekts gegenüberstellt:
 - **MCP** – der obige `mcpserver.py` für Claude Desktop (erweitert um Resources, Prompt, ein Anomalie-Tool)
 - **A2A** – ein Orchestrator-, DB- und Report-Agent, die per Agent-to-Agent-Protokoll zusammenarbeiten
 - **LAP** – ein Wartungs-Agent, der bei erkannten Akustik-Anomalien ein eigenes Diagnose-/Schmiergerät ansteuert (Lab Agent Protocol – steuert dabei nie die eigentliche Datenerfassung)
+- **Agent Harness** – ein ca. 100 Zeilen kurzes, transparentes Beispiel, das zeigt, was ein LLM erst zu einem Agenten macht: die Tool-Aufruf-Schleife (siehe [`Agentensystem/agent_harness/README.md`](Agentensystem/agent_harness/README.md))
 
 Dazu ein zweites Web-Dashboard unter [`leitstand.html`](leitstand.html)
 (verlinkt vom bestehenden Dashboard aus) mit Agent-/Instrument-Cards,
@@ -268,7 +285,25 @@ Architekturdiagramm, LLM-Chat und A2A-Konsole.
 
 Details, Setup und ehrliche Einschränkungen: siehe [`Agentensystem/README.md`](Agentensystem/README.md).
 
+## Operational Historian & OPC-UA
+
+`Raspberry/historian/` (InfluxDB) speichert dieselben Audio-Messwerte
+zusätzlich in einer auf Zeitreihen spezialisierten Datenbank – neben,
+nicht statt der MariaDB. `Raspberry/nodered/` liest Tags von einer
+OPC-UA-fähigen SPS (S7-1500/ET200SP) und veröffentlicht sie auf dem
+bestehenden MQTT-Broker; `Raspberry/opcua_demo_server/` simuliert dafür
+eine Gegenstelle, falls keine echte SPS im Netz erreichbar ist.
+
+## Data Lake
+
+Unter [`DataLake/`](DataLake/README.md) liegt ein eigener, vom
+Raspberry-Pi-Stack unabhängiger Compose-Stack (MinIO + Nessie + PySpark
+in Jupyter), der zeigt, was ein **Lakehouse** mit **Git-artiger
+Versionierung von Tabellen** ist – bewusst auf einem separaten,
+stärkeren Rechner, da Spark für den Pi zu ressourcenhungrig ist.
+
 ## Nächste Schritte
 - Anomalie-Modell mit gesammelten Spektrumdaten trainieren
-- Echtzeit-Inferenz auf Arduino implementieren
-- Alarm-System bei erkannten Anomalien
+- Echtzeit-Inferenz auf Arduino implementieren (aktuell überbrückt durch eine einfache Statistik-Heuristik, siehe `Agentensystem/anomalie_poller/`)
+- Alarm-System bei erkannten Anomalien (ein erster Ansatz dafür läuft bereits über den Orchestrator-/Wartungs-Agent, siehe `Agentensystem/README.md`)
+
