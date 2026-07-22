@@ -1,0 +1,101 @@
+version: '3'
+
+# Data-Lake-Stack: MinIO (Objektspeicher) + Nessie (Iceberg-Katalog mit
+# Git-artiger Versionierung) + Jupyter/PySpark (Verarbeitung).
+#
+# BEWUSST NICHT Teil von Raspberry/compose/docker-compose.yml und NICHT
+# für den Raspberry Pi gedacht - dieser Stack ist deutlich
+# ressourcenhungriger (Spark allein will mehrere GB RAM). Auf einem
+# separaten Rechner (Schul-Server, Lehrer-PC) starten, der Netzzugriff auf
+# den Pi hat (siehe ../README.md, Abschnitt "Verbindung zur Datenkrake").
+#
+# Versionen stammen aus dem offiziellen Nessie-Repo (docker/catalog-auth-s3
+# und "Getting Started with Nessie and Iceberg REST", Stand Nessie 0.108.2 /
+# Iceberg 1.11.0 / Spark 3.5), keine Vermutungen.
+
+services:
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+    container_name: datalake-minio
+    restart: unless-stopped
+    ports:
+      - "9000:9000"   # S3-API
+      - "9001:9001"   # Web-Console
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: changeMeDatalake
+    command: server /data --console-address ":9001"
+    volumes:
+      - ../minio/data:/data
+    healthcheck:
+      test: "bash -c '[[ \"$$(exec 3<>/dev/tcp/localhost/9000 && echo -e '\"'\"'GET /minio/health/live HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n'\"'\"' >&3 && cat <&3 | head -n 1)\" == *\"200 OK\"* ]] || exit 1'"
+      interval: 5s
+      timeout: 2s
+      retries: 15
+
+  # Legt das Warehouse-Bucket einmalig an und beendet sich danach (restart: "no")
+  minio-setup:
+    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+    container_name: datalake-minio-setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: /bin/bash
+    restart: "no"
+    command: [
+      "-c",
+      "mc alias set myminio http://minio:9000/ minioadmin changeMeDatalake ; mc mb myminio/warehouse --ignore-existing"
+    ]
+
+  nessie:
+    image: ghcr.io/projectnessie/nessie:0.108.2
+    container_name: datalake-nessie
+    restart: unless-stopped
+    ports:
+      - "19120:19120"   # Iceberg-REST- und Nessie-API
+      - "9010:9000"     # Management-Port (Metriken/Health), auf Host 9010 gemappt
+    environment:
+      # Version-Store: In-Memory, d.h. der Katalog (Commits/Branches/Tags)
+      # geht bei einem Neustart verloren. Für Dauerbetrieb auf einen
+      # persistenten Store umstellen (z.B. JDBC/Postgres), siehe
+      # https://projectnessie.org/nessie-latest/configuration/
+      - nessie.version.store.type=IN_MEMORY
+      # Bewusst OHNE Authentifizierung (kein Keycloak) - für den
+      # Unterricht im geschützten Schulnetz ausreichend, siehe
+      # Sicherheitshinweis in README.md.
+      - nessie.catalog.default-warehouse=warehouse
+      - nessie.catalog.warehouses.warehouse.location=s3://warehouse/
+      - nessie.catalog.service.s3.default-options.region=us-east-1
+      - nessie.catalog.service.s3.default-options.path-style-access=true
+      - nessie.catalog.service.s3.default-options.access-key=urn:nessie-secret:quarkus:nessie.catalog.secrets.access-key
+      - nessie.catalog.secrets.access-key.name=minioadmin
+      - nessie.catalog.secrets.access-key.secret=changeMeDatalake
+      - nessie.catalog.service.s3.default-options.endpoint=http://minio:9000/
+      - nessie.catalog.service.s3.default-options.external-endpoint=http://localhost:9000/
+    depends_on:
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: "exec 3<>/dev/tcp/localhost/9000 && echo -e 'GET /q/health HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && cat <&3 | grep -q '200 OK'"
+      interval: 5s
+      timeout: 2s
+      retries: 15
+
+  spark-notebook:
+    image: jupyter/pyspark-notebook:latest
+    container_name: datalake-spark-notebook
+    restart: unless-stopped
+    ports:
+      - "8888:8888"   # Jupyter
+      - "4040:4040"   # Spark-UI (während ein Job läuft)
+    environment:
+      JUPYTER_TOKEN: changeMeDatalake
+    volumes:
+      - ../notebooks:/home/jovyan/work
+    depends_on:
+      nessie:
+        condition: service_healthy
+
+networks:
+  default:
+    name: datalake-net
