@@ -7,6 +7,7 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
 - **MCP** – `../MCPLokalClaudDesktop/mcpserver.py` (erweitert, siehe dortiger Commit) für Claude Desktop
 - **A2A** – `db_agent/`, `orchestrator_agent/`, `report_agent/`
 - **LAP** – `lap_common/`, `wartungs_agent/`
+- **Agent Harness** – `agent_harness/`, zeigt die Tool-Aufruf-Schleife, die aus einem lokalen LLM (LM Studio) einen Agenten macht, der die MCP-Tools von oben selbst nutzt. Didaktische Einordnung: [`agent_harness/README.md`](agent_harness/README.md).
 
 ## Was neu dazukommt
 
@@ -19,6 +20,7 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
 | `wartungs_agent/`, `lap_common/` | LAP-Instrument-Agent |
 | `db_agent/`, `orchestrator_agent/`, `report_agent/` | A2A-Schicht |
 | `shared/` | gemeinsame DB-Zugriffsschicht (kennt weder MCP noch A2A noch LAP) |
+| `agent_harness/` | zeigt, was ein LLM erst zum "Agenten" macht (die Tool-Aufruf-Schleife) – nutzt die MCP-Tools von oben, getestet gegen den echten `mcpserver.py` |
 
 ## Setup
 
