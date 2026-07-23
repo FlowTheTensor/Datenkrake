@@ -24,6 +24,40 @@ Faustregel fürs Unterrichtsgespräch: **MariaDB für strukturierte,
 verknüpfte Ereignisse. Historian für hochfrequente Messreihen.** In der
 Praxis laufen beide nebeneinander – genau das zeigt dieser Ausbau.
 
+## Ist "zwei Datenbanken parallel" in der Praxis wirklich üblich?
+
+Ja – der Fachbegriff dafür ist **Polyglot Persistence**: bewusst
+mehrere Datenbanktypen für unterschiedliche Zugriffsmuster, statt eine
+Datenbank für alles zu verbiegen. In der Industrie ist "Historian neben
+relationaler Datenbank/MES" seit Jahrzehnten die Normalarchitektur, nicht
+die Ausnahme (klassische Kombination: OSIsoft PI oder AVEVA Historian
+neben SAP). Im Web-/Software-Bereich ist es ebenso üblich: eine
+OLTP-Datenbank für Geschäftsdaten, daneben ein Metriken-/Zeitreihenspeicher
+(Prometheus, InfluxDB) fürs Monitoring.
+
+**Ehrlich für den aktuellen Ausbaustand dieses Projekts:** Bei einem
+Arduino mit einem Mikrofon ist das Datenvolumen noch nicht dort, wo sich
+ein zweiter Dienst *operativ* auszahlt – eine einzelne, gut indizierte
+MariaDB-Tabelle kommt mit dieser Menge mühelos klar. Der Historian ist
+hier in erster Linie ein **Lerninhalt**, keine Notwendigkeit für die
+aktuelle Anlagengröße.
+
+Er zahlt sich in der Praxis an dem Punkt aus, an dem eine der folgenden
+Bedingungen zutrifft – und genau das ist laut Ausbauplan für dieses
+Projekt absehbar, sobald weitere Sensoren dazukommen:
+
+- **mehrere Sensoren/Stationen** schreiben gleichzeitig (z. B. mehrere
+  Arduino UNO Q, oder die für später vorgesehene OPC-UA-Anbindung an
+  S7-1500/ET200SP über Node-RED, siehe `../nodered/README.md`)
+- **sehr hohe Schreibfrequenz** (viele Messwerte pro Sekunde statt alle
+  paar Sekunden)
+- der Wunsch nach **automatischer Datenalterung** ("nach 90 Tagen auf
+  Stundenmittel verdichten", statt das manuell in MariaDB nachzubauen)
+
+Kurz: **noch nicht nötig, aber ein realistisches Bild davon, wann es
+nötig wird** – und die Architektur steht bereits, sodass beim Anschluss
+weiterer Sensoren nichts umgebaut werden muss.
+
 ## Aufbau
 
 `historian_bridge/` abonniert **dasselbe** MQTT-Topic (`audio/spectrum`)

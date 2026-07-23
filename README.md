@@ -289,7 +289,12 @@ Details, Setup und ehrliche Einschränkungen: siehe [`Agentensystem/README.md`](
 
 `Raspberry/historian/` (InfluxDB) speichert dieselben Audio-Messwerte
 zusätzlich in einer auf Zeitreihen spezialisierten Datenbank – neben,
-nicht statt der MariaDB. `Raspberry/nodered/` liest Tags von einer
+nicht statt der MariaDB (die für das Training weiterhin die einzige
+vollständige Quelle bleibt, siehe `Raspberry/historian/README.md`,
+Abschnitt "Ist zwei Datenbanken parallel in der Praxis wirklich üblich?").
+Für die aktuelle Anlagengröße mit einem Sensor ist der Historian noch
+nicht operativ nötig, zahlt sich aber aus, sobald weitere Sensoren/
+Stationen dazukommen. `Raspberry/nodered/` liest Tags von einer
 OPC-UA-fähigen SPS (S7-1500/ET200SP) und veröffentlicht sie auf dem
 bestehenden MQTT-Broker; `Raspberry/opcua_demo_server/` simuliert dafür
 eine Gegenstelle, falls keine echte SPS im Netz erreichbar ist.
