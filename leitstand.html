@@ -431,6 +431,33 @@
   </section>
 
   <section class="panel">
+    <div class="panel-head"><h2>Weitere Systeme</h2></div>
+    <div class="ki-links" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+      <div class="ki-card">
+        <div class="name">📈 Operational Historian (InfluxDB)</div>
+        <input id="historianUrl" placeholder="http://datenkrake.local:8086" value="http://datenkrake.local:8086">
+        <a class="open-btn" id="historianOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+      </div>
+      <div class="ki-card">
+        <div class="name">🔌 Node-RED (OPC-UA → MQTT)</div>
+        <input id="noderedUrl" placeholder="http://datenkrake.local:1880" value="http://datenkrake.local:1880">
+        <a class="open-btn" id="noderedOpen" href="#" target="_blank" rel="noopener">Editor öffnen ↗</a>
+      </div>
+      <div class="ki-card">
+        <div class="name">🪣 MinIO-Konsole (Data Lake)</div>
+        <input id="minioUrl" placeholder="http://&lt;data-lake-host&gt;:9092">
+        <a class="open-btn" id="minioOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+      </div>
+      <div class="ki-card">
+        <div class="name">📓 Jupyter (Spark/Nessie)</div>
+        <input id="jupyterUrl" placeholder="http://&lt;data-lake-host&gt;:8888">
+        <a class="open-btn" id="jupyterOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+      </div>
+    </div>
+    <div class="chart-note">MinIO und Jupyter laufen auf dem separaten Data-Lake-Rechner (siehe <code>DataLake/README.md</code>), deshalb ohne Standardwert — Adresse einmal eintragen.</div>
+  </section>
+
+  <section class="panel">
     <div class="panel-head"><h2>MCP-Werkzeuge <span style="font-family:'JetBrains Mono',monospace; font-weight:400; font-size:11px; color:var(--ink-faint); text-transform:none; letter-spacing:0;">(mcpserver.py, lokal via stdio in Claude Desktop — Referenz, nicht live abrufbar)</span></h2></div>
     <div class="mcp-grid">
       <div>
@@ -511,6 +538,10 @@
   }
   wireKiLink('akustikUrl','akustikOpen');
   wireKiLink('yoloUrl','yoloOpen');
+  wireKiLink('historianUrl','historianOpen');
+  wireKiLink('noderedUrl','noderedOpen');
+  wireKiLink('minioUrl','minioOpen');
+  wireKiLink('jupyterUrl','jupyterOpen');
 
   /* ---------------- Agent / Instrument Cards ---------------- */
   var CARD_DEFS = [
