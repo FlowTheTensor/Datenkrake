@@ -1,0 +1,86 @@
+<svg width="920" height="750" viewBox="0 0 920 750" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titel desc">
+  <title id="titel">Unterrichtsthemen der Datenkrake</title>
+  <desc id="desc">Fünf Themenblöcke: Agentenprotokolle und KI-Integration, Machine Learning und Datenanalyse, Datenhaltung, Kommunikation und Industrie 4.0, sowie Infrastruktur und Hardware.</desc>
+  <style>
+    .bg { fill: #FBF9F5; }
+    .band { fill: #FFFFFF; stroke: #E7E1D6; stroke-width: 1.3; }
+    .head { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 18px; fill: #1D1D1C; }
+    .num { font-family: Georgia, serif; font-weight: 700; font-size: 15px; fill: #FFFFFF; }
+    .tag { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 12.5px; fill: #1D1D1C; }
+    .tagbg { fill: #F3EEE6; stroke: #E7E1D6; stroke-width: 1; }
+  </style>
+  <rect class="bg" x="0" y="0" width="920" height="750"/>
+<rect class="band" x="20" y="20" width="880" height="136" rx="12"/>
+<circle cx="52" cy="46" r="16" fill="#C81E3A"/>
+<text class="num" x="52" y="51" text-anchor="middle">A</text>
+<text class="head" x="80" y="52">Agentenprotokolle &amp; KI-Integration</text>
+<text class="tag" x="80" y="68" fill="#7D7A72" font-size="11.5">Agentensystem/</text>
+<rect class="tagbg" x="50" y="80" width="60" height="26" rx="6"/>
+<text class="tag" x="80.0" y="97" text-anchor="middle">MCP</text>
+<rect class="tagbg" x="120" y="80" width="60" height="26" rx="6"/>
+<text class="tag" x="150.0" y="97" text-anchor="middle">A2A</text>
+<rect class="tagbg" x="190" y="80" width="60" height="26" rx="6"/>
+<text class="tag" x="220.0" y="97" text-anchor="middle">LAP</text>
+<rect class="tagbg" x="260" y="80" width="107.8" height="26" rx="6"/>
+<text class="tag" x="313.9" y="97" text-anchor="middle">Agent Harness</text>
+<rect class="tagbg" x="377.8" y="80" width="74.8" height="26" rx="6"/>
+<text class="tag" x="415.2" y="97" text-anchor="middle">JSON-RPC</text>
+<rect class="tagbg" x="50" y="114" width="173.79999999999998" height="26" rx="6"/>
+<text class="tag" x="136.89999999999998" y="131" text-anchor="middle">Lokale LLMs (LM Studio)</text>
+<rect class="tagbg" x="233.79999999999998" y="114" width="68.19999999999999" height="26" rx="6"/>
+<text class="tag" x="267.9" y="131" text-anchor="middle">API-Key</text>
+<rect class="band" x="20" y="172" width="880" height="136" rx="12"/>
+<circle cx="52" cy="198" r="16" fill="#B87A1C"/>
+<text class="num" x="52" y="203" text-anchor="middle">B</text>
+<text class="head" x="80" y="204">Machine Learning &amp; Datenanalyse</text>
+<text class="tag" x="80" y="220" fill="#7D7A72" font-size="11.5">ArduinoUnoQ/, DataLake/</text>
+<rect class="tagbg" x="50" y="232" width="121.0" height="26" rx="6"/>
+<text class="tag" x="110.5" y="249" text-anchor="middle">Neuronale Netze</text>
+<rect class="tagbg" x="181.0" y="232" width="60" height="26" rx="6"/>
+<text class="tag" x="211.0" y="249" text-anchor="middle">YOLO</text>
+<rect class="tagbg" x="251.0" y="232" width="134.2" height="26" rx="6"/>
+<text class="tag" x="318.1" y="249" text-anchor="middle">Anomalieerkennung</text>
+<rect class="tagbg" x="50" y="266" width="60" height="26" rx="6"/>
+<text class="tag" x="80.0" y="283" text-anchor="middle">Spark</text>
+<rect class="tagbg" x="120" y="266" width="299.2" height="26" rx="6"/>
+<text class="tag" x="269.6" y="283" text-anchor="middle">Lakehouse (Iceberg + Nessie-Versionierung)</text>
+<rect class="band" x="20" y="324" width="880" height="136" rx="12"/>
+<circle cx="52" cy="350" r="16" fill="#2F6B4F"/>
+<text class="num" x="52" y="355" text-anchor="middle">C</text>
+<text class="head" x="80" y="356">Datenhaltung</text>
+<text class="tag" x="80" y="372" fill="#7D7A72" font-size="11.5">Raspberry/mariadb/, Raspberry/historian/</text>
+<rect class="tagbg" x="50" y="384" width="107.8" height="26" rx="6"/>
+<text class="tag" x="103.9" y="401" text-anchor="middle">SQL / MariaDB</text>
+<rect class="tagbg" x="167.8" y="384" width="233.2" height="26" rx="6"/>
+<text class="tag" x="284.4" y="401" text-anchor="middle">Operational Historian (InfluxDB)</text>
+<rect class="tagbg" x="50" y="418" width="266.2" height="26" rx="6"/>
+<text class="tag" x="183.1" y="435" text-anchor="middle">Objektspeicher (MinIO, S3-kompatibel)</text>
+<rect class="tagbg" x="326.2" y="418" width="154.0" height="26" rx="6"/>
+<text class="tag" x="403.2" y="435" text-anchor="middle">Polyglot Persistence</text>
+<rect class="band" x="20" y="476" width="880" height="136" rx="12"/>
+<circle cx="52" cy="502" r="16" fill="#2A5F8A"/>
+<text class="num" x="52" y="507" text-anchor="middle">D</text>
+<text class="head" x="80" y="508">Kommunikation &amp; Industrie 4.0</text>
+<text class="tag" x="80" y="524" fill="#7D7A72" font-size="11.5">Raspberry/mosquitto/, Raspberry/nodered/</text>
+<rect class="tagbg" x="50" y="536" width="60" height="26" rx="6"/>
+<text class="tag" x="80.0" y="553" text-anchor="middle">MQTT</text>
+<rect class="tagbg" x="120" y="536" width="61.599999999999994" height="26" rx="6"/>
+<text class="tag" x="150.8" y="553" text-anchor="middle">OPC-UA</text>
+<rect class="tagbg" x="191.6" y="536" width="74.8" height="26" rx="6"/>
+<text class="tag" x="229.0" y="553" text-anchor="middle">Node-RED</text>
+<rect class="tagbg" x="50" y="570" width="253.0" height="26" rx="6"/>
+<text class="tag" x="176.5" y="587" text-anchor="middle">Publish/Subscribe vs. Client/Server</text>
+<rect class="band" x="20" y="628" width="880" height="102" rx="12"/>
+<circle cx="52" cy="654" r="16" fill="#5B5852"/>
+<text class="num" x="52" y="659" text-anchor="middle">E</text>
+<text class="head" x="80" y="660">Infrastruktur &amp; Hardware</text>
+<text class="tag" x="80" y="676" fill="#7D7A72" font-size="11.5">Raspberry/compose/, ArduinoUnoQ/</text>
+<rect class="tagbg" x="50" y="688" width="61.599999999999994" height="26" rx="6"/>
+<text class="tag" x="80.8" y="705" text-anchor="middle">Docker</text>
+<rect class="tagbg" x="121.6" y="688" width="60" height="26" rx="6"/>
+<text class="tag" x="151.6" y="705" text-anchor="middle">IoT</text>
+<rect class="tagbg" x="191.6" y="688" width="101.19999999999999" height="26" rx="6"/>
+<text class="tag" x="242.2" y="705" text-anchor="middle">Raspberry Pi</text>
+<rect class="tagbg" x="302.79999999999995" y="688" width="107.8" height="26" rx="6"/>
+<text class="tag" x="356.69999999999993" y="705" text-anchor="middle">Arduino UNO Q</text>
+</svg>

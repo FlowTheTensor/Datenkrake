@@ -2,6 +2,71 @@
 
 Dieses Projekt erfasst Audio-Spektrumdaten über ein USB-Mikrofon/Webcam am Arduino UNO Q und sendet sie per MQTT an den Raspberry Pi "Datenkrake". Die Daten werden in einer MariaDB-Datenbank gespeichert und können für ML-Training (Anomalieerkennung) verwendet werden.
 
+## Was kann man mit diesem System im Unterricht behandeln?
+
+Das Projekt ist bewusst so gewachsen, dass sich daran mehrere zusammenhängende
+Themenblöcke zeigen lassen – jeweils an echtem, lauffähigem Code statt nur
+in der Theorie:
+
+![Übersicht der Unterrichtsthemen: Agentenprotokolle, Machine Learning, Datenhaltung, Kommunikation/Industrie 4.0, Infrastruktur](Images/unterrichtsthemen.svg)
+
+**A) Agentenprotokolle & KI-Integration** ([`Agentensystem/`](Agentensystem/README.md))
+MCP (Tools/Resources/Prompts), A2A (Agent Cards, Skills, Tasks), LAP
+(Instrument Cards, Reservation, Safety-Fence) – drei Protokolle an
+unterschiedlichen "Kanten" (Agent↔Werkzeug, Agent↔Agent, Agent↔Gerät),
+plus ein [Agent Harness](Agentensystem/agent_harness/README.md), der
+zeigt, was ein LLM überhaupt erst zum Agenten macht.
+
+**B) Machine Learning & Datenanalyse** ([`ArduinoUnoQ/`](ArduinoUnoQ/Python/main.py), [`DataLake/`](DataLake/README.md))
+Training eines neuronalen Netzes zur Audio-Klassifikation direkt auf dem
+Arduino UNO Q, Anomalieerkennung (statistische Heuristik vs. trainiertes
+Modell), und ein Lakehouse (Spark + Iceberg + Nessie) mit Git-artiger
+Versionierung von Tabellen.
+
+**C) Datenhaltung** ([`Raspberry/mariadb/`](Raspberry/mariadb/), [`Raspberry/historian/`](Raspberry/historian/README.md))
+Relationale Datenbank vs. Operational Historian vs. Objektspeicher – und
+die Frage, wann man in der Praxis wirklich mehrere Datenbanktypen
+parallel braucht (**Polyglot Persistence**).
+
+**D) Kommunikation & Industrie 4.0** ([`Raspberry/mosquitto/`](Raspberry/mosquitto/), [`Raspberry/nodered/`](Raspberry/nodered/README.md))
+MQTT (Publish/Subscribe) vs. OPC-UA (klassischer Industriestandard für
+Maschinenkommunikation), verbunden über eine Low-Code-Integration
+(Node-RED).
+
+**E) Infrastruktur & Hardware**
+Docker/Docker Compose als Grundlage für alle Dienste, IoT-Architektur
+allgemein, Raspberry Pi als Edge-Gerät, Arduino UNO Q als Mikrocontroller
+mit Linux-Anteil für Edge-KI.
+
+## Systemvoraussetzungen
+
+Nicht jeder Themenblock braucht die volle Ausstattung – für A–D reicht
+der Raspberry Pi plus ein beliebiger PC; nur der Data-Lake-Teil (B)
+braucht zusätzlich einen stärkeren, separaten Rechner.
+
+### Hardware
+
+| Gerät | Wofür | Mindestanforderung |
+|---|---|---|
+| **Arduino UNO Q** + USB-Mikrofon/Webcam | Audio-Erfassung, KI-Inferenz vor Ort | wie im Arduino-Teil beschrieben |
+| **Raspberry Pi** | Mosquitto, MariaDB, Webserver, Historian, Node-RED | Modell 4 oder 5, **mind. 4 GB RAM** (8 GB empfohlen, sobald Historian/Node-RED mitlaufen), 64-Bit-OS, SD-Karte ≥ 16 GB |
+| **PC/Laptop** (beliebiges OS) | Claude Desktop mit MCP, Leitstand-Dashboard im Browser | keine besonderen Anforderungen |
+| *Optional:* **separater Rechner** für den Data-Lake-Stack | MinIO, Nessie, Spark/Jupyter | **mind. 8 GB RAM, besser 16 GB** – Spark allein ist schon ressourcenhungrig, siehe [`DataLake/README.md`](DataLake/README.md) |
+| *Optional:* Rechner mit **GPU** | spürbar schnellere Antworten eines lokalen LLM über LM Studio | nicht zwingend, aber empfohlen |
+
+Alle Geräte müssen im selben Netzwerk erreichbar sein (mDNS/`.local`-Auflösung wie bei `datenkrake.local`).
+
+### Software
+
+| Werkzeug | Wofür | Hinweis |
+|---|---|---|
+| **Docker + Docker Compose** | alle Dienste auf Pi und Data-Lake-Rechner | wird von `setup_iot_stack.sh` bei Bedarf mitinstalliert |
+| **Python 3.10+** | Agentensystem (MCP-/A2A-SDK, Agent Harness), OPC-UA-Demo-Server | einzelne Container-Dienste (z. B. `subscriber`) bringen ihre eigene, gepinnte Python-Version im Image mit – nur für lokal (nicht containerisiert) ausgeführten Code relevant |
+| **git** | Repository klonen und verwalten | |
+| **Claude Desktop** | MCP-Server nutzen | siehe Abschnitt "Claude Desktop konfigurieren" weiter unten in diesem README |
+| *Optional:* **LM Studio** | lokales LLM für Agent Harness und Dashboard-Chat, ohne API-Key | nur nötig für Themenblock A |
+| ein aktueller **Webbrowser** | Leitstand-Dashboard, Node-RED-Editor, InfluxDB-UI, Jupyter, MinIO-Konsole | |
+
 ## Komponenten
 - **Arduino UNO Q**: Erfasst Audio über USB-Mikrofon/Webcam (Linux-Teil), berechnet FFT-Spektrum. Website zur Spektrum-Visualisierung und Datensammlung mit Labels ("gut"/"schlecht"), Training des Modells und Anwendung des Modells
 - **Raspberry Pi**: in Containern: Mosquitto MQTT-Broker, MariaDB-Datenbank, Python-MQTT-Subscriber, Webserver zur Datenbankkontrolle
@@ -17,10 +82,11 @@ Dieses Projekt erfasst Audio-Spektrumdaten über ein USB-Mikrofon/Webcam am Ardu
 ## Installation
 ### Raspberry Pi
 #### Voraussetzungen
-- Raspberry Pi (empfohlen: Modell 4 mit 4 GB RAM oder mehr).
-- Raspberry Pi OS (64-Bit, basierend auf Debian).
-- Internetverbindung für Docker-Installation.
-- SD-Karte mit mindestens 16 GB (mehr für längeres Logging).
+
+Siehe [Systemvoraussetzungen](#systemvoraussetzungen) oben (Zeile
+"Raspberry Pi"). Kurzfassung: Pi 4/5, mind. 4 GB RAM, 64-Bit-OS,
+Internetverbindung, SD-Karte ≥ 16 GB.
+
 1. **Repository klonen**: z.B. mit
     ```bash
     git clone https://github.com/FlowTheTensor/Datenkrake-Container.git 
