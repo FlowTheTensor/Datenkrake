@@ -216,6 +216,93 @@
     font-family:"JetBrains Mono",monospace; border-top:1px solid var(--line);
   }
   footer a{color:var(--ink-faint); text-decoration:underline;}
+
+  /* ---------- Sticky Themen-Navigation ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(251,249,245,.94); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    display:flex; gap:4px; flex-wrap:wrap;
+    padding:10px clamp(16px,4vw,48px);
+  }
+  .topnav a{
+    font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.02em;
+    color:var(--ink-soft); text-decoration:none; padding:6px 11px; border-radius:7px;
+    white-space:nowrap;
+  }
+  .topnav a:hover{background:var(--surface-2); color:var(--ink);}
+  .topnav a b{color:inherit; font-weight:700;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:8px clamp(16px,4vw,48px) 4px;}
+  .hero h1{font-size:clamp(22px,3.2vw,30px); max-width:820px; line-height:1.25;}
+  .hero-lead{max-width:720px; color:var(--ink-soft); font-size:14.5px; line-height:1.7; margin-top:12px;}
+  .topic-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:22px;}
+  .topic-card{
+    display:flex; gap:12px; align-items:flex-start; text-decoration:none;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+    padding:14px 15px; transition:border-color .2s, transform .15s;
+  }
+  .topic-card:hover{border-color:var(--accent); transform:translateY(-1px);}
+  .topic-letter{
+    flex:none; width:30px; height:30px; border-radius:50%; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:13.5px;
+  }
+  .topic-title{font-family:"Quicksand",sans-serif; font-weight:700; font-size:13.5px; color:var(--ink); line-height:1.3;}
+  .topic-desc{font-size:11.5px; color:var(--ink-faint); margin-top:4px; line-height:1.5;}
+
+  /* ---------- Themen-Abschnitte (A–E) ---------- */
+  .theme-section{scroll-margin-top:64px; display:flex; flex-direction:column; gap:16px;}
+  .theme-head{display:flex; align-items:center; gap:14px;}
+  .theme-letter{
+    flex:none; width:40px; height:40px; border-radius:50%; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Quicksand",sans-serif; font-weight:700; font-size:17px;
+  }
+  .theme-head h2{font-size:19px;}
+  .info-box{
+    background:var(--surface-2); border:1px solid var(--line); border-left:4px solid var(--accent);
+    border-radius:8px; padding:14px 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.65;
+  }
+  .info-box b{color:var(--ink);}
+  .info-box.b{border-left-color:var(--accent-2);}
+  .info-box.c{border-left-color:#2F6B4F;}
+  .info-box.d{border-left-color:#2A5F8A;}
+  .info-box.e{border-left-color:var(--ink-soft);}
+
+  /* ---------- Quiz ---------- */
+  .quiz-score-bar{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:8px;
+    padding:12px 16px; margin-bottom:16px;
+  }
+  .quiz-score-bar .score{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--ink);}
+  .quiz-reset-btn{
+    font-family:"JetBrains Mono",monospace; font-size:11.5px; background:var(--surface);
+    border:1px solid var(--line); color:var(--ink-soft); padding:7px 13px; border-radius:7px; cursor:pointer;
+  }
+  .quiz-reset-btn:hover{border-color:var(--accent); color:var(--ink);}
+  .quiz-list{display:flex; flex-direction:column; gap:12px;}
+  .quiz-card{
+    background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--ink-faint);
+    border-radius:8px; padding:14px 16px;
+  }
+  .quiz-cat{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; font-weight:600;}
+  .quiz-q{font-family:"Quicksand",sans-serif; font-weight:600; font-size:14.5px; color:var(--ink); margin-bottom:10px;}
+  .quiz-opts{display:flex; flex-direction:column; gap:7px;}
+  .quiz-opt{
+    display:flex; align-items:flex-start; gap:9px; font-size:13px; color:var(--ink-soft);
+    padding:8px 10px; border-radius:7px; border:1px solid var(--line); cursor:pointer; background:var(--surface-2);
+  }
+  .quiz-opt:hover{border-color:var(--accent);}
+  .quiz-opt input{margin-top:2px;}
+  .quiz-opt.correct{border-color:#2F6B4F; background:#EAF3EC; color:#1C4530;}
+  .quiz-opt.wrong{border-color:var(--accent); background:#FBEAEC; color:#7A1424;}
+  .quiz-exp{
+    margin-top:10px; font-size:12.5px; line-height:1.6; color:var(--ink-soft);
+    background:var(--surface-2); border-radius:7px; padding:9px 12px;
+  }
 </style>
 </head>
 <body>
@@ -249,6 +336,51 @@
   </div>
   <div class="settings-note">Live-Abrufe funktionieren nur, wenn diese Seite von einem Rechner mit Netzzugriff auf die Agenten geöffnet wird, und wenn die Agenten CORS für diesen Ursprung erlauben. Schlägt ein Abruf fehl, zeigen Cards und Konsole "demo"-Daten bzw. eine Fehlermeldung statt leer zu bleiben.</div>
 </div>
+
+<nav class="topnav" aria-label="Inhaltsnavigation">
+  <a href="#thema-a"><b>A</b> · Agentenprotokolle</a>
+  <a href="#thema-b"><b>B</b> · ML &amp; Data Lake</a>
+  <a href="#thema-c"><b>C</b> · Datenhaltung</a>
+  <a href="#thema-d"><b>D</b> · Kommunikation</a>
+  <a href="#thema-e"><b>E</b> · Infrastruktur</a>
+  <a href="#quiz">✎ Quiz</a>
+  <a href="#technologien">Glossar</a>
+</nav>
+
+<section class="hero" aria-labelledby="heroHeading">
+  <span class="eyebrow">Werkzeuge &amp; Wissen an einem Ort</span>
+  <h1 id="heroHeading">Was diese Anlage im Unterricht eigentlich zeigt</h1>
+  <p class="hero-lead">Dieses Dashboard ist gleichzeitig Leitstand und Lernmaterial: jeder Themenblock unten
+  verbindet eine kurze Erklärung mit den echten, laufenden Systemen dahinter — Agent-Cards, Live-Daten,
+  Konfigurationslinks. Am Ende wartet ein kleines Quiz, mit dem sich das Gelernte direkt überprüfen lässt.</p>
+  <div class="topic-grid">
+    <a class="topic-card" href="#thema-a">
+      <div class="topic-letter" style="background:var(--accent)">A</div>
+      <div><div class="topic-title">Agentenprotokolle &amp; KI-Integration</div>
+      <div class="topic-desc">MCP · A2A · LAP · Agent Harness</div></div>
+    </a>
+    <a class="topic-card" href="#thema-b">
+      <div class="topic-letter" style="background:var(--accent-2)">B</div>
+      <div><div class="topic-title">Machine Learning &amp; Data Lake</div>
+      <div class="topic-desc">Neuronale Netze · YOLO · Lakehouse</div></div>
+    </a>
+    <a class="topic-card" href="#thema-c">
+      <div class="topic-letter" style="background:#2F6B4F">C</div>
+      <div><div class="topic-title">Datenhaltung</div>
+      <div class="topic-desc">MariaDB · Historian · Polyglot Persistence</div></div>
+    </a>
+    <a class="topic-card" href="#thema-d">
+      <div class="topic-letter" style="background:#2A5F8A">D</div>
+      <div><div class="topic-title">Kommunikation &amp; Industrie 4.0</div>
+      <div class="topic-desc">MQTT · OPC-UA · Node-RED</div></div>
+    </a>
+    <a class="topic-card" href="#thema-e">
+      <div class="topic-letter" style="background:var(--ink-soft)">E</div>
+      <div><div class="topic-title">Infrastruktur &amp; Hardware</div>
+      <div class="topic-desc">Docker · Raspberry Pi · Arduino UNO Q</div></div>
+    </a>
+  </div>
+</section>
 
 <main>
 
@@ -290,6 +422,24 @@
       <div class="hint">Genauer RPC-Pfad kann je nach a2a-sdk-Version abweichen — bei Fehlern zuerst mit curl gegen die Agent Card prüfen.</div>
     </div>
   </section>
+
+<section class="theme-section" id="thema-a" aria-labelledby="thema-a-heading">
+  <div class="theme-head">
+    <div class="theme-letter" style="background:var(--accent)">A</div>
+    <div><h2 id="thema-a-heading">Agentenprotokolle &amp; KI-Integration</h2>
+    <div class="eyebrow">Agentensystem/</div></div>
+  </div>
+  <div class="info-box">
+    Drei Protokolle verbinden hier unterschiedliche Dinge — und genau diese Unterscheidung ist der Kern
+    des Themas. <b>MCP</b> verbindet ein Sprachmodell mit Werkzeugen und Daten (die „vertikale" Kante) —
+    so bekommt Claude Desktop unten Zugriff auf die MariaDB. <b>A2A</b> verbindet zwei eigenständige
+    Agenten miteinander (die „horizontale" Kante) — der Orchestrator delegiert Aufgaben an den DB- und
+    Report-Agenten. <b>LAP</b> verbindet einen Agenten mit einem physischen Gerät — hier ein
+    Diagnosegerät, das der Wartungs-Agent erst nach einer expliziten Sicherheitsbestätigung ansteuern
+    darf. Der <b>Agent Harness</b> schließlich ist die Schleife, die aus einem rohen Sprachmodell
+    überhaupt erst etwas macht, das Werkzeuge selbstständig benutzen kann — genau das lässt sich oben im
+    Chat-Tab „Agenten-Konsole" gegen die echten A2A-Agenten ausprobieren.
+  </div>
 
   <section class="panel" aria-labelledby="archHeading">
     <div class="panel-head"><h2 id="archHeading">Architektur</h2></div>
@@ -407,56 +557,6 @@
     <div class="cards-row" id="cardsRow"></div>
   </section>
 
-  <section class="grid-2">
-    <div class="panel">
-      <div class="panel-head"><h2>Prozessdaten — peak_db (audio_spectrum)</h2></div>
-      <canvas id="procChart"></canvas>
-      <div class="chart-note">Demo-Daten mit einer eingebauten Anomalie zur Veranschaulichung — für echte Werte an eine Abfrage gegen die Datenkrake-DB anbinden (z. B. über den DB-Agent).</div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h2>KI-Systeme</h2></div>
-      <div class="ki-links">
-        <div class="ki-card">
-          <div class="name">🎤 Akustik-KI (Arduino UNO Q)</div>
-          <input id="akustikUrl" placeholder="http://&lt;arduino-ip&gt;">
-          <a class="open-btn" id="akustikOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
-        </div>
-        <div class="ki-card">
-          <div class="name">📷 YOLO-System (Arduino UNO Q)</div>
-          <input id="yoloUrl" placeholder="http://&lt;arduino-ip&gt;">
-          <a class="open-btn" id="yoloOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="panel-head"><h2>Weitere Systeme</h2></div>
-    <div class="ki-links" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
-      <div class="ki-card">
-        <div class="name">📈 Operational Historian (InfluxDB)</div>
-        <input id="historianUrl" placeholder="http://datenkrake.local:8086" value="http://datenkrake.local:8086">
-        <a class="open-btn" id="historianOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
-      </div>
-      <div class="ki-card">
-        <div class="name">🔌 Node-RED (OPC-UA → MQTT)</div>
-        <input id="noderedUrl" placeholder="http://datenkrake.local:1880" value="http://datenkrake.local:1880">
-        <a class="open-btn" id="noderedOpen" href="#" target="_blank" rel="noopener">Editor öffnen ↗</a>
-      </div>
-      <div class="ki-card">
-        <div class="name">🪣 MinIO-Konsole (Data Lake)</div>
-        <input id="minioUrl" placeholder="http://&lt;data-lake-host&gt;:9092">
-        <a class="open-btn" id="minioOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
-      </div>
-      <div class="ki-card">
-        <div class="name">📓 Jupyter (Spark/Nessie)</div>
-        <input id="jupyterUrl" placeholder="http://&lt;data-lake-host&gt;:8888">
-        <a class="open-btn" id="jupyterOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
-      </div>
-    </div>
-    <div class="chart-note">MinIO und Jupyter laufen auf dem separaten Data-Lake-Rechner (siehe <code>DataLake/README.md</code>), deshalb ohne Standardwert — Adresse einmal eintragen.</div>
-  </section>
-
   <section class="panel">
     <div class="panel-head"><h2>MCP-Werkzeuge <span style="font-family:'JetBrains Mono',monospace; font-weight:400; font-size:11px; color:var(--ink-faint); text-transform:none; letter-spacing:0;">(mcpserver.py, lokal via stdio in Claude Desktop — Referenz, nicht live abrufbar)</span></h2></div>
     <div class="mcp-grid">
@@ -486,8 +586,143 @@
       </div>
     </div>
   </section>
+</section>
 
-  <section>
+<section class="theme-section" id="thema-b" aria-labelledby="thema-b-heading">
+  <div class="theme-head">
+    <div class="theme-letter" style="background:var(--accent-2)">B</div>
+    <div><h2 id="thema-b-heading">Machine Learning &amp; Data Lake</h2>
+    <div class="eyebrow">ArduinoUnoQ/, DataLake/</div></div>
+  </div>
+  <div class="info-box b">
+    Das eigentliche Ziel der Datensammlung: ein <b>neuronales Netz</b> lernt auf dem Arduino UNO Q
+    selbst, zwischen „gut" und „schlecht" klingenden Aufnahmen zu unterscheiden — trainiert mit dem
+    <b>vollständigen Frequenzspektrum</b>, nicht nur einzelnen Kennwerten wie <code>peak_db</code>.
+    Das YOLO-System für die optische Kontrolle ist im aktuellen Ausbaustand bewusst als „geplant"
+    markiert. Daneben zeigt der <b>Data Lake</b>, wie große Datenmengen offen und nachvollziehbar
+    verwaltet werden: mit Nessie lassen sich Tabellen wie in Git branchen und versionieren, bevor man
+    sie mit Spark auswertet — „Git für Daten".
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>KI- &amp; Datenanalyse-Systeme</h2></div>
+    <div class="ki-links" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+        <div class="ki-card">
+          <div class="name">🎤 Akustik-KI (Arduino UNO Q)</div>
+          <input id="akustikUrl" placeholder="http://&lt;arduino-ip&gt;">
+          <a class="open-btn" id="akustikOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+        </div>
+        <div class="ki-card">
+          <div class="name">📷 YOLO-System (Arduino UNO Q)</div>
+          <input id="yoloUrl" placeholder="http://&lt;arduino-ip&gt;">
+          <a class="open-btn" id="yoloOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+        </div>
+        <div class="ki-card">
+          <div class="name">🪣 MinIO-Konsole (Data Lake)</div>
+          <input id="minioUrl" placeholder="http://&lt;data-lake-host&gt;:9092">
+          <a class="open-btn" id="minioOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+        </div>
+        <div class="ki-card">
+          <div class="name">📓 Jupyter (Spark/Nessie)</div>
+          <input id="jupyterUrl" placeholder="http://&lt;data-lake-host&gt;:8888">
+          <a class="open-btn" id="jupyterOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+        </div>
+    </div>
+    <div class="chart-note">MinIO und Jupyter laufen auf dem separaten Data-Lake-Rechner (siehe <code>DataLake/README.md</code>), deshalb ohne Standardwert — Adresse einmal eintragen.</div>
+  </div>
+</section>
+
+<section class="theme-section" id="thema-c" aria-labelledby="thema-c-heading">
+  <div class="theme-head">
+    <div class="theme-letter" style="background:#2F6B4F">C</div>
+    <div><h2 id="thema-c-heading">Datenhaltung</h2>
+    <div class="eyebrow">Raspberry/mariadb/, Raspberry/historian/</div></div>
+  </div>
+  <div class="info-box c">
+    Zwei Datenbanken für dieselben Messwerte — das wirkt zunächst seltsam, ist aber ein anerkanntes
+    Prinzip: <b>Polyglot Persistence</b>. Die MariaDB bleibt die einzige <b>vollständige</b> Quelle
+    (inklusive des kompletten Spektrums, das fürs Training gebraucht wird), der Operational Historian
+    daneben ist auf schnelle Zeitreihen-Abfragen optimiert. Für die aktuelle Anlagengröße mit einem
+    Sensor ist er noch nicht zwingend nötig — er zahlt sich aus, sobald weitere Sensoren oder Stationen
+    dazukommen.
+  </div>
+
+  <section class="grid-2">
+    <div class="panel">
+      <div class="panel-head"><h2>Prozessdaten — peak_db (audio_spectrum)</h2></div>
+      <canvas id="procChart"></canvas>
+      <div class="chart-note">Demo-Daten mit einer eingebauten Anomalie zur Veranschaulichung — für echte Werte an eine Abfrage gegen die Datenkrake-DB anbinden (z. B. über den DB-Agent).</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Operational Historian</h2></div>
+      <div class="ki-links">
+        <div class="ki-card">
+          <div class="name">📈 Operational Historian (InfluxDB)</div>
+          <input id="historianUrl" placeholder="http://datenkrake.local:8086" value="http://datenkrake.local:8086">
+          <a class="open-btn" id="historianOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="theme-section" id="thema-d" aria-labelledby="thema-d-heading">
+  <div class="theme-head">
+    <div class="theme-letter" style="background:#2A5F8A">D</div>
+    <div><h2 id="thema-d-heading">Kommunikation &amp; Industrie 4.0</h2>
+    <div class="eyebrow">Raspberry/mosquitto/, Raspberry/nodered/</div></div>
+  </div>
+  <div class="info-box d">
+    MQTT und OPC-UA lösen unterschiedliche Probleme. <b>MQTT</b> ist ein schlankes
+    Publish/Subscribe-Protokoll, mit dem der Arduino seine Messwerte „hinausruft", ohne zu wissen, wer
+    zuhört. <b>OPC-UA</b> ist der etablierte Industriestandard, mit dem Maschinen wie eine S7-1500 ihre
+    Daten strukturiert bereitstellen. <b>Node-RED</b> übersetzt zwischen beiden Welten, ganz ohne
+    eigenen Code — die SPS-Werte landen anschließend auf dem MQTT-Topic-Namensraum <code>plc/&lt;station&gt;/&lt;tag&gt;</code>.
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Node-RED</h2></div>
+    <div class="ki-links">
+        <div class="ki-card">
+          <div class="name">🔌 Node-RED (OPC-UA → MQTT)</div>
+          <input id="noderedUrl" placeholder="http://datenkrake.local:1880" value="http://datenkrake.local:1880">
+          <a class="open-btn" id="noderedOpen" href="#" target="_blank" rel="noopener">Editor öffnen ↗</a>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="theme-section" id="thema-e" aria-labelledby="thema-e-heading">
+  <div class="theme-head">
+    <div class="theme-letter" style="background:var(--ink-soft)">E</div>
+    <div><h2 id="thema-e-heading">Infrastruktur &amp; Hardware</h2>
+    <div class="eyebrow">Raspberry/compose/, ArduinoUnoQ/</div></div>
+  </div>
+  <div class="info-box e">
+    Alles läuft in <b>Docker-Containern</b> — jeder Dienst isoliert, reproduzierbar aufsetzbar,
+    unabhängig vom restlichen System. Der <b>Raspberry Pi</b> übernimmt die Rolle des zentralen
+    Edge-Servers (Broker, Datenbank, Historian, Webserver), während der <b>Arduino UNO Q</b> durch
+    seinen Linux-Anteil selbst KI-Inferenz direkt am Sensor rechnen kann — ein kleines Beispiel für
+    Edge AI. Details und Mindestanforderungen: Abschnitt „Systemvoraussetzungen" im Haupt-README.
+  </div>
+</section>
+
+<section class="theme-section" id="quiz" aria-labelledby="quiz-heading">
+  <div class="theme-head">
+    <div class="theme-letter" style="background:var(--accent-bright)">✎</div>
+    <div><h2 id="quiz-heading">Quiz — was ist hängen geblieben?</h2>
+    <div class="eyebrow">19 Fragen zu A–E, direktes Feedback</div></div>
+  </div>
+  <div class="panel">
+    <div class="quiz-score-bar">
+      <span class="score" id="quizScore">0 von 0 richtig</span>
+      <button class="quiz-reset-btn" id="quizReset">↺ Quiz zurücksetzen</button>
+    </div>
+    <div class="quiz-list" id="quizList"></div>
+  </div>
+</section>
+
+  <section id="technologien">
     <span class="eyebrow">Verwendete Technologien</span>
     <div class="panel">
       <div class="tech-groups" id="techGroups"></div>
@@ -585,6 +820,136 @@
     return card;
   }
 
+  /* ---------------- Quiz ---------------- */
+  var QUIZ = [
+    {cat:'A', color:'#C81E3A', q:'Was verbindet MCP typischerweise?',
+     options:['Zwei Agenten miteinander','Ein Sprachmodell mit Werkzeugen/Daten','Zwei Datenbanken miteinander','Einen Menschen mit einem anderen Menschen'],
+     correct:1, exp:'MCP ist die "vertikale" Kante: ein Modell greift auf Tools/Resources/Prompts eines Servers zu — z.B. Claude Desktop auf mcpserver.py.'},
+    {cat:'A', color:'#C81E3A', q:'Wodurch entdeckt ein A2A-Agent die Fähigkeiten eines anderen Agenten?',
+     options:['Über eine feste IP-Adressliste','Über ein MQTT-Topic','Über eine Agent Card unter /.well-known/agent-card.json','Über eine SQL-Abfrage'],
+     correct:2, exp:'Die Agent Card ist das öffentliche "Türschild" eines A2A-Agenten mit seinen Skills.'},
+    {cat:'A', color:'#C81E3A', q:'Wozu dient der Safety-Fence-Mechanismus in LAP?',
+     options:['Er verschlüsselt die Verbindung','Er holt vor gefährlichen/irreversiblen Aktionen eine Bestätigung ein','Er reserviert Speicherplatz','Er startet den Container neu'],
+     correct:1, exp:'Bevor eine als gefährlich markierte Aktion ausgeführt wird, muss sie explizit bestätigt werden — siehe Wartungs-Agent.'},
+    {cat:'A', color:'#C81E3A', q:'Was macht ein "Agent Harness" konkret?',
+     options:['Er trainiert das neuronale Netz','Er speichert Messwerte in der Datenbank','Er verschickt MQTT-Nachrichten','Er wechselt zwischen LLM-Aufruf und Tool-Ausführung ab, bis das Modell fertig ist'],
+     correct:3, exp:'Genau diese Schleife macht aus einem rohen Sprachmodell etwas, das selbstständig Werkzeuge nutzen kann.'},
+
+    {cat:'B', color:'#B87A1C', q:'Womit trainiert der Arduino UNO Q sein Klassifikationsmodell?',
+     options:['Nur mit dem Label','Mit Label und vollständigem FFT-Spektrum aus der MariaDB','Mit Daten aus InfluxDB','Mit zufällig erzeugten Daten'],
+     correct:1, exp:'Der Historian speichert das Spektrum bewusst nicht — nur die MariaDB hat die vollständigen Trainingsdaten.'},
+    {cat:'B', color:'#B87A1C', q:'Was macht Nessie im Data-Lake-Stack besonders?',
+     options:['Es ist ein Objektspeicher','Es ersetzt MariaDB','Es bietet Git-artige Versionierung (Branches, Commits) für Tabellen','Es ist ein Backup-Programm'],
+     correct:2, exp:'Tabellen lassen sich branchen, committen und zusammenführen — "Git für Daten".'},
+    {cat:'B', color:'#B87A1C', q:'Ist die YOLO-Anbindung im aktuellen Projektstand schon vollständig umgesetzt?',
+     options:['Ja, vollständig','Nein, sie ist bewusst als "geplant" markiert','Nur auf dem Data-Lake-Rechner','Nur in der Simulation'],
+     correct:1, exp:'Ehrlich im Dashboard gekennzeichnet, um nichts vorzugaukeln, was noch nicht existiert.'},
+    {cat:'B', color:'#B87A1C', q:'Warum läuft der Data-Lake-Stack NICHT auf dem Raspberry Pi?',
+     options:['Kein Netzwerkzugang','Spark/Jupyter sind zu ressourcenhungrig für den Pi','MinIO läuft nur auf x86','Der Pi unterstützt kein Docker'],
+     correct:1, exp:'Deshalb läuft der Stack als eigener Compose-Stack auf einem separaten, stärkeren Rechner.'},
+
+    {cat:'C', color:'#2F6B4F', q:'Was speichert der Operational Historian (InfluxDB) bewusst NICHT?',
+     options:['Den Zeitstempel','Das vollständige FFT-Spektrum-Array','Den peak_db-Wert','Das Label'],
+     correct:1, exp:'Zeitreihen-Datenbanken sind für skalare Werte optimiert, nicht für große verschachtelte Strukturen.'},
+    {cat:'C', color:'#2F6B4F', q:'Wie nennt man das Prinzip, bewusst mehrere Datenbanktypen parallel einzusetzen?',
+     options:['Sharding','Normalisierung','Replikation','Polyglot Persistence'],
+     correct:3, exp:'Ein etabliertes Architekturprinzip, kein Sonderfall dieses Projekts.'},
+    {cat:'C', color:'#2F6B4F', q:'Welche Datenbank bleibt die einzige VOLLSTÄNDIGE Quelle für Trainingsdaten?',
+     options:['InfluxDB','MinIO','MariaDB','Nessie'],
+     correct:2, exp:'Nur dort liegen Label UND vollständiges Spektrum zusammen.'},
+    {cat:'C', color:'#2F6B4F', q:'Ab wann lohnt sich ein Operational Historian laut Projekt-Einschätzung wirklich?',
+     options:['Sofort, unabhängig von der Anlagengröße','Erst bei mehreren Sensoren/Stationen, hoher Frequenz oder Bedarf an Datenalterung','Nie, er ist überflüssig','Nur ohne SQL-Datenbank'],
+     correct:1, exp:'Für einen einzelnen Sensor ist er aktuell eher Lerninhalt als operative Notwendigkeit.'},
+
+    {cat:'D', color:'#2A5F8A', q:'Welches Kommunikationsmuster nutzt MQTT?',
+     options:['Publish/Subscribe','Request/Response','Peer-to-Peer-Streaming','Broadcast ohne Empfänger'],
+     correct:0, exp:'Der Sender weiß nicht, wer (oder ob überhaupt jemand) mithört.'},
+    {cat:'D', color:'#2A5F8A', q:'Was macht Node-RED in diesem Projekt?',
+     options:['Es trainiert neuronale Netze','Es liest OPC-UA-Tags und veröffentlicht sie per MQTT','Es ist die Hauptdatenbank','Es ersetzt Mosquitto'],
+     correct:1, exp:'Eine Low-Code-Brücke zwischen SPS-Welt (OPC-UA) und IoT-Welt (MQTT).'},
+    {cat:'D', color:'#2A5F8A', q:'Welches Protokoll ist der klassische Industriestandard für Maschinenkommunikation?',
+     options:['MQTT','HTTP','OPC-UA','FTP'],
+     correct:2, exp:'S7-1500/ET200SP & Co. sprechen typischerweise OPC-UA.'},
+    {cat:'D', color:'#2A5F8A', q:'Auf welchem MQTT-Topic-Namensraum landen die aus OPC-UA gelesenen SPS-Werte?',
+     options:['audio/spectrum','sensor/data','opcua/raw','plc/<station>/<tag>'],
+     correct:3, exp:'Bewusst getrennt vom bestehenden audio/spectrum-Topic.'},
+
+    {cat:'E', color:'#5B5852', q:'Warum laufen die Dienste dieses Projekts in Docker-Containern?',
+     options:['Pflicht unter Raspberry Pi OS','Für Isolation und reproduzierbare Installation','Weil Python das erfordert','Um Strom zu sparen'],
+     correct:1, exp:'Jeder Dienst läuft unabhängig vom restlichen System — leicht neu aufsetzbar.'},
+    {cat:'E', color:'#5B5852', q:'Was ist die Besonderheit des Arduino UNO Q gegenüber einem klassischen Arduino?',
+     options:['Mehr USB-Ports','Er hat einen Linux-Teil und kann selbst KI-Inferenz rechnen','Nur für Audio gebaut','Er braucht kein Netzwerk'],
+     correct:1, exp:'Genau das macht ihn zum Beispiel für Edge AI in diesem Projekt.'},
+    {cat:'E', color:'#5B5852', q:'Welche Rolle spielt der Raspberry Pi in der Gesamtarchitektur?',
+     options:['Nur ein Backup-Gerät','Der zentrale Edge-Server (Broker, DB, Historian, Webserver)','Er trainiert das neuronale Netz','Er ersetzt Claude Desktop'],
+     correct:1, exp:'Die "Datenkrake" bündelt hier alle zentralen Dienste an einer Stelle.'}
+  ];
+
+  function renderQuiz(){
+    var container = document.getElementById('quizList');
+    container.innerHTML = '';
+    QUIZ.forEach(function(item, qi){
+      var card = document.createElement('div');
+      card.className = 'quiz-card';
+      card.style.borderLeftColor = item.color;
+      var optsHtml = item.options.map(function(opt, oi){
+        return '<label class="quiz-opt" data-qi="'+qi+'">'+
+          '<input type="radio" name="q'+qi+'" value="'+oi+'"> <span>'+opt+'</span></label>';
+      }).join('');
+      card.innerHTML =
+        '<div class="quiz-cat" style="color:'+item.color+'">Thema '+item.cat+'</div>'+
+        '<div class="quiz-q">'+item.q+'</div>'+
+        '<div class="quiz-opts">'+optsHtml+'</div>'+
+        '<div class="quiz-exp" id="exp'+qi+'" hidden></div>';
+      container.appendChild(card);
+    });
+    container.querySelectorAll('input[type=radio]').forEach(function(input){
+      input.addEventListener('change', function(){
+        var qi = parseInt(input.closest('.quiz-opt').dataset.qi, 10);
+        var oi = parseInt(input.value, 10);
+        answerQuestion(qi, oi);
+      });
+    });
+  }
+
+  var quizState = {};
+
+  function answerQuestion(qi, oi){
+    if (quizState[qi] !== undefined) return;
+    quizState[qi] = oi;
+    var item = QUIZ[qi];
+    var cardEls = document.querySelectorAll('.quiz-card');
+    var card = cardEls[qi];
+    var labels = card.querySelectorAll('.quiz-opt');
+    labels.forEach(function(label, idx){
+      label.querySelector('input').disabled = true;
+      if (idx === item.correct) label.classList.add('correct');
+      else if (idx === oi) label.classList.add('wrong');
+    });
+    var exp = document.getElementById('exp'+qi);
+    exp.hidden = false;
+    exp.textContent = (oi === item.correct ? '\u2713 Richtig. ' : '\u2717 Nicht ganz. ') + item.exp;
+    updateQuizScore();
+  }
+
+  function updateQuizScore(){
+    var answered = Object.keys(quizState).length;
+    var correct = 0;
+    Object.keys(quizState).forEach(function(qi){
+      if (quizState[qi] === QUIZ[qi].correct) correct++;
+    });
+    document.getElementById('quizScore').textContent =
+      correct+' von '+answered+' richtig ('+QUIZ.length+' Fragen insgesamt)';
+  }
+
+  document.getElementById('quizReset').addEventListener('click', function(){
+    quizState = {};
+    renderQuiz();
+    updateQuizScore();
+  });
+
+  renderQuiz();
+  updateQuizScore();
   async function loadCards(){
     var row = document.getElementById('cardsRow');
     row.innerHTML = '';
