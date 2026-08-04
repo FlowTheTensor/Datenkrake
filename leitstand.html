@@ -278,6 +278,27 @@
     padding:12px 16px; margin-bottom:16px;
   }
   .quiz-score-bar .score{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--ink);}
+
+  /* Schwebende Punktzahl, die während des Quiz am Rand mitscrollt */
+  .quiz-float{
+    position:fixed; top:50%; right:20px; transform:translateY(-50%) translateX(140%);
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; box-shadow:0 8px 24px rgba(0,0,0,.12);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    min-width:120px; z-index:40; opacity:0;
+    transition:transform .35s ease, opacity .35s ease, border-color .3s ease, background .3s ease;
+    pointer-events:none;
+  }
+  .quiz-float.visible{transform:translateY(-50%) translateX(0); opacity:1; pointer-events:auto;}
+  .quiz-float .quiz-float-label{font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint);}
+  .quiz-float .quiz-float-score{font-family:"Quicksand",sans-serif; font-weight:700; font-size:22px; color:var(--ink);}
+  .quiz-float .quiz-float-sub{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint);}
+  .quiz-float.done{border-color:#2F6B4F; background:#EAF3EC;}
+  .quiz-float.done .quiz-float-score{color:#1C4530;}
+  .quiz-float.done .quiz-float-label{color:#2F6B4F;}
+  @media (max-width:900px){
+    .quiz-float{display:none;} /* auf schmalen Bildschirmen kein Platz am Rand - Score-Leiste im Quiz-Panel reicht */
+  }
   .quiz-reset-btn{
     font-family:"JetBrains Mono",monospace; font-size:11.5px; background:var(--surface);
     border:1px solid var(--line); color:var(--ink-soft); padding:7px 13px; border-radius:7px; cursor:pointer;
@@ -731,6 +752,12 @@
 
 </main>
 
+<div class="quiz-float" id="quizFloat" aria-live="polite">
+  <span class="quiz-float-label" id="quizFloatLabel">Quiz-Punkte</span>
+  <span class="quiz-float-score" id="quizFloatScore">0 / 0</span>
+  <span class="quiz-float-sub" id="quizFloatSub">0 von 19 beantwortet</span>
+</div>
+
 <footer>
   <a href="index.php">← zurück zum Live-Dashboard</a> · Datenkrake Leitstand · Jakob-Preh-Schule · statische HTML-Seite, keine Daten verlassen euer Netz · gebaut auf <a href="https://github.com/FlowTheTensor/Datenkrake-Container" target="_blank" rel="noopener">github.com/FlowTheTensor/Datenkrake-Container</a>
 </footer>
@@ -938,8 +965,42 @@
     Object.keys(quizState).forEach(function(qi){
       if (quizState[qi] === QUIZ[qi].correct) correct++;
     });
+    var total = QUIZ.length;
+    var fertig = answered === total;
+
     document.getElementById('quizScore').textContent =
-      correct+' von '+answered+' richtig ('+QUIZ.length+' Fragen insgesamt)';
+      correct+' von '+answered+' richtig ('+total+' Fragen insgesamt)';
+
+    var floatScore = document.getElementById('quizFloatScore');
+    var floatSub = document.getElementById('quizFloatSub');
+    var floatLabel = document.getElementById('quizFloatLabel');
+    var floatBox = document.getElementById('quizFloat');
+    floatScore.textContent = correct+' / '+total;
+    floatBox.classList.toggle('done', fertig);
+    if (fertig){
+      var prozent = Math.round((correct/total)*100);
+      floatLabel.textContent = 'Quiz fertig!';
+      floatSub.textContent = prozent+'% richtig';
+    } else {
+      floatLabel.textContent = 'Quiz-Punkte';
+      floatSub.textContent = answered+' von '+total+' beantwortet';
+    }
+  }
+
+  // Schwebende Punktzahl nur einblenden, während der Quiz-Bereich im
+  // Sichtbereich ist - folgt beim Scrollen mit (position: fixed + CSS-Klasse).
+  var quizFloatEl = document.getElementById('quizFloat');
+  var quizSection = document.getElementById('quiz');
+  if ('IntersectionObserver' in window){
+    var quizObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        quizFloatEl.classList.toggle('visible', entry.isIntersecting);
+      });
+    }, {threshold: 0.1});
+    quizObserver.observe(quizSection);
+  } else {
+    // Fallback ohne IntersectionObserver: immer sichtbar sobald Quiz gerendert ist
+    quizFloatEl.classList.add('visible');
   }
 
   document.getElementById('quizReset').addEventListener('click', function(){
