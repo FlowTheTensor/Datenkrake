@@ -1,0 +1,1000 @@
+1	Leitstand 192.168.36.1:4840	ns=3;s=DeviceManual	Leitstand01/DeviceManual	DeviceManual	https://support.industry.siemens.com/cs/ww/en/view/86140384	String	11:51:52.542	11:51:52.542	Good
+2	Leitstand 192.168.36.1:4840	ns=3;s=DeviceRevision	Leitstand01/DeviceRevision	DeviceRevision	6ES7 516-3AN01-0AB0  V02.06.01	String	11:51:53.531	11:51:53.531	Good
+3	Leitstand 192.168.36.1:4840	ns=3;s=EngineeringRevision	Leitstand01/EngineeringRevision	EngineeringRevision	V15.1	String	11:51:53.540	11:51:53.540	Good
+4	Leitstand 192.168.36.1:4840	ns=3;s=HardwareRevision	Leitstand01/HardwareRevision	HardwareRevision	3	String	11:51:53.540	11:51:53.540	Good
+5	Leitstand 192.168.36.1:4840	ns=3;i=5201	Leitstand01/Icon	Icon	89504e470d0a1a0a0000000d49484452000000300000003008060000005702f98700000006624b474400ff00ff00ffa0bda793000000097048597300000b1300000b1301009a9c180000000774494d4507e007140b0031ea404221000005454944415468ded5593b8e1d55103dd5332244444e88489091105b601d5e0412926327c40498c41224acc0193842a4ec8100b10542823a04f7d6ad4ff7eb7bdb662ca635336fa6a7dfebfa9c3a75aa1a78e48700c037dffec8fffa837ff9f9cd831bfffb6fafe5fe216ff0e9d3cf010064880f5bd8c639b6130401b0fdd92f6ad7d0befa550429f8ebcf3ff0fcc5cb670fea004840a4e5d97c1033d2fd41349e7686...	ByteString	11:51:53.549	11:51:53.549	Good
+6	Leitstand 192.168.36.1:4840	ns=3;s=Manufacturer	Leitstand01/Manufacturer	Manufacturer	"en-US", "Siemens AG"	LocalizedText	11:51:53.549	11:51:53.549	Good
+7	Leitstand 192.168.36.1:4840	ns=3;s=Model	Leitstand01/Model	Model	"en-US", "CPU 1516-3 PN/DP"	LocalizedText	11:51:53.559	11:51:53.559	Good
+8	Leitstand 192.168.36.1:4840	ns=3;s=OperatingMode	Leitstand01/OperatingMode	OperatingMode	8 (Run)	SimaticOperatingState	11:51:53.559	11:51:53.559	Good
+9	Leitstand 192.168.36.1:4840	ns=3;s=OrderNumber	Leitstand01/OrderNumber	OrderNumber	6ES7 516-3AN01-0AB0 	String	11:51:53.568	11:51:53.568	Good
+10	Leitstand 192.168.36.1:4840	ns=3;s=RevisionCounter	Leitstand01/RevisionCounter	RevisionCounter	-1	Int32	11:51:53.568	11:51:53.568	Good
+11	Leitstand 192.168.36.1:4840	ns=3;s=SerialNumber	Leitstand01/SerialNumber	SerialNumber	S C-K8KR79042018	String	11:51:53.577	11:51:53.577	Good
+12	Leitstand 192.168.36.1:4840	ns=3;s=SoftwareRevision	Leitstand01/SoftwareRevision	SoftwareRevision	V02.06.01	String	11:51:53.577	11:51:53.577	Good
+13	Leitstand 192.168.36.1:4840	ns=3;i=5204	Leitstand01/Counters/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af400000006624b474400ff00ff00ffa0bda793000000097048597300000b1300000b1301009a9c180000000774494d4507e007140b060994185d39000003ac4944415458c3c59741685c551486bffbde445a173188545cb850c48de24614b1566c5cb8d08d60c114172ed4956dd074698a908d9b2ca2989ddd28134941415de8c24c4568250ba1e022a21b15c156d32a9492f69d73ae8b7bef7bf74d33493333e285cbbb73dfccfdfff39fff9cf706fee7e1003e58ddf4ce812ba0ccae45116659405138cab48ef770617d6efd334e9e78d90d43a003e01c3cfaf014ce358787...	ByteString	11:51:53.586	11:51:53.586	Good
+14	Leitstand 192.168.36.1:4840	ns=3;i=5202	Leitstand01/DataBlocksGlobal/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ac4944415478dac5977b5054e719c6f7efb6d3cee8244dbc449c104908c44b6235496b524cd34ea7d738b643c69a585b1b630c2c6850a3207790db2e022eecb2b8dc1451e426726b442e4105b92e0b41600111769785601a52d7d9739ebedf770e2b9afee1a099eccc33b31cf67cbfe779dff7fbceae42f17dbfca439fc685b02592c297a2825419b98cb41c5551cb511df30c6a62dc50736c25be3303ceeb7f85d0e60b67fbbb7076fc8df41e69079c5dff80d0b50bceeedd10baf7e0df71df810996dad946e0f66d1c2c74be4fda49d07f923e20f087108c7b2198...	ByteString	11:51:53.586	11:51:53.586	Good
+15	Leitstand 192.168.36.1:4840	ns=3;i=5203	Leitstand01/DataBlocksInstance/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ac4944415478dac5977b5054e719c6f7efb6d3cee8244dbc449c104908c44b6235496b524cd34ea7d738b643c69a585b1b630c2c6850a3207790db2e022eecb2b8dc1451e426726b442e4105b92e0b41600111769785601a52d7d9739ebedf770e2b9afee1a099eccc33b31cf67cbfe779dff7fbceae42f17dbfca439fc685b02592c297a2825419b98cb41c5551cb511df30c6a62dc50736c25be3303ceeb7f85d0e60b67fbbb7076fc8df41e69079c5dff80d0b50bceeedd10baf7e0df71df810996dad946e0f66d1c2c74be4fda49d07f923e20f087108c7b2198...	ByteString	11:51:53.596	11:51:53.596	Good
+16	Leitstand 192.168.36.1:4840	ns=3;s="BF01EmpfangProfinet"	Leitstand01/Inputs/BF01EmpfangProfinet	BF01EmpfangProfinet	8	UInt32	11:52:14.528	11:52:14.528	Good
+17	Leitstand 192.168.36.1:4840	ns=3;s="BF02EmpfangProfinet"	Leitstand01/Inputs/BF02EmpfangProfinet	BF02EmpfangProfinet	0	UInt32	11:52:14.528	11:52:14.528	Good
+18	Leitstand 192.168.36.1:4840	ns=3;s="DU01EmpfangProfinet"	Leitstand01/Inputs/DU01EmpfangProfinet	DU01EmpfangProfinet	8	UInt32	11:52:14.528	11:52:14.528	Good
+19	Leitstand 192.168.36.1:4840	ns=3;s="DU02EmpfangProfinet"	Leitstand01/Inputs/DU02EmpfangProfinet	DU02EmpfangProfinet	0	UInt32	11:52:14.528	11:52:14.528	Good
+20	Leitstand 192.168.36.1:4840	ns=3;s="H01EmpfangProfinet"	Leitstand01/Inputs/H01EmpfangProfinet	H01EmpfangProfinet	8	UInt32	11:52:14.528	11:52:14.528	Good
+21	Leitstand 192.168.36.1:4840	ns=3;s="H02EmpfangProfinet"	Leitstand01/Inputs/H02EmpfangProfinet	H02EmpfangProfinet	0	UInt32	11:52:14.528	11:52:14.528	Good
+22	Leitstand 192.168.36.1:4840	ns=3;s="HR01EmpfangProfinet"	Leitstand01/Inputs/HR01EmpfangProfinet	HR01EmpfangProfinet	8	UInt32	11:52:14.528	11:52:14.528	Good
+23	Leitstand 192.168.36.1:4840	ns=3;s="HR02EmpfangProfinet"	Leitstand01/Inputs/HR02EmpfangProfinet	HR02EmpfangProfinet	0	UInt32	11:52:14.528	11:52:14.528	Good
+24	Leitstand 192.168.36.1:4840	ns=3;s="K01EmpfangProfinet"	Leitstand01/Inputs/K01EmpfangProfinet	K01EmpfangProfinet	8	UInt32	11:52:14.528	11:52:14.528	Good
+25	Leitstand 192.168.36.1:4840	ns=3;s="K02EmpfangProfinet"	Leitstand01/Inputs/K02EmpfangProfinet	K02EmpfangProfinet	0	UInt32	11:52:14.528	11:52:14.528	Good
+26	Leitstand 192.168.36.1:4840	ns=3;s="MD01EmpfangProfinet"	Leitstand01/Inputs/MD01EmpfangProfinet	MD01EmpfangProfinet	8	UInt32	11:52:14.529	11:52:14.529	Good
+27	Leitstand 192.168.36.1:4840	ns=3;s="MD02EmpfangProfinet"	Leitstand01/Inputs/MD02EmpfangProfinet	MD02EmpfangProfinet	0	UInt32	11:52:14.529	11:52:14.529	Good
+28	Leitstand 192.168.36.1:4840	ns=3;s="MESAktiv"	Leitstand01/Inputs/MESAktiv	MESAktiv	true	Boolean	11:52:14.529	11:52:14.529	Good
+29	Leitstand 192.168.36.1:4840	ns=3;s="MF01EmpfangProfinet"	Leitstand01/Inputs/MF01EmpfangProfinet	MF01EmpfangProfinet	8	UInt32	11:52:14.529	11:52:14.529	Good
+30	Leitstand 192.168.36.1:4840	ns=3;s="MF02EmpfangProfinet"	Leitstand01/Inputs/MF02EmpfangProfinet	MF02EmpfangProfinet	8	UInt32	11:52:14.529	11:52:14.529	Good
+31	Leitstand 192.168.36.1:4840	ns=3;s="PL01EmpfangProfinet"	Leitstand01/Inputs/PL01EmpfangProfinet	PL01EmpfangProfinet	8	UInt32	11:52:14.529	11:52:14.529	Good
+32	Leitstand 192.168.36.1:4840	ns=3;s="PL02EmpfangProfinet"	Leitstand01/Inputs/PL02EmpfangProfinet	PL02EmpfangProfinet	8	UInt32	11:52:14.529	11:52:14.529	Good
+33	Leitstand 192.168.36.1:4840	ns=3;s="bDP01_EbA"	Leitstand01/Inputs/bDP01_EbA	bDP01_EbA	2	Byte	11:52:14.529	11:52:14.529	Good
+34	Leitstand 192.168.36.1:4840	ns=3;s="bDP01_EbB"	Leitstand01/Inputs/bDP01_EbB	bDP01_EbB	2	Byte	11:52:14.530	11:52:14.530	Good
+35	Leitstand 192.168.36.1:4840	ns=3;s="bDP01_EbC"	Leitstand01/Inputs/bDP01_EbC	bDP01_EbC	42	Byte	11:52:14.530	11:52:14.530	Good
+36	Leitstand 192.168.36.1:4840	ns=3;s="bDP02_EbA"	Leitstand01/Inputs/bDP02_EbA	bDP02_EbA	0	Byte	11:52:14.530	11:52:14.530	Good
+37	Leitstand 192.168.36.1:4840	ns=3;s="bDP02_EbB"	Leitstand01/Inputs/bDP02_EbB	bDP02_EbB	0	Byte	11:52:14.530	11:52:14.530	Good
+38	Leitstand 192.168.36.1:4840	ns=3;s="bDP02_EbC"	Leitstand01/Inputs/bDP02_EbC	bDP02_EbC	0	Byte	11:52:14.530	11:52:14.530	Good
+39	Leitstand 192.168.36.1:4840	ns=3;s="bDP03_EbA"	Leitstand01/Inputs/bDP03_EbA	bDP03_EbA	0	Byte	11:52:14.530	11:52:14.530	Good
+40	Leitstand 192.168.36.1:4840	ns=3;s="bDP03_EbB"	Leitstand01/Inputs/bDP03_EbB	bDP03_EbB	0	Byte	11:52:14.530	11:52:14.530	Good
+41	Leitstand 192.168.36.1:4840	ns=3;s="bDP03_EbC"	Leitstand01/Inputs/bDP03_EbC	bDP03_EbC	0	Byte	11:52:14.541	11:52:14.541	Good
+42	Leitstand 192.168.36.1:4840	ns=3;s="bDP04_EbA"	Leitstand01/Inputs/bDP04_EbA	bDP04_EbA	0	Byte	11:52:14.541	11:52:14.541	Good
+43	Leitstand 192.168.36.1:4840	ns=3;s="bDP04_EbB"	Leitstand01/Inputs/bDP04_EbB	bDP04_EbB	0	Byte	11:52:14.542	11:52:14.542	Good
+44	Leitstand 192.168.36.1:4840	ns=3;s="bDP04_EbC"	Leitstand01/Inputs/bDP04_EbC	bDP04_EbC	0	Byte	11:52:14.543	11:52:14.543	Good
+45	Leitstand 192.168.36.1:4840	ns=3;s="e5071Füllstand1"	Leitstand01/Inputs/e5071Füllstand1	e5071Füllstand1	0	UInt16	11:52:14.543	11:52:14.543	Good
+46	Leitstand 192.168.36.1:4840	ns=3;s="e5071Füllstand2"	Leitstand01/Inputs/e5071Füllstand2	e5071Füllstand2	0	UInt16	11:52:14.544	11:52:14.544	Good
+47	Leitstand 192.168.36.1:4840	ns=3;s="e5071Füllstand3"	Leitstand01/Inputs/e5071Füllstand3	e5071Füllstand3	0	UInt16	11:52:14.544	11:52:14.544	Good
+48	Leitstand 192.168.36.1:4840	ns=3;s="e5071ID"	Leitstand01/Inputs/e5071ID	e5071ID	0	UInt16	11:52:14.544	11:52:14.544	Good
+49	Leitstand 192.168.36.1:4840	ns=3;s="e5071NV1"	Leitstand01/Inputs/e5071NV1	e5071NV1	0	UInt16	11:52:14.544	11:52:14.544	Good
+50	Leitstand 192.168.36.1:4840	ns=3;s="e5071NV2"	Leitstand01/Inputs/e5071NV2	e5071NV2	0	UInt16	11:52:14.544	11:52:14.544	Good
+51	Leitstand 192.168.36.1:4840	ns=3;s="e5071NV3"	Leitstand01/Inputs/e5071NV3	e5071NV3	0	UInt16	11:52:14.545	11:52:14.545	Good
+52	Leitstand 192.168.36.1:4840	ns=3;s="e5071NV4"	Leitstand01/Inputs/e5071NV4	e5071NV4	0	UInt16	11:52:14.545	11:52:14.545	Good
+53	Leitstand 192.168.36.1:4840	ns=3;s="e5071Status"	Leitstand01/Inputs/e5071Status	e5071Status	0	UInt16	11:52:14.545	11:52:14.545	Good
+54	Leitstand 192.168.36.1:4840	ns=3;s="e5071Steuerung"	Leitstand01/Inputs/e5071Steuerung	e5071Steuerung	0	Byte	11:52:14.545	11:52:14.545	Good
+55	Leitstand 192.168.36.1:4840	ns=3;s="e5072Füllstand1"	Leitstand01/Inputs/e5072Füllstand1	e5072Füllstand1	0	UInt16	11:52:14.545	11:52:14.545	Good
+56	Leitstand 192.168.36.1:4840	ns=3;s="e5072Füllstand2"	Leitstand01/Inputs/e5072Füllstand2	e5072Füllstand2	0	UInt16	11:52:14.546	11:52:14.546	Good
+57	Leitstand 192.168.36.1:4840	ns=3;s="e5072Füllstand3"	Leitstand01/Inputs/e5072Füllstand3	e5072Füllstand3	0	UInt16	11:52:14.546	11:52:14.546	Good
+58	Leitstand 192.168.36.1:4840	ns=3;s="e5072ID"	Leitstand01/Inputs/e5072ID	e5072ID	0	UInt16	11:52:14.546	11:52:14.546	Good
+59	Leitstand 192.168.36.1:4840	ns=3;s="e5072NV1"	Leitstand01/Inputs/e5072NV1	e5072NV1	0	UInt16	11:52:14.546	11:52:14.546	Good
+60	Leitstand 192.168.36.1:4840	ns=3;s="e5072NV2"	Leitstand01/Inputs/e5072NV2	e5072NV2	0	UInt16	11:52:14.546	11:52:14.546	Good
+61	Leitstand 192.168.36.1:4840	ns=3;s="e5072NV3"	Leitstand01/Inputs/e5072NV3	e5072NV3	0	UInt16	11:52:14.547	11:52:14.547	Good
+62	Leitstand 192.168.36.1:4840	ns=3;s="e5072NV4"	Leitstand01/Inputs/e5072NV4	e5072NV4	0	UInt16	11:52:14.547	11:52:14.547	Good
+63	Leitstand 192.168.36.1:4840	ns=3;s="e5072Status"	Leitstand01/Inputs/e5072Status	e5072Status	0	UInt16	11:52:14.547	11:52:14.547	Good
+64	Leitstand 192.168.36.1:4840	ns=3;s="e5072Steuerung"	Leitstand01/Inputs/e5072Steuerung	e5072Steuerung	0	Byte	11:52:14.547	11:52:14.547	Good
+65	Leitstand 192.168.36.1:4840	ns=3;s="eBF01AuftragErfasst"	Leitstand01/Inputs/eBF01AuftragErfasst	eBF01AuftragErfasst	false	Boolean	11:52:14.548	11:52:14.548	Good
+66	Leitstand 192.168.36.1:4840	ns=3;s="eBF01BandSensorLinks"	Leitstand01/Inputs/eBF01BandSensorLinks	eBF01BandSensorLinks	false	Boolean	11:52:14.548	11:52:14.548	Good
+67	Leitstand 192.168.36.1:4840	ns=3;s="eBF01BandSensorRechts"	Leitstand01/Inputs/eBF01BandSensorRechts	eBF01BandSensorRechts	false	Boolean	11:52:14.548	11:52:14.548	Good
+68	Leitstand 192.168.36.1:4840	ns=3;s="eBF01EinfahrtEnde"	Leitstand01/Inputs/eBF01EinfahrtEnde	eBF01EinfahrtEnde	false	Boolean	11:52:14.548	11:52:14.548	Good
+69	Leitstand 192.168.36.1:4840	ns=3;s="eBF01FahreZu"	Leitstand01/Inputs/eBF01FahreZu	eBF01FahreZu	false	Boolean	11:52:14.548	11:52:14.548	Good
+70	Leitstand 192.168.36.1:4840	ns=3;s="eBF01IDZu"	Leitstand01/Inputs/eBF01IDZu	eBF01IDZu	0	UInt16	11:52:14.548	11:52:14.548	Good
+71	Leitstand 192.168.36.1:4840	ns=3;s="eBF01InReset"	Leitstand01/Inputs/eBF01InReset	eBF01InReset	false	Boolean	11:52:14.548	11:52:14.548	Good
+72	Leitstand 192.168.36.1:4840	ns=3;s="eBF01Stillstand"	Leitstand01/Inputs/eBF01Stillstand	eBF01Stillstand	false	Boolean	11:52:14.548	11:52:14.548	Good
+73	Leitstand 192.168.36.1:4840	ns=3;s="eBF01Wartet"	Leitstand01/Inputs/eBF01Wartet	eBF01Wartet	true	Boolean	11:52:14.549	11:52:14.549	Good
+74	Leitstand 192.168.36.1:4840	ns=3;s="eBF02AuftragErfasst"	Leitstand01/Inputs/eBF02AuftragErfasst	eBF02AuftragErfasst	false	Boolean	11:52:14.549	11:52:14.549	Good
+75	Leitstand 192.168.36.1:4840	ns=3;s="eBF02BandSensorLinks"	Leitstand01/Inputs/eBF02BandSensorLinks	eBF02BandSensorLinks	false	Boolean	11:52:14.549	11:52:14.549	Good
+76	Leitstand 192.168.36.1:4840	ns=3;s="eBF02BandSensorRechts"	Leitstand01/Inputs/eBF02BandSensorRechts	eBF02BandSensorRechts	false	Boolean	11:52:14.549	11:52:14.549	Good
+77	Leitstand 192.168.36.1:4840	ns=3;s="eBF02EinfahrtEnde"	Leitstand01/Inputs/eBF02EinfahrtEnde	eBF02EinfahrtEnde	false	Boolean	11:52:14.549	11:52:14.549	Good
+78	Leitstand 192.168.36.1:4840	ns=3;s="eBF02FahreZu"	Leitstand01/Inputs/eBF02FahreZu	eBF02FahreZu	false	Boolean	11:52:14.549	11:52:14.549	Good
+79	Leitstand 192.168.36.1:4840	ns=3;s="eBF02IDZu"	Leitstand01/Inputs/eBF02IDZu	eBF02IDZu	0	UInt16	11:52:14.549	11:52:14.549	Good
+80	Leitstand 192.168.36.1:4840	ns=3;s="eBF02InReset"	Leitstand01/Inputs/eBF02InReset	eBF02InReset	false	Boolean	11:52:14.549	11:52:14.549	Good
+81	Leitstand 192.168.36.1:4840	ns=3;s="eBF02Stillstand"	Leitstand01/Inputs/eBF02Stillstand	eBF02Stillstand	false	Boolean	11:52:14.550	11:52:14.550	Good
+82	Leitstand 192.168.36.1:4840	ns=3;s="eBF02Wartet"	Leitstand01/Inputs/eBF02Wartet	eBF02Wartet	false	Boolean	11:52:14.550	11:52:14.550	Good
+83	Leitstand 192.168.36.1:4840	ns=3;s="eDU01AuftragErfasst"	Leitstand01/Inputs/eDU01AuftragErfasst	eDU01AuftragErfasst	false	Boolean	11:52:14.550	11:52:14.550	Good
+84	Leitstand 192.168.36.1:4840	ns=3;s="eDU01BandSensorLinks"	Leitstand01/Inputs/eDU01BandSensorLinks	eDU01BandSensorLinks	false	Boolean	11:52:14.550	11:52:14.550	Good
+85	Leitstand 192.168.36.1:4840	ns=3;s="eDU01BandSensorRechts"	Leitstand01/Inputs/eDU01BandSensorRechts	eDU01BandSensorRechts	false	Boolean	11:52:14.550	11:52:14.550	Good
+86	Leitstand 192.168.36.1:4840	ns=3;s="eDU01EinfahrtEnde"	Leitstand01/Inputs/eDU01EinfahrtEnde	eDU01EinfahrtEnde	false	Boolean	11:52:14.550	11:52:14.550	Good
+87	Leitstand 192.168.36.1:4840	ns=3;s="eDU01FahreZu"	Leitstand01/Inputs/eDU01FahreZu	eDU01FahreZu	false	Boolean	11:52:14.550	11:52:14.550	Good
+88	Leitstand 192.168.36.1:4840	ns=3;s="eDU01IDZu"	Leitstand01/Inputs/eDU01IDZu	eDU01IDZu	0	UInt16	11:52:14.551	11:52:14.551	Good
+89	Leitstand 192.168.36.1:4840	ns=3;s="eDU01InReset"	Leitstand01/Inputs/eDU01InReset	eDU01InReset	false	Boolean	11:52:14.551	11:52:14.551	Good
+90	Leitstand 192.168.36.1:4840	ns=3;s="eDU01Stillstand"	Leitstand01/Inputs/eDU01Stillstand	eDU01Stillstand	false	Boolean	11:52:14.551	11:52:14.551	Good
+91	Leitstand 192.168.36.1:4840	ns=3;s="eDU01Wartet"	Leitstand01/Inputs/eDU01Wartet	eDU01Wartet	true	Boolean	11:52:14.551	11:52:14.551	Good
+92	Leitstand 192.168.36.1:4840	ns=3;s="eDU02AuftragErfasst"	Leitstand01/Inputs/eDU02AuftragErfasst	eDU02AuftragErfasst	false	Boolean	11:52:14.551	11:52:14.551	Good
+93	Leitstand 192.168.36.1:4840	ns=3;s="eDU02BandSensorLinks"	Leitstand01/Inputs/eDU02BandSensorLinks	eDU02BandSensorLinks	false	Boolean	11:52:14.551	11:52:14.551	Good
+94	Leitstand 192.168.36.1:4840	ns=3;s="eDU02BandSensorRechts"	Leitstand01/Inputs/eDU02BandSensorRechts	eDU02BandSensorRechts	false	Boolean	11:52:14.551	11:52:14.551	Good
+95	Leitstand 192.168.36.1:4840	ns=3;s="eDU02EinfahrtEnde"	Leitstand01/Inputs/eDU02EinfahrtEnde	eDU02EinfahrtEnde	false	Boolean	11:52:14.551	11:52:14.551	Good
+96	Leitstand 192.168.36.1:4840	ns=3;s="eDU02FahreZu"	Leitstand01/Inputs/eDU02FahreZu	eDU02FahreZu	false	Boolean	11:52:14.552	11:52:14.552	Good
+97	Leitstand 192.168.36.1:4840	ns=3;s="eDU02IDZu"	Leitstand01/Inputs/eDU02IDZu	eDU02IDZu	0	UInt16	11:52:14.552	11:52:14.552	Good
+98	Leitstand 192.168.36.1:4840	ns=3;s="eDU02InReset"	Leitstand01/Inputs/eDU02InReset	eDU02InReset	false	Boolean	11:52:14.552	11:52:14.552	Good
+99	Leitstand 192.168.36.1:4840	ns=3;s="eDU02Stillstand"	Leitstand01/Inputs/eDU02Stillstand	eDU02Stillstand	false	Boolean	11:52:14.552	11:52:14.552	Good
+100	Leitstand 192.168.36.1:4840	ns=3;s="eDU02Wartet"	Leitstand01/Inputs/eDU02Wartet	eDU02Wartet	false	Boolean	11:52:14.552	11:52:14.552	Good
+101	Leitstand 192.168.36.1:4840	ns=3;s="eH01AuftragErfasst"	Leitstand01/Inputs/eH01AuftragErfasst	eH01AuftragErfasst	false	Boolean	11:52:14.552	11:52:14.552	Good
+102	Leitstand 192.168.36.1:4840	ns=3;s="eH01BandSensorLinks"	Leitstand01/Inputs/eH01BandSensorLinks	eH01BandSensorLinks	false	Boolean	11:52:14.553	11:52:14.553	Good
+103	Leitstand 192.168.36.1:4840	ns=3;s="eH01BandSensorRechts"	Leitstand01/Inputs/eH01BandSensorRechts	eH01BandSensorRechts	false	Boolean	11:52:14.553	11:52:14.553	Good
+104	Leitstand 192.168.36.1:4840	ns=3;s="eH01EinfahrtEnde"	Leitstand01/Inputs/eH01EinfahrtEnde	eH01EinfahrtEnde	false	Boolean	11:52:14.553	11:52:14.553	Good
+105	Leitstand 192.168.36.1:4840	ns=3;s="eH01FahreZu"	Leitstand01/Inputs/eH01FahreZu	eH01FahreZu	false	Boolean	11:52:14.553	11:52:14.553	Good
+106	Leitstand 192.168.36.1:4840	ns=3;s="eH01IDZu"	Leitstand01/Inputs/eH01IDZu	eH01IDZu	0	UInt16	11:52:14.553	11:52:14.553	Good
+107	Leitstand 192.168.36.1:4840	ns=3;s="eH01InReset"	Leitstand01/Inputs/eH01InReset	eH01InReset	false	Boolean	11:52:14.553	11:52:14.553	Good
+108	Leitstand 192.168.36.1:4840	ns=3;s="eH01Stillstand"	Leitstand01/Inputs/eH01Stillstand	eH01Stillstand	false	Boolean	11:52:14.553	11:52:14.553	Good
+109	Leitstand 192.168.36.1:4840	ns=3;s="eH01Wartet"	Leitstand01/Inputs/eH01Wartet	eH01Wartet	true	Boolean	11:52:14.553	11:52:14.553	Good
+110	Leitstand 192.168.36.1:4840	ns=3;s="eH02AuftragErfasst"	Leitstand01/Inputs/eH02AuftragErfasst	eH02AuftragErfasst	false	Boolean	11:52:14.553	11:52:14.553	Good
+111	Leitstand 192.168.36.1:4840	ns=3;s="eH02BandSensorLinks"	Leitstand01/Inputs/eH02BandSensorLinks	eH02BandSensorLinks	false	Boolean	11:52:14.554	11:52:14.554	Good
+112	Leitstand 192.168.36.1:4840	ns=3;s="eH02BandSensorRechts"	Leitstand01/Inputs/eH02BandSensorRechts	eH02BandSensorRechts	false	Boolean	11:52:14.554	11:52:14.554	Good
+113	Leitstand 192.168.36.1:4840	ns=3;s="eH02EinfahrtEnde"	Leitstand01/Inputs/eH02EinfahrtEnde	eH02EinfahrtEnde	false	Boolean	11:52:14.554	11:52:14.554	Good
+114	Leitstand 192.168.36.1:4840	ns=3;s="eH02FahreZu"	Leitstand01/Inputs/eH02FahreZu	eH02FahreZu	false	Boolean	11:52:14.554	11:52:14.554	Good
+115	Leitstand 192.168.36.1:4840	ns=3;s="eH02IDZu"	Leitstand01/Inputs/eH02IDZu	eH02IDZu	0	UInt16	11:52:14.554	11:52:14.554	Good
+116	Leitstand 192.168.36.1:4840	ns=3;s="eH02InReset"	Leitstand01/Inputs/eH02InReset	eH02InReset	false	Boolean	11:52:14.554	11:52:14.554	Good
+117	Leitstand 192.168.36.1:4840	ns=3;s="eH02Stillstand"	Leitstand01/Inputs/eH02Stillstand	eH02Stillstand	false	Boolean	11:52:14.554	11:52:14.554	Good
+118	Leitstand 192.168.36.1:4840	ns=3;s="eH02Wartet"	Leitstand01/Inputs/eH02Wartet	eH02Wartet	false	Boolean	11:52:14.554	11:52:14.554	Good
+119	Leitstand 192.168.36.1:4840	ns=3;s="eHR01AuftragErfasst"	Leitstand01/Inputs/eHR01AuftragErfasst	eHR01AuftragErfasst	false	Boolean	11:52:14.554	11:52:14.554	Good
+120	Leitstand 192.168.36.1:4840	ns=3;s="eHR01BandSensorLinks"	Leitstand01/Inputs/eHR01BandSensorLinks	eHR01BandSensorLinks	false	Boolean	11:52:14.555	11:52:14.555	Good
+121	Leitstand 192.168.36.1:4840	ns=3;s="eHR01BandSensorRechts"	Leitstand01/Inputs/eHR01BandSensorRechts	eHR01BandSensorRechts	false	Boolean	11:52:14.555	11:52:14.555	Good
+122	Leitstand 192.168.36.1:4840	ns=3;s="eHR01EinfahrtEnde"	Leitstand01/Inputs/eHR01EinfahrtEnde	eHR01EinfahrtEnde	false	Boolean	11:52:14.555	11:52:14.555	Good
+123	Leitstand 192.168.36.1:4840	ns=3;s="eHR01FahreZu"	Leitstand01/Inputs/eHR01FahreZu	eHR01FahreZu	false	Boolean	11:52:14.555	11:52:14.555	Good
+124	Leitstand 192.168.36.1:4840	ns=3;s="eHR01IDZu"	Leitstand01/Inputs/eHR01IDZu	eHR01IDZu	0	UInt16	11:52:14.555	11:52:14.555	Good
+125	Leitstand 192.168.36.1:4840	ns=3;s="eHR01InReset"	Leitstand01/Inputs/eHR01InReset	eHR01InReset	false	Boolean	11:52:14.558	11:52:14.558	Good
+126	Leitstand 192.168.36.1:4840	ns=3;s="eHR01Stillstand"	Leitstand01/Inputs/eHR01Stillstand	eHR01Stillstand	false	Boolean	11:52:14.558	11:52:14.558	Good
+127	Leitstand 192.168.36.1:4840	ns=3;s="eHR01Wartet"	Leitstand01/Inputs/eHR01Wartet	eHR01Wartet	true	Boolean	11:52:14.559	11:52:14.559	Good
+128	Leitstand 192.168.36.1:4840	ns=3;s="eHR02AuftragErfasst"	Leitstand01/Inputs/eHR02AuftragErfasst	eHR02AuftragErfasst	false	Boolean	11:52:14.559	11:52:14.559	Good
+129	Leitstand 192.168.36.1:4840	ns=3;s="eHR02BandSensorLinks"	Leitstand01/Inputs/eHR02BandSensorLinks	eHR02BandSensorLinks	false	Boolean	11:52:14.559	11:52:14.559	Good
+130	Leitstand 192.168.36.1:4840	ns=3;s="eHR02BandSensorRechts"	Leitstand01/Inputs/eHR02BandSensorRechts	eHR02BandSensorRechts	false	Boolean	11:52:14.559	11:52:14.559	Good
+131	Leitstand 192.168.36.1:4840	ns=3;s="eHR02EinfahrtEnde"	Leitstand01/Inputs/eHR02EinfahrtEnde	eHR02EinfahrtEnde	false	Boolean	11:52:14.559	11:52:14.559	Good
+132	Leitstand 192.168.36.1:4840	ns=3;s="eHR02FahreZu"	Leitstand01/Inputs/eHR02FahreZu	eHR02FahreZu	false	Boolean	11:52:14.559	11:52:14.559	Good
+133	Leitstand 192.168.36.1:4840	ns=3;s="eHR02IDZu"	Leitstand01/Inputs/eHR02IDZu	eHR02IDZu	0	UInt16	11:52:14.559	11:52:14.559	Good
+134	Leitstand 192.168.36.1:4840	ns=3;s="eHR02InReset"	Leitstand01/Inputs/eHR02InReset	eHR02InReset	false	Boolean	11:52:14.559	11:52:14.559	Good
+135	Leitstand 192.168.36.1:4840	ns=3;s="eHR02Stillstand"	Leitstand01/Inputs/eHR02Stillstand	eHR02Stillstand	false	Boolean	11:52:14.560	11:52:14.560	Good
+136	Leitstand 192.168.36.1:4840	ns=3;s="eHR02Wartet"	Leitstand01/Inputs/eHR02Wartet	eHR02Wartet	false	Boolean	11:52:14.560	11:52:14.560	Good
+137	Leitstand 192.168.36.1:4840	ns=3;s="eK01AuftragErfasst"	Leitstand01/Inputs/eK01AuftragErfasst	eK01AuftragErfasst	false	Boolean	11:52:14.560	11:52:14.560	Good
+138	Leitstand 192.168.36.1:4840	ns=3;s="eK01BandSensorLinks"	Leitstand01/Inputs/eK01BandSensorLinks	eK01BandSensorLinks	false	Boolean	11:52:14.560	11:52:14.560	Good
+139	Leitstand 192.168.36.1:4840	ns=3;s="eK01BandSensorRechts"	Leitstand01/Inputs/eK01BandSensorRechts	eK01BandSensorRechts	false	Boolean	11:52:14.560	11:52:14.560	Good
+140	Leitstand 192.168.36.1:4840	ns=3;s="eK01EinfahrtEnde"	Leitstand01/Inputs/eK01EinfahrtEnde	eK01EinfahrtEnde	false	Boolean	11:52:14.560	11:52:14.560	Good
+141	Leitstand 192.168.36.1:4840	ns=3;s="eK01FahreZu"	Leitstand01/Inputs/eK01FahreZu	eK01FahreZu	false	Boolean	11:52:14.560	11:52:14.560	Good
+142	Leitstand 192.168.36.1:4840	ns=3;s="eK01IDZu"	Leitstand01/Inputs/eK01IDZu	eK01IDZu	0	UInt16	11:52:14.561	11:52:14.561	Good
+143	Leitstand 192.168.36.1:4840	ns=3;s="eK01InReset"	Leitstand01/Inputs/eK01InReset	eK01InReset	false	Boolean	11:52:14.561	11:52:14.561	Good
+144	Leitstand 192.168.36.1:4840	ns=3;s="eK01Stillstand"	Leitstand01/Inputs/eK01Stillstand	eK01Stillstand	false	Boolean	11:52:14.561	11:52:14.561	Good
+145	Leitstand 192.168.36.1:4840	ns=3;s="eK01Wartet"	Leitstand01/Inputs/eK01Wartet	eK01Wartet	true	Boolean	11:52:14.561	11:52:14.561	Good
+146	Leitstand 192.168.36.1:4840	ns=3;s="eK02AuftragErfasst"	Leitstand01/Inputs/eK02AuftragErfasst	eK02AuftragErfasst	false	Boolean	11:52:14.561	11:52:14.561	Good
+147	Leitstand 192.168.36.1:4840	ns=3;s="eK02BandSensorLinks"	Leitstand01/Inputs/eK02BandSensorLinks	eK02BandSensorLinks	false	Boolean	11:52:14.561	11:52:14.561	Good
+148	Leitstand 192.168.36.1:4840	ns=3;s="eK02BandSensorRechts"	Leitstand01/Inputs/eK02BandSensorRechts	eK02BandSensorRechts	false	Boolean	11:52:14.561	11:52:14.561	Good
+149	Leitstand 192.168.36.1:4840	ns=3;s="eK02EinfahrtEnde"	Leitstand01/Inputs/eK02EinfahrtEnde	eK02EinfahrtEnde	false	Boolean	11:52:14.561	11:52:14.561	Good
+150	Leitstand 192.168.36.1:4840	ns=3;s="eK02FahreZu"	Leitstand01/Inputs/eK02FahreZu	eK02FahreZu	false	Boolean	11:52:14.561	11:52:14.561	Good
+151	Leitstand 192.168.36.1:4840	ns=3;s="eK02IDZu"	Leitstand01/Inputs/eK02IDZu	eK02IDZu	0	UInt16	11:52:14.562	11:52:14.562	Good
+152	Leitstand 192.168.36.1:4840	ns=3;s="eK02InReset"	Leitstand01/Inputs/eK02InReset	eK02InReset	false	Boolean	11:52:14.562	11:52:14.562	Good
+153	Leitstand 192.168.36.1:4840	ns=3;s="eK02Stillstand"	Leitstand01/Inputs/eK02Stillstand	eK02Stillstand	false	Boolean	11:52:14.562	11:52:14.562	Good
+154	Leitstand 192.168.36.1:4840	ns=3;s="eK02Wartet"	Leitstand01/Inputs/eK02Wartet	eK02Wartet	false	Boolean	11:52:14.562	11:52:14.562	Good
+155	Leitstand 192.168.36.1:4840	ns=3;s="eMD01AuftragErfasst"	Leitstand01/Inputs/eMD01AuftragErfasst	eMD01AuftragErfasst	false	Boolean	11:52:14.562	11:52:14.562	Good
+156	Leitstand 192.168.36.1:4840	ns=3;s="eMD01BandSensorLinks"	Leitstand01/Inputs/eMD01BandSensorLinks	eMD01BandSensorLinks	false	Boolean	11:52:14.562	11:52:14.562	Good
+157	Leitstand 192.168.36.1:4840	ns=3;s="eMD01BandSensorRechts"	Leitstand01/Inputs/eMD01BandSensorRechts	eMD01BandSensorRechts	false	Boolean	11:52:14.562	11:52:14.562	Good
+158	Leitstand 192.168.36.1:4840	ns=3;s="eMD01EinfahrtEnde"	Leitstand01/Inputs/eMD01EinfahrtEnde	eMD01EinfahrtEnde	false	Boolean	11:52:14.563	11:52:14.563	Good
+159	Leitstand 192.168.36.1:4840	ns=3;s="eMD01FahreZu"	Leitstand01/Inputs/eMD01FahreZu	eMD01FahreZu	false	Boolean	11:52:14.563	11:52:14.563	Good
+160	Leitstand 192.168.36.1:4840	ns=3;s="eMD01IDZu"	Leitstand01/Inputs/eMD01IDZu	eMD01IDZu	0	UInt16	11:52:14.563	11:52:14.563	Good
+161	Leitstand 192.168.36.1:4840	ns=3;s="eMD01InReset"	Leitstand01/Inputs/eMD01InReset	eMD01InReset	false	Boolean	11:52:14.563	11:52:14.563	Good
+162	Leitstand 192.168.36.1:4840	ns=3;s="eMD01Stillstand"	Leitstand01/Inputs/eMD01Stillstand	eMD01Stillstand	false	Boolean	11:52:14.563	11:52:14.563	Good
+163	Leitstand 192.168.36.1:4840	ns=3;s="eMD01Wartet"	Leitstand01/Inputs/eMD01Wartet	eMD01Wartet	true	Boolean	11:52:14.563	11:52:14.563	Good
+164	Leitstand 192.168.36.1:4840	ns=3;s="eMD02AuftragErfasst"	Leitstand01/Inputs/eMD02AuftragErfasst	eMD02AuftragErfasst	false	Boolean	11:52:14.563	11:52:14.563	Good
+165	Leitstand 192.168.36.1:4840	ns=3;s="eMD02BandSensorLinks"	Leitstand01/Inputs/eMD02BandSensorLinks	eMD02BandSensorLinks	false	Boolean	11:52:14.564	11:52:14.564	Good
+166	Leitstand 192.168.36.1:4840	ns=3;s="eMD02BandSensorRechts"	Leitstand01/Inputs/eMD02BandSensorRechts	eMD02BandSensorRechts	false	Boolean	11:52:14.564	11:52:14.564	Good
+167	Leitstand 192.168.36.1:4840	ns=3;s="eMD02EinfahrtEnde"	Leitstand01/Inputs/eMD02EinfahrtEnde	eMD02EinfahrtEnde	false	Boolean	11:52:14.564	11:52:14.564	Good
+168	Leitstand 192.168.36.1:4840	ns=3;s="eMD02FahreZu"	Leitstand01/Inputs/eMD02FahreZu	eMD02FahreZu	false	Boolean	11:52:14.564	11:52:14.564	Good
+169	Leitstand 192.168.36.1:4840	ns=3;s="eMD02IDZu"	Leitstand01/Inputs/eMD02IDZu	eMD02IDZu	0	UInt16	11:52:14.564	11:52:14.564	Good
+170	Leitstand 192.168.36.1:4840	ns=3;s="eMD02InReset"	Leitstand01/Inputs/eMD02InReset	eMD02InReset	false	Boolean	11:52:14.564	11:52:14.564	Good
+171	Leitstand 192.168.36.1:4840	ns=3;s="eMD02Stillstand"	Leitstand01/Inputs/eMD02Stillstand	eMD02Stillstand	false	Boolean	11:52:14.564	11:52:14.564	Good
+172	Leitstand 192.168.36.1:4840	ns=3;s="eMD02Wartet"	Leitstand01/Inputs/eMD02Wartet	eMD02Wartet	false	Boolean	11:52:14.564	11:52:14.564	Good
+173	Leitstand 192.168.36.1:4840	ns=3;s="eMF01AuftragErfasst"	Leitstand01/Inputs/eMF01AuftragErfasst	eMF01AuftragErfasst	false	Boolean	11:52:14.565	11:52:14.565	Good
+174	Leitstand 192.168.36.1:4840	ns=3;s="eMF01BandSensorLinks"	Leitstand01/Inputs/eMF01BandSensorLinks	eMF01BandSensorLinks	false	Boolean	11:52:14.565	11:52:14.565	Good
+175	Leitstand 192.168.36.1:4840	ns=3;s="eMF01BandSensorRechts"	Leitstand01/Inputs/eMF01BandSensorRechts	eMF01BandSensorRechts	false	Boolean	11:52:14.565	11:52:14.565	Good
+176	Leitstand 192.168.36.1:4840	ns=3;s="eMF01EinfahrtEnde"	Leitstand01/Inputs/eMF01EinfahrtEnde	eMF01EinfahrtEnde	false	Boolean	11:52:14.565	11:52:14.565	Good
+177	Leitstand 192.168.36.1:4840	ns=3;s="eMF01FahreZu"	Leitstand01/Inputs/eMF01FahreZu	eMF01FahreZu	false	Boolean	11:52:14.565	11:52:14.565	Good
+178	Leitstand 192.168.36.1:4840	ns=3;s="eMF01IDZu"	Leitstand01/Inputs/eMF01IDZu	eMF01IDZu	0	UInt16	11:52:14.565	11:52:14.565	Good
+179	Leitstand 192.168.36.1:4840	ns=3;s="eMF01InReset"	Leitstand01/Inputs/eMF01InReset	eMF01InReset	false	Boolean	11:52:14.565	11:52:14.565	Good
+180	Leitstand 192.168.36.1:4840	ns=3;s="eMF01Stillstand"	Leitstand01/Inputs/eMF01Stillstand	eMF01Stillstand	false	Boolean	11:52:14.565	11:52:14.565	Good
+181	Leitstand 192.168.36.1:4840	ns=3;s="eMF01Wartet"	Leitstand01/Inputs/eMF01Wartet	eMF01Wartet	true	Boolean	11:52:14.565	11:52:14.565	Good
+182	Leitstand 192.168.36.1:4840	ns=3;s="eMF02AuftragErfasst"	Leitstand01/Inputs/eMF02AuftragErfasst	eMF02AuftragErfasst	false	Boolean	11:52:14.566	11:52:14.566	Good
+183	Leitstand 192.168.36.1:4840	ns=3;s="eMF02BandSensorLinks"	Leitstand01/Inputs/eMF02BandSensorLinks	eMF02BandSensorLinks	false	Boolean	11:52:14.566	11:52:14.566	Good
+184	Leitstand 192.168.36.1:4840	ns=3;s="eMF02BandSensorRechts"	Leitstand01/Inputs/eMF02BandSensorRechts	eMF02BandSensorRechts	false	Boolean	11:52:14.566	11:52:14.566	Good
+185	Leitstand 192.168.36.1:4840	ns=3;s="eMF02EinfahrtEnde"	Leitstand01/Inputs/eMF02EinfahrtEnde	eMF02EinfahrtEnde	false	Boolean	11:52:14.566	11:52:14.566	Good
+186	Leitstand 192.168.36.1:4840	ns=3;s="eMF02FahreZu"	Leitstand01/Inputs/eMF02FahreZu	eMF02FahreZu	false	Boolean	11:52:14.566	11:52:14.566	Good
+187	Leitstand 192.168.36.1:4840	ns=3;s="eMF02IDZu"	Leitstand01/Inputs/eMF02IDZu	eMF02IDZu	0	UInt16	11:52:14.566	11:52:14.566	Good
+188	Leitstand 192.168.36.1:4840	ns=3;s="eMF02InReset"	Leitstand01/Inputs/eMF02InReset	eMF02InReset	false	Boolean	11:52:14.566	11:52:14.566	Good
+189	Leitstand 192.168.36.1:4840	ns=3;s="eMF02Stillstand"	Leitstand01/Inputs/eMF02Stillstand	eMF02Stillstand	false	Boolean	11:52:14.566	11:52:14.566	Good
+190	Leitstand 192.168.36.1:4840	ns=3;s="eMF02Wartet"	Leitstand01/Inputs/eMF02Wartet	eMF02Wartet	true	Boolean	11:52:14.567	11:52:14.567	Good
+191	Leitstand 192.168.36.1:4840	ns=3;s="ePL01AuftragErfasst"	Leitstand01/Inputs/ePL01AuftragErfasst	ePL01AuftragErfasst	false	Boolean	11:52:14.567	11:52:14.567	Good
+192	Leitstand 192.168.36.1:4840	ns=3;s="ePL01BandSensorLinks"	Leitstand01/Inputs/ePL01BandSensorLinks	ePL01BandSensorLinks	false	Boolean	11:52:14.567	11:52:14.567	Good
+193	Leitstand 192.168.36.1:4840	ns=3;s="ePL01BandSensorRechts"	Leitstand01/Inputs/ePL01BandSensorRechts	ePL01BandSensorRechts	false	Boolean	11:52:14.567	11:52:14.567	Good
+194	Leitstand 192.168.36.1:4840	ns=3;s="ePL01EinfahrtEnde"	Leitstand01/Inputs/ePL01EinfahrtEnde	ePL01EinfahrtEnde	false	Boolean	11:52:14.567	11:52:14.567	Good
+195	Leitstand 192.168.36.1:4840	ns=3;s="ePL01FahreZu"	Leitstand01/Inputs/ePL01FahreZu	ePL01FahreZu	false	Boolean	11:52:14.567	11:52:14.567	Good
+196	Leitstand 192.168.36.1:4840	ns=3;s="ePL01IDZu"	Leitstand01/Inputs/ePL01IDZu	ePL01IDZu	0	UInt16	11:52:14.567	11:52:14.567	Good
+197	Leitstand 192.168.36.1:4840	ns=3;s="ePL01InReset"	Leitstand01/Inputs/ePL01InReset	ePL01InReset	false	Boolean	11:52:14.567	11:52:14.567	Good
+198	Leitstand 192.168.36.1:4840	ns=3;s="ePL01Stillstand"	Leitstand01/Inputs/ePL01Stillstand	ePL01Stillstand	false	Boolean	11:52:14.568	11:52:14.568	Good
+199	Leitstand 192.168.36.1:4840	ns=3;s="ePL01Wartet"	Leitstand01/Inputs/ePL01Wartet	ePL01Wartet	true	Boolean	11:52:14.568	11:52:14.568	Good
+200	Leitstand 192.168.36.1:4840	ns=3;s="ePL02AuftragErfasst"	Leitstand01/Inputs/ePL02AuftragErfasst	ePL02AuftragErfasst	false	Boolean	11:52:14.568	11:52:14.568	Good
+201	Leitstand 192.168.36.1:4840	ns=3;s="ePL02BandSensorLinks"	Leitstand01/Inputs/ePL02BandSensorLinks	ePL02BandSensorLinks	false	Boolean	11:52:14.568	11:52:14.568	Good
+202	Leitstand 192.168.36.1:4840	ns=3;s="ePL02BandSensorRechts"	Leitstand01/Inputs/ePL02BandSensorRechts	ePL02BandSensorRechts	false	Boolean	11:52:14.568	11:52:14.568	Good
+203	Leitstand 192.168.36.1:4840	ns=3;s="ePL02EinfahrtEnde"	Leitstand01/Inputs/ePL02EinfahrtEnde	ePL02EinfahrtEnde	false	Boolean	11:52:14.568	11:52:14.568	Good
+204	Leitstand 192.168.36.1:4840	ns=3;s="ePL02FahreZu"	Leitstand01/Inputs/ePL02FahreZu	ePL02FahreZu	false	Boolean	11:52:14.568	11:52:14.568	Good
+205	Leitstand 192.168.36.1:4840	ns=3;s="ePL02IDZu"	Leitstand01/Inputs/ePL02IDZu	ePL02IDZu	0	UInt16	11:52:14.568	11:52:14.568	Good
+206	Leitstand 192.168.36.1:4840	ns=3;s="ePL02InReset"	Leitstand01/Inputs/ePL02InReset	ePL02InReset	false	Boolean	11:52:14.569	11:52:14.569	Good
+207	Leitstand 192.168.36.1:4840	ns=3;s="ePL02Stillstand"	Leitstand01/Inputs/ePL02Stillstand	ePL02Stillstand	false	Boolean	11:52:14.569	11:52:14.569	Good
+208	Leitstand 192.168.36.1:4840	ns=3;s="ePL02Wartet"	Leitstand01/Inputs/ePL02Wartet	ePL02Wartet	true	Boolean	11:52:14.569	11:52:14.569	Good
+209	Leitstand 192.168.36.1:4840	ns=3;s="Clock_0.5Hz"	Leitstand01/Memory/Clock_0.5Hz	Clock_0.5Hz	false	Boolean	11:52:28.539	11:52:28.539	Good
+210	Leitstand 192.168.36.1:4840	ns=3;s="Clock_0.625Hz"	Leitstand01/Memory/Clock_0.625Hz	Clock_0.625Hz	false	Boolean	11:52:28.539	11:52:28.539	Good
+211	Leitstand 192.168.36.1:4840	ns=3;s="Clock_1.25Hz"	Leitstand01/Memory/Clock_1.25Hz	Clock_1.25Hz	true	Boolean	11:52:27.539	11:52:27.539	Good
+212	Leitstand 192.168.36.1:4840	ns=3;s="Clock_10Hz"	Leitstand01/Memory/Clock_10Hz	Clock_10Hz	true	Boolean	11:52:15.540	11:52:15.540	Good
+213	Leitstand 192.168.36.1:4840	ns=3;s="Clock_1Hz"	Leitstand01/Memory/Clock_1Hz	Clock_1Hz	true	Boolean	11:52:14.569	11:52:14.569	Good
+214	Leitstand 192.168.36.1:4840	ns=3;s="Clock_2.5Hz"	Leitstand01/Memory/Clock_2.5Hz	Clock_2.5Hz	true	Boolean	11:52:28.539	11:52:28.539	Good
+215	Leitstand 192.168.36.1:4840	ns=3;s="Clock_2Hz"	Leitstand01/Memory/Clock_2Hz	Clock_2Hz	true	Boolean	11:52:15.540	11:52:15.540	Good
+216	Leitstand 192.168.36.1:4840	ns=3;s="Clock_5Hz"	Leitstand01/Memory/Clock_5Hz	Clock_5Hz	false	Boolean	11:52:14.570	11:52:14.570	Good
+217	Leitstand 192.168.36.1:4840	ns=3;s="Clock_Byte"	Leitstand01/Memory/Clock_Byte	Clock_Byte	61	Byte	11:52:28.539	11:52:28.539	Good
+218	Leitstand 192.168.36.1:4840	ns=3;s="BF01SendeProfinet"	Leitstand01/Outputs/BF01SendeProfinet	BF01SendeProfinet	0	UInt16	11:52:14.570	11:52:14.570	Good
+219	Leitstand 192.168.36.1:4840	ns=3;s="BF02SendeProfinet"	Leitstand01/Outputs/BF02SendeProfinet	BF02SendeProfinet	0	UInt16	11:52:14.570	11:52:14.570	Good
+220	Leitstand 192.168.36.1:4840	ns=3;s="DU01SendeProfinet"	Leitstand01/Outputs/DU01SendeProfinet	DU01SendeProfinet	0	UInt16	11:52:14.570	11:52:14.570	Good
+221	Leitstand 192.168.36.1:4840	ns=3;s="DU02SendeProfinet"	Leitstand01/Outputs/DU02SendeProfinet	DU02SendeProfinet	0	UInt16	11:52:14.570	11:52:14.570	Good
+222	Leitstand 192.168.36.1:4840	ns=3;s="H01SendeProfinet"	Leitstand01/Outputs/H01SendeProfinet	H01SendeProfinet	0	UInt16	11:52:14.570	11:52:14.570	Good
+223	Leitstand 192.168.36.1:4840	ns=3;s="H02SendeProfinet"	Leitstand01/Outputs/H02SendeProfinet	H02SendeProfinet	0	UInt16	11:52:14.571	11:52:14.571	Good
+224	Leitstand 192.168.36.1:4840	ns=3;s="HR01SendeProfinet"	Leitstand01/Outputs/HR01SendeProfinet	HR01SendeProfinet	0	UInt16	11:52:14.571	11:52:14.571	Good
+225	Leitstand 192.168.36.1:4840	ns=3;s="HR02SendeProfinet"	Leitstand01/Outputs/HR02SendeProfinet	HR02SendeProfinet	0	UInt16	11:52:14.571	11:52:14.571	Good
+226	Leitstand 192.168.36.1:4840	ns=3;s="K01SendeProfinet"	Leitstand01/Outputs/K01SendeProfinet	K01SendeProfinet	0	UInt16	11:52:14.571	11:52:14.571	Good
+227	Leitstand 192.168.36.1:4840	ns=3;s="K02SendeProfinet"	Leitstand01/Outputs/K02SendeProfinet	K02SendeProfinet	0	UInt16	11:52:14.571	11:52:14.571	Good
+228	Leitstand 192.168.36.1:4840	ns=3;s="MD01SendeProfinet"	Leitstand01/Outputs/MD01SendeProfinet	MD01SendeProfinet	0	UInt16	11:52:14.571	11:52:14.571	Good
+229	Leitstand 192.168.36.1:4840	ns=3;s="MD02SendeProfinet"	Leitstand01/Outputs/MD02SendeProfinet	MD02SendeProfinet	0	UInt16	11:52:14.573	11:52:14.573	Good
+230	Leitstand 192.168.36.1:4840	ns=3;s="MF01SendeProfinet"	Leitstand01/Outputs/MF01SendeProfinet	MF01SendeProfinet	0	UInt16	11:52:14.573	11:52:14.573	Good
+231	Leitstand 192.168.36.1:4840	ns=3;s="MF02SendeProfinet"	Leitstand01/Outputs/MF02SendeProfinet	MF02SendeProfinet	0	UInt16	11:52:14.573	11:52:14.573	Good
+232	Leitstand 192.168.36.1:4840	ns=3;s="PL01SendeProfinet"	Leitstand01/Outputs/PL01SendeProfinet	PL01SendeProfinet	0	UInt16	11:52:14.573	11:52:14.573	Good
+233	Leitstand 192.168.36.1:4840	ns=3;s="PL02SendeProfinet"	Leitstand01/Outputs/PL02SendeProfinet	PL02SendeProfinet	0	UInt16	11:52:14.574	11:52:14.574	Good
+234	Leitstand 192.168.36.1:4840	ns=3;s="bDP01_AbA"	Leitstand01/Outputs/bDP01_AbA	bDP01_AbA	0	Byte	11:52:14.574	11:52:14.574	Good
+235	Leitstand 192.168.36.1:4840	ns=3;s="bDP01_AbB"	Leitstand01/Outputs/bDP01_AbB	bDP01_AbB	0	Byte	11:52:14.574	11:52:14.574	Good
+236	Leitstand 192.168.36.1:4840	ns=3;s="bDP01_AbC"	Leitstand01/Outputs/bDP01_AbC	bDP01_AbC	0	Byte	11:52:14.574	11:52:14.574	Good
+237	Leitstand 192.168.36.1:4840	ns=3;s="bDP02_AbA"	Leitstand01/Outputs/bDP02_AbA	bDP02_AbA	0	Byte	11:52:14.574	11:52:14.574	Good
+238	Leitstand 192.168.36.1:4840	ns=3;s="bDP02_AbB"	Leitstand01/Outputs/bDP02_AbB	bDP02_AbB	0	Byte	11:52:14.574	11:52:14.574	Good
+239	Leitstand 192.168.36.1:4840	ns=3;s="bDP02_AbC"	Leitstand01/Outputs/bDP02_AbC	bDP02_AbC	0	Byte	11:52:14.574	11:52:14.574	Good
+240	Leitstand 192.168.36.1:4840	ns=3;s="bDP03_AbA"	Leitstand01/Outputs/bDP03_AbA	bDP03_AbA	0	Byte	11:52:14.574	11:52:14.574	Good
+241	Leitstand 192.168.36.1:4840	ns=3;s="bDP03_AbB"	Leitstand01/Outputs/bDP03_AbB	bDP03_AbB	0	Byte	11:52:14.574	11:52:14.574	Good
+242	Leitstand 192.168.36.1:4840	ns=3;s="bDP03_AbC"	Leitstand01/Outputs/bDP03_AbC	bDP03_AbC	0	Byte	11:52:14.574	11:52:14.574	Good
+243	Leitstand 192.168.36.1:4840	ns=3;s="bDP04_AbA"	Leitstand01/Outputs/bDP04_AbA	bDP04_AbA	0	Byte	11:52:14.575	11:52:14.575	Good
+244	Leitstand 192.168.36.1:4840	ns=3;s="bDP04_AbB"	Leitstand01/Outputs/bDP04_AbB	bDP04_AbB	0	Byte	11:52:14.575	11:52:14.575	Good
+245	Leitstand 192.168.36.1:4840	ns=3;s="bDP04_AbC"	Leitstand01/Outputs/bDP04_AbC	bDP04_AbC	0	Byte	11:52:14.575	11:52:14.575	Good
+246	Leitstand 192.168.36.1:4840	ns=3;s="s5071ID"	Leitstand01/Outputs/s5071ID	s5071ID	0	UInt16	11:52:14.575	11:52:14.575	Good
+247	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV1"	Leitstand01/Outputs/s5071NV1	s5071NV1	0	UInt16	11:52:14.575	11:52:14.575	Good
+248	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV2"	Leitstand01/Outputs/s5071NV2	s5071NV2	0	UInt16	11:52:14.575	11:52:14.575	Good
+249	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV3"	Leitstand01/Outputs/s5071NV3	s5071NV3	0	UInt16	11:52:14.575	11:52:14.575	Good
+250	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV4"	Leitstand01/Outputs/s5071NV4	s5071NV4	0	UInt16	11:52:14.576	11:52:14.576	Good
+251	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV5"	Leitstand01/Outputs/s5071NV5	s5071NV5	0	UInt16	11:52:14.576	11:52:14.576	Good
+252	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV6"	Leitstand01/Outputs/s5071NV6	s5071NV6	0	UInt16	11:52:14.576	11:52:14.576	Good
+253	Leitstand 192.168.36.1:4840	ns=3;s="s5071NV7"	Leitstand01/Outputs/s5071NV7	s5071NV7	0	UInt16	11:52:14.576	11:52:14.576	Good
+254	Leitstand 192.168.36.1:4840	ns=3;s="s5071Status"	Leitstand01/Outputs/s5071Status	s5071Status	0	UInt16	11:52:14.576	11:52:14.576	Good
+255	Leitstand 192.168.36.1:4840	ns=3;s="s5071Steuerung"	Leitstand01/Outputs/s5071Steuerung	s5071Steuerung	0	Byte	11:52:14.576	11:52:14.576	Good
+256	Leitstand 192.168.36.1:4840	ns=3;s="s5072ID"	Leitstand01/Outputs/s5072ID	s5072ID	0	UInt16	11:52:14.576	11:52:14.576	Good
+257	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV1"	Leitstand01/Outputs/s5072NV1	s5072NV1	0	UInt16	11:52:14.576	11:52:14.576	Good
+258	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV2"	Leitstand01/Outputs/s5072NV2	s5072NV2	0	UInt16	11:52:14.576	11:52:14.576	Good
+259	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV3"	Leitstand01/Outputs/s5072NV3	s5072NV3	0	UInt16	11:52:14.577	11:52:14.577	Good
+260	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV4"	Leitstand01/Outputs/s5072NV4	s5072NV4	0	UInt16	11:52:14.577	11:52:14.577	Good
+261	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV5"	Leitstand01/Outputs/s5072NV5	s5072NV5	0	UInt16	11:52:14.577	11:52:14.577	Good
+262	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV6"	Leitstand01/Outputs/s5072NV6	s5072NV6	0	UInt16	11:52:14.577	11:52:14.577	Good
+263	Leitstand 192.168.36.1:4840	ns=3;s="s5072NV7"	Leitstand01/Outputs/s5072NV7	s5072NV7	0	UInt16	11:52:14.577	11:52:14.577	Good
+264	Leitstand 192.168.36.1:4840	ns=3;s="s5072Status"	Leitstand01/Outputs/s5072Status	s5072Status	0	UInt16	11:52:14.577	11:52:14.577	Good
+265	Leitstand 192.168.36.1:4840	ns=3;s="s5072Steuerung"	Leitstand01/Outputs/s5072Steuerung	s5072Steuerung	0	Byte	11:52:14.577	11:52:14.577	Good
+266	Leitstand 192.168.36.1:4840	ns=3;s="sBF01AusfahrtLinks"	Leitstand01/Outputs/sBF01AusfahrtLinks	sBF01AusfahrtLinks	false	Boolean	11:52:14.577	11:52:14.577	Good
+267	Leitstand 192.168.36.1:4840	ns=3;s="sBF01AusfahrtRechts"	Leitstand01/Outputs/sBF01AusfahrtRechts	sBF01AusfahrtRechts	false	Boolean	11:52:14.577	11:52:14.577	Good
+268	Leitstand 192.168.36.1:4840	ns=3;s="sBF01EinfahrtLinks"	Leitstand01/Outputs/sBF01EinfahrtLinks	sBF01EinfahrtLinks	false	Boolean	11:52:14.578	11:52:14.578	Good
+269	Leitstand 192.168.36.1:4840	ns=3;s="sBF01EinfahrtRechts"	Leitstand01/Outputs/sBF01EinfahrtRechts	sBF01EinfahrtRechts	false	Boolean	11:52:14.578	11:52:14.578	Good
+270	Leitstand 192.168.36.1:4840	ns=3;s="sBF01EntnahmeLinks"	Leitstand01/Outputs/sBF01EntnahmeLinks	sBF01EntnahmeLinks	false	Boolean	11:52:14.578	11:52:14.578	Good
+271	Leitstand 192.168.36.1:4840	ns=3;s="sBF01EntnahmeRechts"	Leitstand01/Outputs/sBF01EntnahmeRechts	sBF01EntnahmeRechts	false	Boolean	11:52:14.578	11:52:14.578	Good
+272	Leitstand 192.168.36.1:4840	ns=3;s="sBF01StartAuftrag"	Leitstand01/Outputs/sBF01StartAuftrag	sBF01StartAuftrag	false	Boolean	11:52:14.578	11:52:14.578	Good
+273	Leitstand 192.168.36.1:4840	ns=3;s="sBF01StopperOeffnen"	Leitstand01/Outputs/sBF01StopperOeffnen	sBF01StopperOeffnen	false	Boolean	11:52:14.578	11:52:14.578	Good
+274	Leitstand 192.168.36.1:4840	ns=3;s="sBF01TippLinkslauf"	Leitstand01/Outputs/sBF01TippLinkslauf	sBF01TippLinkslauf	false	Boolean	11:52:14.578	11:52:14.578	Good
+275	Leitstand 192.168.36.1:4840	ns=3;s="sBF01TippRechtslauf"	Leitstand01/Outputs/sBF01TippRechtslauf	sBF01TippRechtslauf	false	Boolean	11:52:14.578	11:52:14.578	Good
+276	Leitstand 192.168.36.1:4840	ns=3;s="sBF01ZufuhrLinks"	Leitstand01/Outputs/sBF01ZufuhrLinks	sBF01ZufuhrLinks	false	Boolean	11:52:14.578	11:52:14.578	Good
+277	Leitstand 192.168.36.1:4840	ns=3;s="sBF01ZufuhrRechts"	Leitstand01/Outputs/sBF01ZufuhrRechts	sBF01ZufuhrRechts	false	Boolean	11:52:14.579	11:52:14.579	Good
+278	Leitstand 192.168.36.1:4840	ns=3;s="sBF02AusfahrtLinks"	Leitstand01/Outputs/sBF02AusfahrtLinks	sBF02AusfahrtLinks	false	Boolean	11:52:14.579	11:52:14.579	Good
+279	Leitstand 192.168.36.1:4840	ns=3;s="sBF02AusfahrtRechts"	Leitstand01/Outputs/sBF02AusfahrtRechts	sBF02AusfahrtRechts	false	Boolean	11:52:14.579	11:52:14.579	Good
+280	Leitstand 192.168.36.1:4840	ns=3;s="sBF02EinfahrtLinks"	Leitstand01/Outputs/sBF02EinfahrtLinks	sBF02EinfahrtLinks	false	Boolean	11:52:14.579	11:52:14.579	Good
+281	Leitstand 192.168.36.1:4840	ns=3;s="sBF02EinfahrtRechts"	Leitstand01/Outputs/sBF02EinfahrtRechts	sBF02EinfahrtRechts	false	Boolean	11:52:14.579	11:52:14.579	Good
+282	Leitstand 192.168.36.1:4840	ns=3;s="sBF02EntnahmeLinks"	Leitstand01/Outputs/sBF02EntnahmeLinks	sBF02EntnahmeLinks	false	Boolean	11:52:14.579	11:52:14.579	Good
+283	Leitstand 192.168.36.1:4840	ns=3;s="sBF02EntnahmeRechts"	Leitstand01/Outputs/sBF02EntnahmeRechts	sBF02EntnahmeRechts	false	Boolean	11:52:14.579	11:52:14.579	Good
+284	Leitstand 192.168.36.1:4840	ns=3;s="sBF02StartAuftrag"	Leitstand01/Outputs/sBF02StartAuftrag	sBF02StartAuftrag	false	Boolean	11:52:14.580	11:52:14.580	Good
+285	Leitstand 192.168.36.1:4840	ns=3;s="sBF02StopperOeffnen"	Leitstand01/Outputs/sBF02StopperOeffnen	sBF02StopperOeffnen	false	Boolean	11:52:14.580	11:52:14.580	Good
+286	Leitstand 192.168.36.1:4840	ns=3;s="sBF02TippLinkslauf"	Leitstand01/Outputs/sBF02TippLinkslauf	sBF02TippLinkslauf	false	Boolean	11:52:14.580	11:52:14.580	Good
+287	Leitstand 192.168.36.1:4840	ns=3;s="sBF02TippRechtslauf"	Leitstand01/Outputs/sBF02TippRechtslauf	sBF02TippRechtslauf	false	Boolean	11:52:14.580	11:52:14.580	Good
+288	Leitstand 192.168.36.1:4840	ns=3;s="sBF02ZufuhrLinks"	Leitstand01/Outputs/sBF02ZufuhrLinks	sBF02ZufuhrLinks	false	Boolean	11:52:14.580	11:52:14.580	Good
+289	Leitstand 192.168.36.1:4840	ns=3;s="sBF02ZufuhrRechts"	Leitstand01/Outputs/sBF02ZufuhrRechts	sBF02ZufuhrRechts	false	Boolean	11:52:14.580	11:52:14.580	Good
+290	Leitstand 192.168.36.1:4840	ns=3;s="sDU01AusfahrtLinks"	Leitstand01/Outputs/sDU01AusfahrtLinks	sDU01AusfahrtLinks	false	Boolean	11:52:14.580	11:52:14.580	Good
+291	Leitstand 192.168.36.1:4840	ns=3;s="sDU01AusfahrtRechts"	Leitstand01/Outputs/sDU01AusfahrtRechts	sDU01AusfahrtRechts	false	Boolean	11:52:14.581	11:52:14.581	Good
+292	Leitstand 192.168.36.1:4840	ns=3;s="sDU01EinfahrtLinks"	Leitstand01/Outputs/sDU01EinfahrtLinks	sDU01EinfahrtLinks	false	Boolean	11:52:14.581	11:52:14.581	Good
+293	Leitstand 192.168.36.1:4840	ns=3;s="sDU01EinfahrtRechts"	Leitstand01/Outputs/sDU01EinfahrtRechts	sDU01EinfahrtRechts	false	Boolean	11:52:14.581	11:52:14.581	Good
+294	Leitstand 192.168.36.1:4840	ns=3;s="sDU01EntnahmeLinks"	Leitstand01/Outputs/sDU01EntnahmeLinks	sDU01EntnahmeLinks	false	Boolean	11:52:14.581	11:52:14.581	Good
+295	Leitstand 192.168.36.1:4840	ns=3;s="sDU01EntnahmeRechts"	Leitstand01/Outputs/sDU01EntnahmeRechts	sDU01EntnahmeRechts	false	Boolean	11:52:14.581	11:52:14.581	Good
+296	Leitstand 192.168.36.1:4840	ns=3;s="sDU01StartAuftrag"	Leitstand01/Outputs/sDU01StartAuftrag	sDU01StartAuftrag	false	Boolean	11:52:14.581	11:52:14.581	Good
+297	Leitstand 192.168.36.1:4840	ns=3;s="sDU01StopperOeffnen"	Leitstand01/Outputs/sDU01StopperOeffnen	sDU01StopperOeffnen	false	Boolean	11:52:14.581	11:52:14.581	Good
+298	Leitstand 192.168.36.1:4840	ns=3;s="sDU01TipDUinkslauf"	Leitstand01/Outputs/sDU01TipDUinkslauf	sDU01TipDUinkslauf	false	Boolean	11:52:14.581	11:52:14.581	Good
+299	Leitstand 192.168.36.1:4840	ns=3;s="sDU01TippRechtslauf"	Leitstand01/Outputs/sDU01TippRechtslauf	sDU01TippRechtslauf	false	Boolean	11:52:14.582	11:52:14.582	Good
+300	Leitstand 192.168.36.1:4840	ns=3;s="sDU01ZufuhrLinks"	Leitstand01/Outputs/sDU01ZufuhrLinks	sDU01ZufuhrLinks	false	Boolean	11:52:14.582	11:52:14.582	Good
+301	Leitstand 192.168.36.1:4840	ns=3;s="sDU01ZufuhrRechts"	Leitstand01/Outputs/sDU01ZufuhrRechts	sDU01ZufuhrRechts	false	Boolean	11:52:14.582	11:52:14.582	Good
+302	Leitstand 192.168.36.1:4840	ns=3;s="sDU02AusfahrtLinks"	Leitstand01/Outputs/sDU02AusfahrtLinks	sDU02AusfahrtLinks	false	Boolean	11:52:14.582	11:52:14.582	Good
+303	Leitstand 192.168.36.1:4840	ns=3;s="sDU02AusfahrtRechts"	Leitstand01/Outputs/sDU02AusfahrtRechts	sDU02AusfahrtRechts	false	Boolean	11:52:14.582	11:52:14.582	Good
+304	Leitstand 192.168.36.1:4840	ns=3;s="sDU02EinfahrtLinks"	Leitstand01/Outputs/sDU02EinfahrtLinks	sDU02EinfahrtLinks	false	Boolean	11:52:14.582	11:52:14.582	Good
+305	Leitstand 192.168.36.1:4840	ns=3;s="sDU02EinfahrtRechts"	Leitstand01/Outputs/sDU02EinfahrtRechts	sDU02EinfahrtRechts	false	Boolean	11:52:14.582	11:52:14.582	Good
+306	Leitstand 192.168.36.1:4840	ns=3;s="sDU02EntnahmeLinks"	Leitstand01/Outputs/sDU02EntnahmeLinks	sDU02EntnahmeLinks	false	Boolean	11:52:14.583	11:52:14.583	Good
+307	Leitstand 192.168.36.1:4840	ns=3;s="sDU02EntnahmeRechts"	Leitstand01/Outputs/sDU02EntnahmeRechts	sDU02EntnahmeRechts	false	Boolean	11:52:14.583	11:52:14.583	Good
+308	Leitstand 192.168.36.1:4840	ns=3;s="sDU02StartAuftrag"	Leitstand01/Outputs/sDU02StartAuftrag	sDU02StartAuftrag	false	Boolean	11:52:14.583	11:52:14.583	Good
+309	Leitstand 192.168.36.1:4840	ns=3;s="sDU02StopperOeffnen"	Leitstand01/Outputs/sDU02StopperOeffnen	sDU02StopperOeffnen	false	Boolean	11:52:14.583	11:52:14.583	Good
+310	Leitstand 192.168.36.1:4840	ns=3;s="sDU02TipDUinkslauf"	Leitstand01/Outputs/sDU02TipDUinkslauf	sDU02TipDUinkslauf	false	Boolean	11:52:14.583	11:52:14.583	Good
+311	Leitstand 192.168.36.1:4840	ns=3;s="sDU02TippRechtslauf"	Leitstand01/Outputs/sDU02TippRechtslauf	sDU02TippRechtslauf	false	Boolean	11:52:14.583	11:52:14.583	Good
+312	Leitstand 192.168.36.1:4840	ns=3;s="sDU02ZufuhrLinks"	Leitstand01/Outputs/sDU02ZufuhrLinks	sDU02ZufuhrLinks	false	Boolean	11:52:14.583	11:52:14.583	Good
+313	Leitstand 192.168.36.1:4840	ns=3;s="sDU02ZufuhrRechts"	Leitstand01/Outputs/sDU02ZufuhrRechts	sDU02ZufuhrRechts	false	Boolean	11:52:14.584	11:52:14.584	Good
+314	Leitstand 192.168.36.1:4840	ns=3;s="sH01AusfahrtLinks"	Leitstand01/Outputs/sH01AusfahrtLinks	sH01AusfahrtLinks	false	Boolean	11:52:14.584	11:52:14.584	Good
+315	Leitstand 192.168.36.1:4840	ns=3;s="sH01AusfahrtRechts"	Leitstand01/Outputs/sH01AusfahrtRechts	sH01AusfahrtRechts	false	Boolean	11:52:14.584	11:52:14.584	Good
+316	Leitstand 192.168.36.1:4840	ns=3;s="sH01EinfahrtLinks"	Leitstand01/Outputs/sH01EinfahrtLinks	sH01EinfahrtLinks	false	Boolean	11:52:14.584	11:52:14.584	Good
+317	Leitstand 192.168.36.1:4840	ns=3;s="sH01EinfahrtRechts"	Leitstand01/Outputs/sH01EinfahrtRechts	sH01EinfahrtRechts	false	Boolean	11:52:14.584	11:52:14.584	Good
+318	Leitstand 192.168.36.1:4840	ns=3;s="sH01EntnahmeLinks"	Leitstand01/Outputs/sH01EntnahmeLinks	sH01EntnahmeLinks	false	Boolean	11:52:14.584	11:52:14.584	Good
+319	Leitstand 192.168.36.1:4840	ns=3;s="sH01EntnahmeRechts"	Leitstand01/Outputs/sH01EntnahmeRechts	sH01EntnahmeRechts	false	Boolean	11:52:14.584	11:52:14.584	Good
+320	Leitstand 192.168.36.1:4840	ns=3;s="sH01StartAuftrag"	Leitstand01/Outputs/sH01StartAuftrag	sH01StartAuftrag	false	Boolean	11:52:14.584	11:52:14.584	Good
+321	Leitstand 192.168.36.1:4840	ns=3;s="sH01StopperOeffnen"	Leitstand01/Outputs/sH01StopperOeffnen	sH01StopperOeffnen	false	Boolean	11:52:14.585	11:52:14.585	Good
+322	Leitstand 192.168.36.1:4840	ns=3;s="sH01TippLinkslauf"	Leitstand01/Outputs/sH01TippLinkslauf	sH01TippLinkslauf	false	Boolean	11:52:14.585	11:52:14.585	Good
+323	Leitstand 192.168.36.1:4840	ns=3;s="sH01TippRechtslauf"	Leitstand01/Outputs/sH01TippRechtslauf	sH01TippRechtslauf	false	Boolean	11:52:14.585	11:52:14.585	Good
+324	Leitstand 192.168.36.1:4840	ns=3;s="sH01ZufuhrLinks"	Leitstand01/Outputs/sH01ZufuhrLinks	sH01ZufuhrLinks	false	Boolean	11:52:14.585	11:52:14.585	Good
+325	Leitstand 192.168.36.1:4840	ns=3;s="sH01ZufuhrRechts"	Leitstand01/Outputs/sH01ZufuhrRechts	sH01ZufuhrRechts	false	Boolean	11:52:14.585	11:52:14.585	Good
+326	Leitstand 192.168.36.1:4840	ns=3;s="sH02AusfahrtLinks"	Leitstand01/Outputs/sH02AusfahrtLinks	sH02AusfahrtLinks	false	Boolean	11:52:14.585	11:52:14.585	Good
+327	Leitstand 192.168.36.1:4840	ns=3;s="sH02AusfahrtRechts"	Leitstand01/Outputs/sH02AusfahrtRechts	sH02AusfahrtRechts	false	Boolean	11:52:14.585	11:52:14.585	Good
+328	Leitstand 192.168.36.1:4840	ns=3;s="sH02EinfahrtLinks"	Leitstand01/Outputs/sH02EinfahrtLinks	sH02EinfahrtLinks	false	Boolean	11:52:14.585	11:52:14.585	Good
+329	Leitstand 192.168.36.1:4840	ns=3;s="sH02EinfahrtRechts"	Leitstand01/Outputs/sH02EinfahrtRechts	sH02EinfahrtRechts	false	Boolean	11:52:14.585	11:52:14.585	Good
+330	Leitstand 192.168.36.1:4840	ns=3;s="sH02EntnahmeLinks"	Leitstand01/Outputs/sH02EntnahmeLinks	sH02EntnahmeLinks	false	Boolean	11:52:14.586	11:52:14.586	Good
+331	Leitstand 192.168.36.1:4840	ns=3;s="sH02EntnahmeRechts"	Leitstand01/Outputs/sH02EntnahmeRechts	sH02EntnahmeRechts	false	Boolean	11:52:14.586	11:52:14.586	Good
+332	Leitstand 192.168.36.1:4840	ns=3;s="sH02StartAuftrag"	Leitstand01/Outputs/sH02StartAuftrag	sH02StartAuftrag	false	Boolean	11:52:14.586	11:52:14.586	Good
+333	Leitstand 192.168.36.1:4840	ns=3;s="sH02StopperOeffnen"	Leitstand01/Outputs/sH02StopperOeffnen	sH02StopperOeffnen	false	Boolean	11:52:14.586	11:52:14.586	Good
+334	Leitstand 192.168.36.1:4840	ns=3;s="sH02TippLinkslauf"	Leitstand01/Outputs/sH02TippLinkslauf	sH02TippLinkslauf	false	Boolean	11:52:14.586	11:52:14.586	Good
+335	Leitstand 192.168.36.1:4840	ns=3;s="sH02TippRechtslauf"	Leitstand01/Outputs/sH02TippRechtslauf	sH02TippRechtslauf	false	Boolean	11:52:14.586	11:52:14.586	Good
+336	Leitstand 192.168.36.1:4840	ns=3;s="sH02ZufuhrLinks"	Leitstand01/Outputs/sH02ZufuhrLinks	sH02ZufuhrLinks	false	Boolean	11:52:14.586	11:52:14.586	Good
+337	Leitstand 192.168.36.1:4840	ns=3;s="sH02ZufuhrRechts"	Leitstand01/Outputs/sH02ZufuhrRechts	sH02ZufuhrRechts	false	Boolean	11:52:14.586	11:52:14.586	Good
+338	Leitstand 192.168.36.1:4840	ns=3;s="sHR01AusfahrtLinks"	Leitstand01/Outputs/sHR01AusfahrtLinks	sHR01AusfahrtLinks	false	Boolean	11:52:14.587	11:52:14.587	Good
+339	Leitstand 192.168.36.1:4840	ns=3;s="sHR01AusfahrtRechts"	Leitstand01/Outputs/sHR01AusfahrtRechts	sHR01AusfahrtRechts	false	Boolean	11:52:14.587	11:52:14.587	Good
+340	Leitstand 192.168.36.1:4840	ns=3;s="sHR01EinfahrtLinks"	Leitstand01/Outputs/sHR01EinfahrtLinks	sHR01EinfahrtLinks	false	Boolean	11:52:14.587	11:52:14.587	Good
+341	Leitstand 192.168.36.1:4840	ns=3;s="sHR01EinfahrtRechts"	Leitstand01/Outputs/sHR01EinfahrtRechts	sHR01EinfahrtRechts	false	Boolean	11:52:14.588	11:52:14.588	Good
+342	Leitstand 192.168.36.1:4840	ns=3;s="sHR01EntnahmeLinks"	Leitstand01/Outputs/sHR01EntnahmeLinks	sHR01EntnahmeLinks	false	Boolean	11:52:14.588	11:52:14.588	Good
+343	Leitstand 192.168.36.1:4840	ns=3;s="sHR01EntnahmeRechts"	Leitstand01/Outputs/sHR01EntnahmeRechts	sHR01EntnahmeRechts	false	Boolean	11:52:14.589	11:52:14.589	Good
+344	Leitstand 192.168.36.1:4840	ns=3;s="sHR01StartAuftrag"	Leitstand01/Outputs/sHR01StartAuftrag	sHR01StartAuftrag	false	Boolean	11:52:14.589	11:52:14.589	Good
+345	Leitstand 192.168.36.1:4840	ns=3;s="sHR01StopperOeffnen"	Leitstand01/Outputs/sHR01StopperOeffnen	sHR01StopperOeffnen	false	Boolean	11:52:14.589	11:52:14.589	Good
+346	Leitstand 192.168.36.1:4840	ns=3;s="sHR01TippLinkslauf"	Leitstand01/Outputs/sHR01TippLinkslauf	sHR01TippLinkslauf	false	Boolean	11:52:14.590	11:52:14.590	Good
+347	Leitstand 192.168.36.1:4840	ns=3;s="sHR01TippRechtslauf"	Leitstand01/Outputs/sHR01TippRechtslauf	sHR01TippRechtslauf	false	Boolean	11:52:14.590	11:52:14.590	Good
+348	Leitstand 192.168.36.1:4840	ns=3;s="sHR01ZufuhrLinks"	Leitstand01/Outputs/sHR01ZufuhrLinks	sHR01ZufuhrLinks	false	Boolean	11:52:14.590	11:52:14.590	Good
+349	Leitstand 192.168.36.1:4840	ns=3;s="sHR01ZufuhrRechts"	Leitstand01/Outputs/sHR01ZufuhrRechts	sHR01ZufuhrRechts	false	Boolean	11:52:14.591	11:52:14.591	Good
+350	Leitstand 192.168.36.1:4840	ns=3;s="sHR02AusfahrtLinks"	Leitstand01/Outputs/sHR02AusfahrtLinks	sHR02AusfahrtLinks	false	Boolean	11:52:14.591	11:52:14.591	Good
+351	Leitstand 192.168.36.1:4840	ns=3;s="sHR02AusfahrtRechts"	Leitstand01/Outputs/sHR02AusfahrtRechts	sHR02AusfahrtRechts	false	Boolean	11:52:14.592	11:52:14.592	Good
+352	Leitstand 192.168.36.1:4840	ns=3;s="sHR02EinfahrtLinks"	Leitstand01/Outputs/sHR02EinfahrtLinks	sHR02EinfahrtLinks	false	Boolean	11:52:14.592	11:52:14.592	Good
+353	Leitstand 192.168.36.1:4840	ns=3;s="sHR02EinfahrtRechts"	Leitstand01/Outputs/sHR02EinfahrtRechts	sHR02EinfahrtRechts	false	Boolean	11:52:14.592	11:52:14.592	Good
+354	Leitstand 192.168.36.1:4840	ns=3;s="sHR02EntnahmeLinks"	Leitstand01/Outputs/sHR02EntnahmeLinks	sHR02EntnahmeLinks	false	Boolean	11:52:14.593	11:52:14.593	Good
+355	Leitstand 192.168.36.1:4840	ns=3;s="sHR02EntnahmeRechts"	Leitstand01/Outputs/sHR02EntnahmeRechts	sHR02EntnahmeRechts	false	Boolean	11:52:14.593	11:52:14.593	Good
+356	Leitstand 192.168.36.1:4840	ns=3;s="sHR02StartAuftrag"	Leitstand01/Outputs/sHR02StartAuftrag	sHR02StartAuftrag	false	Boolean	11:52:14.593	11:52:14.593	Good
+357	Leitstand 192.168.36.1:4840	ns=3;s="sHR02StopperOeffnen"	Leitstand01/Outputs/sHR02StopperOeffnen	sHR02StopperOeffnen	false	Boolean	11:52:14.595	11:52:14.595	Good
+358	Leitstand 192.168.36.1:4840	ns=3;s="sHR02TippLinkslauf"	Leitstand01/Outputs/sHR02TippLinkslauf	sHR02TippLinkslauf	false	Boolean	11:52:14.595	11:52:14.595	Good
+359	Leitstand 192.168.36.1:4840	ns=3;s="sHR02TippRechtslauf"	Leitstand01/Outputs/sHR02TippRechtslauf	sHR02TippRechtslauf	false	Boolean	11:52:14.595	11:52:14.595	Good
+360	Leitstand 192.168.36.1:4840	ns=3;s="sHR02ZufuhrLinks"	Leitstand01/Outputs/sHR02ZufuhrLinks	sHR02ZufuhrLinks	false	Boolean	11:52:14.595	11:52:14.595	Good
+361	Leitstand 192.168.36.1:4840	ns=3;s="sHR02ZufuhrRechts"	Leitstand01/Outputs/sHR02ZufuhrRechts	sHR02ZufuhrRechts	false	Boolean	11:52:14.596	11:52:14.596	Good
+362	Leitstand 192.168.36.1:4840	ns=3;s="sK01AusfahrtLinks"	Leitstand01/Outputs/sK01AusfahrtLinks	sK01AusfahrtLinks	false	Boolean	11:52:14.596	11:52:14.596	Good
+363	Leitstand 192.168.36.1:4840	ns=3;s="sK01AusfahrtRechts"	Leitstand01/Outputs/sK01AusfahrtRechts	sK01AusfahrtRechts	false	Boolean	11:52:14.596	11:52:14.596	Good
+364	Leitstand 192.168.36.1:4840	ns=3;s="sK01EinfahrtLinks"	Leitstand01/Outputs/sK01EinfahrtLinks	sK01EinfahrtLinks	false	Boolean	11:52:14.596	11:52:14.596	Good
+365	Leitstand 192.168.36.1:4840	ns=3;s="sK01EinfahrtRechts"	Leitstand01/Outputs/sK01EinfahrtRechts	sK01EinfahrtRechts	false	Boolean	11:52:14.596	11:52:14.596	Good
+366	Leitstand 192.168.36.1:4840	ns=3;s="sK01EntnahmeLinks"	Leitstand01/Outputs/sK01EntnahmeLinks	sK01EntnahmeLinks	false	Boolean	11:52:14.596	11:52:14.596	Good
+367	Leitstand 192.168.36.1:4840	ns=3;s="sK01EntnahmeRechts"	Leitstand01/Outputs/sK01EntnahmeRechts	sK01EntnahmeRechts	false	Boolean	11:52:14.596	11:52:14.596	Good
+368	Leitstand 192.168.36.1:4840	ns=3;s="sK01StartAuftrag"	Leitstand01/Outputs/sK01StartAuftrag	sK01StartAuftrag	false	Boolean	11:52:14.596	11:52:14.596	Good
+369	Leitstand 192.168.36.1:4840	ns=3;s="sK01StopperOeffnen"	Leitstand01/Outputs/sK01StopperOeffnen	sK01StopperOeffnen	false	Boolean	11:52:14.597	11:52:14.597	Good
+370	Leitstand 192.168.36.1:4840	ns=3;s="sK01TippLinkslauf"	Leitstand01/Outputs/sK01TippLinkslauf	sK01TippLinkslauf	false	Boolean	11:52:14.597	11:52:14.597	Good
+371	Leitstand 192.168.36.1:4840	ns=3;s="sK01TippRechtslauf"	Leitstand01/Outputs/sK01TippRechtslauf	sK01TippRechtslauf	false	Boolean	11:52:14.597	11:52:14.597	Good
+372	Leitstand 192.168.36.1:4840	ns=3;s="sK01ZufuhrLinks"	Leitstand01/Outputs/sK01ZufuhrLinks	sK01ZufuhrLinks	false	Boolean	11:52:14.597	11:52:14.597	Good
+373	Leitstand 192.168.36.1:4840	ns=3;s="sK01ZufuhrRechts"	Leitstand01/Outputs/sK01ZufuhrRechts	sK01ZufuhrRechts	false	Boolean	11:52:14.597	11:52:14.597	Good
+374	Leitstand 192.168.36.1:4840	ns=3;s="sK02AusfahrtLinks"	Leitstand01/Outputs/sK02AusfahrtLinks	sK02AusfahrtLinks	false	Boolean	11:52:14.597	11:52:14.597	Good
+375	Leitstand 192.168.36.1:4840	ns=3;s="sK02AusfahrtRechts"	Leitstand01/Outputs/sK02AusfahrtRechts	sK02AusfahrtRechts	false	Boolean	11:52:14.597	11:52:14.597	Good
+376	Leitstand 192.168.36.1:4840	ns=3;s="sK02EinfahrtLinks"	Leitstand01/Outputs/sK02EinfahrtLinks	sK02EinfahrtLinks	false	Boolean	11:52:14.598	11:52:14.598	Good
+377	Leitstand 192.168.36.1:4840	ns=3;s="sK02EinfahrtRechts"	Leitstand01/Outputs/sK02EinfahrtRechts	sK02EinfahrtRechts	false	Boolean	11:52:14.598	11:52:14.598	Good
+378	Leitstand 192.168.36.1:4840	ns=3;s="sK02EntnahmeLinks"	Leitstand01/Outputs/sK02EntnahmeLinks	sK02EntnahmeLinks	false	Boolean	11:52:14.598	11:52:14.598	Good
+379	Leitstand 192.168.36.1:4840	ns=3;s="sK02EntnahmeRechts"	Leitstand01/Outputs/sK02EntnahmeRechts	sK02EntnahmeRechts	false	Boolean	11:52:14.598	11:52:14.598	Good
+380	Leitstand 192.168.36.1:4840	ns=3;s="sK02StartAuftrag"	Leitstand01/Outputs/sK02StartAuftrag	sK02StartAuftrag	false	Boolean	11:52:14.598	11:52:14.598	Good
+381	Leitstand 192.168.36.1:4840	ns=3;s="sK02StopperOeffnen"	Leitstand01/Outputs/sK02StopperOeffnen	sK02StopperOeffnen	false	Boolean	11:52:14.598	11:52:14.598	Good
+382	Leitstand 192.168.36.1:4840	ns=3;s="sK02TippLinkslauf"	Leitstand01/Outputs/sK02TippLinkslauf	sK02TippLinkslauf	false	Boolean	11:52:14.598	11:52:14.598	Good
+383	Leitstand 192.168.36.1:4840	ns=3;s="sK02TippRechtslauf"	Leitstand01/Outputs/sK02TippRechtslauf	sK02TippRechtslauf	false	Boolean	11:52:14.598	11:52:14.598	Good
+384	Leitstand 192.168.36.1:4840	ns=3;s="sK02ZufuhrLinks"	Leitstand01/Outputs/sK02ZufuhrLinks	sK02ZufuhrLinks	false	Boolean	11:52:14.599	11:52:14.599	Good
+385	Leitstand 192.168.36.1:4840	ns=3;s="sK02ZufuhrRechts"	Leitstand01/Outputs/sK02ZufuhrRechts	sK02ZufuhrRechts	false	Boolean	11:52:14.599	11:52:14.599	Good
+386	Leitstand 192.168.36.1:4840	ns=3;s="sMD01AusfahrtLinks"	Leitstand01/Outputs/sMD01AusfahrtLinks	sMD01AusfahrtLinks	false	Boolean	11:52:14.599	11:52:14.599	Good
+387	Leitstand 192.168.36.1:4840	ns=3;s="sMD01AusfahrtRechts"	Leitstand01/Outputs/sMD01AusfahrtRechts	sMD01AusfahrtRechts	false	Boolean	11:52:14.599	11:52:14.599	Good
+388	Leitstand 192.168.36.1:4840	ns=3;s="sMD01EinfahrtLinks"	Leitstand01/Outputs/sMD01EinfahrtLinks	sMD01EinfahrtLinks	false	Boolean	11:52:14.599	11:52:14.599	Good
+389	Leitstand 192.168.36.1:4840	ns=3;s="sMD01EinfahrtRechts"	Leitstand01/Outputs/sMD01EinfahrtRechts	sMD01EinfahrtRechts	false	Boolean	11:52:14.599	11:52:14.599	Good
+390	Leitstand 192.168.36.1:4840	ns=3;s="sMD01EntnahmeLinks"	Leitstand01/Outputs/sMD01EntnahmeLinks	sMD01EntnahmeLinks	false	Boolean	11:52:14.599	11:52:14.599	Good
+391	Leitstand 192.168.36.1:4840	ns=3;s="sMD01EntnahmeRechts"	Leitstand01/Outputs/sMD01EntnahmeRechts	sMD01EntnahmeRechts	false	Boolean	11:52:14.599	11:52:14.599	Good
+392	Leitstand 192.168.36.1:4840	ns=3;s="sMD01StartAuftrag"	Leitstand01/Outputs/sMD01StartAuftrag	sMD01StartAuftrag	false	Boolean	11:52:14.600	11:52:14.600	Good
+393	Leitstand 192.168.36.1:4840	ns=3;s="sMD01StopperOeffnen"	Leitstand01/Outputs/sMD01StopperOeffnen	sMD01StopperOeffnen	false	Boolean	11:52:14.600	11:52:14.600	Good
+394	Leitstand 192.168.36.1:4840	ns=3;s="sMD01TippLinkslauf"	Leitstand01/Outputs/sMD01TippLinkslauf	sMD01TippLinkslauf	false	Boolean	11:52:14.600	11:52:14.600	Good
+395	Leitstand 192.168.36.1:4840	ns=3;s="sMD01TippRechtslauf"	Leitstand01/Outputs/sMD01TippRechtslauf	sMD01TippRechtslauf	false	Boolean	11:52:14.600	11:52:14.600	Good
+396	Leitstand 192.168.36.1:4840	ns=3;s="sMD01ZufuhrLinks"	Leitstand01/Outputs/sMD01ZufuhrLinks	sMD01ZufuhrLinks	false	Boolean	11:52:14.600	11:52:14.600	Good
+397	Leitstand 192.168.36.1:4840	ns=3;s="sMD01ZufuhrRechts"	Leitstand01/Outputs/sMD01ZufuhrRechts	sMD01ZufuhrRechts	false	Boolean	11:52:14.600	11:52:14.600	Good
+398	Leitstand 192.168.36.1:4840	ns=3;s="sMD02AusfahrtLinks"	Leitstand01/Outputs/sMD02AusfahrtLinks	sMD02AusfahrtLinks	false	Boolean	11:52:14.600	11:52:14.600	Good
+399	Leitstand 192.168.36.1:4840	ns=3;s="sMD02AusfahrtRechts"	Leitstand01/Outputs/sMD02AusfahrtRechts	sMD02AusfahrtRechts	false	Boolean	11:52:14.600	11:52:14.600	Good
+400	Leitstand 192.168.36.1:4840	ns=3;s="sMD02EinfahrtLinks"	Leitstand01/Outputs/sMD02EinfahrtLinks	sMD02EinfahrtLinks	false	Boolean	11:52:14.601	11:52:14.601	Good
+401	Leitstand 192.168.36.1:4840	ns=3;s="sMD02EinfahrtRechts"	Leitstand01/Outputs/sMD02EinfahrtRechts	sMD02EinfahrtRechts	false	Boolean	11:52:14.601	11:52:14.601	Good
+402	Leitstand 192.168.36.1:4840	ns=3;s="sMD02EntnahmeLinks"	Leitstand01/Outputs/sMD02EntnahmeLinks	sMD02EntnahmeLinks	false	Boolean	11:52:14.601	11:52:14.601	Good
+403	Leitstand 192.168.36.1:4840	ns=3;s="sMD02EntnahmeRechts"	Leitstand01/Outputs/sMD02EntnahmeRechts	sMD02EntnahmeRechts	false	Boolean	11:52:14.601	11:52:14.601	Good
+404	Leitstand 192.168.36.1:4840	ns=3;s="sMD02StartAuftrag"	Leitstand01/Outputs/sMD02StartAuftrag	sMD02StartAuftrag	false	Boolean	11:52:14.601	11:52:14.601	Good
+405	Leitstand 192.168.36.1:4840	ns=3;s="sMD02StopperOeffnen"	Leitstand01/Outputs/sMD02StopperOeffnen	sMD02StopperOeffnen	false	Boolean	11:52:14.601	11:52:14.601	Good
+406	Leitstand 192.168.36.1:4840	ns=3;s="sMD02TippLinkslauf"	Leitstand01/Outputs/sMD02TippLinkslauf	sMD02TippLinkslauf	false	Boolean	11:52:14.601	11:52:14.601	Good
+407	Leitstand 192.168.36.1:4840	ns=3;s="sMD02TippRechtslauf"	Leitstand01/Outputs/sMD02TippRechtslauf	sMD02TippRechtslauf	false	Boolean	11:52:14.601	11:52:14.601	Good
+408	Leitstand 192.168.36.1:4840	ns=3;s="sMD02ZufuhrLinks"	Leitstand01/Outputs/sMD02ZufuhrLinks	sMD02ZufuhrLinks	false	Boolean	11:52:14.602	11:52:14.602	Good
+409	Leitstand 192.168.36.1:4840	ns=3;s="sMD02ZufuhrRechts"	Leitstand01/Outputs/sMD02ZufuhrRechts	sMD02ZufuhrRechts	false	Boolean	11:52:14.602	11:52:14.602	Good
+410	Leitstand 192.168.36.1:4840	ns=3;s="sMF01AusfahrtLinks"	Leitstand01/Outputs/sMF01AusfahrtLinks	sMF01AusfahrtLinks	false	Boolean	11:52:14.602	11:52:14.602	Good
+411	Leitstand 192.168.36.1:4840	ns=3;s="sMF01AusfahrtRechts"	Leitstand01/Outputs/sMF01AusfahrtRechts	sMF01AusfahrtRechts	false	Boolean	11:52:14.602	11:52:14.602	Good
+412	Leitstand 192.168.36.1:4840	ns=3;s="sMF01EinfahrtLinks"	Leitstand01/Outputs/sMF01EinfahrtLinks	sMF01EinfahrtLinks	false	Boolean	11:52:14.602	11:52:14.602	Good
+413	Leitstand 192.168.36.1:4840	ns=3;s="sMF01EinfahrtRechts"	Leitstand01/Outputs/sMF01EinfahrtRechts	sMF01EinfahrtRechts	false	Boolean	11:52:14.602	11:52:14.602	Good
+414	Leitstand 192.168.36.1:4840	ns=3;s="sMF01EntnahmeLinks"	Leitstand01/Outputs/sMF01EntnahmeLinks	sMF01EntnahmeLinks	false	Boolean	11:52:14.602	11:52:14.602	Good
+415	Leitstand 192.168.36.1:4840	ns=3;s="sMF01EntnahmeRechts"	Leitstand01/Outputs/sMF01EntnahmeRechts	sMF01EntnahmeRechts	false	Boolean	11:52:14.602	11:52:14.602	Good
+416	Leitstand 192.168.36.1:4840	ns=3;s="sMF01StartAuftrag"	Leitstand01/Outputs/sMF01StartAuftrag	sMF01StartAuftrag	false	Boolean	11:52:14.603	11:52:14.603	Good
+417	Leitstand 192.168.36.1:4840	ns=3;s="sMF01StopperOeffnen"	Leitstand01/Outputs/sMF01StopperOeffnen	sMF01StopperOeffnen	false	Boolean	11:52:14.603	11:52:14.603	Good
+418	Leitstand 192.168.36.1:4840	ns=3;s="sMF01TippLinkslauf"	Leitstand01/Outputs/sMF01TippLinkslauf	sMF01TippLinkslauf	false	Boolean	11:52:14.603	11:52:14.603	Good
+419	Leitstand 192.168.36.1:4840	ns=3;s="sMF01TippRechtslauf"	Leitstand01/Outputs/sMF01TippRechtslauf	sMF01TippRechtslauf	false	Boolean	11:52:14.603	11:52:14.603	Good
+420	Leitstand 192.168.36.1:4840	ns=3;s="sMF01ZufuhrLinks"	Leitstand01/Outputs/sMF01ZufuhrLinks	sMF01ZufuhrLinks	false	Boolean	11:52:14.603	11:52:14.603	Good
+421	Leitstand 192.168.36.1:4840	ns=3;s="sMF01ZufuhrRechts"	Leitstand01/Outputs/sMF01ZufuhrRechts	sMF01ZufuhrRechts	false	Boolean	11:52:14.603	11:52:14.603	Good
+422	Leitstand 192.168.36.1:4840	ns=3;s="sMF02AusfahrtLinks"	Leitstand01/Outputs/sMF02AusfahrtLinks	sMF02AusfahrtLinks	false	Boolean	11:52:14.603	11:52:14.603	Good
+423	Leitstand 192.168.36.1:4840	ns=3;s="sMF02AusfahrtRechts"	Leitstand01/Outputs/sMF02AusfahrtRechts	sMF02AusfahrtRechts	false	Boolean	11:52:14.603	11:52:14.603	Good
+424	Leitstand 192.168.36.1:4840	ns=3;s="sMF02EinfahrtLinks"	Leitstand01/Outputs/sMF02EinfahrtLinks	sMF02EinfahrtLinks	false	Boolean	11:52:14.604	11:52:14.604	Good
+425	Leitstand 192.168.36.1:4840	ns=3;s="sMF02EinfahrtRechts"	Leitstand01/Outputs/sMF02EinfahrtRechts	sMF02EinfahrtRechts	false	Boolean	11:52:14.604	11:52:14.604	Good
+426	Leitstand 192.168.36.1:4840	ns=3;s="sMF02EntnahmeLinks"	Leitstand01/Outputs/sMF02EntnahmeLinks	sMF02EntnahmeLinks	false	Boolean	11:52:14.604	11:52:14.604	Good
+427	Leitstand 192.168.36.1:4840	ns=3;s="sMF02EntnahmeRechts"	Leitstand01/Outputs/sMF02EntnahmeRechts	sMF02EntnahmeRechts	false	Boolean	11:52:14.604	11:52:14.604	Good
+428	Leitstand 192.168.36.1:4840	ns=3;s="sMF02StartAuftrag"	Leitstand01/Outputs/sMF02StartAuftrag	sMF02StartAuftrag	false	Boolean	11:52:14.604	11:52:14.604	Good
+429	Leitstand 192.168.36.1:4840	ns=3;s="sMF02StopperOeffnen"	Leitstand01/Outputs/sMF02StopperOeffnen	sMF02StopperOeffnen	false	Boolean	11:52:14.604	11:52:14.604	Good
+430	Leitstand 192.168.36.1:4840	ns=3;s="sMF02TippLinkslauf"	Leitstand01/Outputs/sMF02TippLinkslauf	sMF02TippLinkslauf	false	Boolean	11:52:14.604	11:52:14.604	Good
+431	Leitstand 192.168.36.1:4840	ns=3;s="sMF02TippRechtslauf"	Leitstand01/Outputs/sMF02TippRechtslauf	sMF02TippRechtslauf	false	Boolean	11:52:14.604	11:52:14.604	Good
+432	Leitstand 192.168.36.1:4840	ns=3;s="sMF02ZufuhrLinks"	Leitstand01/Outputs/sMF02ZufuhrLinks	sMF02ZufuhrLinks	false	Boolean	11:52:14.604	11:52:14.604	Good
+433	Leitstand 192.168.36.1:4840	ns=3;s="sMF02ZufuhrRechts"	Leitstand01/Outputs/sMF02ZufuhrRechts	sMF02ZufuhrRechts	false	Boolean	11:52:14.605	11:52:14.605	Good
+434	Leitstand 192.168.36.1:4840	ns=3;s="sPL01AusfahrtLinks"	Leitstand01/Outputs/sPL01AusfahrtLinks	sPL01AusfahrtLinks	false	Boolean	11:52:14.605	11:52:14.605	Good
+435	Leitstand 192.168.36.1:4840	ns=3;s="sPL01AusfahrtRechts"	Leitstand01/Outputs/sPL01AusfahrtRechts	sPL01AusfahrtRechts	false	Boolean	11:52:14.605	11:52:14.605	Good
+436	Leitstand 192.168.36.1:4840	ns=3;s="sPL01EinfahrtLinks"	Leitstand01/Outputs/sPL01EinfahrtLinks	sPL01EinfahrtLinks	false	Boolean	11:52:14.605	11:52:14.605	Good
+437	Leitstand 192.168.36.1:4840	ns=3;s="sPL01EinfahrtRechts"	Leitstand01/Outputs/sPL01EinfahrtRechts	sPL01EinfahrtRechts	false	Boolean	11:52:14.605	11:52:14.605	Good
+438	Leitstand 192.168.36.1:4840	ns=3;s="sPL01EntnahmeLinks"	Leitstand01/Outputs/sPL01EntnahmeLinks	sPL01EntnahmeLinks	false	Boolean	11:52:14.605	11:52:14.605	Good
+439	Leitstand 192.168.36.1:4840	ns=3;s="sPL01EntnahmeRechts"	Leitstand01/Outputs/sPL01EntnahmeRechts	sPL01EntnahmeRechts	false	Boolean	11:52:14.605	11:52:14.605	Good
+440	Leitstand 192.168.36.1:4840	ns=3;s="sPL01StartAuftrag"	Leitstand01/Outputs/sPL01StartAuftrag	sPL01StartAuftrag	false	Boolean	11:52:14.605	11:52:14.605	Good
+441	Leitstand 192.168.36.1:4840	ns=3;s="sPL01StopperOeffnen"	Leitstand01/Outputs/sPL01StopperOeffnen	sPL01StopperOeffnen	false	Boolean	11:52:14.606	11:52:14.606	Good
+442	Leitstand 192.168.36.1:4840	ns=3;s="sPL01TippLinkslauf"	Leitstand01/Outputs/sPL01TippLinkslauf	sPL01TippLinkslauf	false	Boolean	11:52:14.606	11:52:14.606	Good
+443	Leitstand 192.168.36.1:4840	ns=3;s="sPL01TippRechtslauf"	Leitstand01/Outputs/sPL01TippRechtslauf	sPL01TippRechtslauf	false	Boolean	11:52:14.606	11:52:14.606	Good
+444	Leitstand 192.168.36.1:4840	ns=3;s="sPL01ZufuhrLinks"	Leitstand01/Outputs/sPL01ZufuhrLinks	sPL01ZufuhrLinks	false	Boolean	11:52:14.606	11:52:14.606	Good
+445	Leitstand 192.168.36.1:4840	ns=3;s="sPL01ZufuhrRechts"	Leitstand01/Outputs/sPL01ZufuhrRechts	sPL01ZufuhrRechts	false	Boolean	11:52:14.606	11:52:14.606	Good
+446	Leitstand 192.168.36.1:4840	ns=3;s="sPL02AusfahrtLinks"	Leitstand01/Outputs/sPL02AusfahrtLinks	sPL02AusfahrtLinks	false	Boolean	11:52:14.606	11:52:14.606	Good
+447	Leitstand 192.168.36.1:4840	ns=3;s="sPL02AusfahrtRechts"	Leitstand01/Outputs/sPL02AusfahrtRechts	sPL02AusfahrtRechts	false	Boolean	11:52:14.606	11:52:14.606	Good
+448	Leitstand 192.168.36.1:4840	ns=3;s="sPL02EinfahrtLinks"	Leitstand01/Outputs/sPL02EinfahrtLinks	sPL02EinfahrtLinks	false	Boolean	11:52:14.606	11:52:14.606	Good
+449	Leitstand 192.168.36.1:4840	ns=3;s="sPL02EinfahrtRechts"	Leitstand01/Outputs/sPL02EinfahrtRechts	sPL02EinfahrtRechts	false	Boolean	11:52:14.606	11:52:14.606	Good
+450	Leitstand 192.168.36.1:4840	ns=3;s="sPL02EntnahmeLinks"	Leitstand01/Outputs/sPL02EntnahmeLinks	sPL02EntnahmeLinks	false	Boolean	11:52:14.607	11:52:14.607	Good
+451	Leitstand 192.168.36.1:4840	ns=3;s="sPL02EntnahmeRechts"	Leitstand01/Outputs/sPL02EntnahmeRechts	sPL02EntnahmeRechts	false	Boolean	11:52:14.607	11:52:14.607	Good
+452	Leitstand 192.168.36.1:4840	ns=3;s="sPL02StartAuftrag"	Leitstand01/Outputs/sPL02StartAuftrag	sPL02StartAuftrag	false	Boolean	11:52:14.607	11:52:14.607	Good
+453	Leitstand 192.168.36.1:4840	ns=3;s="sPL02StopperOeffnen"	Leitstand01/Outputs/sPL02StopperOeffnen	sPL02StopperOeffnen	false	Boolean	11:52:14.607	11:52:14.607	Good
+454	Leitstand 192.168.36.1:4840	ns=3;s="sPL02TippLinkslauf"	Leitstand01/Outputs/sPL02TippLinkslauf	sPL02TippLinkslauf	false	Boolean	11:52:14.607	11:52:14.607	Good
+455	Leitstand 192.168.36.1:4840	ns=3;s="sPL02TippRechtslauf"	Leitstand01/Outputs/sPL02TippRechtslauf	sPL02TippRechtslauf	false	Boolean	11:52:14.607	11:52:14.607	Good
+456	Leitstand 192.168.36.1:4840	ns=3;s="sPL02ZufuhrLinks"	Leitstand01/Outputs/sPL02ZufuhrLinks	sPL02ZufuhrLinks	false	Boolean	11:52:14.607	11:52:14.607	Good
+457	Leitstand 192.168.36.1:4840	ns=3;s="sPL02ZufuhrRechts"	Leitstand01/Outputs/sPL02ZufuhrRechts	sPL02ZufuhrRechts	false	Boolean	11:52:14.608	11:52:14.608	Good
+458	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag"	DataBlocksGlobal/dbHMI/aowHMISteuerauftrag	aowHMISteuerauftrag	{0,0,0,0}	UInt16	11:52:14.608	11:52:14.608	Good
+459	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag_1500"	DataBlocksGlobal/dbHMI/aowHMISteuerauftrag_1500	aowHMISteuerauftrag_1500	{51,3,0,0}	UInt16	11:52:14.608	11:52:14.608	Good
+460	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"	DataBlocksGlobal/dbHMI/auheHMIEntnahme	auheHMIEntnahme		HMI_ENTNAHME	11:52:14.612	11:52:14.612	Good
+461	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bHMIEntnahme"	DataBlocksGlobal/dbHMI/bHMIEntnahme	bHMIEntnahme	0	Byte	11:52:14.613	11:52:14.613	Good
+462	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bHMIFarbeDeckel"	DataBlocksGlobal/dbHMI/bHMIFarbeDeckel	bHMIFarbeDeckel	0	Byte	11:52:14.613	11:52:14.613	Good
+463	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bHMIZerlegen"	DataBlocksGlobal/dbHMI/bHMIZerlegen	bHMIZerlegen	0	Byte	11:52:14.613	11:52:14.613	Good
+464	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bKonfEntnahme"	DataBlocksGlobal/dbHMI/bKonfEntnahme	bKonfEntnahme	13	Byte	11:52:14.613	11:52:14.613	Good
+465	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bKonfFarbeDeckel"	DataBlocksGlobal/dbHMI/bKonfFarbeDeckel	bKonfFarbeDeckel	0	Byte	11:52:14.613	11:52:14.613	Good
+466	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bKonfFarbeKugeln"	DataBlocksGlobal/dbHMI/bKonfFarbeKugeln	bKonfFarbeKugeln	0	Byte	11:52:14.614	11:52:14.614	Good
+467	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."bKonfZerlegen"	DataBlocksGlobal/dbHMI/bKonfZerlegen	bKonfZerlegen	0	Byte	11:52:14.614	11:52:14.614	Good
+468	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."stMES"	DataBlocksGlobal/dbHMI/stMES	stMES		String	11:52:14.614	11:52:14.614	Good
+469	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."stVersion"	DataBlocksGlobal/dbHMI/stVersion	stVersion	Version 4.3.8	String	11:52:14.614	11:52:14.614	Good
+470	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAbbruch"	DataBlocksGlobal/dbHMI/uhbAbbruch	uhbAbbruch		HMI_BUTTON	11:52:14.615	11:52:14.615	Good
+471	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAuftrag"	DataBlocksGlobal/dbHMI/uhbAuftrag	uhbAuftrag		HMI_BUTTON	11:52:14.615	11:52:14.615	Good
+472	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAuftragStarten"	DataBlocksGlobal/dbHMI/uhbAuftragStarten	uhbAuftragStarten		HMI_BUTTON	11:52:14.616	11:52:14.616	Good
+473	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbFertigen"	DataBlocksGlobal/dbHMI/uhbFertigen	uhbFertigen		HMI_BUTTON	11:52:14.616	11:52:14.616	Good
+474	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbLagerortFestlegen"	DataBlocksGlobal/dbHMI/uhbLagerortFestlegen	uhbLagerortFestlegen		HMI_BUTTON	11:52:14.617	11:52:14.617	Good
+475	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbZerlegen"	DataBlocksGlobal/dbHMI/uhbZerlegen	uhbZerlegen		HMI_BUTTON	11:52:14.617	11:52:14.617	Good
+476	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uiHMIKugelnBlau"	DataBlocksGlobal/dbHMI/uiHMIKugelnBlau	uiHMIKugelnBlau	0	UInt16	11:52:14.618	11:52:14.618	Good
+477	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uiHMIKugelnGruen"	DataBlocksGlobal/dbHMI/uiHMIKugelnGruen	uiHMIKugelnGruen	0	UInt16	11:52:14.618	11:52:14.618	Good
+478	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uiHMIKugelnRot"	DataBlocksGlobal/dbHMI/uiHMIKugelnRot	uiHMIKugelnRot	0	UInt16	11:52:14.618	11:52:14.618	Good
+479	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uiSeriennummer"	DataBlocksGlobal/dbHMI/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.618	11:52:14.618	Good
+480	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xBildumschaltung02"	DataBlocksGlobal/dbHMI/xBildumschaltung02	xBildumschaltung02	false	Boolean	11:52:14.618	11:52:14.618	Good
+481	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xBildumschaltung04"	DataBlocksGlobal/dbHMI/xBildumschaltung04	xBildumschaltung04	false	Boolean	11:52:14.618	11:52:14.618	Good
+482	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xFehlerMenge"	DataBlocksGlobal/dbHMI/xFehlerMenge	xFehlerMenge	false	Boolean	11:52:14.618	11:52:14.618	Good
+483	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xHMIZufuhr"	DataBlocksGlobal/dbHMI/xHMIZufuhr	xHMIZufuhr	false	Boolean	11:52:14.619	11:52:14.619	Good
+484	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xMESAktiv"	DataBlocksGlobal/dbHMI/xMESAktiv	xMESAktiv	true	Boolean	11:52:14.619	11:52:14.619	Good
+485	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xPopUpDreheinheit"	DataBlocksGlobal/dbHMI/xPopUpDreheinheit	xPopUpDreheinheit	false	Boolean	11:52:14.619	11:52:14.619	Good
+486	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."xPopupRotationaktiv"	DataBlocksGlobal/dbHMI/xPopupRotationaktiv	xPopupRotationaktiv	false	Boolean	11:52:14.619	11:52:14.619	Good
+487	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Auftragsnummer"	DataBlocksGlobal/dbMESLeitstand/Auftragsnummer	Auftragsnummer	0	Int16	11:52:14.619	11:52:14.619	Good
+488	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."AuftragÜbernehmen"	DataBlocksGlobal/dbMESLeitstand/AuftragÜbernehmen	AuftragÜbernehmen	false	Boolean	11:52:14.620	11:52:14.620	Good
+489	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."AuftragÜbernommen"	DataBlocksGlobal/dbMESLeitstand/AuftragÜbernommen	AuftragÜbernommen	false	Boolean	11:52:14.620	11:52:14.620	Good
+490	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."BereitFürAuftrag"	DataBlocksGlobal/dbMESLeitstand/BereitFürAuftrag	BereitFürAuftrag	false	Boolean	11:52:14.620	11:52:14.620	Good
+491	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Farbe"	DataBlocksGlobal/dbMESLeitstand/Farbe	Farbe	0	Byte	11:52:14.620	11:52:14.620	Good
+492	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Inhalt"	DataBlocksGlobal/dbMESLeitstand/Inhalt	Inhalt	0	Byte	11:52:14.620	11:52:14.620	Good
+493	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."MengeInhalt1"	DataBlocksGlobal/dbMESLeitstand/MengeInhalt1	MengeInhalt1	0	UInt16	11:52:14.620	11:52:14.620	Good
+494	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."MengeInhalt2"	DataBlocksGlobal/dbMESLeitstand/MengeInhalt2	MengeInhalt2	0	UInt16	11:52:14.620	11:52:14.620	Good
+495	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."MengeInhalt3"	DataBlocksGlobal/dbMESLeitstand/MengeInhalt3	MengeInhalt3	0	UInt16	11:52:14.620	11:52:14.620	Good
+496	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Richten"	DataBlocksGlobal/dbMESLeitstand/Richten	Richten	false	Boolean	11:52:14.620	11:52:14.620	Good
+497	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."RichtenAbgeschlossen"	DataBlocksGlobal/dbMESLeitstand/RichtenAbgeschlossen	RichtenAbgeschlossen	false	Boolean	11:52:14.621	11:52:14.621	Good
+498	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"	DataBlocksGlobal/dbMESLeitstand/Teile	Teile	{false,false,false,false,false,false,false,false,false}	Boolean	11:52:14.621	11:52:14.621	Good
+499	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"	DataBlocksGlobal/dbZentral/IRB01	IRB01		"dbZentral"."IRB01"	11:52:14.629	11:52:14.629	Good
+500	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiDummy"	DataBlocksGlobal/dbZentral/aouiDummy	aouiDummy	{0,0,0,0}	UInt16	11:52:14.629	11:52:14.629	Good
+501	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"	DataBlocksGlobal/dbZentral/aouiFahrt	aouiFahrt	{0,0,0,0,0,0,0,0,0,0}	UInt16	11:52:14.629	11:52:14.629	Good
+502	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"	DataBlocksGlobal/dbZentral/auavAuftragsverfolgung	auavAuftragsverfolgung		AUFTRAG_VERFOLGUNG	11:52:14.659	11:52:14.659	Good
+503	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"	DataBlocksGlobal/dbZentral/stAufbau	stAufbau		"dbZentral"."stAufbau"	11:52:14.681	11:52:14.681	Good
+504	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAuftrag"	DataBlocksGlobal/dbZentral/stAuftrag	stAuftrag		"dbZentral"."stAuftrag"	11:52:14.682	11:52:14.682	Good
+505	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stFTS"	DataBlocksGlobal/dbZentral/stFTS	stFTS		"dbZentral"."stFTS"	11:52:14.685	11:52:14.685	Good
+506	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stKommunikation"	DataBlocksGlobal/dbZentral/stKommunikation	stKommunikation		Null	11:51:58.058	11:51:58.058	BadNotReadable
+507	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"	DataBlocksGlobal/dbZentral/ufbDummy	ufbDummy		KOMMUNIKATION_TRANSFER	11:52:14.686	11:52:14.686	Good
+508	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."uiBildnummer"	DataBlocksGlobal/dbZentral/uiBildnummer	uiBildnummer	3	UInt16	11:52:14.686	11:52:14.686	Good
+509	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."uiLetzeSeriennummer"	DataBlocksGlobal/dbZentral/uiLetzeSeriennummer	uiLetzeSeriennummer	14215	UInt16	11:52:14.686	11:52:14.686	Good
+510	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."uiVerbindungsstatus"	DataBlocksGlobal/dbZentral/uiVerbindungsstatus	uiVerbindungsstatus	2	UInt16	11:52:14.686	11:52:14.686	Good
+511	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."xDummyfalse"	DataBlocksGlobal/dbZentral/xDummyfalse	xDummyfalse	false	Boolean	11:52:14.687	11:52:14.687	Good
+512	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag"[0]	dbHMI/aowHMISteuerauftrag/0	0	0	UInt16	11:52:14.687	11:52:14.687	Good
+513	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag"[1]	dbHMI/aowHMISteuerauftrag/1	1	0	UInt16	11:52:14.687	11:52:14.687	Good
+514	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag"[2]	dbHMI/aowHMISteuerauftrag/2	2	0	UInt16	11:52:14.687	11:52:14.687	Good
+515	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag"[3]	dbHMI/aowHMISteuerauftrag/3	3	0	UInt16	11:52:14.687	11:52:14.687	Good
+516	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag_1500"[0]	dbHMI/aowHMISteuerauftrag_1500/0	0	51	UInt16	11:52:14.687	11:52:14.687	Good
+517	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag_1500"[1]	dbHMI/aowHMISteuerauftrag_1500/1	1	3	UInt16	11:52:14.687	11:52:14.687	Good
+518	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag_1500"[2]	dbHMI/aowHMISteuerauftrag_1500/2	2	0	UInt16	11:52:14.687	11:52:14.687	Good
+519	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."aowHMISteuerauftrag_1500"[3]	dbHMI/aowHMISteuerauftrag_1500/3	3	0	UInt16	11:52:14.688	11:52:14.688	Good
+520	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[0]	dbHMI/auheHMIEntnahme/0	0		HMI_ENTNAHME	11:52:14.688	11:52:14.688	Good
+521	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[1]	dbHMI/auheHMIEntnahme/1	1		HMI_ENTNAHME	11:52:14.689	11:52:14.689	Good
+522	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[2]	dbHMI/auheHMIEntnahme/2	2		HMI_ENTNAHME	11:52:14.690	11:52:14.690	Good
+523	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[3]	dbHMI/auheHMIEntnahme/3	3		HMI_ENTNAHME	11:52:14.691	11:52:14.691	Good
+524	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[4]	dbHMI/auheHMIEntnahme/4	4		HMI_ENTNAHME	11:52:14.692	11:52:14.692	Good
+525	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[5]	dbHMI/auheHMIEntnahme/5	5		HMI_ENTNAHME	11:52:14.694	11:52:14.694	Good
+526	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[6]	dbHMI/auheHMIEntnahme/6	6		HMI_ENTNAHME	11:52:14.694	11:52:14.694	Good
+527	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[7]	dbHMI/auheHMIEntnahme/7	7		HMI_ENTNAHME	11:52:14.695	11:52:14.695	Good
+528	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAbbruch"."uiButtonDarstellung"	dbHMI/uhbAbbruch/uiButtonDarstellung	uiButtonDarstellung	1	UInt16	11:52:14.696	11:52:14.696	Good
+529	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAbbruch"."xButtonGedrueckt"	dbHMI/uhbAbbruch/xButtonGedrueckt	xButtonGedrueckt	false	Boolean	11:52:14.696	11:52:14.696	Good
+530	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAuftrag"."uiButtonDarstellung"	dbHMI/uhbAuftrag/uiButtonDarstellung	uiButtonDarstellung	0	UInt16	11:52:14.696	11:52:14.696	Good
+531	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAuftrag"."xButtonGedrueckt"	dbHMI/uhbAuftrag/xButtonGedrueckt	xButtonGedrueckt	false	Boolean	11:52:14.696	11:52:14.696	Good
+532	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAuftragStarten"."uiButtonDarstellung"	dbHMI/uhbAuftragStarten/uiButtonDarstellung	uiButtonDarstellung	0	UInt16	11:52:14.696	11:52:14.696	Good
+533	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbAuftragStarten"."xButtonGedrueckt"	dbHMI/uhbAuftragStarten/xButtonGedrueckt	xButtonGedrueckt	false	Boolean	11:52:14.696	11:52:14.696	Good
+534	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbFertigen"."uiButtonDarstellung"	dbHMI/uhbFertigen/uiButtonDarstellung	uiButtonDarstellung	0	UInt16	11:52:14.696	11:52:14.696	Good
+535	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbFertigen"."xButtonGedrueckt"	dbHMI/uhbFertigen/xButtonGedrueckt	xButtonGedrueckt	false	Boolean	11:52:14.696	11:52:14.696	Good
+536	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbLagerortFestlegen"."uiButtonDarstellung"	dbHMI/uhbLagerortFestlegen/uiButtonDarstellung	uiButtonDarstellung	0	UInt16	11:52:14.696	11:52:14.696	Good
+537	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbLagerortFestlegen"."xButtonGedrueckt"	dbHMI/uhbLagerortFestlegen/xButtonGedrueckt	xButtonGedrueckt	false	Boolean	11:52:14.697	11:52:14.697	Good
+538	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbZerlegen"."uiButtonDarstellung"	dbHMI/uhbZerlegen/uiButtonDarstellung	uiButtonDarstellung	0	UInt16	11:52:14.697	11:52:14.697	Good
+539	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."uhbZerlegen"."xButtonGedrueckt"	dbHMI/uhbZerlegen/xButtonGedrueckt	xButtonGedrueckt	false	Boolean	11:52:14.697	11:52:14.697	Good
+540	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[0]	dbMESLeitstand/Teile/0	0	false	Boolean	11:52:14.697	11:52:14.697	Good
+541	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[1]	dbMESLeitstand/Teile/1	1	false	Boolean	11:52:14.697	11:52:14.697	Good
+542	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[2]	dbMESLeitstand/Teile/2	2	false	Boolean	11:52:14.697	11:52:14.697	Good
+543	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[3]	dbMESLeitstand/Teile/3	3	false	Boolean	11:52:14.697	11:52:14.697	Good
+544	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[4]	dbMESLeitstand/Teile/4	4	false	Boolean	11:52:14.697	11:52:14.697	Good
+545	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[5]	dbMESLeitstand/Teile/5	5	false	Boolean	11:52:14.697	11:52:14.697	Good
+546	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[6]	dbMESLeitstand/Teile/6	6	false	Boolean	11:52:14.698	11:52:14.698	Good
+547	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[7]	dbMESLeitstand/Teile/7	7	false	Boolean	11:52:14.698	11:52:14.698	Good
+548	Leitstand 192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Teile"[8]	dbMESLeitstand/Teile/8	8	false	Boolean	11:52:14.698	11:52:14.698	Good
+549	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"	dbZentral/IRB01/stRFIDEmpfang	stRFIDEmpfang		"dbZentral"."IRB01"."stRFIDEmpfang"	11:52:14.702	11:52:14.702	Good
+550	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"	dbZentral/IRB01/stRFIDSenden	stRFIDSenden		"dbZentral"."IRB01"."stRFIDSenden"	11:52:14.705	11:52:14.705	Good
+551	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDStatus"	dbZentral/IRB01/stRFIDStatus	stRFIDStatus		"dbZentral"."IRB01"."stRFIDStatus"	11:52:14.706	11:52:14.706	Good
+552	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"	dbZentral/IRB01/uzlsRoboterStatus	uzlsRoboterStatus		ZU_LEITSTAND_STATUS	11:52:14.707	11:52:14.707	Good
+553	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiDummy"[0]	dbZentral/aouiDummy/0	0	0	UInt16	11:52:14.707	11:52:14.707	Good
+554	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiDummy"[1]	dbZentral/aouiDummy/1	1	0	UInt16	11:52:14.707	11:52:14.707	Good
+555	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiDummy"[2]	dbZentral/aouiDummy/2	2	0	UInt16	11:52:14.707	11:52:14.707	Good
+556	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiDummy"[3]	dbZentral/aouiDummy/3	3	0	UInt16	11:52:14.707	11:52:14.707	Good
+557	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[0]	dbZentral/aouiFahrt/0	0	0	UInt16	11:52:14.707	11:52:14.707	Good
+558	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[1]	dbZentral/aouiFahrt/1	1	0	UInt16	11:52:14.708	11:52:14.708	Good
+559	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[2]	dbZentral/aouiFahrt/2	2	0	UInt16	11:52:14.708	11:52:14.708	Good
+560	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[3]	dbZentral/aouiFahrt/3	3	0	UInt16	11:52:14.708	11:52:14.708	Good
+561	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[4]	dbZentral/aouiFahrt/4	4	0	UInt16	11:52:14.708	11:52:14.708	Good
+562	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[5]	dbZentral/aouiFahrt/5	5	0	UInt16	11:52:14.708	11:52:14.708	Good
+563	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[6]	dbZentral/aouiFahrt/6	6	0	UInt16	11:52:14.708	11:52:14.708	Good
+564	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[7]	dbZentral/aouiFahrt/7	7	0	UInt16	11:52:14.708	11:52:14.708	Good
+565	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[8]	dbZentral/aouiFahrt/8	8	0	UInt16	11:52:14.708	11:52:14.708	Good
+566	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."aouiFahrt"[9]	dbZentral/aouiFahrt/9	9	0	UInt16	11:52:14.708	11:52:14.708	Good
+567	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[0]	dbZentral/auavAuftragsverfolgung/0	0		AUFTRAG_VERFOLGUNG	11:52:14.711	11:52:14.711	Good
+568	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[1]	dbZentral/auavAuftragsverfolgung/1	1		AUFTRAG_VERFOLGUNG	11:52:14.714	11:52:14.714	Good
+569	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[2]	dbZentral/auavAuftragsverfolgung/2	2		AUFTRAG_VERFOLGUNG	11:52:14.717	11:52:14.717	Good
+570	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[3]	dbZentral/auavAuftragsverfolgung/3	3		AUFTRAG_VERFOLGUNG	11:52:14.721	11:52:14.721	Good
+571	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[4]	dbZentral/auavAuftragsverfolgung/4	4		AUFTRAG_VERFOLGUNG	11:52:14.725	11:52:14.725	Good
+572	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[5]	dbZentral/auavAuftragsverfolgung/5	5		AUFTRAG_VERFOLGUNG	11:52:14.728	11:52:14.728	Good
+573	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[6]	dbZentral/auavAuftragsverfolgung/6	6		AUFTRAG_VERFOLGUNG	11:52:14.731	11:52:14.731	Good
+574	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[7]	dbZentral/auavAuftragsverfolgung/7	7		AUFTRAG_VERFOLGUNG	11:52:14.734	11:52:14.734	Good
+575	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[8]	dbZentral/auavAuftragsverfolgung/8	8		AUFTRAG_VERFOLGUNG	11:52:14.737	11:52:14.737	Good
+576	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[9]	dbZentral/auavAuftragsverfolgung/9	9		AUFTRAG_VERFOLGUNG	11:52:14.740	11:52:14.740	Good
+577	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."audbPeripherie"	dbZentral/stAufbau/audbPeripherie	audbPeripherie		DP_BELEGUNG	11:52:14.744	11:52:14.744	Good
+578	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"	dbZentral/stAufbau/auiAnlage	auiAnlage		UInt16	11:52:14.744	11:52:14.744	Good
+579	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."aukKreuzung"	dbZentral/stAufbau/aukKreuzung	aukKreuzung		KREUZUNG	11:52:14.746	11:52:14.746	Good
+580	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auskStationKonfiguration"	dbZentral/stAufbau/auskStationKonfiguration	auskStationKonfiguration		STATION_KONFIGURATION	11:52:14.766	11:52:14.766	Good
+581	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."stTeileVorrat"	dbZentral/stAufbau/stTeileVorrat	stTeileVorrat		"dbZentral"."stAufbau"."stTeileVorrat"	11:52:14.767	11:52:14.767	Good
+582	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAuftrag"."uiSeriennummer"	dbZentral/stAuftrag/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.767	11:52:14.767	Good
+583	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAuftrag"."urapAuftragProdukt"	dbZentral/stAuftrag/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.768	11:52:14.768	Good
+584	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAuftrag"."urawAuftragWeg"	dbZentral/stAuftrag/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.769	11:52:14.769	Good
+585	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stFTS"."udtDatenLesen"	dbZentral/stFTS/udtDatenLesen	udtDatenLesen		ZU_LEITSTAND_ZYKLISCH_FTS	11:52:14.770	11:52:14.770	Good
+586	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stFTS"."udtDatenSchreiben"	dbZentral/stFTS/udtDatenSchreiben	udtDatenSchreiben		VON_LEITSTAND_ZYKLISCH_FTS	11:52:14.771	11:52:14.771	Good
+587	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stFTS"."uiProgNummer"	dbZentral/stFTS/uiProgNummer	uiProgNummer	0	UInt16	11:52:14.772	11:52:14.772	Good
+588	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stKommunikation"."aukaKommunikationAblauf"	dbZentral/stKommunikation/aukaKommunikationAblauf	aukaKommunikationAblauf		KOMMUNIKATION_ABLAUF	11:52:14.781	11:52:14.781	Good
+589	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stKommunikation"."aukskStationenStatus"	dbZentral/stKommunikation/aukskStationenStatus	aukskStationenStatus		KOMMUNIKATION_STATUS	11:52:14.796	11:52:14.796	Good
+590	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stKommunikation"."ukaAGV"	dbZentral/stKommunikation/ukaAGV	ukaAGV		KOMMUNIKATION_ABLAUF	11:52:14.797	11:52:14.797	Good
+591	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."uiFahreZu"	dbZentral/ufbDummy/uiFahreZu	uiFahreZu	0	UInt16	11:52:14.798	11:52:14.798	Good
+592	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."uiID"	dbZentral/ufbDummy/uiID	uiID	0	UInt16	11:52:14.798	11:52:14.798	Good
+593	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xAusfahrtLinks"	dbZentral/ufbDummy/xAusfahrtLinks	xAusfahrtLinks	false	Boolean	11:52:14.799	11:52:14.799	Good
+594	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xAusfahrtRechts"	dbZentral/ufbDummy/xAusfahrtRechts	xAusfahrtRechts	false	Boolean	11:52:14.799	11:52:14.799	Good
+595	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xEinfahrtBeendet"	dbZentral/ufbDummy/xEinfahrtBeendet	xEinfahrtBeendet	false	Boolean	11:52:14.799	11:52:14.799	Good
+596	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xEinfahrtLinks"	dbZentral/ufbDummy/xEinfahrtLinks	xEinfahrtLinks	false	Boolean	11:52:14.799	11:52:14.799	Good
+597	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xEinfahrtRechts"	dbZentral/ufbDummy/xEinfahrtRechts	xEinfahrtRechts	false	Boolean	11:52:14.800	11:52:14.800	Good
+598	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xEntnahmeLinks"	dbZentral/ufbDummy/xEntnahmeLinks	xEntnahmeLinks	false	Boolean	11:52:14.800	11:52:14.800	Good
+599	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xEntnahmeRechts"	dbZentral/ufbDummy/xEntnahmeRechts	xEntnahmeRechts	false	Boolean	11:52:14.800	11:52:14.800	Good
+600	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xLinkslauf"	dbZentral/ufbDummy/xLinkslauf	xLinkslauf	false	Boolean	11:52:14.801	11:52:14.801	Good
+601	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xRechtslauf"	dbZentral/ufbDummy/xRechtslauf	xRechtslauf	false	Boolean	11:52:14.801	11:52:14.801	Good
+602	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xSensorLinks"	dbZentral/ufbDummy/xSensorLinks	xSensorLinks	false	Boolean	11:52:14.801	11:52:14.801	Good
+603	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xSensorRechts"	dbZentral/ufbDummy/xSensorRechts	xSensorRechts	false	Boolean	11:52:14.801	11:52:14.801	Good
+604	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xStopperOeffnen"	dbZentral/ufbDummy/xStopperOeffnen	xStopperOeffnen	false	Boolean	11:52:14.801	11:52:14.801	Good
+605	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xTransferEnde"	dbZentral/ufbDummy/xTransferEnde	xTransferEnde	false	Boolean	11:52:14.801	11:52:14.801	Good
+606	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xWartet"	dbZentral/ufbDummy/xWartet	xWartet	false	Boolean	11:52:14.801	11:52:14.801	Good
+607	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xZufuhrLinks"	dbZentral/ufbDummy/xZufuhrLinks	xZufuhrLinks	false	Boolean	11:52:14.801	11:52:14.801	Good
+608	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."ufbDummy"."xZufuhrRechts"	dbZentral/ufbDummy/xZufuhrRechts	xZufuhrRechts	false	Boolean	11:52:14.801	11:52:14.801	Good
+609	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xDrehenGUZS/UZS"	dbDreheinheit/Inputs/xDrehenGUZS/UZS	xDrehenGUZS/UZS	false	Boolean	11:52:14.802	11:52:14.802	Good
+610	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xDrehzylinderInGUZS"	dbDreheinheit/Inputs/xDrehzylinderInGUZS	xDrehzylinderInGUZS	true	Boolean	11:52:14.802	11:52:14.802	Good
+611	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xDrehzylinderInUZS"	dbDreheinheit/Inputs/xDrehzylinderInUZS	xDrehzylinderInUZS	false	Boolean	11:52:14.802	11:52:14.802	Good
+612	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xHubInAS"	dbDreheinheit/Inputs/xHubInAS	xHubInAS	false	Boolean	11:52:14.802	11:52:14.802	Good
+613	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xHubInGS"	dbDreheinheit/Inputs/xHubInGS	xHubInGS	true	Boolean	11:52:14.802	11:52:14.802	Good
+614	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xPosPalette"	dbDreheinheit/Inputs/xPosPalette	xPosPalette	false	Boolean	11:52:14.802	11:52:14.802	Good
+615	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xR/L"	dbDreheinheit/Inputs/xR/L	xR/L	false	Boolean	11:52:14.802	11:52:14.802	Good
+616	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xReset"	dbDreheinheit/Inputs/xReset	xReset	false	Boolean	11:52:14.803	11:52:14.803	Good
+617	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xStopperInAS"	dbDreheinheit/Inputs/xStopperInAS	xStopperInAS	false	Boolean	11:52:14.803	11:52:14.803	Good
+618	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xStopperInGS"	dbDreheinheit/Inputs/xStopperInGS	xStopperInGS	true	Boolean	11:52:14.803	11:52:14.803	Good
+619	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xÜbergeben"	dbDreheinheit/Inputs/xÜbergeben	xÜbergeben	false	Boolean	11:52:14.803	11:52:14.803	Good
+620	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xÜbernehmen"	dbDreheinheit/Inputs/xÜbernehmen	xÜbernehmen	false	Boolean	11:52:14.803	11:52:14.803	Good
+621	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xDrehzylinderNachUZS"	dbDreheinheit/Outputs/xDrehzylinderNachUZS	xDrehzylinderNachUZS	false	Boolean	11:52:14.803	11:52:14.803	Good
+622	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xEndeInitialisierung"	dbDreheinheit/Outputs/xEndeInitialisierung	xEndeInitialisierung	true	Boolean	11:52:14.803	11:52:14.803	Good
+623	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xHubNachAS"	dbDreheinheit/Outputs/xHubNachAS	xHubNachAS	false	Boolean	11:52:14.803	11:52:14.803	Good
+624	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xInReset"	dbDreheinheit/Outputs/xInReset	xInReset	false	Boolean	11:52:14.803	11:52:14.803	Good
+625	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xLinkslauf"	dbDreheinheit/Outputs/xLinkslauf	xLinkslauf	false	Boolean	11:52:14.804	11:52:14.804	Good
+626	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xRechtslauf"	dbDreheinheit/Outputs/xRechtslauf	xRechtslauf	false	Boolean	11:52:14.804	11:52:14.804	Good
+627	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xStopperNachAS"	dbDreheinheit/Outputs/xStopperNachAS	xStopperNachAS	false	Boolean	11:52:14.804	11:52:14.804	Good
+628	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xÜbergabeBereit"	dbDreheinheit/Outputs/xÜbergabeBereit	xÜbergabeBereit	false	Boolean	11:52:14.804	11:52:14.804	Good
+629	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xÜbernahmeBereit"	dbDreheinheit/Outputs/xÜbernahmeBereit	xÜbernahmeBereit	false	Boolean	11:52:14.804	11:52:14.804	Good
+630	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."iMerkerSchrittzaehler"	dbDreheinheit/Static/iMerkerSchrittzaehler	iMerkerSchrittzaehler	4	Int16	11:52:14.804	11:52:14.804	Good
+631	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."iSchrittzaehler"	dbDreheinheit/Static/iSchrittzaehler	iSchrittzaehler	4	Int16	11:52:14.804	11:52:14.804	Good
+632	Leitstand 192.168.36.1:4840	ns=3;s="dbDreheinheit"."xNTrigPosPalette"	dbDreheinheit/Static/xNTrigPosPalette	xNTrigPosPalette	false	Boolean	11:52:14.804	11:52:14.804	Good
+633	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."uiID"	dbDurchfahrt1Direkt/Inputs/uiID	uiID	6011	UInt16	11:52:14.804	11:52:14.804	Good
+634	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."uiIDZu"	dbDurchfahrt1Direkt/Inputs/uiIDZu	uiIDZu	0	UInt16	11:52:14.805	11:52:14.805	Good
+635	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."xReset"	dbDurchfahrt1Direkt/Inputs/xReset	xReset	false	Boolean	11:52:14.805	11:52:14.805	Good
+636	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."xSensorLinks"	dbDurchfahrt1Direkt/Inputs/xSensorLinks	xSensorLinks	true	Boolean	11:52:14.805	11:52:14.805	Good
+637	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."xSensorRechts"	dbDurchfahrt1Direkt/Inputs/xSensorRechts	xSensorRechts	true	Boolean	11:52:14.805	11:52:14.805	Good
+638	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."aksKommunikationStatus"	dbDurchfahrt1Direkt/Outputs/aksKommunikationStatus	aksKommunikationStatus		KOMMUNIKATION_STATUS	11:52:14.806	11:52:14.806	Good
+639	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."xLinkslauf"	dbDurchfahrt1Direkt/Outputs/xLinkslauf	xLinkslauf	false	Boolean	11:52:14.806	11:52:14.806	Good
+640	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."xRechtslauf"	dbDurchfahrt1Direkt/Outputs/xRechtslauf	xRechtslauf	false	Boolean	11:52:14.806	11:52:14.806	Good
+641	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."iMerkerPosX"	dbDurchfahrt1Direkt/Static/iMerkerPosX	iMerkerPosX	0	Int16	11:52:14.806	11:52:14.806	Good
+642	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."iMerkerPosY"	dbDurchfahrt1Direkt/Static/iMerkerPosY	iMerkerPosY	0	Int16	11:52:14.806	11:52:14.806	Good
+643	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."iSchrittzähler"	dbDurchfahrt1Direkt/Static/iSchrittzähler	iSchrittzähler	2	Int16	11:52:14.806	11:52:14.806	Good
+644	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."iZählerX"	dbDurchfahrt1Direkt/Static/iZählerX	iZählerX	0	Int16	11:52:14.806	11:52:14.806	Good
+645	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."iZählerY"	dbDurchfahrt1Direkt/Static/iZählerY	iZählerY	0	Int16	11:52:14.807	11:52:14.807	Good
+646	Leitstand 192.168.36.1:4840	ns=3;s="dbDurchfahrt1Direkt"."uiMerkerIDZu"	dbDurchfahrt1Direkt/Static/uiMerkerIDZu	uiMerkerIDZu	0	UInt16	11:52:14.807	11:52:14.807	Good
+647	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."aukKreuzungKonfiguration"	dbFahrauftrag/Inputs/aukKreuzungKonfiguration	aukKreuzungKonfiguration		KREUZUNG	11:52:14.810	11:52:14.810	Good
+648	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."aukskStationenStatus"	dbFahrauftrag/Inputs/aukskStationenStatus	aukskStationenStatus		KOMMUNIKATION_STATUS	11:52:14.824	11:52:14.824	Good
+649	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."auskStationKonfiguration"	dbFahrauftrag/Inputs/auskStationKonfiguration	auskStationKonfiguration		STATION_KONFIGURATION	11:52:14.845	11:52:14.845	Good
+650	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."bMonDemon"	dbFahrauftrag/Inputs/bMonDemon	bMonDemon	0	Byte	11:52:14.846	11:52:14.846	Good
+651	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."stTeileVorrat"	dbFahrauftrag/Inputs/stTeileVorrat	stTeileVorrat		"fbFahrauftrag"."stTeileVorrat"	11:52:14.846	11:52:14.846	Good
+652	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."uiVon"	dbFahrauftrag/Inputs/uiVon	uiVon	0	UInt16	11:52:14.847	11:52:14.847	Good
+653	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."uiZu"	dbFahrauftrag/Inputs/uiZu	uiZu	0	UInt16	11:52:14.847	11:52:14.847	Good
+654	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."xAufbauBerrechnen"	dbFahrauftrag/Inputs/xAufbauBerrechnen	xAufbauBerrechnen	false	Boolean	11:52:14.847	11:52:14.847	Good
+655	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."xFahrwegeErmitteln"	dbFahrauftrag/Inputs/xFahrwegeErmitteln	xFahrwegeErmitteln	false	Boolean	11:52:14.848	11:52:14.848	Good
+656	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."xReset"	dbFahrauftrag/Inputs/xReset	xReset	true	Boolean	11:52:14.848	11:52:14.848	Good
+657	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iVonX"	dbFahrauftrag/Outputs/iVonX	iVonX	0	Int16	11:52:14.848	11:52:14.848	Good
+658	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iVonY"	dbFahrauftrag/Outputs/iVonY	iVonY	0	Int16	11:52:14.848	11:52:14.848	Good
+659	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iZuX"	dbFahrauftrag/Outputs/iZuX	iZuX	0	Int16	11:52:14.848	11:52:14.848	Good
+660	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iZuY"	dbFahrauftrag/Outputs/iZuY	iZuY	0	Int16	11:52:14.848	11:52:14.848	Good
+661	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."xBerechnungBeendet"	dbFahrauftrag/Outputs/xBerechnungBeendet	xBerechnungBeendet	false	Boolean	11:52:14.848	11:52:14.848	Good
+662	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."xFahrtEnde"	dbFahrauftrag/Outputs/xFahrtEnde	xFahrtEnde	false	Boolean	11:52:14.848	11:52:14.848	Good
+663	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."xFahrwegErmittelt"	dbFahrauftrag/Outputs/xFahrwegErmittelt	xFahrwegErmittelt	false	Boolean	11:52:14.849	11:52:14.849	Good
+664	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."aouiMerkerWegAlt"	dbFahrauftrag/Static/aouiMerkerWegAlt	aouiMerkerWegAlt	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}	UInt16	11:52:14.849	11:52:14.849	Good
+665	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."aouiMerkerWegNeu"	dbFahrauftrag/Static/aouiMerkerWegNeu	aouiMerkerWegNeu	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}	UInt16	11:52:14.849	11:52:14.849	Good
+666	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."auiMerkerAlleWege"	dbFahrauftrag/Static/auiMerkerAlleWege	auiMerkerAlleWege		UInt16	11:52:14.849	11:52:14.849	Good
+667	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."auiMerkerGefunden"	dbFahrauftrag/Static/auiMerkerGefunden	auiMerkerGefunden	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}	UInt16	11:52:14.850	11:52:14.850	Good
+668	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."auzkMerkerZuKoordinaten"	dbFahrauftrag/Static/auzkMerkerZuKoordinaten	auzkMerkerZuKoordinaten		ZU_KOORDINATEN	11:52:14.853	11:52:14.853	Good
+669	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iForZaehler2"	dbFahrauftrag/Static/iForZaehler2	iForZaehler2	0	Int16	11:52:14.854	11:52:14.854	Good
+670	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iForZähler"	dbFahrauftrag/Static/iForZähler	iForZähler	0	Int16	11:52:14.854	11:52:14.854	Good
+671	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iLängeKurveLinks"	dbFahrauftrag/Static/iLängeKurveLinks	iLängeKurveLinks	0	Int16	11:52:14.854	11:52:14.854	Good
+672	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iLängeKurveRechts"	dbFahrauftrag/Static/iLängeKurveRechts	iLängeKurveRechts	0	Int16	11:52:14.854	11:52:14.854	Good
+673	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iLängeWegXVonZu"	dbFahrauftrag/Static/iLängeWegXVonZu	iLängeWegXVonZu	0	Int16	11:52:14.854	11:52:14.854	Good
+674	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iLängeWegYVonZu"	dbFahrauftrag/Static/iLängeWegYVonZu	iLängeWegYVonZu	0	Int16	11:52:14.854	11:52:14.854	Good
+675	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerAktuellZaehler"	dbFahrauftrag/Static/iMerkerAktuellZaehler	iMerkerAktuellZaehler	0	Int16	11:52:14.854	11:52:14.854	Good
+676	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerFahrt"	dbFahrauftrag/Static/iMerkerFahrt	iMerkerFahrt	0	Int16	11:52:14.854	11:52:14.854	Good
+677	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerFahrtX"	dbFahrauftrag/Static/iMerkerFahrtX	iMerkerFahrtX	0	Int16	11:52:14.854	11:52:14.854	Good
+678	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerFahrtY"	dbFahrauftrag/Static/iMerkerFahrtY	iMerkerFahrtY	0	Int16	11:52:14.854	11:52:14.854	Good
+679	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerForZaehler"	dbFahrauftrag/Static/iMerkerForZaehler	iMerkerForZaehler	0	Int16	11:52:14.855	11:52:14.855	Good
+680	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerForZaehler2"	dbFahrauftrag/Static/iMerkerForZaehler2	iMerkerForZaehler2	0	Int16	11:52:14.855	11:52:14.855	Good
+681	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerKreuzung2Y"	dbFahrauftrag/Static/iMerkerKreuzung2Y	iMerkerKreuzung2Y	0	Int16	11:52:14.855	11:52:14.855	Good
+682	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerStartFahrtX"	dbFahrauftrag/Static/iMerkerStartFahrtX	iMerkerStartFahrtX	0	Int16	11:52:14.855	11:52:14.855	Good
+683	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerVonX"	dbFahrauftrag/Static/iMerkerVonX	iMerkerVonX	0	Int16	11:52:14.855	11:52:14.855	Good
+684	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerVonY"	dbFahrauftrag/Static/iMerkerVonY	iMerkerVonY	0	Int16	11:52:14.855	11:52:14.855	Good
+685	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerWeg"	dbFahrauftrag/Static/iMerkerWeg	iMerkerWeg	0	Int16	11:52:14.855	11:52:14.855	Good
+686	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerWegAlt"	dbFahrauftrag/Static/iMerkerWegAlt	iMerkerWegAlt	0	Int16	11:52:14.855	11:52:14.855	Good
+687	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerWegNeu"	dbFahrauftrag/Static/iMerkerWegNeu	iMerkerWegNeu	0	Int16	11:52:14.856	11:52:14.856	Good
+688	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerZuX"	dbFahrauftrag/Static/iMerkerZuX	iMerkerZuX	0	Int16	11:52:14.856	11:52:14.856	Good
+689	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iMerkerZuY"	dbFahrauftrag/Static/iMerkerZuY	iMerkerZuY	0	Int16	11:52:14.856	11:52:14.856	Good
+690	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iSchrittzähler"	dbFahrauftrag/Static/iSchrittzähler	iSchrittzähler	1	Int16	11:52:14.856	11:52:14.856	Good
+691	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iZählerX"	dbFahrauftrag/Static/iZählerX	iZählerX	0	Int16	11:52:14.856	11:52:14.856	Good
+692	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."iZählerY"	dbFahrauftrag/Static/iZählerY	iZählerY	0	Int16	11:52:14.856	11:52:14.856	Good
+693	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."uiMerkerAnzahlGefunden"	dbFahrauftrag/Static/uiMerkerAnzahlGefunden	uiMerkerAnzahlGefunden	0	UInt16	11:52:14.856	11:52:14.856	Good
+694	Leitstand 192.168.36.1:4840	ns=3;s="dbFahrauftrag"."uiMerkerZu"	dbFahrauftrag/Static/uiMerkerZu	uiMerkerZu	0	UInt16	11:52:14.856	11:52:14.856	Good
+695	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiHMIBildnummer"	dbHMIAnlageKonf/InOuts/uiHMIBildnummer	uiHMIBildnummer	3	UInt16	11:52:14.856	11:52:14.856	Good
+696	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xBildumschaltung02"	dbHMIAnlageKonf/InOuts/xBildumschaltung02	xBildumschaltung02	false	Boolean	11:52:14.856	11:52:14.856	Good
+697	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xBildumschaltung04"	dbHMIAnlageKonf/InOuts/xBildumschaltung04	xBildumschaltung04	false	Boolean	11:52:14.857	11:52:14.857	Good
+698	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xPopUpDreheinheitAktiv"	dbHMIAnlageKonf/InOuts/xPopUpDreheinheitAktiv	xPopUpDreheinheitAktiv	false	Boolean	11:52:14.857	11:52:14.857	Good
+699	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xPopupRotationaktiv"	dbHMIAnlageKonf/InOuts/xPopupRotationaktiv	xPopupRotationaktiv	false	Boolean	11:52:14.857	11:52:14.857	Good
+700	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."auksStationen"	dbHMIAnlageKonf/Inputs/auksStationen	auksStationen		KOMMUNIKATION_ABLAUF	11:52:14.867	11:52:14.867	Good
+701	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."axHMIButtonAnlage"	dbHMIAnlageKonf/Inputs/axHMIButtonAnlage	axHMIButtonAnlage		Boolean	11:52:14.867	11:52:14.867	Good
+702	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."axHMIButtonDP"	dbHMIAnlageKonf/Inputs/axHMIButtonDP	axHMIButtonDP		Boolean	11:52:14.868	11:52:14.868	Good
+703	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiBildnummer"	dbHMIAnlageKonf/Inputs/uiBildnummer	uiBildnummer	0	UInt16	11:52:14.868	11:52:14.868	Good
+704	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiVerbindung"	dbHMIAnlageKonf/Inputs/uiVerbindung	uiVerbindung	2	UInt16	11:52:14.868	11:52:14.868	Good
+705	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xAnlageBerechnet"	dbHMIAnlageKonf/Inputs/xAnlageBerechnet	xAnlageBerechnet	false	Boolean	11:52:14.868	11:52:14.868	Good
+706	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIRotieren90"	dbHMIAnlageKonf/Inputs/xHMIRotieren90	xHMIRotieren90	false	Boolean	11:52:14.868	11:52:14.868	Good
+707	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xReset"	dbHMIAnlageKonf/Inputs/xReset	xReset	false	Boolean	11:52:14.868	11:52:14.868	Good
+708	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."astHMIAnlage"	dbHMIAnlageKonf/Outputs/astHMIAnlage	astHMIAnlage		String	11:52:14.872	11:52:14.872	Good
+709	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."audbHMIDPBelegung"	dbHMIAnlageKonf/Outputs/audbHMIDPBelegung	audbHMIDPBelegung		DP_BELEGUNG	11:52:14.875	11:52:14.875	Good
+710	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."auiHMIAnlageOrientierung"	dbHMIAnlageKonf/Outputs/auiHMIAnlageOrientierung	auiHMIAnlageOrientierung		UInt16	11:52:14.876	11:52:14.876	Good
+711	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."auiHMIAnlageZustand"	dbHMIAnlageKonf/Outputs/auiHMIAnlageZustand	auiHMIAnlageZustand		UInt16	11:52:14.876	11:52:14.876	Good
+712	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."stHMIDEKreuzung"	dbHMIAnlageKonf/Outputs/stHMIDEKreuzung	stHMIDEKreuzung		String	11:52:14.876	11:52:14.876	Good
+713	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiHMIOrientierungDE"	dbHMIAnlageKonf/Outputs/uiHMIOrientierungDE	uiHMIOrientierungDE	0	UInt16	11:52:14.876	11:52:14.876	Good
+714	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiHMIOrientierungKreuzung"	dbHMIAnlageKonf/Outputs/uiHMIOrientierungKreuzung	uiHMIOrientierungKreuzung	0	UInt16	11:52:14.876	11:52:14.876	Good
+715	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiHMIOrientierungStation"	dbHMIAnlageKonf/Outputs/uiHMIOrientierungStation	uiHMIOrientierungStation	0	UInt16	11:52:14.877	11:52:14.877	Good
+716	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xAnlageBerechnen"	dbHMIAnlageKonf/Outputs/xAnlageBerechnen	xAnlageBerechnen	false	Boolean	11:52:14.877	11:52:14.877	Good
+717	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIAuswahl"	dbHMIAnlageKonf/Outputs/xHMIAuswahl	xHMIAuswahl	false	Boolean	11:52:14.877	11:52:14.877	Good
+718	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIDEKreuzung"	dbHMIAnlageKonf/Outputs/xHMIDEKreuzung	xHMIDEKreuzung	false	Boolean	11:52:14.877	11:52:14.877	Good
+719	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIEntnahme"	dbHMIAnlageKonf/Outputs/xHMIEntnahme	xHMIEntnahme	false	Boolean	11:52:14.877	11:52:14.877	Good
+720	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIRotation90"	dbHMIAnlageKonf/Outputs/xHMIRotation90	xHMIRotation90	false	Boolean	11:52:14.877	11:52:14.877	Good
+721	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIRotationDE"	dbHMIAnlageKonf/Outputs/xHMIRotationDE	xHMIRotationDE	false	Boolean	11:52:14.877	11:52:14.877	Good
+722	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIRotationStationen"	dbHMIAnlageKonf/Outputs/xHMIRotationStationen	xHMIRotationStationen	false	Boolean	11:52:14.877	11:52:14.877	Good
+723	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xHMIZuweisungKreuzung"	dbHMIAnlageKonf/Outputs/xHMIZuweisungKreuzung	xHMIZuweisungKreuzung	false	Boolean	11:52:14.878	11:52:14.878	Good
+724	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iButtonZaehler"	dbHMIAnlageKonf/Static/iButtonZaehler	iButtonZaehler	0	Int16	11:52:14.878	11:52:14.878	Good
+725	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iMerkerKreuzungZähler"	dbHMIAnlageKonf/Static/iMerkerKreuzungZähler	iMerkerKreuzungZähler	0	Int16	11:52:14.878	11:52:14.878	Good
+726	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iMerkerXZähler"	dbHMIAnlageKonf/Static/iMerkerXZähler	iMerkerXZähler	0	Int16	11:52:14.878	11:52:14.878	Good
+727	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iMerkerYZähler"	dbHMIAnlageKonf/Static/iMerkerYZähler	iMerkerYZähler	0	Int16	11:52:14.878	11:52:14.878	Good
+728	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iSchrittzähler"	dbHMIAnlageKonf/Static/iSchrittzähler	iSchrittzähler	201	Int16	11:52:14.878	11:52:14.878	Good
+729	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iXZähler"	dbHMIAnlageKonf/Static/iXZähler	iXZähler	12	Int16	11:52:14.878	11:52:14.878	Good
+730	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iYZähler"	dbHMIAnlageKonf/Static/iYZähler	iYZähler	7	Int16	11:52:14.878	11:52:14.878	Good
+731	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."iZähler"	dbHMIAnlageKonf/Static/iZähler	iZähler	14	Int16	11:52:28.578	11:52:28.578	Good
+732	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."stGewaehlt"	dbHMIAnlageKonf/Static/stGewaehlt	stGewaehlt		String	11:52:14.879	11:52:14.879	Good
+733	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiGewählt"	dbHMIAnlageKonf/Static/uiGewählt	uiGewählt	0	UInt16	11:52:14.879	11:52:14.879	Good
+734	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."uiStation"	dbHMIAnlageKonf/Static/uiStation	uiStation	0	UInt16	11:52:14.879	11:52:14.879	Good
+735	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xButtonGewählt"	dbHMIAnlageKonf/Static/xButtonGewählt	xButtonGewählt	false	Boolean	11:52:14.879	11:52:14.879	Good
+736	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xKonfigurationErmittelt"	dbHMIAnlageKonf/Static/xKonfigurationErmittelt	xKonfigurationErmittelt	false	Boolean	11:52:14.879	11:52:14.879	Good
+737	Leitstand 192.168.36.1:4840	ns=3;s="dbHMIAnlageKonf"."xMerkerDP"	dbHMIAnlageKonf/Static/xMerkerDP	xMerkerDP	false	Boolean	11:52:14.880	11:52:14.880	Good
+738	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."uiAufPosition"	dbKreuzung1/Inputs/uiAufPosition	uiAufPosition	0	UInt16	11:52:14.880	11:52:14.880	Good
+739	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xEndeTransfer"	dbKreuzung1/Inputs/xEndeTransfer	xEndeTransfer	false	Boolean	11:52:14.880	11:52:14.880	Good
+740	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xReset"	dbKreuzung1/Inputs/xReset	xReset	false	Boolean	11:52:14.880	11:52:14.880	Good
+741	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xSensorHorizontal"	dbKreuzung1/Inputs/xSensorHorizontal	xSensorHorizontal	true	Boolean	11:52:14.880	11:52:14.880	Good
+742	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xSensorVertikal"	dbKreuzung1/Inputs/xSensorVertikal	xSensorVertikal	false	Boolean	11:52:14.880	11:52:14.880	Good
+743	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStart"	dbKreuzung1/Inputs/xStart	xStart	false	Boolean	11:52:14.880	11:52:14.880	Good
+744	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xEnde"	dbKreuzung1/Outputs/xEnde	xEnde	false	Boolean	11:52:14.880	11:52:14.880	Good
+745	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xHubMittenband"	dbKreuzung1/Outputs/xHubMittenband	xHubMittenband	false	Boolean	11:52:14.880	11:52:14.880	Good
+746	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStartTransfer"	dbKreuzung1/Outputs/xStartTransfer	xStartTransfer	false	Boolean	11:52:14.881	11:52:14.881	Good
+747	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStopper1"	dbKreuzung1/Outputs/xStopper1	xStopper1	false	Boolean	11:52:14.881	11:52:14.881	Good
+748	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStopper2"	dbKreuzung1/Outputs/xStopper2	xStopper2	false	Boolean	11:52:14.881	11:52:14.881	Good
+749	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStopper3"	dbKreuzung1/Outputs/xStopper3	xStopper3	false	Boolean	11:52:14.881	11:52:14.881	Good
+750	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStopper4"	dbKreuzung1/Outputs/xStopper4	xStopper4	false	Boolean	11:52:14.881	11:52:14.881	Good
+751	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."iSchrittzähler"	dbKreuzung1/Static/iSchrittzähler	iSchrittzähler	1	Int16	11:52:14.881	11:52:14.881	Good
+752	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."tonTimer"	dbKreuzung1/Static/tonTimer	tonTimer		Null	11:52:12.521	11:52:12.521	BadNotReadable
+753	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xEndeTimer"	dbKreuzung1/Static/xEndeTimer	xEndeTimer	true	Boolean	11:52:14.881	11:52:14.881	Good
+754	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung1"."xStartTimer"	dbKreuzung1/Static/xStartTimer	xStartTimer	true	Boolean	11:52:14.882	11:52:14.882	Good
+755	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."uiAufPosition"	dbKreuzung2/Inputs/uiAufPosition	uiAufPosition	0	UInt16	11:52:14.882	11:52:14.882	Good
+756	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xEndeTransfer"	dbKreuzung2/Inputs/xEndeTransfer	xEndeTransfer	false	Boolean	11:52:14.882	11:52:14.882	Good
+757	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xReset"	dbKreuzung2/Inputs/xReset	xReset	false	Boolean	11:52:14.882	11:52:14.882	Good
+758	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xSensorHorizontal"	dbKreuzung2/Inputs/xSensorHorizontal	xSensorHorizontal	true	Boolean	11:52:14.882	11:52:14.882	Good
+759	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xSensorVertikal"	dbKreuzung2/Inputs/xSensorVertikal	xSensorVertikal	false	Boolean	11:52:14.882	11:52:14.882	Good
+760	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStart"	dbKreuzung2/Inputs/xStart	xStart	false	Boolean	11:52:14.882	11:52:14.882	Good
+761	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xEnde"	dbKreuzung2/Outputs/xEnde	xEnde	false	Boolean	11:52:14.882	11:52:14.882	Good
+762	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xHubMittenband"	dbKreuzung2/Outputs/xHubMittenband	xHubMittenband	false	Boolean	11:52:14.883	11:52:14.883	Good
+763	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStartTransfer"	dbKreuzung2/Outputs/xStartTransfer	xStartTransfer	false	Boolean	11:52:14.883	11:52:14.883	Good
+764	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStopper1"	dbKreuzung2/Outputs/xStopper1	xStopper1	false	Boolean	11:52:14.883	11:52:14.883	Good
+765	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStopper2"	dbKreuzung2/Outputs/xStopper2	xStopper2	false	Boolean	11:52:14.883	11:52:14.883	Good
+766	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStopper3"	dbKreuzung2/Outputs/xStopper3	xStopper3	false	Boolean	11:52:14.883	11:52:14.883	Good
+767	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStopper4"	dbKreuzung2/Outputs/xStopper4	xStopper4	false	Boolean	11:52:14.883	11:52:14.883	Good
+768	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."iSchrittzähler"	dbKreuzung2/Static/iSchrittzähler	iSchrittzähler	1	Int16	11:52:14.883	11:52:14.883	Good
+769	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."tonTimer"	dbKreuzung2/Static/tonTimer	tonTimer		Null	11:52:12.541	11:52:12.541	BadNotReadable
+770	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xEndeTimer"	dbKreuzung2/Static/xEndeTimer	xEndeTimer	true	Boolean	11:52:14.884	11:52:14.884	Good
+771	Leitstand 192.168.36.1:4840	ns=3;s="dbKreuzung2"."xStartTimer"	dbKreuzung2/Static/xStartTimer	xStartTimer	true	Boolean	11:52:14.884	11:52:14.884	Good
+772	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiAufPosition"	dbTransferV2/InOuts/uiAufPosition	uiAufPosition	0	UInt16	11:52:14.884	11:52:14.884	Good
+773	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiVon"	dbTransferV2/InOuts/uiVon	uiVon	0	UInt16	11:52:14.884	11:52:14.884	Good
+774	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiZu"	dbTransferV2/InOuts/uiZu	uiZu	0	UInt16	11:52:14.884	11:52:14.884	Good
+775	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."aukKreuzung"	dbTransferV2/Inputs/aukKreuzung	aukKreuzung		KREUZUNG	11:52:14.886	11:52:14.886	Good
+776	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."auskStationKonfiguration"	dbTransferV2/Inputs/auskStationKonfiguration	auskStationKonfiguration		STATION_KONFIGURATION	11:52:14.906	11:52:14.906	Good
+777	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xDrehenLinkslauf"	dbTransferV2/Inputs/xDrehenLinkslauf	xDrehenLinkslauf	false	Boolean	11:52:14.907	11:52:14.907	Good
+778	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xDrehenRechtslauf"	dbTransferV2/Inputs/xDrehenRechtslauf	xDrehenRechtslauf	false	Boolean	11:52:14.907	11:52:14.907	Good
+779	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xDrehzylinderEnde"	dbTransferV2/Inputs/xDrehzylinderEnde	xDrehzylinderEnde	false	Boolean	11:52:14.908	11:52:14.908	Good
+780	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xEndeKreuzung1"	dbTransferV2/Inputs/xEndeKreuzung1	xEndeKreuzung1	false	Boolean	11:52:14.908	11:52:14.908	Good
+781	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xEndeKreuzung2"	dbTransferV2/Inputs/xEndeKreuzung2	xEndeKreuzung2	false	Boolean	11:52:14.908	11:52:14.908	Good
+782	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xEndeWegeBerechnung"	dbTransferV2/Inputs/xEndeWegeBerechnung	xEndeWegeBerechnung	false	Boolean	11:52:14.908	11:52:14.908	Good
+783	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xFTSEnde"	dbTransferV2/Inputs/xFTSEnde	xFTSEnde	false	Boolean	11:52:14.909	11:52:14.909	Good
+784	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xFTSPickTransfer"	dbTransferV2/Inputs/xFTSPickTransfer	xFTSPickTransfer	false	Boolean	11:52:14.909	11:52:14.909	Good
+785	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xFTSPlaceTransfer"	dbTransferV2/Inputs/xFTSPlaceTransfer	xFTSPlaceTransfer	false	Boolean	11:52:14.909	11:52:14.909	Good
+786	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xHMIEntnahme"	dbTransferV2/Inputs/xHMIEntnahme	xHMIEntnahme	false	Boolean	11:52:14.909	11:52:14.909	Good
+787	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xPosDrehzylinder"	dbTransferV2/Inputs/xPosDrehzylinder	xPosDrehzylinder	false	Boolean	11:52:14.909	11:52:14.909	Good
+788	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xReset"	dbTransferV2/Inputs/xReset	xReset	false	Boolean	11:52:14.909	11:52:14.909	Good
+789	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xStartTransfer"	dbTransferV2/Inputs/xStartTransfer	xStartTransfer	false	Boolean	11:52:14.909	11:52:14.909	Good
+790	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiFTSVon"	dbTransferV2/Outputs/uiFTSVon	uiFTSVon	0	UInt16	11:52:14.909	11:52:14.909	Good
+791	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiFTSZu"	dbTransferV2/Outputs/uiFTSZu	uiFTSZu	0	UInt16	11:52:14.910	11:52:14.910	Good
+792	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xDrehzylinderR/L"	dbTransferV2/Outputs/xDrehzylinderR/L	xDrehzylinderR/L	false	Boolean	11:52:14.910	11:52:14.910	Good
+793	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xDrehzylinderStart"	dbTransferV2/Outputs/xDrehzylinderStart	xDrehzylinderStart	false	Boolean	11:52:14.910	11:52:14.910	Good
+794	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xEndeTransfer"	dbTransferV2/Outputs/xEndeTransfer	xEndeTransfer	false	Boolean	11:52:14.910	11:52:14.910	Good
+795	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xFTSEinfahrtBeendet"	dbTransferV2/Outputs/xFTSEinfahrtBeendet	xFTSEinfahrtBeendet	false	Boolean	11:52:14.910	11:52:14.910	Good
+796	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xHMIProduktFehlerhaft"	dbTransferV2/Outputs/xHMIProduktFehlerhaft	xHMIProduktFehlerhaft	false	Boolean	11:52:14.910	11:52:14.910	Good
+797	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xHMIProduktOK"	dbTransferV2/Outputs/xHMIProduktOK	xHMIProduktOK	false	Boolean	11:52:14.910	11:52:14.910	Good
+798	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xHMIService"	dbTransferV2/Outputs/xHMIService	xHMIService	false	Boolean	11:52:14.910	11:52:14.910	Good
+799	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xStartKreuzung1"	dbTransferV2/Outputs/xStartKreuzung1	xStartKreuzung1	false	Boolean	11:52:14.911	11:52:14.911	Good
+800	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xStartKreuzung2"	dbTransferV2/Outputs/xStartKreuzung2	xStartKreuzung2	false	Boolean	11:52:14.911	11:52:14.911	Good
+801	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xStartWegeBerechnung"	dbTransferV2/Outputs/xStartWegeBerechnung	xStartWegeBerechnung	false	Boolean	11:52:14.911	11:52:14.911	Good
+802	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xWartet"	dbTransferV2/Outputs/xWartet	xWartet	true	Boolean	11:52:14.911	11:52:14.911	Good
+803	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."aukfKreuzung"	dbTransferV2/Static/aukfKreuzung	aukfKreuzung		KREUZUNG_FAHRBEFEHL	11:52:14.913	11:52:14.913	Good
+804	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iMerkerFTSZu"	dbTransferV2/Static/iMerkerFTSZu	iMerkerFTSZu	0	Int16	11:52:14.913	11:52:14.913	Good
+805	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iMerkerKreuzung"	dbTransferV2/Static/iMerkerKreuzung	iMerkerKreuzung	0	Int16	11:52:14.913	11:52:14.913	Good
+806	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iMerkerZählerX"	dbTransferV2/Static/iMerkerZählerX	iMerkerZählerX	0	Int16	11:52:14.913	11:52:14.913	Good
+807	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iMerkerZählerY"	dbTransferV2/Static/iMerkerZählerY	iMerkerZählerY	0	Int16	11:52:14.913	11:52:14.913	Good
+808	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iMerkerZählerYRichtung"	dbTransferV2/Static/iMerkerZählerYRichtung	iMerkerZählerYRichtung	0	Int16	11:52:14.913	11:52:14.913	Good
+809	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iSchrittzähler"	dbTransferV2/Static/iSchrittzähler	iSchrittzähler	1	Int16	11:52:14.913	11:52:14.913	Good
+810	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iVonX"	dbTransferV2/Static/iVonX	iVonX	0	Int16	11:52:14.914	11:52:14.914	Good
+811	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iVonY"	dbTransferV2/Static/iVonY	iVonY	0	Int16	11:52:14.914	11:52:14.914	Good
+812	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iZuX"	dbTransferV2/Static/iZuX	iZuX	0	Int16	11:52:14.914	11:52:14.914	Good
+813	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iZuY"	dbTransferV2/Static/iZuY	iZuY	0	Int16	11:52:14.914	11:52:14.914	Good
+814	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iZähler"	dbTransferV2/Static/iZähler	iZähler	0	Int16	11:52:28.586	11:52:28.586	Good
+815	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iZählerReset"	dbTransferV2/Static/iZählerReset	iZählerReset	22	Int16	11:52:14.914	11:52:14.914	Good
+816	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iZählerX"	dbTransferV2/Static/iZählerX	iZählerX	0	Int16	11:52:14.914	11:52:14.914	Good
+817	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."iZählerY"	dbTransferV2/Static/iZählerY	iZählerY	0	Int16	11:52:14.914	11:52:14.914	Good
+818	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."stKreuzung2"	dbTransferV2/Static/stKreuzung2	stKreuzung2		"fbTransferV2"."stKreuzung2"	11:52:14.915	11:52:14.915	Good
+819	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."tonTimer"	dbTransferV2/Static/tonTimer	tonTimer		Null	11:52:12.576	11:52:12.576	BadNotReadable
+820	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerAuftragVon"	dbTransferV2/Static/uiMerkerAuftragVon	uiMerkerAuftragVon	0	UInt16	11:52:14.915	11:52:14.915	Good
+821	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerAuftragZu"	dbTransferV2/Static/uiMerkerAuftragZu	uiMerkerAuftragZu	0	UInt16	11:52:14.915	11:52:14.915	Good
+822	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerKreuzung"	dbTransferV2/Static/uiMerkerKreuzung	uiMerkerKreuzung	0	UInt16	11:52:14.915	11:52:14.915	Good
+823	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerKreuzungBand2"	dbTransferV2/Static/uiMerkerKreuzungBand2	uiMerkerKreuzungBand2	0	UInt16	11:52:14.916	11:52:14.916	Good
+824	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerNachDrehen"	dbTransferV2/Static/uiMerkerNachDrehen	uiMerkerNachDrehen	0	UInt16	11:52:14.916	11:52:14.916	Good
+825	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerVon"	dbTransferV2/Static/uiMerkerVon	uiMerkerVon	0	UInt16	11:52:14.916	11:52:14.916	Good
+826	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."uiMerkerZu"	dbTransferV2/Static/uiMerkerZu	uiMerkerZu	0	UInt16	11:52:14.916	11:52:14.916	Good
+827	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xEndeTimer"	dbTransferV2/Static/xEndeTimer	xEndeTimer	false	Boolean	11:52:14.916	11:52:14.916	Good
+828	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xMerkerDrehung"	dbTransferV2/Static/xMerkerDrehung	xMerkerDrehung	false	Boolean	11:52:14.916	11:52:14.916	Good
+829	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xMerkerDrehungVorKreuzung"	dbTransferV2/Static/xMerkerDrehungVorKreuzung	xMerkerDrehungVorKreuzung	false	Boolean	11:52:14.916	11:52:14.916	Good
+830	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xMerkerKreuzungTransfer2"	dbTransferV2/Static/xMerkerKreuzungTransfer2	xMerkerKreuzungTransfer2	false	Boolean	11:52:14.917	11:52:14.917	Good
+831	Leitstand 192.168.36.1:4840	ns=3;s="dbTransferV2"."xStartTimer"	dbTransferV2/Static/xStartTimer	xStartTimer	false	Boolean	11:52:14.917	11:52:14.917	Good
+832	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[0]."bAufgabe"	auheHMIEntnahme/0/bAufgabe	bAufgabe	0	Byte	11:52:14.917	11:52:14.917	Good
+833	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[0]."iZaehler"	auheHMIEntnahme/0/iZaehler	iZaehler	0	Int16	11:52:14.917	11:52:14.917	Good
+834	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[0]."stName"	auheHMIEntnahme/0/stName	stName		String	11:52:14.917	11:52:14.917	Good
+835	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[0]."xSichtbar"	auheHMIEntnahme/0/xSichtbar	xSichtbar	false	Boolean	11:52:14.917	11:52:14.917	Good
+836	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[1]."bAufgabe"	auheHMIEntnahme/1/bAufgabe	bAufgabe	0	Byte	11:52:14.917	11:52:14.917	Good
+837	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[1]."iZaehler"	auheHMIEntnahme/1/iZaehler	iZaehler	0	Int16	11:52:14.918	11:52:14.918	Good
+838	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[1]."stName"	auheHMIEntnahme/1/stName	stName		String	11:52:14.918	11:52:14.918	Good
+839	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[1]."xSichtbar"	auheHMIEntnahme/1/xSichtbar	xSichtbar	false	Boolean	11:52:14.918	11:52:14.918	Good
+840	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[2]."bAufgabe"	auheHMIEntnahme/2/bAufgabe	bAufgabe	0	Byte	11:52:14.918	11:52:14.918	Good
+841	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[2]."iZaehler"	auheHMIEntnahme/2/iZaehler	iZaehler	0	Int16	11:52:14.918	11:52:14.918	Good
+842	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[2]."stName"	auheHMIEntnahme/2/stName	stName		String	11:52:14.918	11:52:14.918	Good
+843	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[2]."xSichtbar"	auheHMIEntnahme/2/xSichtbar	xSichtbar	false	Boolean	11:52:14.919	11:52:14.919	Good
+844	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[3]."bAufgabe"	auheHMIEntnahme/3/bAufgabe	bAufgabe	0	Byte	11:52:14.919	11:52:14.919	Good
+845	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[3]."iZaehler"	auheHMIEntnahme/3/iZaehler	iZaehler	0	Int16	11:52:14.919	11:52:14.919	Good
+846	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[3]."stName"	auheHMIEntnahme/3/stName	stName		String	11:52:14.919	11:52:14.919	Good
+847	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[3]."xSichtbar"	auheHMIEntnahme/3/xSichtbar	xSichtbar	false	Boolean	11:52:14.920	11:52:14.920	Good
+848	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[4]."bAufgabe"	auheHMIEntnahme/4/bAufgabe	bAufgabe	0	Byte	11:52:14.920	11:52:14.920	Good
+849	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[4]."iZaehler"	auheHMIEntnahme/4/iZaehler	iZaehler	0	Int16	11:52:14.920	11:52:14.920	Good
+850	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[4]."stName"	auheHMIEntnahme/4/stName	stName		String	11:52:14.920	11:52:14.920	Good
+851	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[4]."xSichtbar"	auheHMIEntnahme/4/xSichtbar	xSichtbar	false	Boolean	11:52:14.920	11:52:14.920	Good
+852	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[5]."bAufgabe"	auheHMIEntnahme/5/bAufgabe	bAufgabe	0	Byte	11:52:14.920	11:52:14.920	Good
+853	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[5]."iZaehler"	auheHMIEntnahme/5/iZaehler	iZaehler	0	Int16	11:52:14.920	11:52:14.920	Good
+854	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[5]."stName"	auheHMIEntnahme/5/stName	stName		String	11:52:14.921	11:52:14.921	Good
+855	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[5]."xSichtbar"	auheHMIEntnahme/5/xSichtbar	xSichtbar	false	Boolean	11:52:14.921	11:52:14.921	Good
+856	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[6]."bAufgabe"	auheHMIEntnahme/6/bAufgabe	bAufgabe	0	Byte	11:52:14.921	11:52:14.921	Good
+857	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[6]."iZaehler"	auheHMIEntnahme/6/iZaehler	iZaehler	0	Int16	11:52:14.921	11:52:14.921	Good
+858	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[6]."stName"	auheHMIEntnahme/6/stName	stName		String	11:52:14.921	11:52:14.921	Good
+859	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[6]."xSichtbar"	auheHMIEntnahme/6/xSichtbar	xSichtbar	false	Boolean	11:52:14.921	11:52:14.921	Good
+860	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[7]."bAufgabe"	auheHMIEntnahme/7/bAufgabe	bAufgabe	0	Byte	11:52:14.921	11:52:14.921	Good
+861	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[7]."iZaehler"	auheHMIEntnahme/7/iZaehler	iZaehler	0	Int16	11:52:14.922	11:52:14.922	Good
+862	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[7]."stName"	auheHMIEntnahme/7/stName	stName		String	11:52:14.922	11:52:14.922	Good
+863	Leitstand 192.168.36.1:4840	ns=3;s="dbHMI"."auheHMIEntnahme"[7]."xSichtbar"	auheHMIEntnahme/7/xSichtbar	xSichtbar	false	Boolean	11:52:14.922	11:52:14.922	Good
+864	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."dtAuftrag"	IRB01/stRFIDEmpfang/dtAuftrag	dtAuftrag	{144,1,1,0,0,0,0,2}	Byte	11:52:14.922	11:52:14.922	Good
+865	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."dtProdukt"	IRB01/stRFIDEmpfang/dtProdukt	dtProdukt	{144,1,1,0,0,0,0,2}	Byte	11:52:14.922	11:52:14.922	Good
+866	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."uiAuftragsnummer"	IRB01/stRFIDEmpfang/uiAuftragsnummer	uiAuftragsnummer	0	UInt16	11:52:14.922	11:52:14.922	Good
+867	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."urapAuftragProdukt"	IRB01/stRFIDEmpfang/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.924	11:52:14.924	Good
+868	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."urawAuftragWeg"	IRB01/stRFIDEmpfang/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.924	11:52:14.924	Good
+869	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."urppProduktPrüfung"	IRB01/stRFIDEmpfang/urppProduktPrüfung	urppProduktPrüfung		RFID_PRODUKT_PRÜFUNG	11:52:14.925	11:52:14.925	Good
+870	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."urpsProduktEigene"	IRB01/stRFIDEmpfang/urpsProduktEigene	urpsProduktEigene		RFID_PRODUKT_STATION	11:52:14.926	11:52:14.926	Good
+871	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDEmpfang"."urpsProduktVorgänger"	IRB01/stRFIDEmpfang/urpsProduktVorgänger	urpsProduktVorgänger		RFID_PRODUKT_STATION	11:52:14.927	11:52:14.927	Good
+872	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"."uiAuftragsnummer"	IRB01/stRFIDSenden/uiAuftragsnummer	uiAuftragsnummer	0	UInt16	11:52:14.927	11:52:14.927	Good
+873	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"."urapAuftragProdukt"	IRB01/stRFIDSenden/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.928	11:52:14.928	Good
+874	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"."urawAuftragWeg"	IRB01/stRFIDSenden/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.929	11:52:14.929	Good
+875	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"."urppProduktPrüfung"	IRB01/stRFIDSenden/urppProduktPrüfung	urppProduktPrüfung		RFID_PRODUKT_PRÜFUNG	11:52:14.930	11:52:14.930	Good
+876	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"."urpsProduktEigene"	IRB01/stRFIDSenden/urpsProduktEigene	urpsProduktEigene		RFID_PRODUKT_STATION	11:52:14.931	11:52:14.931	Good
+877	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDSenden"."urpsProduktNächste"	IRB01/stRFIDSenden/urpsProduktNächste	urpsProduktNächste		RFID_PRODUKT_STATION	11:52:14.932	11:52:14.932	Good
+878	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDStatus"."xRFID_AktionEnde"	IRB01/stRFIDStatus/xRFID_AktionEnde	xRFID_AktionEnde	false	Boolean	11:52:14.932	11:52:14.932	Good
+879	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDStatus"."xRFID_BereitFürAuftrag"	IRB01/stRFIDStatus/xRFID_BereitFürAuftrag	xRFID_BereitFürAuftrag	false	Boolean	11:52:14.932	11:52:14.932	Good
+880	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDStatus"."xRFID_ChipErkanntLinks"	IRB01/stRFIDStatus/xRFID_ChipErkanntLinks	xRFID_ChipErkanntLinks	false	Boolean	11:52:14.932	11:52:14.932	Good
+881	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDStatus"."xRFID_ChipErkanntRechts"	IRB01/stRFIDStatus/xRFID_ChipErkanntRechts	xRFID_ChipErkanntRechts	false	Boolean	11:52:14.933	11:52:14.933	Good
+882	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."stRFIDStatus"."xRFID_StartUpEnde"	IRB01/stRFIDStatus/xRFID_StartUpEnde	xRFID_StartUpEnde	false	Boolean	11:52:14.933	11:52:14.933	Good
+883	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."bFehlermeldung"	IRB01/uzlsRoboterStatus/bFehlermeldung	bFehlermeldung	0	Byte	11:52:14.933	11:52:14.933	Good
+884	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."bKonf1"	IRB01/uzlsRoboterStatus/bKonf1	bKonf1	0	Byte	11:52:14.933	11:52:14.933	Good
+885	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."bKonf2"	IRB01/uzlsRoboterStatus/bKonf2	bKonf2	0	Byte	11:52:14.933	11:52:14.933	Good
+886	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."bKonf3"	IRB01/uzlsRoboterStatus/bKonf3	bKonf3	0	Byte	11:52:14.933	11:52:14.933	Good
+887	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."iAnzahlLager1"	IRB01/uzlsRoboterStatus/iAnzahlLager1	iAnzahlLager1	0	Int16	11:52:14.933	11:52:14.933	Good
+888	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."iAnzahlLager2"	IRB01/uzlsRoboterStatus/iAnzahlLager2	iAnzahlLager2	0	Int16	11:52:14.933	11:52:14.933	Good
+889	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."iAnzahlLager3"	IRB01/uzlsRoboterStatus/iAnzahlLager3	iAnzahlLager3	0	Int16	11:52:14.934	11:52:14.934	Good
+890	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."strFehlermeldung"	IRB01/uzlsRoboterStatus/strFehlermeldung	strFehlermeldung		String	11:52:14.934	11:52:14.934	Good
+891	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."IRB01"."uzlsRoboterStatus"."uiBetriebsart"	IRB01/uzlsRoboterStatus/uiBetriebsart	uiBetriebsart	0	UInt16	11:52:14.934	11:52:14.934	Good
+892	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[0]."aufwFahrweg"	auavAuftragsverfolgung/0/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.940	11:52:14.940	Good
+893	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[0]."uiAktuelleStation"	auavAuftragsverfolgung/0/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.941	11:52:14.941	Good
+894	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[0]."uiSeriennummer"	auavAuftragsverfolgung/0/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.941	11:52:14.941	Good
+895	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[0]."urapAuftragProdukt"	auavAuftragsverfolgung/0/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.942	11:52:14.942	Good
+896	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[0]."urawAuftragWeg"	auavAuftragsverfolgung/0/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.943	11:52:14.943	Good
+897	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[1]."aufwFahrweg"	auavAuftragsverfolgung/1/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.950	11:52:14.950	Good
+898	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[1]."uiAktuelleStation"	auavAuftragsverfolgung/1/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.950	11:52:14.950	Good
+899	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[1]."uiSeriennummer"	auavAuftragsverfolgung/1/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.951	11:52:14.951	Good
+900	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[1]."urapAuftragProdukt"	auavAuftragsverfolgung/1/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.952	11:52:14.952	Good
+901	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[1]."urawAuftragWeg"	auavAuftragsverfolgung/1/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.953	11:52:14.953	Good
+902	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[2]."aufwFahrweg"	auavAuftragsverfolgung/2/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.959	11:52:14.959	Good
+903	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[2]."uiAktuelleStation"	auavAuftragsverfolgung/2/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.960	11:52:14.960	Good
+904	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[2]."uiSeriennummer"	auavAuftragsverfolgung/2/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.960	11:52:14.960	Good
+905	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[2]."urapAuftragProdukt"	auavAuftragsverfolgung/2/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.961	11:52:14.961	Good
+906	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[2]."urawAuftragWeg"	auavAuftragsverfolgung/2/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.961	11:52:14.961	Good
+907	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[3]."aufwFahrweg"	auavAuftragsverfolgung/3/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.968	11:52:14.968	Good
+908	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[3]."uiAktuelleStation"	auavAuftragsverfolgung/3/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.969	11:52:14.969	Good
+909	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[3]."uiSeriennummer"	auavAuftragsverfolgung/3/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.969	11:52:14.969	Good
+910	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[3]."urapAuftragProdukt"	auavAuftragsverfolgung/3/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.970	11:52:14.970	Good
+911	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[3]."urawAuftragWeg"	auavAuftragsverfolgung/3/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.971	11:52:14.971	Good
+912	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[4]."aufwFahrweg"	auavAuftragsverfolgung/4/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.977	11:52:14.977	Good
+913	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[4]."uiAktuelleStation"	auavAuftragsverfolgung/4/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.978	11:52:14.978	Good
+914	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[4]."uiSeriennummer"	auavAuftragsverfolgung/4/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.978	11:52:14.978	Good
+915	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[4]."urapAuftragProdukt"	auavAuftragsverfolgung/4/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.979	11:52:14.979	Good
+916	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[4]."urawAuftragWeg"	auavAuftragsverfolgung/4/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.979	11:52:14.979	Good
+917	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[5]."aufwFahrweg"	auavAuftragsverfolgung/5/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.986	11:52:14.986	Good
+918	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[5]."uiAktuelleStation"	auavAuftragsverfolgung/5/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.987	11:52:14.987	Good
+919	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[5]."uiSeriennummer"	auavAuftragsverfolgung/5/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.987	11:52:14.987	Good
+920	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[5]."urapAuftragProdukt"	auavAuftragsverfolgung/5/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.988	11:52:14.988	Good
+921	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[5]."urawAuftragWeg"	auavAuftragsverfolgung/5/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.989	11:52:14.989	Good
+922	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[6]."aufwFahrweg"	auavAuftragsverfolgung/6/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:14.995	11:52:14.995	Good
+923	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[6]."uiAktuelleStation"	auavAuftragsverfolgung/6/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:14.996	11:52:14.996	Good
+924	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[6]."uiSeriennummer"	auavAuftragsverfolgung/6/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:14.996	11:52:14.996	Good
+925	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[6]."urapAuftragProdukt"	auavAuftragsverfolgung/6/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:14.998	11:52:14.998	Good
+926	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[6]."urawAuftragWeg"	auavAuftragsverfolgung/6/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:14.999	11:52:14.999	Good
+927	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[7]."aufwFahrweg"	auavAuftragsverfolgung/7/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:15.007	11:52:15.007	Good
+928	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[7]."uiAktuelleStation"	auavAuftragsverfolgung/7/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:15.007	11:52:15.007	Good
+929	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[7]."uiSeriennummer"	auavAuftragsverfolgung/7/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:15.007	11:52:15.007	Good
+930	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[7]."urapAuftragProdukt"	auavAuftragsverfolgung/7/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:15.008	11:52:15.008	Good
+931	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[7]."urawAuftragWeg"	auavAuftragsverfolgung/7/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:15.009	11:52:15.009	Good
+932	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[8]."aufwFahrweg"	auavAuftragsverfolgung/8/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:15.015	11:52:15.015	Good
+933	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[8]."uiAktuelleStation"	auavAuftragsverfolgung/8/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:15.016	11:52:15.016	Good
+934	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[8]."uiSeriennummer"	auavAuftragsverfolgung/8/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:15.016	11:52:15.016	Good
+935	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[8]."urapAuftragProdukt"	auavAuftragsverfolgung/8/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:15.017	11:52:15.017	Good
+936	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[8]."urawAuftragWeg"	auavAuftragsverfolgung/8/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:15.018	11:52:15.018	Good
+937	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[9]."aufwFahrweg"	auavAuftragsverfolgung/9/aufwFahrweg	aufwFahrweg		FAHR_STATION	11:52:15.025	11:52:15.025	Good
+938	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[9]."uiAktuelleStation"	auavAuftragsverfolgung/9/uiAktuelleStation	uiAktuelleStation	0	UInt16	11:52:15.026	11:52:15.026	Good
+939	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[9]."uiSeriennummer"	auavAuftragsverfolgung/9/uiSeriennummer	uiSeriennummer	0	UInt16	11:52:15.026	11:52:15.026	Good
+940	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[9]."urapAuftragProdukt"	auavAuftragsverfolgung/9/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	11:52:15.027	11:52:15.027	Good
+941	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."auavAuftragsverfolgung"[9]."urawAuftragWeg"	auavAuftragsverfolgung/9/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	11:52:15.028	11:52:15.028	Good
+942	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."audbPeripherie"[0]	stAufbau/audbPeripherie/0	0		DP_BELEGUNG	11:52:15.028	11:52:15.028	Good
+943	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."audbPeripherie"[1]	stAufbau/audbPeripherie/1	1		DP_BELEGUNG	11:52:15.029	11:52:15.029	Good
+944	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."audbPeripherie"[2]	stAufbau/audbPeripherie/2	2		DP_BELEGUNG	11:52:15.030	11:52:15.030	Good
+945	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."audbPeripherie"[3]	stAufbau/audbPeripherie/3	3		DP_BELEGUNG	11:52:15.031	11:52:15.031	Good
+946	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,0]	stAufbau/auiAnlage/0,0	0,0	0	UInt16	11:52:15.031	11:52:15.031	Good
+947	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,1]	stAufbau/auiAnlage/0,1	0,1	5081	UInt16	11:52:15.031	11:52:15.031	Good
+948	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,2]	stAufbau/auiAnlage/0,2	0,2	0	UInt16	11:52:15.032	11:52:15.032	Good
+949	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,3]	stAufbau/auiAnlage/0,3	0,3	5002	UInt16	11:52:15.032	11:52:15.032	Good
+950	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,4]	stAufbau/auiAnlage/0,4	0,4	0	UInt16	11:52:15.032	11:52:15.032	Good
+951	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,5]	stAufbau/auiAnlage/0,5	0,5	0	UInt16	11:52:15.032	11:52:15.032	Good
+952	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[0,6]	stAufbau/auiAnlage/0,6	0,6	0	UInt16	11:52:15.032	11:52:15.032	Good
+953	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,0]	stAufbau/auiAnlage/1,0	1,0	0	UInt16	11:52:15.032	11:52:15.032	Good
+954	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,1]	stAufbau/auiAnlage/1,1	1,1	6002	UInt16	11:52:15.032	11:52:15.032	Good
+955	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,2]	stAufbau/auiAnlage/1,2	1,2	5062	UInt16	11:52:15.032	11:52:15.032	Good
+956	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,3]	stAufbau/auiAnlage/1,3	1,3	6001	UInt16	11:52:15.032	11:52:15.032	Good
+957	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,4]	stAufbau/auiAnlage/1,4	1,4	0	UInt16	11:52:15.032	11:52:15.032	Good
+958	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,5]	stAufbau/auiAnlage/1,5	1,5	0	UInt16	11:52:15.032	11:52:15.032	Good
+959	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[1,6]	stAufbau/auiAnlage/1,6	1,6	0	UInt16	11:52:15.033	11:52:15.033	Good
+960	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,0]	stAufbau/auiAnlage/10,0	10,0	0	UInt16	11:52:15.033	11:52:15.033	Good
+961	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,1]	stAufbau/auiAnlage/10,1	10,1	0	UInt16	11:52:15.033	11:52:15.033	Good
+962	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,2]	stAufbau/auiAnlage/10,2	10,2	0	UInt16	11:52:15.033	11:52:15.033	Good
+963	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,3]	stAufbau/auiAnlage/10,3	10,3	0	UInt16	11:52:15.033	11:52:15.033	Good
+964	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,4]	stAufbau/auiAnlage/10,4	10,4	0	UInt16	11:52:15.033	11:52:15.033	Good
+965	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,5]	stAufbau/auiAnlage/10,5	10,5	0	UInt16	11:52:15.033	11:52:15.033	Good
+966	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[10,6]	stAufbau/auiAnlage/10,6	10,6	0	UInt16	11:52:15.033	11:52:15.033	Good
+967	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,0]	stAufbau/auiAnlage/11,0	11,0	0	UInt16	11:52:15.033	11:52:15.033	Good
+968	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,1]	stAufbau/auiAnlage/11,1	11,1	0	UInt16	11:52:15.033	11:52:15.033	Good
+969	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,2]	stAufbau/auiAnlage/11,2	11,2	0	UInt16	11:52:15.034	11:52:15.034	Good
+970	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,3]	stAufbau/auiAnlage/11,3	11,3	0	UInt16	11:52:15.034	11:52:15.034	Good
+971	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,4]	stAufbau/auiAnlage/11,4	11,4	0	UInt16	11:52:15.034	11:52:15.034	Good
+972	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,5]	stAufbau/auiAnlage/11,5	11,5	0	UInt16	11:52:15.034	11:52:15.034	Good
+973	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[11,6]	stAufbau/auiAnlage/11,6	11,6	0	UInt16	11:52:15.034	11:52:15.034	Good
+974	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,0]	stAufbau/auiAnlage/2,0	2,0	0	UInt16	11:52:15.034	11:52:15.034	Good
+975	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,1]	stAufbau/auiAnlage/2,1	2,1	5001	UInt16	11:52:15.034	11:52:15.034	Good
+976	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,2]	stAufbau/auiAnlage/2,2	2,2	0	UInt16	11:52:15.034	11:52:15.034	Good
+977	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,3]	stAufbau/auiAnlage/2,3	2,3	5031	UInt16	11:52:15.035	11:52:15.035	Good
+978	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,4]	stAufbau/auiAnlage/2,4	2,4	0	UInt16	11:52:15.035	11:52:15.035	Good
+979	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,5]	stAufbau/auiAnlage/2,5	2,5	0	UInt16	11:52:15.035	11:52:15.035	Good
+980	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[2,6]	stAufbau/auiAnlage/2,6	2,6	0	UInt16	11:52:15.035	11:52:15.035	Good
+981	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,0]	stAufbau/auiAnlage/3,0	3,0	0	UInt16	11:52:15.035	11:52:15.035	Good
+982	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,1]	stAufbau/auiAnlage/3,1	3,1	5011	UInt16	11:52:15.035	11:52:15.035	Good
+983	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,2]	stAufbau/auiAnlage/3,2	3,2	0	UInt16	11:52:15.035	11:52:15.035	Good
+984	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,3]	stAufbau/auiAnlage/3,3	3,3	5021	UInt16	11:52:15.035	11:52:15.035	Good
+985	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,4]	stAufbau/auiAnlage/3,4	3,4	0	UInt16	11:52:15.036	11:52:15.036	Good
+986	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,5]	stAufbau/auiAnlage/3,5	3,5	0	UInt16	11:52:15.036	11:52:15.036	Good
+987	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[3,6]	stAufbau/auiAnlage/3,6	3,6	0	UInt16	11:52:15.036	11:52:15.036	Good
+988	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,0]	stAufbau/auiAnlage/4,0	4,0	0	UInt16	11:52:15.036	11:52:15.036	Good
+989	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,1]	stAufbau/auiAnlage/4,1	4,1	5041	UInt16	11:52:15.036	11:52:15.036	Good
+990	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,2]	stAufbau/auiAnlage/4,2	4,2	0	UInt16	11:52:15.036	11:52:15.036	Good
+991	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,3]	stAufbau/auiAnlage/4,3	4,3	5051	UInt16	11:52:15.036	11:52:15.036	Good
+992	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,4]	stAufbau/auiAnlage/4,4	4,4	0	UInt16	11:52:15.036	11:52:15.036	Good
+993	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,5]	stAufbau/auiAnlage/4,5	4,5	0	UInt16	11:52:15.036	11:52:15.036	Good
+994	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[4,6]	stAufbau/auiAnlage/4,6	4,6	0	UInt16	11:52:15.036	11:52:15.036	Good
+995	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[5,0]	stAufbau/auiAnlage/5,0	5,0	0	UInt16	11:52:15.037	11:52:15.037	Good
+996	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[5,1]	stAufbau/auiAnlage/5,1	5,1	6000	UInt16	11:52:15.037	11:52:15.037	Good
+997	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[5,2]	stAufbau/auiAnlage/5,2	5,2	5061	UInt16	11:52:15.037	11:52:15.037	Good
+998	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[5,3]	stAufbau/auiAnlage/5,3	5,3	6000	UInt16	11:52:15.037	11:52:15.037	Good
+999	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[5,4]	stAufbau/auiAnlage/5,4	5,4	0	UInt16	11:52:15.037	11:52:15.037	Good
+1000	Leitstand 192.168.36.1:4840	ns=3;s="dbZentral"."stAufbau"."auiAnlage"[5,5]	stAufbau/auiAnlage/5,5	5,5	0	UInt16	11:52:15.037	11:52:15.037	Good

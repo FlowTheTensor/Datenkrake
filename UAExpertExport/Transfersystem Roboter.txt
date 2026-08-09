@@ -1,0 +1,172 @@
+1	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=DeviceManual	Multifunktion01SPS/DeviceManual	DeviceManual	https://support.industry.siemens.com/cs/ww/en/view/86140384	String	14:15:37.803	14:15:37.803	Good
+2	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=DeviceRevision	Multifunktion01SPS/DeviceRevision	DeviceRevision	6ES7 516-3AN01-0AB0  V02.06.01	String	14:15:37.803	14:15:37.803	Good
+3	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=EngineeringRevision	Multifunktion01SPS/EngineeringRevision	EngineeringRevision	V15.1	String	14:15:37.809	14:15:37.809	Good
+4	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=HardwareRevision	Multifunktion01SPS/HardwareRevision	HardwareRevision	3	String	14:15:37.809	14:15:37.809	Good
+5	Transfersystem Roboter 192.168.36.9:4840	ns=3;i=5201	Multifunktion01SPS/Icon	Icon	89504e470d0a1a0a0000000d49484452000000300000003008060000005702f98700000006624b474400ff00ff00ffa0bda793000000097048597300000b1300000b1301009a9c180000000774494d4507e007140b0031ea404221000005454944415468ded5593b8e1d55103dd5332244444e88489091105b601d5e0412926327c40498c41224acc0193842a4ec8100b10542823a04f7d6ad4ff7eb7bdb662ca635336fa6a7dfebfa9c3a75aa1a78e48700c037dffec8fffa837ff9f9cd831bfffb6fafe5fe216ff0e9d3cf010064880f5bd8c639b6130401b0fdd92f6ad7d0befa550429f8ebcf3ff0fcc5cb670fea004840a4e5d97c1033d2fd41349e7686...	ByteString	14:15:37.811	14:15:37.811	Good
+6	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=Manufacturer	Multifunktion01SPS/Manufacturer	Manufacturer	"en-US", "Siemens AG"	LocalizedText	14:15:37.811	14:15:37.811	Good
+7	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=Model	Multifunktion01SPS/Model	Model	"en-US", "CPU 1516-3 PN/DP"	LocalizedText	14:15:37.814	14:15:37.814	Good
+8	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=OperatingMode	Multifunktion01SPS/OperatingMode	OperatingMode	8 (Run)	SimaticOperatingState	14:15:37.814	14:15:37.814	Good
+9	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=OrderNumber	Multifunktion01SPS/OrderNumber	OrderNumber	6ES7 516-3AN01-0AB0 	String	14:15:37.814	14:15:37.814	Good
+10	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=RevisionCounter	Multifunktion01SPS/RevisionCounter	RevisionCounter	-1	Int32	14:15:37.814	14:15:37.814	Good
+11	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=SerialNumber	Multifunktion01SPS/SerialNumber	SerialNumber	S C-K8KR87732018	String	14:15:37.814	14:15:37.814	Good
+12	Transfersystem Roboter 192.168.36.9:4840	ns=3;s=SoftwareRevision	Multifunktion01SPS/SoftwareRevision	SoftwareRevision	V02.06.01	String	14:15:37.814	14:15:37.814	Good
+13	Transfersystem Roboter 192.168.36.9:4840	ns=3;i=5204	Multifunktion01SPS/Counters/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af400000006624b474400ff00ff00ffa0bda793000000097048597300000b1300000b1301009a9c180000000774494d4507e007140b060994185d39000003ac4944415458c3c59741685c551486bffbde445a173188545cb850c48de24614b1566c5cb8d08d60c114172ed4956dd074698a908d9b2ca2989ddd28134941415de8c24c4568250ba1e022a21b15c156d32a9492f69d73ae8b7bef7bf74d33493333e285cbbb73dfccfdfff39fff9cf706fee7e1003e58ddf4ce812ba0ccae45116659405138cab48ef770617d6efd334e9e78d90d43a003e01c3cfaf014ce358787...	ByteString	14:15:37.815	14:15:37.815	Good
+14	Transfersystem Roboter 192.168.36.9:4840	ns=3;i=5202	Multifunktion01SPS/DataBlocksGlobal/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ac4944415478dac5977b5054e719c6f7efb6d3cee8244dbc449c104908c44b6235496b524cd34ea7d738b643c69a585b1b630c2c6850a3207790db2e022eecb2b8dc1451e426726b442e4105b92e0b41600111769785601a52d7d9739ebedf770e2b9afee1a099eccc33b31cf67cbfe779dff7fbceae42f17dbfca439fc685b02592c297a2825419b98cb41c5551cb511df30c6a62dc50736c25be3303ceeb7f85d0e60b67fbbb7076fc8df41e69079c5dff80d0b50bceeedd10baf7e0df71df810996dad946e0f66d1c2c74be4fda49d07f923e20f087108c7b2198...	ByteString	14:15:37.815	14:15:37.815	Good
+15	Transfersystem Roboter 192.168.36.9:4840	ns=3;i=5203	Multifunktion01SPS/DataBlocksInstance/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ac4944415478dac5977b5054e719c6f7efb6d3cee8244dbc449c104908c44b6235496b524cd34ea7d738b643c69a585b1b630c2c6850a3207790db2e022eecb2b8dc1451e426726b442e4105b92e0b41600111769785601a52d7d9739ebedf770e2b9afee1a099eccc33b31cf67cbfe779dff7fbceae42f17dbfca439fc685b02592c297a2825419b98cb41c5551cb511df30c6a62dc50736c25be3303ceeb7f85d0e60b67fbbb7076fc8df41e69079c5dff80d0b50bceeedd10baf7e0df71df810996dad946e0f66d1c2c74be4fda49d07f923e20f087108c7b2198...	ByteString	14:15:37.815	14:15:37.815	Good
+16	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-BG1_Bandsensor_Links"	Multifunktion01SPS/Inputs/+AL-BG1_Bandsensor_Links	+AL-BG1_Bandsensor_Links	true	Boolean	14:15:37.815	14:15:37.815	Good
+17	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"	Multifunktion01SPS/Inputs/+AL-BG2_Bandsensor_Rechts	+AL-BG2_Bandsensor_Rechts	true	Boolean	14:15:37.815	14:15:37.815	Good
+18	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-BG3_Stopper_Links_AS"	Multifunktion01SPS/Inputs/+AL-BG3_Stopper_Links_AS	+AL-BG3_Stopper_Links_AS	true	Boolean	14:15:37.816	14:15:37.816	Good
+19	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-BG4_Stopper_Rechts_AS"	Multifunktion01SPS/Inputs/+AL-BG4_Stopper_Rechts_AS	+AL-BG4_Stopper_Rechts_AS	true	Boolean	14:15:37.816	14:15:37.816	Good
+20	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-BG5_Stopper_Links_GS"	Multifunktion01SPS/Inputs/+AL-BG5_Stopper_Links_GS	+AL-BG5_Stopper_Links_GS	false	Boolean	14:15:37.816	14:15:37.816	Good
+21	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-BG6_Stopper_Rechts_GS"	Multifunktion01SPS/Inputs/+AL-BG6_Stopper_Rechts_GS	+AL-BG6_Stopper_Rechts_GS	false	Boolean	14:15:37.816	14:15:37.816	Good
+22	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AM-BG1_PositionAutomat"	Multifunktion01SPS/Inputs/+AM-BG1_PositionAutomat	+AM-BG1_PositionAutomat	true	Boolean	14:15:37.816	14:15:37.816	Good
+23	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AM-BG2_StopperAutomat_GS"	Multifunktion01SPS/Inputs/+AM-BG2_StopperAutomat_GS	+AM-BG2_StopperAutomat_GS	true	Boolean	14:15:37.817	14:15:37.817	Good
+24	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AM-BG3_StopperAutomat_AS"	Multifunktion01SPS/Inputs/+AM-BG3_StopperAutomat_AS	+AM-BG3_StopperAutomat_AS	false	Boolean	14:15:37.817	14:15:37.817	Good
+25	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="EmpfangProfinet"	Multifunktion01SPS/Inputs/EmpfangProfinet	EmpfangProfinet	0	UInt16	14:15:37.817	14:15:37.817	Good
+26	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="SchalterFuellstandIgnorieren"	Multifunktion01SPS/Inputs/SchalterFuellstandIgnorieren	SchalterFuellstandIgnorieren	false	Boolean	14:15:37.817	14:15:37.817	Good
+27	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eAusfahrtLinks"	Multifunktion01SPS/Inputs/eAusfahrtLinks	eAusfahrtLinks	false	Boolean	14:15:37.817	14:15:37.817	Good
+28	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eAusfahrtRechts"	Multifunktion01SPS/Inputs/eAusfahrtRechts	eAusfahrtRechts	false	Boolean	14:15:37.818	14:15:37.818	Good
+29	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eEinfahrtLinks"	Multifunktion01SPS/Inputs/eEinfahrtLinks	eEinfahrtLinks	false	Boolean	14:15:37.820	14:15:37.820	Good
+30	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eEinfahrtRechts"	Multifunktion01SPS/Inputs/eEinfahrtRechts	eEinfahrtRechts	false	Boolean	14:15:37.821	14:15:37.821	Good
+31	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eEntnahmeLinks"	Multifunktion01SPS/Inputs/eEntnahmeLinks	eEntnahmeLinks	false	Boolean	14:15:37.822	14:15:37.822	Good
+32	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eEntnahmeRechts"	Multifunktion01SPS/Inputs/eEntnahmeRechts	eEntnahmeRechts	false	Boolean	14:15:37.822	14:15:37.822	Good
+33	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eStartAuftrag"	Multifunktion01SPS/Inputs/eStartAuftrag	eStartAuftrag	false	Boolean	14:15:37.825	14:15:37.825	Good
+34	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eStopperOeffnen"	Multifunktion01SPS/Inputs/eStopperOeffnen	eStopperOeffnen	false	Boolean	14:15:37.825	14:15:37.825	Good
+35	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eTippLinkslauf"	Multifunktion01SPS/Inputs/eTippLinkslauf	eTippLinkslauf	false	Boolean	14:15:37.825	14:15:37.825	Good
+36	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="eTippRechtslauf"	Multifunktion01SPS/Inputs/eTippRechtslauf	eTippRechtslauf	false	Boolean	14:15:37.825	14:15:37.825	Good
+37	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-MA1.Linkslauf"	Multifunktion01SPS/Outputs/+AL-MA1.Linkslauf	+AL-MA1.Linkslauf	false	Boolean	14:15:37.826	14:15:37.826	Good
+38	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-MA1.Rechtslauf"	Multifunktion01SPS/Outputs/+AL-MA1.Rechtslauf	+AL-MA1.Rechtslauf	false	Boolean	14:15:37.826	14:15:37.826	Good
+39	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-MA1.Vmax"	Multifunktion01SPS/Outputs/+AL-MA1.Vmax	+AL-MA1.Vmax	false	Boolean	14:15:37.826	14:15:37.826	Good
+40	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-MB1_Stopper_Links"	Multifunktion01SPS/Outputs/+AL-MB1_Stopper_Links	+AL-MB1_Stopper_Links	true	Boolean	14:15:37.826	14:15:37.826	Good
+41	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AL-MB2_Stopper_Rechts"	Multifunktion01SPS/Outputs/+AL-MB2_Stopper_Rechts	+AL-MB2_Stopper_Rechts	true	Boolean	14:15:37.826	14:15:37.826	Good
+42	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="+AM-MB1_StopperAutomat"	Multifunktion01SPS/Outputs/+AM-MB1_StopperAutomat	+AM-MB1_StopperAutomat	false	Boolean	14:15:37.826	14:15:37.826	Good
+43	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="SendeProfinet"	Multifunktion01SPS/Outputs/SendeProfinet	SendeProfinet	8	UInt32	14:15:37.827	14:15:37.827	Good
+44	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sAuftragErfasst"	Multifunktion01SPS/Outputs/sAuftragErfasst	sAuftragErfasst	false	Boolean	14:15:37.827	14:15:37.827	Good
+45	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sBandSensorLinks"	Multifunktion01SPS/Outputs/sBandSensorLinks	sBandSensorLinks	false	Boolean	14:15:37.827	14:15:37.827	Good
+46	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sBandSensorRechts"	Multifunktion01SPS/Outputs/sBandSensorRechts	sBandSensorRechts	false	Boolean	14:15:37.827	14:15:37.827	Good
+47	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sEinfahrtEnde"	Multifunktion01SPS/Outputs/sEinfahrtEnde	sEinfahrtEnde	false	Boolean	14:15:37.827	14:15:37.827	Good
+48	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sFahreZu"	Multifunktion01SPS/Outputs/sFahreZu	sFahreZu	false	Boolean	14:15:37.827	14:15:37.827	Good
+49	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sIDZU"	Multifunktion01SPS/Outputs/sIDZU	sIDZU	0	UInt16	14:15:37.828	14:15:37.828	Good
+50	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sInReset"	Multifunktion01SPS/Outputs/sInReset	sInReset	false	Boolean	14:15:37.828	14:15:37.828	Good
+51	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sStillstand"	Multifunktion01SPS/Outputs/sStillstand	sStillstand	false	Boolean	14:15:37.828	14:15:37.828	Good
+52	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="sWartet"	Multifunktion01SPS/Outputs/sWartet	sWartet	true	Boolean	14:15:37.828	14:15:37.828	Good
+53	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Arbeitsgang"	DataBlocksGlobal/dbMESStation/Arbeitsgang	Arbeitsgang	0	UInt16	14:15:37.829	14:15:37.829	Good
+54	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"	DataBlocksGlobal/dbMESStation/Auftragsnummern	Auftragsnummern	{0,0,0,0,0,0,0,0,0,0}	UInt16	14:15:37.829	14:15:37.829	Good
+55	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Fehler"	DataBlocksGlobal/dbMESStation/Fehler	Fehler		MES_Fehler	14:15:37.833	14:15:37.833	Good
+56	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Füllstand1"	DataBlocksGlobal/dbMESStation/Füllstand1	Füllstand1	0	UInt16	14:15:37.833	14:15:37.833	Good
+57	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Füllstand2"	DataBlocksGlobal/dbMESStation/Füllstand2	Füllstand2	0	UInt16	14:15:37.837	14:15:37.837	Good
+58	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Füllstand3"	DataBlocksGlobal/dbMESStation/Füllstand3	Füllstand3	0	UInt16	14:15:37.837	14:15:37.837	Good
+59	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."GeschwindigkeitOptimal"	DataBlocksGlobal/dbMESStation/GeschwindigkeitOptimal	GeschwindigkeitOptimal	0	Float	14:15:37.837	14:15:37.837	Good
+60	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."GeschwindigkeitReal"	DataBlocksGlobal/dbMESStation/GeschwindigkeitReal	GeschwindigkeitReal	0	Float	14:15:37.837	14:15:37.837	Good
+61	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."ID"	DataBlocksGlobal/dbMESStation/ID	ID	0	UInt16	14:15:37.837	14:15:37.837	Good
+62	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MengeAusschuss"	DataBlocksGlobal/dbMESStation/MengeAusschuss	MengeAusschuss	0	UInt16	14:15:37.838	14:15:37.838	Good
+63	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MengeProduziert"	DataBlocksGlobal/dbMESStation/MengeProduziert	MengeProduziert	0	UInt16	14:15:37.838	14:15:37.838	Good
+64	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"	DataBlocksGlobal/dbMESStation/MesZylinder	MesZylinder		MES_Zylinder	14:15:37.843	14:15:37.843	Good
+65	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Name"	DataBlocksGlobal/dbMESStation/Name	Name	unknown	String	14:15:37.844	14:15:37.844	Good
+66	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Zustand"	DataBlocksGlobal/dbMESStation/Zustand	Zustand	2	UInt16	14:15:37.844	14:15:37.844	Good
+67	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"	DataBlocksGlobal/dbOPCLeitstand/uvlaVonLeitstandAuftrag	uvlaVonLeitstandAuftrag		VON_LEITSTAND_AUFTRAG	14:15:37.846	14:15:37.846	Good
+68	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"	DataBlocksGlobal/dbOPCLeitstand/uzlsZuLeitstandStatus	uzlsZuLeitstandStatus		ZU_LEITSTAND_STATUS	14:15:37.847	14:15:37.847	Good
+69	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[0]	dbMESStation/Auftragsnummern/0	0	0	UInt16	14:15:37.847	14:15:37.847	Good
+70	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[1]	dbMESStation/Auftragsnummern/1	1	0	UInt16	14:15:37.848	14:15:37.848	Good
+71	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[2]	dbMESStation/Auftragsnummern/2	2	0	UInt16	14:15:37.848	14:15:37.848	Good
+72	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[3]	dbMESStation/Auftragsnummern/3	3	0	UInt16	14:15:37.848	14:15:37.848	Good
+73	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[4]	dbMESStation/Auftragsnummern/4	4	0	UInt16	14:15:37.848	14:15:37.848	Good
+74	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[5]	dbMESStation/Auftragsnummern/5	5	0	UInt16	14:15:37.848	14:15:37.848	Good
+75	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[6]	dbMESStation/Auftragsnummern/6	6	0	UInt16	14:15:37.849	14:15:37.849	Good
+76	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[7]	dbMESStation/Auftragsnummern/7	7	0	UInt16	14:15:37.849	14:15:37.849	Good
+77	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[8]	dbMESStation/Auftragsnummern/8	8	0	UInt16	14:15:37.849	14:15:37.849	Good
+78	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Auftragsnummern"[9]	dbMESStation/Auftragsnummern/9	9	0	UInt16	14:15:37.849	14:15:37.849	Good
+79	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Fehler"."Bezeichnung"	dbMESStation/Fehler/Bezeichnung	Bezeichnung		String	14:15:37.852	14:15:37.852	Good
+80	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."Fehler"."Code"	dbMESStation/Fehler/Code	Code	0	UInt16	14:15:37.852	14:15:37.852	Good
+81	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[0]	dbMESStation/MesZylinder/0	0		MES_Zylinder	14:15:37.854	14:15:37.854	Good
+82	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[1]	dbMESStation/MesZylinder/1	1		MES_Zylinder	14:15:37.855	14:15:37.855	Good
+83	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[2]	dbMESStation/MesZylinder/2	2		MES_Zylinder	14:15:37.858	14:15:37.858	Good
+84	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[3]	dbMESStation/MesZylinder/3	3		MES_Zylinder	14:15:37.859	14:15:37.859	Good
+85	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[4]	dbMESStation/MesZylinder/4	4		MES_Zylinder	14:15:37.860	14:15:37.860	Good
+86	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[5]	dbMESStation/MesZylinder/5	5		MES_Zylinder	14:15:37.861	14:15:37.861	Good
+87	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[6]	dbMESStation/MesZylinder/6	6		MES_Zylinder	14:15:37.862	14:15:37.862	Good
+88	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[7]	dbMESStation/MesZylinder/7	7		MES_Zylinder	14:15:37.863	14:15:37.863	Good
+89	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[8]	dbMESStation/MesZylinder/8	8		MES_Zylinder	14:15:37.864	14:15:37.864	Good
+90	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[9]	dbMESStation/MesZylinder/9	9		MES_Zylinder	14:15:37.864	14:15:37.864	Good
+91	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."uiAuftragsnummer"	dbOPCLeitstand/uvlaVonLeitstandAuftrag/uiAuftragsnummer	uiAuftragsnummer	0	UInt16	14:15:37.865	14:15:37.865	Good
+92	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"	dbOPCLeitstand/uvlaVonLeitstandAuftrag/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	14:15:37.866	14:15:37.866	Good
+93	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"	dbOPCLeitstand/uvlaVonLeitstandAuftrag/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	14:15:37.867	14:15:37.867	Good
+94	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bFehlermeldung"	dbOPCLeitstand/uzlsZuLeitstandStatus/bFehlermeldung	bFehlermeldung	0	Byte	14:15:37.867	14:15:37.867	Good
+95	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bKonf1"	dbOPCLeitstand/uzlsZuLeitstandStatus/bKonf1	bKonf1	2	Byte	14:15:37.867	14:15:37.867	Good
+96	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bKonf2"	dbOPCLeitstand/uzlsZuLeitstandStatus/bKonf2	bKonf2	0	Byte	14:15:37.867	14:15:37.867	Good
+97	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bKonf3"	dbOPCLeitstand/uzlsZuLeitstandStatus/bKonf3	bKonf3	0	Byte	14:15:37.868	14:15:37.868	Good
+98	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."iAnzahlLager1"	dbOPCLeitstand/uzlsZuLeitstandStatus/iAnzahlLager1	iAnzahlLager1	0	Int16	14:15:37.868	14:15:37.868	Good
+99	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."iAnzahlLager2"	dbOPCLeitstand/uzlsZuLeitstandStatus/iAnzahlLager2	iAnzahlLager2	0	Int16	14:15:37.868	14:15:37.868	Good
+100	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."iAnzahlLager3"	dbOPCLeitstand/uzlsZuLeitstandStatus/iAnzahlLager3	iAnzahlLager3	0	Int16	14:15:37.868	14:15:37.868	Good
+101	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."strFehlermeldung"	dbOPCLeitstand/uzlsZuLeitstandStatus/strFehlermeldung	strFehlermeldung		String	14:15:37.868	14:15:37.868	Good
+102	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."uiBetriebsart"	dbOPCLeitstand/uzlsZuLeitstandStatus/uiBetriebsart	uiBetriebsart	4	UInt16	14:15:37.869	14:15:37.869	Good
+103	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[0]."Aufgabe"	MesZylinder/0/Aufgabe	Aufgabe	0	UInt16	14:15:37.869	14:15:37.869	Good
+104	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[0]."Bezeichner"	MesZylinder/0/Bezeichner	Bezeichner	Transfersystem Stopper links	String	14:15:37.869	14:15:37.869	Good
+105	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[0]."Status"	MesZylinder/0/Status	Status	0	UInt16	14:15:37.872	14:15:37.872	Good
+106	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[1]."Aufgabe"	MesZylinder/1/Aufgabe	Aufgabe	0	UInt16	14:15:37.872	14:15:37.872	Good
+107	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[1]."Bezeichner"	MesZylinder/1/Bezeichner	Bezeichner	Transfersystem Stopper rechts	String	14:15:37.874	14:15:37.874	Good
+108	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[1]."Status"	MesZylinder/1/Status	Status	0	UInt16	14:15:37.874	14:15:37.874	Good
+109	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[2]."Aufgabe"	MesZylinder/2/Aufgabe	Aufgabe	0	UInt16	14:15:37.879	14:15:37.879	Good
+110	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[2]."Bezeichner"	MesZylinder/2/Bezeichner	Bezeichner	Automat 1 Stopper	String	14:15:37.879	14:15:37.879	Good
+111	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[2]."Status"	MesZylinder/2/Status	Status	0	UInt16	14:15:37.880	14:15:37.880	Good
+112	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[3]."Aufgabe"	MesZylinder/3/Aufgabe	Aufgabe	0	UInt16	14:15:37.880	14:15:37.880	Good
+113	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[3]."Bezeichner"	MesZylinder/3/Bezeichner	Bezeichner		String	14:15:37.880	14:15:37.880	Good
+114	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[3]."Status"	MesZylinder/3/Status	Status	0	UInt16	14:15:37.880	14:15:37.880	Good
+115	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[4]."Aufgabe"	MesZylinder/4/Aufgabe	Aufgabe	0	UInt16	14:15:37.881	14:15:37.881	Good
+116	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[4]."Bezeichner"	MesZylinder/4/Bezeichner	Bezeichner		String	14:15:37.881	14:15:37.881	Good
+117	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[4]."Status"	MesZylinder/4/Status	Status	0	UInt16	14:15:37.881	14:15:37.881	Good
+118	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[5]."Aufgabe"	MesZylinder/5/Aufgabe	Aufgabe	0	UInt16	14:15:37.882	14:15:37.882	Good
+119	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[5]."Bezeichner"	MesZylinder/5/Bezeichner	Bezeichner		String	14:15:37.882	14:15:37.882	Good
+120	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[5]."Status"	MesZylinder/5/Status	Status	0	UInt16	14:15:37.882	14:15:37.882	Good
+121	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[6]."Aufgabe"	MesZylinder/6/Aufgabe	Aufgabe	0	UInt16	14:15:37.882	14:15:37.882	Good
+122	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[6]."Bezeichner"	MesZylinder/6/Bezeichner	Bezeichner		String	14:15:37.883	14:15:37.883	Good
+123	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[6]."Status"	MesZylinder/6/Status	Status	0	UInt16	14:15:37.883	14:15:37.883	Good
+124	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[7]."Aufgabe"	MesZylinder/7/Aufgabe	Aufgabe	0	UInt16	14:15:37.883	14:15:37.883	Good
+125	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[7]."Bezeichner"	MesZylinder/7/Bezeichner	Bezeichner		String	14:15:37.883	14:15:37.883	Good
+126	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[7]."Status"	MesZylinder/7/Status	Status	0	UInt16	14:15:37.884	14:15:37.884	Good
+127	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[8]."Aufgabe"	MesZylinder/8/Aufgabe	Aufgabe	0	UInt16	14:15:37.884	14:15:37.884	Good
+128	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[8]."Bezeichner"	MesZylinder/8/Bezeichner	Bezeichner		String	14:15:37.884	14:15:37.884	Good
+129	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[8]."Status"	MesZylinder/8/Status	Status	0	UInt16	14:15:37.885	14:15:37.885	Good
+130	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[9]."Aufgabe"	MesZylinder/9/Aufgabe	Aufgabe	0	UInt16	14:15:37.885	14:15:37.885	Good
+131	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[9]."Bezeichner"	MesZylinder/9/Bezeichner	Bezeichner		String	14:15:37.888	14:15:37.888	Good
+132	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbMESStation"."MesZylinder"[9]."Status"	MesZylinder/9/Status	Status	0	UInt16	14:15:37.888	14:15:37.888	Good
+133	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiInhalt1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiInhalt1	usiInhalt1	0	Byte	14:15:37.890	14:15:37.890	Good
+134	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiInhalt2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiInhalt2	usiInhalt2	0	Byte	14:15:37.890	14:15:37.890	Good
+135	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiInhalt3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiInhalt3	usiInhalt3	0	Byte	14:15:37.893	14:15:37.893	Good
+136	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV1	usiNV1	0	Byte	14:15:37.894	14:15:37.894	Good
+137	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV2	usiNV2	0	Byte	14:15:37.894	14:15:37.894	Good
+138	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV3	usiNV3	0	Byte	14:15:37.894	14:15:37.894	Good
+139	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV4"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV4	usiNV4	0	Byte	14:15:37.894	14:15:37.894	Good
+140	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV5"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV5	usiNV5	0	Byte	14:15:37.894	14:15:37.894	Good
+141	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelBlau"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelBlau	xDeckelBlau	false	Boolean	14:15:37.895	14:15:37.895	Good
+142	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelGrün"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelGrün	xDeckelGrün	false	Boolean	14:15:37.895	14:15:37.895	Good
+143	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelRot"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelRot	xDeckelRot	false	Boolean	14:15:37.895	14:15:37.895	Good
+144	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelSchwarz"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelSchwarz	xDeckelSchwarz	false	Boolean	14:15:37.895	14:15:37.895	Good
+145	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xInhalt1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xInhalt1	xInhalt1	false	Boolean	14:15:37.896	14:15:37.896	Good
+146	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xInhalt2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xInhalt2	xInhalt2	false	Boolean	14:15:37.896	14:15:37.896	Good
+147	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xInhalt3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xInhalt3	xInhalt3	false	Boolean	14:15:37.896	14:15:37.896	Good
+148	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV1	xNV1	false	Boolean	14:15:37.896	14:15:37.896	Good
+149	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV2	xNV2	false	Boolean	14:15:37.896	14:15:37.896	Good
+150	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV3	xNV3	false	Boolean	14:15:37.896	14:15:37.896	Good
+151	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV4"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV4	xNV4	false	Boolean	14:15:37.897	14:15:37.897	Good
+152	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV5"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV5	xNV5	false	Boolean	14:15:37.897	14:15:37.897	Good
+153	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV6"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV6	xNV6	false	Boolean	14:15:37.898	14:15:37.898	Good
+154	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV7"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV7	xNV7	false	Boolean	14:15:37.898	14:15:37.898	Good
+155	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xSchließer"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xSchließer	xSchließer	false	Boolean	14:15:37.899	14:15:37.899	Good
+156	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xÖffner"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xÖffner	xÖffner	false	Boolean	14:15:37.899	14:15:37.899	Good
+157	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xBefüllen"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xBefüllen	xBefüllen	false	Boolean	14:15:37.902	14:15:37.902	Good
+158	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xDUInHandling"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xDUInHandling	xDUInHandling	false	Boolean	14:15:37.903	14:15:37.903	Good
+159	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xDemontieren"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xDemontieren	xDemontieren	false	Boolean	14:15:37.905	14:15:37.905	Good
+160	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xEntnahmeStation"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xEntnahmeStation	xEntnahmeStation	false	Boolean	14:15:37.905	14:15:37.905	Good
+161	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xHandarbeitsplatz"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xHandarbeitsplatz	xHandarbeitsplatz	false	Boolean	14:15:37.908	14:15:37.908	Good
+162	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xHochregal"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xHochregal	xHochregal	false	Boolean	14:15:37.909	14:15:37.909	Good
+163	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xKontrolle"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xKontrolle	xKontrolle	false	Boolean	14:15:37.910	14:15:37.910	Good
+164	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xMontieren"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xMontieren	xMontieren	false	Boolean	14:15:37.911	14:15:37.911	Good
+165	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV2"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV2	xNV2	false	Boolean	14:15:37.911	14:15:37.911	Good
+166	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV3"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV3	xNV3	false	Boolean	14:15:37.911	14:15:37.911	Good
+167	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV4"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV4	xNV4	false	Boolean	14:15:37.911	14:15:37.911	Good
+168	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV5"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV5	xNV5	false	Boolean	14:15:37.911	14:15:37.911	Good
+169	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV6"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV6	xNV6	false	Boolean	14:15:37.912	14:15:37.912	Good
+170	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV7"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV7	xNV7	false	Boolean	14:15:37.912	14:15:37.912	Good
+171	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xPalettenlager1"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xPalettenlager1	xPalettenlager1	false	Boolean	14:15:37.912	14:15:37.912	Good
+172	Transfersystem Roboter 192.168.36.9:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xPalettenlager2"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xPalettenlager2	xPalettenlager2	false	Boolean	14:15:37.913	14:15:37.913	Good

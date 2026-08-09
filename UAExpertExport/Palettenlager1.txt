@@ -1,0 +1,200 @@
+1	Palettenlager1 192.168.36.2:4840	ns=3;s=DeviceManual	Palettenlager01SPS/DeviceManual	DeviceManual	https://support.industry.siemens.com/cs/ww/en/view/86140384	String	02:42:34.623	02:42:34.623	Good
+2	Palettenlager1 192.168.36.2:4840	ns=3;s=DeviceRevision	Palettenlager01SPS/DeviceRevision	DeviceRevision	6ES7 516-3AN01-0AB0  V02.06.01	String	02:42:34.623	02:42:34.623	Good
+3	Palettenlager1 192.168.36.2:4840	ns=3;s=EngineeringRevision	Palettenlager01SPS/EngineeringRevision	EngineeringRevision	V15.1	String	02:42:34.630	02:42:34.630	Good
+4	Palettenlager1 192.168.36.2:4840	ns=3;s=HardwareRevision	Palettenlager01SPS/HardwareRevision	HardwareRevision	3	String	02:42:34.630	02:42:34.630	Good
+5	Palettenlager1 192.168.36.2:4840	ns=3;i=5201	Palettenlager01SPS/Icon	Icon	89504e470d0a1a0a0000000d49484452000000300000003008060000005702f98700000006624b474400ff00ff00ffa0bda793000000097048597300000b1300000b1301009a9c180000000774494d4507e007140b0031ea404221000005454944415468ded5593b8e1d55103dd5332244444e88489091105b601d5e0412926327c40498c41224acc0193842a4ec8100b10542823a04f7d6ad4ff7eb7bdb662ca635336fa6a7dfebfa9c3a75aa1a78e48700c037dffec8fffa837ff9f9cd831bfffb6fafe5fe216ff0e9d3cf010064880f5bd8c639b6130401b0fdd92f6ad7d0befa550429f8ebcf3ff0fcc5cb670fea004840a4e5d97c1033d2fd41349e7686...	ByteString	02:42:34.637	02:42:34.637	Good
+6	Palettenlager1 192.168.36.2:4840	ns=3;s=Manufacturer	Palettenlager01SPS/Manufacturer	Manufacturer	"en-US", "Siemens AG"	LocalizedText	02:42:34.637	02:42:34.637	Good
+7	Palettenlager1 192.168.36.2:4840	ns=3;s=Model	Palettenlager01SPS/Model	Model	"en-US", "CPU 1516-3 PN/DP"	LocalizedText	02:42:34.643	02:42:34.643	Good
+8	Palettenlager1 192.168.36.2:4840	ns=3;s=OperatingMode	Palettenlager01SPS/OperatingMode	OperatingMode	8 (Run)	SimaticOperatingState	02:42:34.643	02:42:34.643	Good
+9	Palettenlager1 192.168.36.2:4840	ns=3;s=OrderNumber	Palettenlager01SPS/OrderNumber	OrderNumber	6ES7 516-3AN01-0AB0 	String	02:42:34.650	02:42:34.650	Good
+10	Palettenlager1 192.168.36.2:4840	ns=3;s=RevisionCounter	Palettenlager01SPS/RevisionCounter	RevisionCounter	-1	Int32	02:42:34.650	02:42:34.650	Good
+11	Palettenlager1 192.168.36.2:4840	ns=3;s=SerialNumber	Palettenlager01SPS/SerialNumber	SerialNumber	S C-K8KR75112018	String	02:42:34.656	02:42:34.656	Good
+12	Palettenlager1 192.168.36.2:4840	ns=3;s=SoftwareRevision	Palettenlager01SPS/SoftwareRevision	SoftwareRevision	V02.06.01	String	02:42:34.656	02:42:34.656	Good
+13	Palettenlager1 192.168.36.2:4840	ns=3;i=5204	Palettenlager01SPS/Counters/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af400000006624b474400ff00ff00ffa0bda793000000097048597300000b1300000b1301009a9c180000000774494d4507e007140b060994185d39000003ac4944415458c3c59741685c551486bffbde445a173188545cb850c48de24614b1566c5cb8d08d60c114172ed4956dd074698a908d9b2ca2989ddd28134941415de8c24c4568250ba1e022a21b15c156d32a9492f69d73ae8b7bef7bf74d33493333e285cbbb73dfccfdfff39fff9cf706fee7e1003e58ddf4ce812ba0ccae45116659405138cab48ef770617d6efd334e9e78d90d43a003e01c3cfaf014ce358787...	ByteString	02:42:34.663	02:42:34.663	Good
+14	Palettenlager1 192.168.36.2:4840	ns=3;i=5202	Palettenlager01SPS/DataBlocksGlobal/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ac4944415478dac5977b5054e719c6f7efb6d3cee8244dbc449c104908c44b6235496b524cd34ea7d738b643c69a585b1b630c2c6850a3207790db2e022eecb2b8dc1451e426726b442e4105b92e0b41600111769785601a52d7d9739ebedf770e2b9afee1a099eccc33b31cf67cbfe779dff7fbceae42f17dbfca439fc685b02592c297a2825419b98cb41c5551cb511df30c6a62dc50736c25be3303ceeb7f85d0e60b67fbbb7076fc8df41e69079c5dff80d0b50bceeedd10baf7e0df71df810996dad946e0f66d1c2c74be4fda49d07f923e20f087108c7b2198...	ByteString	02:42:34.663	02:42:34.663	Good
+15	Palettenlager1 192.168.36.2:4840	ns=3;i=5203	Palettenlager01SPS/DataBlocksInstance/Icon	Icon	89504e470d0a1a0a0000000d4948445200000020000000200806000000737a7af4000007ac4944415478dac5977b5054e719c6f7efb6d3cee8244dbc449c104908c44b6235496b524cd34ea7d738b643c69a585b1b630c2c6850a3207790db2e022eecb2b8dc1451e426726b442e4105b92e0b41600111769785601a52d7d9739ebedf770e2b9afee1a099eccc33b31cf67cbfe779dff7fbceae42f17dbfca439fc685b02592c297a2825419b98cb41c5551cb511df30c6a62dc50736c25be3303ceeb7f85d0e60b67fbbb7076fc8df41e69079c5dff80d0b50bceeedd10baf7e0df71df810996dad946e0f66d1c2c74be4fda49d07f923e20f087108c7b2198...	ByteString	02:42:34.670	02:42:34.670	Good
+16	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-BG1_Bandsensor_Links"	Palettenlager01SPS/Inputs/+AL-BG1_Bandsensor_Links	+AL-BG1_Bandsensor_Links	true	Boolean	02:42:38.618	02:42:38.618	Good
+17	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"	Palettenlager01SPS/Inputs/+AL-BG2_Bandsensor_Rechts	+AL-BG2_Bandsensor_Rechts	true	Boolean	02:42:38.618	02:42:38.618	Good
+18	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-BG3_Stopper_Links"	Palettenlager01SPS/Inputs/+AL-BG3_Stopper_Links	+AL-BG3_Stopper_Links	true	Boolean	02:42:38.618	02:42:38.618	Good
+19	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-BG4_Stopper_Rechts"	Palettenlager01SPS/Inputs/+AL-BG4_Stopper_Rechts	+AL-BG4_Stopper_Rechts	true	Boolean	02:42:38.618	02:42:38.618	Good
+20	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG10_PaletteObenVorhanden"	Palettenlager01SPS/Inputs/+AM-BG10_PaletteObenVorhanden	+AM-BG10_PaletteObenVorhanden	false	Boolean	02:42:38.619	02:42:38.619	Good
+21	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG1_PosLinks"	Palettenlager01SPS/Inputs/+AM-BG1_PosLinks	+AM-BG1_PosLinks	true	Boolean	02:42:38.619	02:42:38.619	Good
+22	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG2_PosRechts"	Palettenlager01SPS/Inputs/+AM-BG2_PosRechts	+AM-BG2_PosRechts	true	Boolean	02:42:38.619	02:42:38.619	Good
+23	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG3_StopperLinks"	Palettenlager01SPS/Inputs/+AM-BG3_StopperLinks	+AM-BG3_StopperLinks	false	Boolean	02:42:38.619	02:42:38.619	Good
+24	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG4_StopperRechts"	Palettenlager01SPS/Inputs/+AM-BG4_StopperRechts	+AM-BG4_StopperRechts	false	Boolean	02:42:38.619	02:42:38.619	Good
+25	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG5_VereinzelerOffen"	Palettenlager01SPS/Inputs/+AM-BG5_VereinzelerOffen	+AM-BG5_VereinzelerOffen	false	Boolean	02:42:38.619	02:42:38.619	Good
+26	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG6_HubUnten"	Palettenlager01SPS/Inputs/+AM-BG6_HubUnten	+AM-BG6_HubUnten	true	Boolean	02:42:38.619	02:42:38.619	Good
+27	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG7_HubMitte"	Palettenlager01SPS/Inputs/+AM-BG7_HubMitte	+AM-BG7_HubMitte	false	Boolean	02:42:38.619	02:42:38.619	Good
+28	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG8_HubOben"	Palettenlager01SPS/Inputs/+AM-BG8_HubOben	+AM-BG8_HubOben	false	Boolean	02:42:38.620	02:42:38.620	Good
+29	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BG9_PaletteUntenVorhanden"	Palettenlager01SPS/Inputs/+AM-BG9_PaletteUntenVorhanden	+AM-BG9_PaletteUntenVorhanden	false	Boolean	02:42:38.620	02:42:38.620	Good
+30	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-BL1_Füllstand"	Palettenlager01SPS/Inputs/+AM-BL1_Füllstand	+AM-BL1_Füllstand	19583	Int16	02:42:38.620	02:42:38.620	Good
+31	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG10_PaletteObenVorhanden"	Palettenlager01SPS/Inputs/+AN-BG10_PaletteObenVorhanden	+AN-BG10_PaletteObenVorhanden	false	Boolean	02:42:38.620	02:42:38.620	Good
+32	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG1_PosLinks"	Palettenlager01SPS/Inputs/+AN-BG1_PosLinks	+AN-BG1_PosLinks	true	Boolean	02:42:38.620	02:42:38.620	Good
+33	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG2_PosRechts"	Palettenlager01SPS/Inputs/+AN-BG2_PosRechts	+AN-BG2_PosRechts	true	Boolean	02:42:38.620	02:42:38.620	Good
+34	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG3_StopperLinks"	Palettenlager01SPS/Inputs/+AN-BG3_StopperLinks	+AN-BG3_StopperLinks	false	Boolean	02:42:38.620	02:42:38.620	Good
+35	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG4_StopperRechts"	Palettenlager01SPS/Inputs/+AN-BG4_StopperRechts	+AN-BG4_StopperRechts	false	Boolean	02:42:38.621	02:42:38.621	Good
+36	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG5_VereinzelerOffen"	Palettenlager01SPS/Inputs/+AN-BG5_VereinzelerOffen	+AN-BG5_VereinzelerOffen	false	Boolean	02:42:38.621	02:42:38.621	Good
+37	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG6_HubUnten"	Palettenlager01SPS/Inputs/+AN-BG6_HubUnten	+AN-BG6_HubUnten	true	Boolean	02:42:38.621	02:42:38.621	Good
+38	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG7_HubMitte"	Palettenlager01SPS/Inputs/+AN-BG7_HubMitte	+AN-BG7_HubMitte	false	Boolean	02:42:38.621	02:42:38.621	Good
+39	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG8_HubOben"	Palettenlager01SPS/Inputs/+AN-BG8_HubOben	+AN-BG8_HubOben	false	Boolean	02:42:38.621	02:42:38.621	Good
+40	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BG9_PaletteUntenVorhanden"	Palettenlager01SPS/Inputs/+AN-BG9_PaletteUntenVorhanden	+AN-BG9_PaletteUntenVorhanden	false	Boolean	02:42:38.621	02:42:38.621	Good
+41	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-BL2_Füllstand"	Palettenlager01SPS/Inputs/+AN-BL2_Füllstand	+AN-BL2_Füllstand	6639	Int16	02:42:38.621	02:42:38.621	Good
+42	Palettenlager1 192.168.36.2:4840	ns=3;s="EmpfangProfinet"	Palettenlager01SPS/Inputs/EmpfangProfinet	EmpfangProfinet	0	UInt16	02:42:38.621	02:42:38.621	Good
+43	Palettenlager1 192.168.36.2:4840	ns=3;s="SchalterFuellstandIgnorieren"	Palettenlager01SPS/Inputs/SchalterFuellstandIgnorieren	SchalterFuellstandIgnorieren	false	Boolean	02:42:38.622	02:42:38.622	Good
+44	Palettenlager1 192.168.36.2:4840	ns=3;s="eAusfahrtLinks"	Palettenlager01SPS/Inputs/eAusfahrtLinks	eAusfahrtLinks	false	Boolean	02:42:38.622	02:42:38.622	Good
+45	Palettenlager1 192.168.36.2:4840	ns=3;s="eAusfahrtRechts"	Palettenlager01SPS/Inputs/eAusfahrtRechts	eAusfahrtRechts	false	Boolean	02:42:38.622	02:42:38.622	Good
+46	Palettenlager1 192.168.36.2:4840	ns=3;s="eEinfahrtLinks"	Palettenlager01SPS/Inputs/eEinfahrtLinks	eEinfahrtLinks	false	Boolean	02:42:38.622	02:42:38.622	Good
+47	Palettenlager1 192.168.36.2:4840	ns=3;s="eEinfahrtRechts"	Palettenlager01SPS/Inputs/eEinfahrtRechts	eEinfahrtRechts	false	Boolean	02:42:38.622	02:42:38.622	Good
+48	Palettenlager1 192.168.36.2:4840	ns=3;s="eEntnahmeLinks"	Palettenlager01SPS/Inputs/eEntnahmeLinks	eEntnahmeLinks	false	Boolean	02:42:38.622	02:42:38.622	Good
+49	Palettenlager1 192.168.36.2:4840	ns=3;s="eEntnahmeRechts"	Palettenlager01SPS/Inputs/eEntnahmeRechts	eEntnahmeRechts	false	Boolean	02:42:38.622	02:42:38.622	Good
+50	Palettenlager1 192.168.36.2:4840	ns=3;s="eStartAuftrag"	Palettenlager01SPS/Inputs/eStartAuftrag	eStartAuftrag	false	Boolean	02:42:38.622	02:42:38.622	Good
+51	Palettenlager1 192.168.36.2:4840	ns=3;s="eStopperOeffnen"	Palettenlager01SPS/Inputs/eStopperOeffnen	eStopperOeffnen	false	Boolean	02:42:38.623	02:42:38.623	Good
+52	Palettenlager1 192.168.36.2:4840	ns=3;s="eTippLinkslauf"	Palettenlager01SPS/Inputs/eTippLinkslauf	eTippLinkslauf	false	Boolean	02:42:38.623	02:42:38.623	Good
+53	Palettenlager1 192.168.36.2:4840	ns=3;s="eTippRechtslauf"	Palettenlager01SPS/Inputs/eTippRechtslauf	eTippRechtslauf	false	Boolean	02:42:38.623	02:42:38.623	Good
+54	Palettenlager1 192.168.36.2:4840	ns=3;s="eZufuhrLinks"	Palettenlager01SPS/Inputs/eZufuhrLinks	eZufuhrLinks	false	Boolean	02:42:38.623	02:42:38.623	Good
+55	Palettenlager1 192.168.36.2:4840	ns=3;s="eZufuhrRechts"	Palettenlager01SPS/Inputs/eZufuhrRechts	eZufuhrRechts	false	Boolean	02:42:38.623	02:42:38.623	Good
+56	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-MA1.Linkslauf"	Palettenlager01SPS/Outputs/+AL-MA1.Linkslauf	+AL-MA1.Linkslauf	false	Boolean	02:42:38.623	02:42:38.623	Good
+57	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-MA1.Rechtslauf"	Palettenlager01SPS/Outputs/+AL-MA1.Rechtslauf	+AL-MA1.Rechtslauf	false	Boolean	02:42:38.623	02:42:38.623	Good
+58	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-MA1.Vmax"	Palettenlager01SPS/Outputs/+AL-MA1.Vmax	+AL-MA1.Vmax	false	Boolean	02:42:38.624	02:42:38.624	Good
+59	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-MB1_Stopper_Links"	Palettenlager01SPS/Outputs/+AL-MB1_Stopper_Links	+AL-MB1_Stopper_Links	true	Boolean	02:42:38.624	02:42:38.624	Good
+60	Palettenlager1 192.168.36.2:4840	ns=3;s="+AL-MB2_Stopper_Rechts"	Palettenlager01SPS/Outputs/+AL-MB2_Stopper_Rechts	+AL-MB2_Stopper_Rechts	true	Boolean	02:42:38.624	02:42:38.624	Good
+61	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-MB1_StopperLinks"	Palettenlager01SPS/Outputs/+AM-MB1_StopperLinks	+AM-MB1_StopperLinks	false	Boolean	02:42:38.624	02:42:38.624	Good
+62	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-MB2_StopperRechts"	Palettenlager01SPS/Outputs/+AM-MB2_StopperRechts	+AM-MB2_StopperRechts	false	Boolean	02:42:38.624	02:42:38.624	Good
+63	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-MB3_Vereinzeler"	Palettenlager01SPS/Outputs/+AM-MB3_Vereinzeler	+AM-MB3_Vereinzeler	false	Boolean	02:42:38.624	02:42:38.624	Good
+64	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-MB4_HubUnten"	Palettenlager01SPS/Outputs/+AM-MB4_HubUnten	+AM-MB4_HubUnten	true	Boolean	02:42:38.624	02:42:38.624	Good
+65	Palettenlager1 192.168.36.2:4840	ns=3;s="+AM-MB5_HubOben"	Palettenlager01SPS/Outputs/+AM-MB5_HubOben	+AM-MB5_HubOben	false	Boolean	02:42:38.624	02:42:38.624	Good
+66	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-MB1_StopperLinks"	Palettenlager01SPS/Outputs/+AN-MB1_StopperLinks	+AN-MB1_StopperLinks	false	Boolean	02:42:38.624	02:42:38.624	Good
+67	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-MB2_StopperRechts"	Palettenlager01SPS/Outputs/+AN-MB2_StopperRechts	+AN-MB2_StopperRechts	false	Boolean	02:42:38.625	02:42:38.625	Good
+68	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-MB3_Vereinzeler"	Palettenlager01SPS/Outputs/+AN-MB3_Vereinzeler	+AN-MB3_Vereinzeler	false	Boolean	02:42:38.625	02:42:38.625	Good
+69	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-MB4_HubUnten"	Palettenlager01SPS/Outputs/+AN-MB4_HubUnten	+AN-MB4_HubUnten	true	Boolean	02:42:38.625	02:42:38.625	Good
+70	Palettenlager1 192.168.36.2:4840	ns=3;s="+AN-MB5_HubOben"	Palettenlager01SPS/Outputs/+AN-MB5_HubOben	+AN-MB5_HubOben	false	Boolean	02:42:38.625	02:42:38.625	Good
+71	Palettenlager1 192.168.36.2:4840	ns=3;s="SendeProfinet"	Palettenlager01SPS/Outputs/SendeProfinet	SendeProfinet	8	UInt32	02:42:38.625	02:42:38.625	Good
+72	Palettenlager1 192.168.36.2:4840	ns=3;s="sAuftragErfasst"	Palettenlager01SPS/Outputs/sAuftragErfasst	sAuftragErfasst	false	Boolean	02:42:38.625	02:42:38.625	Good
+73	Palettenlager1 192.168.36.2:4840	ns=3;s="sBandSensorLinks"	Palettenlager01SPS/Outputs/sBandSensorLinks	sBandSensorLinks	false	Boolean	02:42:38.625	02:42:38.625	Good
+74	Palettenlager1 192.168.36.2:4840	ns=3;s="sBandSensorRechts"	Palettenlager01SPS/Outputs/sBandSensorRechts	sBandSensorRechts	false	Boolean	02:42:38.625	02:42:38.625	Good
+75	Palettenlager1 192.168.36.2:4840	ns=3;s="sEinfahrtEnde"	Palettenlager01SPS/Outputs/sEinfahrtEnde	sEinfahrtEnde	false	Boolean	02:42:38.626	02:42:38.626	Good
+76	Palettenlager1 192.168.36.2:4840	ns=3;s="sFahreZu"	Palettenlager01SPS/Outputs/sFahreZu	sFahreZu	false	Boolean	02:42:38.626	02:42:38.626	Good
+77	Palettenlager1 192.168.36.2:4840	ns=3;s="sIDZU"	Palettenlager01SPS/Outputs/sIDZU	sIDZU	0	UInt16	02:42:38.626	02:42:38.626	Good
+78	Palettenlager1 192.168.36.2:4840	ns=3;s="sInReset"	Palettenlager01SPS/Outputs/sInReset	sInReset	false	Boolean	02:42:38.626	02:42:38.626	Good
+79	Palettenlager1 192.168.36.2:4840	ns=3;s="sStillstand"	Palettenlager01SPS/Outputs/sStillstand	sStillstand	false	Boolean	02:42:38.626	02:42:38.626	Good
+80	Palettenlager1 192.168.36.2:4840	ns=3;s="sWartet"	Palettenlager01SPS/Outputs/sWartet	sWartet	true	Boolean	02:42:38.626	02:42:38.626	Good
+81	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Arbeitsgang"	DataBlocksGlobal/dbMESStation/Arbeitsgang	Arbeitsgang	0	UInt16	02:42:38.626	02:42:38.626	Good
+82	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"	DataBlocksGlobal/dbMESStation/Auftragsnummern	Auftragsnummern	{0,0,0,0,0,0,0,0,0,0}	UInt16	02:42:38.626	02:42:38.626	Good
+83	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Fehler"	DataBlocksGlobal/dbMESStation/Fehler	Fehler		MES_Fehler	02:42:38.627	02:42:38.627	Good
+84	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Füllstand1"	DataBlocksGlobal/dbMESStation/Füllstand1	Füllstand1	8	UInt16	02:42:38.627	02:42:38.627	Good
+85	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Füllstand2"	DataBlocksGlobal/dbMESStation/Füllstand2	Füllstand2	1	UInt16	02:42:38.627	02:42:38.627	Good
+86	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Füllstand3"	DataBlocksGlobal/dbMESStation/Füllstand3	Füllstand3	0	UInt16	02:42:38.627	02:42:38.627	Good
+87	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."GeschwindigkeitOptimal"	DataBlocksGlobal/dbMESStation/GeschwindigkeitOptimal	GeschwindigkeitOptimal	0	Float	02:42:38.628	02:42:38.628	Good
+88	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."GeschwindigkeitReal"	DataBlocksGlobal/dbMESStation/GeschwindigkeitReal	GeschwindigkeitReal	0	Float	02:42:38.628	02:42:38.628	Good
+89	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."ID"	DataBlocksGlobal/dbMESStation/ID	ID	5001	UInt16	02:42:38.628	02:42:38.628	Good
+90	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MengeAusschuss"	DataBlocksGlobal/dbMESStation/MengeAusschuss	MengeAusschuss	0	UInt16	02:42:38.628	02:42:38.628	Good
+91	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MengeProduziert"	DataBlocksGlobal/dbMESStation/MengeProduziert	MengeProduziert	0	UInt16	02:42:38.628	02:42:38.628	Good
+92	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"	DataBlocksGlobal/dbMESStation/MesZylinder	MesZylinder		MES_Zylinder	02:42:38.634	02:42:38.634	Good
+93	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Name"	DataBlocksGlobal/dbMESStation/Name	Name	PS_1	String	02:42:38.635	02:42:38.635	Good
+94	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Zustand"	DataBlocksGlobal/dbMESStation/Zustand	Zustand	2	UInt16	02:42:38.635	02:42:38.635	Good
+95	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"	DataBlocksGlobal/dbOPCLeitstand/uvlaVonLeitstandAuftrag	uvlaVonLeitstandAuftrag		VON_LEITSTAND_AUFTRAG	02:42:38.637	02:42:38.637	Good
+96	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"	DataBlocksGlobal/dbOPCLeitstand/uzlsZuLeitstandStatus	uzlsZuLeitstandStatus		ZU_LEITSTAND_STATUS	02:42:38.637	02:42:38.637	Good
+97	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[0]	dbMESStation/Auftragsnummern/0	0	0	UInt16	02:42:38.638	02:42:38.638	Good
+98	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[1]	dbMESStation/Auftragsnummern/1	1	0	UInt16	02:42:38.638	02:42:38.638	Good
+99	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[2]	dbMESStation/Auftragsnummern/2	2	0	UInt16	02:42:38.638	02:42:38.638	Good
+100	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[3]	dbMESStation/Auftragsnummern/3	3	0	UInt16	02:42:38.638	02:42:38.638	Good
+101	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[4]	dbMESStation/Auftragsnummern/4	4	0	UInt16	02:42:38.638	02:42:38.638	Good
+102	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[5]	dbMESStation/Auftragsnummern/5	5	0	UInt16	02:42:38.638	02:42:38.638	Good
+103	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[6]	dbMESStation/Auftragsnummern/6	6	0	UInt16	02:42:38.638	02:42:38.638	Good
+104	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[7]	dbMESStation/Auftragsnummern/7	7	0	UInt16	02:42:38.638	02:42:38.638	Good
+105	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[8]	dbMESStation/Auftragsnummern/8	8	0	UInt16	02:42:38.639	02:42:38.639	Good
+106	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Auftragsnummern"[9]	dbMESStation/Auftragsnummern/9	9	0	UInt16	02:42:38.639	02:42:38.639	Good
+107	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Fehler"."Bezeichnung"	dbMESStation/Fehler/Bezeichnung	Bezeichnung		String	02:42:38.639	02:42:38.639	Good
+108	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."Fehler"."Code"	dbMESStation/Fehler/Code	Code	0	UInt16	02:42:38.639	02:42:38.639	Good
+109	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[0]	dbMESStation/MesZylinder/0	0		MES_Zylinder	02:42:38.640	02:42:38.640	Good
+110	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[1]	dbMESStation/MesZylinder/1	1		MES_Zylinder	02:42:38.640	02:42:38.640	Good
+111	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[2]	dbMESStation/MesZylinder/2	2		MES_Zylinder	02:42:38.641	02:42:38.641	Good
+112	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[3]	dbMESStation/MesZylinder/3	3		MES_Zylinder	02:42:38.642	02:42:38.642	Good
+113	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[4]	dbMESStation/MesZylinder/4	4		MES_Zylinder	02:42:38.643	02:42:38.643	Good
+114	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[5]	dbMESStation/MesZylinder/5	5		MES_Zylinder	02:42:38.643	02:42:38.643	Good
+115	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[6]	dbMESStation/MesZylinder/6	6		MES_Zylinder	02:42:38.644	02:42:38.644	Good
+116	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[7]	dbMESStation/MesZylinder/7	7		MES_Zylinder	02:42:38.645	02:42:38.645	Good
+117	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[8]	dbMESStation/MesZylinder/8	8		MES_Zylinder	02:42:38.646	02:42:38.646	Good
+118	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[9]	dbMESStation/MesZylinder/9	9		MES_Zylinder	02:42:38.647	02:42:38.647	Good
+119	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."uiAuftragsnummer"	dbOPCLeitstand/uvlaVonLeitstandAuftrag/uiAuftragsnummer	uiAuftragsnummer	0	UInt16	02:42:38.647	02:42:38.647	Good
+120	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"	dbOPCLeitstand/uvlaVonLeitstandAuftrag/urapAuftragProdukt	urapAuftragProdukt		RFID_AUFTRAG_PRODUKT	02:42:38.648	02:42:38.648	Good
+121	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"	dbOPCLeitstand/uvlaVonLeitstandAuftrag/urawAuftragWeg	urawAuftragWeg		RFID_AUFTRAG_WEG	02:42:38.649	02:42:38.649	Good
+122	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bFehlermeldung"	dbOPCLeitstand/uzlsZuLeitstandStatus/bFehlermeldung	bFehlermeldung	0	Byte	02:42:38.649	02:42:38.649	Good
+123	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bKonf1"	dbOPCLeitstand/uzlsZuLeitstandStatus/bKonf1	bKonf1	1	Byte	02:42:38.650	02:42:38.650	Good
+124	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bKonf2"	dbOPCLeitstand/uzlsZuLeitstandStatus/bKonf2	bKonf2	1	Byte	02:42:38.650	02:42:38.650	Good
+125	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."bKonf3"	dbOPCLeitstand/uzlsZuLeitstandStatus/bKonf3	bKonf3	0	Byte	02:42:38.650	02:42:38.650	Good
+126	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."iAnzahlLager1"	dbOPCLeitstand/uzlsZuLeitstandStatus/iAnzahlLager1	iAnzahlLager1	8	Int16	02:42:38.650	02:42:38.650	Good
+127	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."iAnzahlLager2"	dbOPCLeitstand/uzlsZuLeitstandStatus/iAnzahlLager2	iAnzahlLager2	1	Int16	02:42:38.650	02:42:38.650	Good
+128	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."iAnzahlLager3"	dbOPCLeitstand/uzlsZuLeitstandStatus/iAnzahlLager3	iAnzahlLager3	0	Int16	02:42:38.650	02:42:38.650	Good
+129	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."strFehlermeldung"	dbOPCLeitstand/uzlsZuLeitstandStatus/strFehlermeldung	strFehlermeldung		String	02:42:38.650	02:42:38.650	Good
+130	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uzlsZuLeitstandStatus"."uiBetriebsart"	dbOPCLeitstand/uzlsZuLeitstandStatus/uiBetriebsart	uiBetriebsart	4	UInt16	02:42:38.651	02:42:38.651	Good
+131	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[0]."Aufgabe"	MesZylinder/0/Aufgabe	Aufgabe	0	UInt16	02:42:38.651	02:42:38.651	Good
+132	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[0]."Bezeichner"	MesZylinder/0/Bezeichner	Bezeichner	Transfersystem Stopper links	String	02:42:38.651	02:42:38.651	Good
+133	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[0]."Status"	MesZylinder/0/Status	Status	0	UInt16	02:42:38.651	02:42:38.651	Good
+134	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[1]."Aufgabe"	MesZylinder/1/Aufgabe	Aufgabe	0	UInt16	02:42:38.651	02:42:38.651	Good
+135	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[1]."Bezeichner"	MesZylinder/1/Bezeichner	Bezeichner	Transfersystem Stopper rechts	String	02:42:38.651	02:42:38.651	Good
+136	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[1]."Status"	MesZylinder/1/Status	Status	0	UInt16	02:42:38.652	02:42:38.652	Good
+137	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[2]."Aufgabe"	MesZylinder/2/Aufgabe	Aufgabe	0	UInt16	02:42:38.652	02:42:38.652	Good
+138	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[2]."Bezeichner"	MesZylinder/2/Bezeichner	Bezeichner	Automat 1 Stopper links	String	02:42:38.652	02:42:38.652	Good
+139	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[2]."Status"	MesZylinder/2/Status	Status	0	UInt16	02:42:38.652	02:42:38.652	Good
+140	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[3]."Aufgabe"	MesZylinder/3/Aufgabe	Aufgabe	0	UInt16	02:42:38.652	02:42:38.652	Good
+141	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[3]."Bezeichner"	MesZylinder/3/Bezeichner	Bezeichner	Automat 1 Stopper rechts	String	02:42:38.653	02:42:38.653	Good
+142	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[3]."Status"	MesZylinder/3/Status	Status	0	UInt16	02:42:38.653	02:42:38.653	Good
+143	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[4]."Aufgabe"	MesZylinder/4/Aufgabe	Aufgabe	0	UInt16	02:42:38.653	02:42:38.653	Good
+144	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[4]."Bezeichner"	MesZylinder/4/Bezeichner	Bezeichner	Automat 1 Vereinzeler	String	02:42:38.653	02:42:38.653	Good
+145	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[4]."Status"	MesZylinder/4/Status	Status	0	UInt16	02:42:38.653	02:42:38.653	Good
+146	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[5]."Aufgabe"	MesZylinder/5/Aufgabe	Aufgabe	0	UInt16	02:42:38.653	02:42:38.653	Good
+147	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[5]."Bezeichner"	MesZylinder/5/Bezeichner	Bezeichner	Automat 1 Hub	String	02:42:38.653	02:42:38.653	Good
+148	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[5]."Status"	MesZylinder/5/Status	Status	0	UInt16	02:42:38.654	02:42:38.654	Good
+149	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[6]."Aufgabe"	MesZylinder/6/Aufgabe	Aufgabe	0	UInt16	02:42:38.654	02:42:38.654	Good
+150	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[6]."Bezeichner"	MesZylinder/6/Bezeichner	Bezeichner	Automat 1 Stopper links	String	02:42:38.654	02:42:38.654	Good
+151	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[6]."Status"	MesZylinder/6/Status	Status	0	UInt16	02:42:38.654	02:42:38.654	Good
+152	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[7]."Aufgabe"	MesZylinder/7/Aufgabe	Aufgabe	0	UInt16	02:42:38.654	02:42:38.654	Good
+153	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[7]."Bezeichner"	MesZylinder/7/Bezeichner	Bezeichner	Automat 1 Stopper rechts	String	02:42:38.654	02:42:38.654	Good
+154	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[7]."Status"	MesZylinder/7/Status	Status	0	UInt16	02:42:38.655	02:42:38.655	Good
+155	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[8]."Aufgabe"	MesZylinder/8/Aufgabe	Aufgabe	0	UInt16	02:42:38.655	02:42:38.655	Good
+156	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[8]."Bezeichner"	MesZylinder/8/Bezeichner	Bezeichner	Automat 1 Vereinzeler	String	02:42:38.655	02:42:38.655	Good
+157	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[8]."Status"	MesZylinder/8/Status	Status	0	UInt16	02:42:38.655	02:42:38.655	Good
+158	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[9]."Aufgabe"	MesZylinder/9/Aufgabe	Aufgabe	0	UInt16	02:42:38.655	02:42:38.655	Good
+159	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[9]."Bezeichner"	MesZylinder/9/Bezeichner	Bezeichner	Automat 1 Hub	String	02:42:38.655	02:42:38.655	Good
+160	Palettenlager1 192.168.36.2:4840	ns=3;s="dbMESStation"."MesZylinder"[9]."Status"	MesZylinder/9/Status	Status	0	UInt16	02:42:38.655	02:42:38.655	Good
+161	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiInhalt1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiInhalt1	usiInhalt1	0	Byte	02:42:38.656	02:42:38.656	Good
+162	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiInhalt2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiInhalt2	usiInhalt2	0	Byte	02:42:38.656	02:42:38.656	Good
+163	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiInhalt3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiInhalt3	usiInhalt3	0	Byte	02:42:38.656	02:42:38.656	Good
+164	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV1	usiNV1	0	Byte	02:42:38.656	02:42:38.656	Good
+165	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV2	usiNV2	0	Byte	02:42:38.656	02:42:38.656	Good
+166	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV3	usiNV3	0	Byte	02:42:38.656	02:42:38.656	Good
+167	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV4"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV4	usiNV4	0	Byte	02:42:38.656	02:42:38.656	Good
+168	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."usiNV5"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/usiNV5	usiNV5	0	Byte	02:42:38.656	02:42:38.656	Good
+169	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelBlau"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelBlau	xDeckelBlau	false	Boolean	02:42:38.657	02:42:38.657	Good
+170	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelGrün"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelGrün	xDeckelGrün	false	Boolean	02:42:38.657	02:42:38.657	Good
+171	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelRot"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelRot	xDeckelRot	false	Boolean	02:42:38.657	02:42:38.657	Good
+172	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xDeckelSchwarz"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xDeckelSchwarz	xDeckelSchwarz	false	Boolean	02:42:38.657	02:42:38.657	Good
+173	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xInhalt1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xInhalt1	xInhalt1	false	Boolean	02:42:38.657	02:42:38.657	Good
+174	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xInhalt2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xInhalt2	xInhalt2	false	Boolean	02:42:38.657	02:42:38.657	Good
+175	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xInhalt3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xInhalt3	xInhalt3	false	Boolean	02:42:38.657	02:42:38.657	Good
+176	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV1"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV1	xNV1	false	Boolean	02:42:38.657	02:42:38.657	Good
+177	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV2"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV2	xNV2	false	Boolean	02:42:38.657	02:42:38.657	Good
+178	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV3"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV3	xNV3	false	Boolean	02:42:38.657	02:42:38.657	Good
+179	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV4"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV4	xNV4	false	Boolean	02:42:38.658	02:42:38.658	Good
+180	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV5"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV5	xNV5	false	Boolean	02:42:38.658	02:42:38.658	Good
+181	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV6"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV6	xNV6	false	Boolean	02:42:38.658	02:42:38.658	Good
+182	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xNV7"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xNV7	xNV7	false	Boolean	02:42:38.658	02:42:38.658	Good
+183	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xSchließer"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xSchließer	xSchließer	false	Boolean	02:42:38.658	02:42:38.658	Good
+184	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urapAuftragProdukt"."xÖffner"	uvlaVonLeitstandAuftrag/urapAuftragProdukt/xÖffner	xÖffner	false	Boolean	02:42:38.658	02:42:38.658	Good
+185	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xBefüllen"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xBefüllen	xBefüllen	false	Boolean	02:42:38.658	02:42:38.658	Good
+186	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xDUInHandling"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xDUInHandling	xDUInHandling	false	Boolean	02:42:38.658	02:42:38.658	Good
+187	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xDemontieren"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xDemontieren	xDemontieren	false	Boolean	02:42:38.659	02:42:38.659	Good
+188	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xEntnahmeStation"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xEntnahmeStation	xEntnahmeStation	false	Boolean	02:42:38.659	02:42:38.659	Good
+189	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xHandarbeitsplatz"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xHandarbeitsplatz	xHandarbeitsplatz	false	Boolean	02:42:38.659	02:42:38.659	Good
+190	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xHochregal"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xHochregal	xHochregal	false	Boolean	02:42:38.659	02:42:38.659	Good
+191	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xKontrolle"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xKontrolle	xKontrolle	false	Boolean	02:42:38.659	02:42:38.659	Good
+192	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xMontieren"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xMontieren	xMontieren	false	Boolean	02:42:38.659	02:42:38.659	Good
+193	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV2"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV2	xNV2	false	Boolean	02:42:38.659	02:42:38.659	Good
+194	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV3"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV3	xNV3	false	Boolean	02:42:38.659	02:42:38.659	Good
+195	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV4"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV4	xNV4	false	Boolean	02:42:38.659	02:42:38.659	Good
+196	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV5"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV5	xNV5	false	Boolean	02:42:38.659	02:42:38.659	Good
+197	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV6"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV6	xNV6	false	Boolean	02:42:38.660	02:42:38.660	Good
+198	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xNV7"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xNV7	xNV7	false	Boolean	02:42:38.660	02:42:38.660	Good
+199	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xPalettenlager1"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xPalettenlager1	xPalettenlager1	false	Boolean	02:42:38.660	02:42:38.660	Good
+200	Palettenlager1 192.168.36.2:4840	ns=3;s="dbOPCLeitstand"."uvlaVonLeitstandAuftrag"."urawAuftragWeg"."xPalettenlager2"	uvlaVonLeitstandAuftrag/urawAuftragWeg/xPalettenlager2	xPalettenlager2	false	Boolean	02:42:38.660	02:42:38.660	Good

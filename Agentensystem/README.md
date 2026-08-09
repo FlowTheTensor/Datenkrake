@@ -35,6 +35,53 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
    pip install -r requirements.txt
    ```
 
+## Umgebungsvariablen (.env)
+
+Im Ordner `Agentensystem/` liegt eine Vorlage: `.env.example`.
+
+1. Kopieren und anpassen:
+   ```bash
+   cp .env.example .env
+   ```
+   PowerShell:
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+2. Relevante Schalter:
+   - `ANOMALIE_QUELLE=influx` (Standard) liest die Referenzwerte aus InfluxDB.
+   - `ANOMALIE_QUELLE=mariadb` nutzt das bisherige Verhalten direkt auf `audio_spectrum`.
+   - `REPORT_USE_LLM=true` aktiviert optional LLM-Formulierung im Report-Agent.
+   - `REPORT_USE_LLM=false` nutzt das feste, offline-faehige Template (Standard).
+3. Wichtig zur Architektur:
+   - Erkennung kann aus Influx kommen, der Poller schreibt trotzdem in `audio_anomalien` (MariaDB).
+   - Dadurch bleiben Orchestrator-, Wartungs- und Reporting-Kette unverändert kompatibel.
+   - Report-Antworten gehen nur dann in ein LLM, wenn `REPORT_USE_LLM=true` gesetzt ist.
+
+Mindestens diese Variablen muessen gesetzt sein:
+
+```dotenv
+ANOMALIE_QUELLE=influx
+
+DK_DB_HOST=datenkrake.local
+DK_DB_PORT=3306
+DK_DB_NAME=telemetry
+DK_READ_USER=mcp_read
+DK_READ_PASSWORD=...
+DK_WRITE_USER=anomalie_writer
+DK_WRITE_PASSWORD=...
+
+DK_INFLUX_URL=http://datenkrake.local:8086
+DK_INFLUX_TOKEN=...
+DK_INFLUX_ORG=datenkrake
+DK_INFLUX_BUCKET=telemetrie
+
+REPORT_USE_LLM=false
+REPORT_LLM_URL=http://localhost:1234
+REPORT_LLM_MODEL=local-model
+REPORT_LLM_API_KEY=...
+REPORT_LLM_TIMEOUT=30
+```
+
 ## Prozesse und Reihenfolge
 
 | # | Befehl | Rolle | Port |

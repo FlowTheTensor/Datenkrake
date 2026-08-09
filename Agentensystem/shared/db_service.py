@@ -10,8 +10,10 @@ Kennt weder MCP noch A2A noch LAP - reines Python.
 import os
 import statistics
 from contextlib import contextmanager
+from datetime import timedelta
 
 import pymysql
+from influxdb_client import InfluxDBClient
 
 DB_HOST = os.environ.get("DK_DB_HOST", "datenkrake.local")
 DB_PORT = int(os.environ.get("DK_DB_PORT", "3306"))
@@ -22,6 +24,11 @@ READ_PASSWORD = os.environ.get("DK_READ_PASSWORD", "changeMeMcp")
 
 WRITE_USER = os.environ.get("DK_WRITE_USER", "anomalie_writer")
 WRITE_PASSWORD = os.environ.get("DK_WRITE_PASSWORD", "changeMeAnomalie")
+
+INFLUX_URL = os.environ.get("DK_INFLUX_URL", "http://datenkrake.local:8086")
+INFLUX_TOKEN = os.environ.get("DK_INFLUX_TOKEN", "changeMeHistorianToken")
+INFLUX_ORG = os.environ.get("DK_INFLUX_ORG", "datenkrake")
+INFLUX_BUCKET = os.environ.get("DK_INFLUX_BUCKET", "telemetrie")
 
 
 @contextmanager
@@ -78,6 +85,71 @@ def pruefe_akustik_anomalie(fenster: int = 20) -> dict:
         "referenz_mittel": round(mittel, 2),
         "referenz_std": round(std, 2),
     }
+
+
+def pruefe_akustik_anomalie_influx(fenster: int = 20) -> dict:
+    """Influx-Variante derselben Heuristik (Mittelwert + Standardabweichung
+    auf peak_db). Liefert absichtlich noch keine bezug_id, weil diese im
+    operativen System aus MariaDB stammt und dort als FK gebraucht wird."""
+    # Fuer kleine Fenster etwas Puffer holen, falls einzelne Punkte fehlen.
+    limit = max(fenster + 5, 30)
+    # Fenster grob auf Zeit abbilden: bei typischen Raten reichen 24h gut aus.
+    lookback = timedelta(hours=24)
+    flux = (
+        f'from(bucket: "{INFLUX_BUCKET}")\n'
+        f'  |> range(start: -{int(lookback.total_seconds())}s)\n'
+        '  |> filter(fn: (r) => r["_measurement"] == "audio_spectrum")\n'
+        '  |> filter(fn: (r) => r["_field"] == "peak_db")\n'
+        '  |> keep(columns: ["_time", "_value"])\n'
+        '  |> sort(columns: ["_time"], desc: true)\n'
+        f'  |> limit(n: {limit})'
+    )
+
+    with InfluxDBClient(url=INFLUX_URL, token=INFLUX_TOKEN, org=INFLUX_ORG) as client:
+        tables = client.query_api().query(org=INFLUX_ORG, query=flux)
+
+    werte = []
+    for table in tables:
+        for record in table.records:
+            try:
+                werte.append(float(record.get_value()))
+            except (TypeError, ValueError):
+                continue
+
+    if len(werte) < 6:
+        return {"anomalie": False, "grund": "zu wenige Datenpunkte in InfluxDB"}
+
+    werte = list(reversed(werte[:fenster]))
+    if len(werte) < 6:
+        return {"anomalie": False, "grund": "zu wenige Datenpunkte nach Fensterung"}
+
+    referenz = werte[:-1]
+    aktuell_peak_db = werte[-1]
+    mittel = statistics.mean(referenz)
+    std = statistics.pstdev(referenz) or 0.01
+    anomalie = abs(aktuell_peak_db - mittel) > 2.5 * std
+
+    return {
+        "anomalie": anomalie,
+        "aktuell_peak_db": round(aktuell_peak_db, 2),
+        "referenz_mittel": round(mittel, 2),
+        "referenz_std": round(std, 2),
+    }
+
+
+def get_letzte_spectrum_messung() -> dict | None:
+    """Liefert die neueste Messung aus audio_spectrum fuer die operative
+    bezug_id (FK in audio_anomalien) und einen konsistenten peak_db-Wert."""
+    with _read_connection() as conn:
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT id, peak_db FROM audio_spectrum ORDER BY ts DESC LIMIT 1"
+        )
+        row = cur.fetchone()
+    if not row:
+        return None
+    row["peak_db"] = round(float(row["peak_db"]), 2)
+    return row
 
 
 def anomalie_bereits_erfasst(bezug_id: int) -> bool:
