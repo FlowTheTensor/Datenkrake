@@ -1407,6 +1407,70 @@
     seinen Linux-Anteil selbst KI-Inferenz direkt am Sensor rechnen kann — ein kleines Beispiel für
     Edge AI. Details und Mindestanforderungen: Abschnitt „Systemvoraussetzungen" im Haupt-README.
   </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Netzwerktopologie</h2></div>
+    <svg viewBox="0 0 900 480" width="100%" role="img" style="max-width:100%; height:auto; display:block;">
+      <title>Netzwerktopologie Datenkrake Raspberry Pi 5</title>
+      <desc>Der Raspberry Pi 5 verbindet zwei getrennte Netze: per Ethernet das Anlagen-Netz 192.168.36.0/24 mit Leitstand und Modellanlage, und per WLAN einen eigenen Hotspot 10.42.0.0/24 mit Laptop, Akustik-KI und YOLO-System. Zwischen beiden Netzen wird nicht geroutet.</desc>
+      <defs>
+        <marker id="arNetTopo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="#2A5F8A"/>
+        </marker>
+      </defs>
+
+      <g>
+        <rect x="370" y="30" width="160" height="54" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <text x="450" y="52" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Raspberry Pi 5</text>
+        <text x="450" y="69" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Datenkrake</text>
+      </g>
+
+      <path d="M392,84 L235,140" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
+      <text x="238" y="112" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">eth0 · 192.168.36.20</text>
+
+      <path d="M508,84 L665,140" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
+      <text x="560" y="112" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">wlan0 · 10.42.0.1</text>
+
+      <line x1="450" y1="150" x2="450" y2="430" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="2 4"/>
+
+      <rect x="40" y="140" width="380" height="300" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
+      <text x="230" y="166" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Anlagen-Netz</text>
+      <text x="230" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">192.168.36.0/24 · Ethernet</text>
+
+      <g>
+        <rect x="70" y="200" width="320" height="54" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="230" y="222" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Leitstand (SPS)</text>
+        <text x="230" y="239" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">.1 · OPC-UA · Port 4840</text>
+      </g>
+      <g>
+        <rect x="70" y="270" width="320" height="54" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="230" y="292" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Modellanlage</text>
+        <text x="230" y="309" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">.2–.10 · 9 Stationen · OPC-UA</text>
+      </g>
+
+      <rect x="480" y="140" width="380" height="300" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
+      <text x="670" y="166" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Pi-Hotspot (WLAN)</text>
+      <text x="670" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">10.42.0.0/24</text>
+
+      <g>
+        <rect x="510" y="200" width="320" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
+        <text x="670" y="222" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Laptop</text>
+        <text x="670" y="239" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">DHCP · Claude/MCP-Zugriff</text>
+      </g>
+      <g>
+        <rect x="510" y="270" width="320" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
+        <text x="670" y="292" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Akustik-KI</text>
+        <text x="670" y="309" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q · DHCP</text>
+      </g>
+      <g>
+        <rect x="510" y="340" width="320" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="670" y="362" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">YOLO-System</text>
+        <text x="670" y="379" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q · geplant</text>
+      </g>
+
+      <text x="450" y="460" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">Kein Routing zwischen den Netzen — nur der Pi ist aus beiden erreichbar</text>
+    </svg>
+  </div>
 </section>
 
 <section class="theme-section" id="quiz" aria-labelledby="quiz-heading">
