@@ -12,7 +12,7 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
 ## Was neu dazukommt
 
 | Neu | Ersetzt/ergänzt |
-|---|---|
+| --- | --- |
 | `../MCPLokalClaudDesktop/mcpserver.py` | **erweitert** (alle 5 bestehenden Tools unverändert) um 1 Tool, 2 Resources, 1 Prompt |
 | `../Raspberry/mariadb/init/01-agentensystem.sql` | **ergänzt** `00-create-database.sql` um 2 Tabellen + 1 User |
 | `../leitstand.html` | **ergänzt** `index.php` um eine zweite, verlinkte Seite — bewusst im Repo-Root, damit sie beim Durchstöbern des Repos sofort sichtbar ist |
@@ -25,11 +25,14 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
 ## Setup
 
 1. SQL-Migration einspielen (bei Neuinstallation läuft sie automatisch mit):
+
    ```bash
    mysql -h <pi-ip> -P 3306 -u root -p telemetry < ../Raspberry/mariadb/init/01-agentensystem.sql
    ```
+
 2. Claude Desktop neu starten, damit die erweiterte `mcpserver.py` greift (Konfiguration bleibt wie im Haupt-README beschrieben).
 3. Python-Umgebung für den Agenten-Teil (auf einem Rechner mit Netzzugriff auf `datenkrake.local`):
+
    ```bash
    python -m venv .venv && source .venv/bin/activate
    pip install -r requirements.txt
@@ -40,13 +43,17 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
 Im Ordner `Agentensystem/` liegt eine Vorlage: `.env.example`.
 
 1. Kopieren und anpassen:
+
    ```bash
    cp .env.example .env
    ```
+
    PowerShell:
+
    ```powershell
    Copy-Item .env.example .env
    ```
+
 2. Relevante Schalter:
    - `ANOMALIE_QUELLE=influx` (Standard) liest die Referenzwerte aus InfluxDB.
    - `ANOMALIE_QUELLE=mariadb` nutzt das bisherige Verhalten direkt auf `audio_spectrum`.
@@ -85,7 +92,7 @@ REPORT_LLM_TIMEOUT=30
 ## Prozesse und Reihenfolge
 
 | # | Befehl | Rolle | Port |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | *(bestehende Pipeline: Arduino UNO Q, Mosquitto, MariaDB, Subscriber)* | liefert `audio_spectrum` | – |
 | 2 | `python -m anomalie_poller.poller` | füllt `audio_anomalien` (Übergangslösung) | – |
 | 3 | `python -m wartungs_agent` | LAP-Server | 9101 |
@@ -122,6 +129,13 @@ Live-Abrufe der Agent-Cards funktionieren nur, wenn die Agenten CORS für
 den Browser-Ursprung erlauben (Standard-FastAPI/Starlette tut das nicht
 automatisch) – siehe Hinweis im Dashboard selbst.
 
+## Netzwerkannahme (aktuell)
+
+- Raspberry Pi 5 per `eth0` im Anlagen-Netz `192.168.36.0/24`.
+- Raspberry Pi 5 per `wlan0` als Client in einem bestehenden DMZ-WLAN.
+- Laptop und Arduino-Systeme befinden sich ebenfalls in diesem DMZ-WLAN.
+- Der Pi stellt dabei **keinen eigenen Hotspot/Access Point** bereit.
+
 ## Wichtige Einschränkung: noch keine Stationszuordnung
 
 Das aktuelle Schema kennt nur EIN überwachtes Objekt (ein Arduino UNO Q,
@@ -133,7 +147,7 @@ betrieben werden, braucht `audio_spectrum` eine zusätzliche Spalte (z. B.
 ## Abgrenzung fürs Tafelbild
 
 | | MCP | A2A | LAP |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Verbindet | Agent ↔ Daten | Agent ↔ Agent | Agent ↔ physisches Zusatzgerät |
 | Hier konkret | `mcpserver.py` für Claude Desktop | Orchestrator ↔ DB-Agent, Orchestrator ↔ Report-Agent | Orchestrator → Wartungs-Agent |
 | Einheit | Tool-Aufruf / Resource-Read / Prompt-Auswahl | Task mit Lebenszyklus | Reservation → (Safety-Fence) → MeasurementResult |

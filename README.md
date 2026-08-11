@@ -48,6 +48,13 @@ git add leitstand.html && git commit -m "OPC-UA-Dokumentations-Overlay ergänzt"
 - `http://datenkrake.local` öffnet standardmäßig den Leitstand (`leitstand.html`).
 - Das bisherige Audio-Live-Dashboard bleibt unter `http://datenkrake.local/index.php` erreichbar.
 
+### Aktuelle Netz-Topologie
+
+- Der Raspberry Pi hängt per `eth0` im Anlagen-Netz `192.168.36.0/24`.
+- Zusätzlich ist der Pi per `wlan0` als Client in ein bestehendes DMZ-WLAN eingebucht.
+- Im DMZ-WLAN liegen Laptop und Arduino-Systeme (Akustik-KI/YOLO).
+- Der Pi ist dabei **kein eigener Access Point**.
+
 ## Hinweis zu den Datei-Links
 
 Die Links im Abschnitt „Dateien“ zeigen relativ auf

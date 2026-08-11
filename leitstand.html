@@ -119,7 +119,7 @@
 
   #archOverlay{
     display:none; position:fixed; inset:0; z-index:999;
-    background:rgba(29,29,28,.55); backdrop-filter:blur(2px);
+    background:rgba(29,29,28,.55); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
     padding:32px clamp(12px,4vw,40px); overflow-y:auto;
   }
   #archOverlay.open{display:flex; align-items:flex-start; justify-content:center;}
@@ -177,7 +177,7 @@
   /* ---------- OPC-UA-Dokumentation-Overlay ---------- */
   #uaxOverlay{
     display:none; position:fixed; inset:0; z-index:999;
-    background:rgba(29,29,28,.55); backdrop-filter:blur(2px);
+    background:rgba(29,29,28,.55); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
     padding:32px clamp(12px,4vw,40px); overflow-y:auto;
   }
   #uaxOverlay.open{display:flex; align-items:flex-start; justify-content:center;}
@@ -387,7 +387,7 @@
   /* ---------- Sticky Themen-Navigation ---------- */
   .topnav{
     position:sticky; top:0; z-index:20;
-    background:rgba(251,249,245,.94); backdrop-filter:blur(6px);
+    background:rgba(251,249,245,.94); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
     display:flex; gap:4px; flex-wrap:wrap;
     padding:10px clamp(16px,4vw,48px);
@@ -428,6 +428,41 @@
     font-family:"Quicksand",sans-serif; font-weight:700; font-size:17px;
   }
   .theme-head h2{font-size:19px;}
+  .header-actions{display:flex; align-items:center; gap:10px;}
+  .svg-responsive{max-width:100%; height:auto; display:block;}
+  .bg-accent{background:var(--accent);}
+  .bg-accent-2{background:var(--accent-2);}
+  .bg-green{background:#2F6B4F;}
+  .bg-blue{background:#2A5F8A;}
+  .bg-ink-soft{background:var(--ink-soft);}
+  .bg-accent-bright{background:var(--accent-bright);}
+  .bar-ink-soft{background:var(--ink-soft);}
+  .bar-blue{background:#2A5F8A;}
+  .bar-accent-2{background:var(--accent-2);}
+  .sw-blue{background:#2A5F8A;}
+  .badge-legend{padding:2px 8px;}
+  .mcp-note{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:400;
+    font-size:11px;
+    color:var(--ink-faint);
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .ki-links-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;}
+  .uax-table th.num{text-align:right;}
+  .uax-note-top{margin-top:10px;}
+  .uax-list-compact{font-size:11.5px; color:var(--ink-soft); line-height:1.7; margin:0; padding-left:18px;}
+  .quiz-cat-a{color:#C81E3A;}
+  .quiz-cat-b{color:#B87A1C;}
+  .quiz-cat-c{color:#2F6B4F;}
+  .quiz-cat-d{color:#2A5F8A;}
+  .quiz-cat-e{color:#5B5852;}
+  .quiz-border-a{border-left-color:#C81E3A;}
+  .quiz-border-b{border-left-color:#B87A1C;}
+  .quiz-border-c{border-left-color:#2F6B4F;}
+  .quiz-border-d{border-left-color:#2A5F8A;}
+  .quiz-border-e{border-left-color:#5B5852;}
   .info-box{
     background:var(--surface-2); border:1px solid var(--line); border-left:4px solid var(--accent);
     border-radius:8px; padding:14px 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.65;
@@ -503,7 +538,7 @@
       <div class="eyebrow">Agentensystem — MCP · A2A · LAP</div>
     </div>
   </div>
-  <div style="display:flex; align-items:center; gap:10px;">
+  <div class="header-actions">
     <div class="status-pill"><span class="dot" id="statusDot"></span><span id="statusText">prüfe Verbindungen …</span></div>
     <button class="gear-btn" id="settingsToggle" aria-expanded="false" aria-controls="settingsDrawer">⚙ Einstellungen</button>
   </div>
@@ -543,27 +578,27 @@
   Konfigurationslinks. Am Ende wartet ein kleines Quiz, mit dem sich das Gelernte direkt überprüfen lässt.</p>
   <div class="topic-grid">
     <a class="topic-card" href="#thema-a">
-      <div class="topic-letter" style="background:var(--accent)">A</div>
+      <div class="topic-letter bg-accent">A</div>
       <div><div class="topic-title">Agentenprotokolle &amp; KI-Integration</div>
       <div class="topic-desc">MCP · A2A · LAP · Agent Harness</div></div>
     </a>
     <a class="topic-card" href="#thema-b">
-      <div class="topic-letter" style="background:var(--accent-2)">B</div>
+      <div class="topic-letter bg-accent-2">B</div>
       <div><div class="topic-title">Machine Learning &amp; Data Lake</div>
       <div class="topic-desc">Neuronale Netze · YOLO · Lakehouse</div></div>
     </a>
     <a class="topic-card" href="#thema-c">
-      <div class="topic-letter" style="background:#2F6B4F">C</div>
+      <div class="topic-letter bg-green">C</div>
       <div><div class="topic-title">Datenhaltung</div>
       <div class="topic-desc">MariaDB · Historian · Polyglot Persistence</div></div>
     </a>
     <a class="topic-card" href="#thema-d">
-      <div class="topic-letter" style="background:#2A5F8A">D</div>
+      <div class="topic-letter bg-blue">D</div>
       <div><div class="topic-title">Kommunikation &amp; Industrie 4.0</div>
       <div class="topic-desc">MQTT · OPC-UA · Node-RED</div></div>
     </a>
     <a class="topic-card" href="#thema-e">
-      <div class="topic-letter" style="background:var(--ink-soft)">E</div>
+      <div class="topic-letter bg-ink-soft">E</div>
       <div><div class="topic-title">Infrastruktur &amp; Hardware</div>
       <div class="topic-desc">Docker · Raspberry Pi · Arduino UNO Q</div></div>
     </a>
@@ -573,8 +608,8 @@
     <div class="quick-links-head">Schnellzugriff</div>
     <div class="quick-links-grid">
       <div class="quick-link-card">
-        <p class="quick-link-title">Audio-Live-Dashboard (alt)</p>
-        <a href="index.php" target="_blank" rel="noopener">index.php öffnen ↗</a>
+        <p class="quick-link-title">Trainingsdaten für Aktustik-KI</p>
+        <a href="index.php" target="_blank" rel="noopener">Datenbankübersicht ↗</a>
       </div>
       <div class="quick-link-card">
         <p class="quick-link-title">Arduino UNO Q · Akustik-KI</p>
@@ -632,7 +667,7 @@
 
 <section class="theme-section" id="thema-a" aria-labelledby="thema-a-heading">
   <div class="theme-head">
-    <div class="theme-letter" style="background:var(--accent)">A</div>
+    <div class="theme-letter bg-accent">A</div>
     <div><h2 id="thema-a-heading">Agentenprotokolle &amp; KI-Integration</h2>
     <div class="eyebrow">Agentensystem/</div></div>
   </div>
@@ -655,7 +690,7 @@
         <span class="sw"></span>Komponenten-Übersicht
       </button>
     </div>
-    <svg viewBox="0 0 1100 760" width="100%" role="img" style="max-width:100%; height:auto; display:block;">
+    <svg viewBox="0 0 1100 760" width="100%" role="img" class="svg-responsive">
       <title>Systemarchitektur: Datenerhebung, Verarbeitung/Bereitstellung auf der Datenkrake (Raspberry Pi 5) und Analyse</title>
       <desc>Links erheben Akustik-KI, YOLO-System (Arduino UNO Q, per MQTT) und die Modellanlage (per OPC-UA über Node-RED) Rohdaten. In der Mitte bündelt die Datenkrake auf einem Raspberry Pi 5 als Docker-Stack den Mosquitto-Broker, Node-RED als OPC-UA/MQTT-Brücke, den Operational Historian InfluxDB, die MariaDB als vollständige Datenquelle, einen Anomalie-Poller, der zusätzlich Zeitreihenanalysen aus InfluxDB abruft, sowie das Agentensystem aus Orchestrator-, DB-, Wartungs- und Report-Agent, die per A2A kommunizieren; ein Webserver liefert dieses Dashboard aus. Rechts liest ein separater Server/PC per Batch-Import einen Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) aus der MariaDB, während ein MCP-Server auf einem PC dieselbe MariaDB abfragt und die Daten per MCP sowohl an Claude Desktop als auch an einen eigenständigen Agent Harness weiterreicht, die beide gleichwertig als MCP-Clients auftreten; ein Browser greift per HTTP auf den Webserver zu.</desc>
       <defs>
@@ -910,7 +945,7 @@
       </div>
 
       <div class="arch-zone">
-        <div class="arch-zone-head"><span class="bar" style="background:var(--ink-soft)"></span>Datenerhebung</div>
+        <div class="arch-zone-head"><span class="bar bar-ink-soft"></span>Datenerhebung</div>
         <div class="arch-grid">
           <div class="arch-card">
             <h4>Akustik-KI</h4>
@@ -931,7 +966,7 @@
       </div>
 
       <div class="arch-zone">
-        <div class="arch-zone-head"><span class="bar" style="background:#2A5F8A"></span>Verarbeiten + Bereitstellen (Datenkrake · Raspberry Pi 5)</div>
+        <div class="arch-zone-head"><span class="bar bar-blue"></span>Verarbeiten + Bereitstellen (Datenkrake · Raspberry Pi 5)</div>
         <div class="arch-grid">
           <div class="arch-card">
             <h4>Mosquitto</h4>
@@ -1007,7 +1042,7 @@
       </div>
 
       <div class="arch-zone">
-        <div class="arch-zone-head"><span class="bar" style="background:var(--accent-2)"></span>Analyse</div>
+        <div class="arch-zone-head"><span class="bar bar-accent-2"></span>Analyse</div>
         <div class="arch-grid">
           <div class="arch-card">
             <h4>Server/PC · Data-Lake</h4>
@@ -1041,11 +1076,11 @@
       </div>
 
       <div class="arch-legend">
-        <div class="item"><span class="badge badge-mcp" style="padding:2px 8px;">MCP</span>Sprachmodell ↔ Werkzeug</div>
-        <div class="item"><span class="badge badge-a2a" style="padding:2px 8px;">A2A</span>Agent ↔ Agent</div>
-        <div class="item"><span class="badge badge-lap" style="padding:2px 8px;">LAP</span>Agent ↔ physisches Gerät</div>
-        <div class="item"><span class="badge badge-net" style="padding:2px 8px;">MQTT / OPC-UA</span>Industrie-4.0-Kommunikation</div>
-        <div class="item"><span class="badge badge-feed" style="padding:2px 8px;">SQL / HTTP / …</span>sonstiger Datenfluss</div>
+        <div class="item"><span class="badge badge-mcp badge-legend">MCP</span>Sprachmodell ↔ Werkzeug</div>
+        <div class="item"><span class="badge badge-a2a badge-legend">A2A</span>Agent ↔ Agent</div>
+        <div class="item"><span class="badge badge-lap badge-legend">LAP</span>Agent ↔ physisches Gerät</div>
+        <div class="item"><span class="badge badge-net badge-legend">MQTT / OPC-UA</span>Industrie-4.0-Kommunikation</div>
+        <div class="item"><span class="badge badge-feed badge-legend">SQL / HTTP / …</span>sonstiger Datenfluss</div>
       </div>
     </div>
   </div>
@@ -1056,7 +1091,7 @@
   </section>
 
   <section class="panel">
-    <div class="panel-head"><h2>MCP-Werkzeuge <span style="font-family:'JetBrains Mono',monospace; font-weight:400; font-size:11px; color:var(--ink-faint); text-transform:none; letter-spacing:0;">(mcpserver.py, lokal via stdio in Claude Desktop — Referenz, nicht live abrufbar)</span></h2></div>
+    <div class="panel-head"><h2>MCP-Werkzeuge <span class="mcp-note">(mcpserver.py, lokal via stdio in Claude Desktop — Referenz, nicht live abrufbar)</span></h2></div>
     <div class="mcp-grid">
       <div>
         <div class="mcp-sub">Tools</div>
@@ -1088,7 +1123,7 @@
 
 <section class="theme-section" id="thema-b" aria-labelledby="thema-b-heading">
   <div class="theme-head">
-    <div class="theme-letter" style="background:var(--accent-2)">B</div>
+    <div class="theme-letter bg-accent-2">B</div>
     <div><h2 id="thema-b-heading">Machine Learning &amp; Data Lake</h2>
     <div class="eyebrow">ArduinoUnoQ/, DataLake/</div></div>
   </div>
@@ -1104,7 +1139,7 @@
 
   <div class="panel">
     <div class="panel-head"><h2>KI- &amp; Datenanalyse-Systeme</h2></div>
-    <div class="ki-links" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+    <div class="ki-links ki-links-grid">
         <div class="ki-card">
           <div class="name">🎤 Akustik-KI (Arduino UNO Q)</div>
           <input id="akustikUrl" placeholder="http://&lt;arduino-ip&gt;">
@@ -1132,7 +1167,7 @@
 
 <section class="theme-section" id="thema-c" aria-labelledby="thema-c-heading">
   <div class="theme-head">
-    <div class="theme-letter" style="background:#2F6B4F">C</div>
+    <div class="theme-letter bg-green">C</div>
     <div><h2 id="thema-c-heading">Datenhaltung</h2>
     <div class="eyebrow">Raspberry/mariadb/, Raspberry/historian/</div></div>
   </div>
@@ -1166,7 +1201,7 @@
 
 <section class="theme-section" id="thema-d" aria-labelledby="thema-d-heading">
   <div class="theme-head">
-    <div class="theme-letter" style="background:#2A5F8A">D</div>
+    <div class="theme-letter bg-blue">D</div>
     <div><h2 id="thema-d-heading">Kommunikation &amp; Industrie 4.0</h2>
     <div class="eyebrow">Raspberry/mosquitto/, Raspberry/nodered/</div></div>
   </div>
@@ -1182,7 +1217,7 @@
     <div class="panel-head">
       <h2>Node-RED</h2>
       <button class="arch-overlay-btn" id="uaxOverlayBtn" type="button" aria-haspopup="dialog" aria-controls="uaxOverlay">
-        <span class="sw" style="background:#2A5F8A"></span>OPC-UA-Signaldokumentation
+        <span class="sw sw-blue"></span>OPC-UA-Signaldokumentation
       </button>
     </div>
     <div class="ki-links">
@@ -1224,7 +1259,7 @@
       <h3><span class="bar"></span>Geltungsbereich (exportierte Stationen)</h3>
       <div class="uax-table-wrap">
         <table class="uax-table">
-          <thead><tr><th>Station</th><th>Datei</th><th>OPC-UA-Endpoint</th><th style="text-align:right">Datensätze</th></tr></thead>
+          <thead><tr><th>Station</th><th>Datei</th><th>OPC-UA-Endpoint</th><th class="num">Datensätze</th></tr></thead>
           <tbody>
             <tr><td>Leitstand</td><td>Leitstand.txt</td><td>192.168.36.1:4840</td><td class="num">1000</td></tr>
             <tr><td>Palettenlager 1</td><td>Palettenlager1.txt</td><td>192.168.36.2:4840</td><td class="num">200</td></tr>
@@ -1239,7 +1274,7 @@
           </tbody>
         </table>
       </div>
-      <p style="margin-top:10px;">Die meisten Anlagenstationen haben ein nahezu identisches Kommunikations-Grundmodell. Der Leitstand bildet die Zentrale und hat deutlich mehr Signale und eigene Strukturtypen.</p>
+      <p class="uax-note-top">Die meisten Anlagenstationen haben ein nahezu identisches Kommunikations-Grundmodell. Der Leitstand bildet die Zentrale und hat deutlich mehr Signale und eigene Strukturtypen.</p>
     </div>
 
     <div class="uax-section" id="uax-struktur">
@@ -1358,7 +1393,7 @@
     "sWartet": true
   }
 }</div>
-      <p style="margin-top:10px;">Hinweise: <code>ts</code> immer in UTC (ISO-8601) · <code>quality</code> aus dem OPC-UA-StatusCode mitgeben · bei Arrays/Strukturen flache Key-Namen mit Pfad verwenden.</p>
+      <p class="uax-note-top">Hinweise: <code>ts</code> immer in UTC (ISO-8601) · <code>quality</code> aus dem OPC-UA-StatusCode mitgeben · bei Arrays/Strukturen flache Key-Namen mit Pfad verwenden.</p>
     </div>
 
     <div class="uax-section" id="uax-db">
@@ -1405,7 +1440,7 @@
 
     <div class="uax-section" id="uax-besonderheiten">
       <h3><span class="bar"></span>Bekannte Besonderheiten aus den Exporten</h3>
-      <ul style="font-size:11.5px; color:var(--ink-soft); line-height:1.7; margin:0; padding-left:18px;">
+      <ul class="uax-list-compact">
         <li>Umlaute kommen in Feldnamen vor (z. B. Füllstand mit Umlaut im Original).</li>
         <li>Einzelne Felder haben Schreibvarianten, z. B. SchalterPruefungIgnorieren vs. SchalterPruefungIgnoriren.</li>
         <li>Einige Stationsnamen in dbMESStation.Name stehen auf unknown oder 0 und sollten in SPS/HMI gepflegt werden.</li>
@@ -1446,7 +1481,7 @@
 
 <section class="theme-section" id="thema-e" aria-labelledby="thema-e-heading">
   <div class="theme-head">
-    <div class="theme-letter" style="background:var(--ink-soft)">E</div>
+    <div class="theme-letter bg-ink-soft">E</div>
     <div><h2 id="thema-e-heading">Infrastruktur &amp; Hardware</h2>
     <div class="eyebrow">Raspberry/compose/, ArduinoUnoQ/</div></div>
   </div>
@@ -1460,9 +1495,9 @@
 
   <div class="panel">
     <div class="panel-head"><h2>Netzwerktopologie</h2></div>
-    <svg viewBox="0 0 1280 570" width="100%" role="img" style="max-width:100%; height:auto; display:block;">
+    <svg viewBox="0 0 1280 570" width="100%" role="img" class="svg-responsive">
       <title>Netzwerktopologie Datenkrake Raspberry Pi 5</title>
-      <desc>Der Raspberry Pi 5 verbindet zwei getrennte Netze: per Ethernet das Anlagen-Netz 192.168.36.0/24 mit dem Leitstand und den zehn OPC-UA-Stationen der Modellanlage (angeordnet wie in der realen Aufstellung), plus einem separaten Hochregallager-IPC ohne OPC-UA-Anbindung; und per WLAN einen eigenen Hotspot 10.42.0.0/24 mit Laptop, Akustik-KI und YOLO-System. Zwischen beiden Netzen wird nicht geroutet.</desc>
+      <desc>Der Raspberry Pi 5 hängt mit Ethernet im Anlagen-Netz 192.168.36.0/24 mit Leitstand und den zehn OPC-UA-Stationen der Modellanlage (angeordnet wie in der realen Aufstellung), plus separatem Hochregallager-IPC ohne OPC-UA-Anbindung. Zusätzlich ist der Pi per WLAN als Client in ein vorhandenes DMZ-Netz eingebucht, in dem Laptop, Akustik-KI und YOLO-System liegen. Der Pi ist dabei kein eigener Access Point.</desc>
       <defs>
         <marker id="arNetTopo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M1 1L8 5L1 9Z" fill="#2A5F8A"/>
@@ -1479,7 +1514,7 @@
       <text x="270" y="118" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">eth0 · 192.168.36.20</text>
 
       <path d="M700,84 L1065,150" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
-      <text x="825" y="118" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">wlan0 · 10.42.0.1</text>
+      <text x="825" y="118" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">wlan0 · DMZ (Client, DHCP)</text>
 
       <line x1="885" y1="160" x2="885" y2="514" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="2 4"/>
 
@@ -1554,10 +1589,10 @@
         <text x="725" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.4 · OPC-UA</text>
       </g>
 
-      <!-- ================= Pi-Hotspot ================= -->
+      <!-- ================= WLAN-DMZ ================= -->
       <rect x="900" y="150" width="340" height="364" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
-      <text x="1070" y="176" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Pi-Hotspot (WLAN)</text>
-      <text x="1070" y="192" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">10.42.0.0/24</text>
+      <text x="1070" y="176" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">WLAN-DMZ</text>
+      <text x="1070" y="192" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Pi als WLAN-Client (kein AP)</text>
 
       <g>
         <rect x="930" y="250" width="280" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
@@ -1582,7 +1617,7 @@
 
 <section class="theme-section" id="quiz" aria-labelledby="quiz-heading">
   <div class="theme-head">
-    <div class="theme-letter" style="background:var(--accent-bright)">✎</div>
+    <div class="theme-letter bg-accent-bright">✎</div>
     <div><h2 id="quiz-heading">Quiz — was ist hängen geblieben?</h2>
     <div class="eyebrow">19 Fragen zu A–E, direktes Feedback</div></div>
   </div>
@@ -1800,13 +1835,13 @@
     QUIZ.forEach(function(item, qi){
       var card = document.createElement('div');
       card.className = 'quiz-card';
-      card.style.borderLeftColor = item.color;
+      card.classList.add('quiz-border-'+item.cat.toLowerCase());
       var optsHtml = item.options.map(function(opt, oi){
         return '<label class="quiz-opt" data-qi="'+qi+'">'+
           '<input type="radio" name="q'+qi+'" value="'+oi+'"> <span>'+opt+'</span></label>';
       }).join('');
       card.innerHTML =
-        '<div class="quiz-cat" style="color:'+item.color+'">Thema '+item.cat+'</div>'+
+        '<div class="quiz-cat quiz-cat-'+item.cat.toLowerCase()+'">Thema '+item.cat+'</div>'+
         '<div class="quiz-q">'+item.q+'</div>'+
         '<div class="quiz-opts">'+optsHtml+'</div>'+
         '<div class="quiz-exp" id="exp'+qi+'" hidden></div>';
