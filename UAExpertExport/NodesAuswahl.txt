@@ -1,0 +1,100 @@
+# Palettenlager1
+192.168.36.2:4840	ns=3;s="+AL-BG1_Bandsensor_Links"	Boolean
+192.168.36.2:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"	Boolean
+192.168.36.2:4840	ns=3;s="+AM-BG6_HubUnten"	Boolean
+192.168.36.2:4840	ns=3;s="+AM-BG7_HubMitte"	Boolean
+192.168.36.2:4840	ns=3;s="+AM-BG8_HubOben"	Boolean
+192.168.36.2:4840	ns=3;s="+AM-BL1_Füllstand"  UInt16
+192.168.36.2:4840	ns=3;s="+AN-BL2_Füllstand"	UInt16
+192.168.36.2:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.2:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.2:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+# Rohlager Dosen
+192.168.36.3:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.3:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.3:4840	ns=3;s="+AM-BL1_Füllstand"  UInt16
+192.168.36.3:4840	ns=3;s="+AO-BL2_Füllstand"  UInt16
+192.168.36.3:4840	ns=3;s="+AL-MA1.Linkslauf"	Boolean
+192.168.36.3:4840	ns=3;s="+AL-MA1.Rechtslauf"	Boolean
+192.168.36.3:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+# Abfüllen
+192.168.36.4:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.4:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG05_ZylinderMag1AS"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG06_ZylinderMag2AS"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG07_ZylinderMag3AS"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG08_FallMagazin1"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG09_FallMagazin2"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG10_FallMagazin3"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG11_FüllstandMag1" Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG12_FüllstandMag2"	Boolean
+192.168.36.4:4840	ns=3;s="+AM-BG13_FüllstandMag3"	Boolean
+192.168.36.4:4840	ns=3;s="+AN-BG1_WaageGS"	Boolean
+192.168.36.4:4840	ns=3;s="+AN-BG2_WaageAS"	Boolean
+192.168.36.4:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.4:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.4:4840	ns=3;s="+AL-MA1.Vmax"	Boolean
+
+#Qualität Kamera
+192.168.36.5:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.5:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.5:4840	ns=3;s="+AM-BG3_Tor_links_oben" Boolean
+192.168.36.5:4840	ns=3;s="+AM-BG4_Tor_links_unten"    Boolean
+192.168.36.5:4840	ns=3;s="+AM-BG5_Tor_rechts_oben"    Boolean
+192.168.36.5:4840	ns=3;s="+AM-BG6_Tor_rechts_unten"   Boolean
+192.168.36.5:4840	ns=3;s="+AM-BL1_Füllstand"  Int16
+192.168.36.5:4840	ns=3;s="AnzahlKugeln"   Int32
+192.168.36.5:4840	ns=3;s="FarbeErkannt"   Byte
+192.168.36.5:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.5:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.5:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+#Handling Saugarm
+192.168.36.6:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.6:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.6:4840	ns=3;s="+AM-BG05_Hub1Oben"	Boolean
+192.168.36.6:4840	ns=3;s="+AM-BG06_Hub2Oben"	Boolean
+192.168.36.6:4840	ns=3;s="+AM-BG07_Vakuum"	Boolean
+192.168.36.6:4840	ns=3;s="+AM-BG08_SchwenkarmBand"    Boolean
+192.168.36.6:4840	ns=3;s="+AM-BG09_SchwenkarmMagazin" Boolean
+192.168.36.6:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.6:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.6:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+# Presse
+192.168.36.7:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.7:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.7:4840	ns=3;s="+AM-BG3_HubMontageOben" Boolean
+192.168.36.7:4840	ns=3;s="+AM-BG4_HubMontageUnten"    Boolean
+192.168.36.7:4840	ns=3;s="+AO-AF2_ÜberwachungAusgelöst"   Boolean
+192.168.36.7:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.7:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.7:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+# Palettenlager2
+192.168.36.8:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.8:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.8:4840	ns=3;s="+AM-BG6_HubUnten"   Boolean
+192.168.36.8:4840	ns=3;s="+AM-BG7_HubMitte"   Boolean
+192.168.36.8:4840	ns=3;s="+AM-BG8_HubOben"    Boolean
+192.168.36.8:4840	ns=3;s="+AM-BL1_Füllstand"  UInt16
+192.168.36.8:4840	ns=3;s="+AN-BL2_Füllstand"  UInt16
+192.168.36.8:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.8:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.8:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+# Transfersystem Roboter
+192.168.36.9:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.9:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.9:4840	ns=3;s="+AL-MA1.Linkslauf"  Boolean
+192.168.36.9:4840	ns=3;s="+AL-MA1.Rechtslauf" Boolean
+192.168.36.9:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
+
+# Teansfersystem Hochregallager
+192.168.36.10:4840	ns=3;s="+AL-BG1_Bandsensor_Links"   Boolean
+192.168.36.10:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"  Boolean
+192.168.36.10:4840	ns=3;s="+AL-MA1.Linkslauf"	Boolean
+192.168.36.10:4840	ns=3;s="+AL-MA1.Rechtslauf"	Boolean
+192.168.36.10:4840	ns=3;s="+AL-MA1.Vmax"   Boolean
