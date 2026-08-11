@@ -3,6 +3,7 @@ import threading
 import numpy as np
 import subprocess
 import json
+import os
 import paho.mqtt.client as mqtt
 from flask import Flask, jsonify, request
 from datetime import datetime
@@ -14,15 +15,44 @@ CHUNK_SIZE = 2048    # Samples pro FFT (bessere Frequenzauflösung)
 MAX_FREQ = 5000      # Hz
 
 # MQTT Konfiguration
-MQTT_BROKER = '172.29.0.67'#"datenkrake.local"  # Alternativ: IP-Adresse falls mDNS nicht funktioniert
+DEFAULT_BROKER_IP = '172.29.0.67'  # Fallback, falls noch keine Konfiguration gespeichert wurde
 MQTT_PORT = 1883
 MQTT_TOPIC = "audio/spectrum"
 
-# MySQL Datenbank Konfiguration
-DB_HOST = '172.29.0.67'#"datenkrake.local"
+# MySQL Datenbank Konfiguration (dieselbe Datenkrake-IP wie für MQTT)
 DB_USER = "sensor"
 DB_PASSWORD = "changeMeSensor"
 DB_NAME = "telemetry"
+
+# Persistente Speicherung der Datenkrake-IP, damit sie einen Neustart übersteht.
+# Wichtig für Netze, in denen mDNS (datenkrake.local) nicht zuverlässig funktioniert
+# (z. B. unter Linux) — die IP kann stattdessen über die Weboberfläche gesetzt werden.
+CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'datenkrake_config.json')
+
+def load_broker_ip():
+    """Lädt die zuletzt gespeicherte Datenkrake-IP, falls vorhanden."""
+    try:
+        with open(CONFIG_FILE, 'r') as f:
+            cfg = json.load(f)
+            ip = (cfg.get('broker_ip') or '').strip()
+            if ip:
+                return ip
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        pass
+    return DEFAULT_BROKER_IP
+
+def save_broker_ip(ip):
+    """Speichert die Datenkrake-IP dauerhaft."""
+    try:
+        with open(CONFIG_FILE, 'w') as f:
+            json.dump({'broker_ip': ip}, f)
+        return True
+    except OSError as e:
+        print(f"Konnte Konfiguration nicht speichern: {e}")
+        return False
+
+MQTT_BROKER = load_broker_ip()
+DB_HOST = MQTT_BROKER
 
 app = Flask(__name__)
 
@@ -38,6 +68,7 @@ record_count = 0
 
 # MQTT Client
 mqtt_client = None
+mqtt_connected = False
 mqtt_send_count = {"gut": 0, "schlecht": 0}  # Zähler für gesendete MQTT Nachrichten
 
 def resolve_hostname(hostname):
@@ -64,8 +95,16 @@ def resolve_hostname(hostname):
     return hostname  # Gib Original zurück, vielleicht klappt es später
 
 def setup_mqtt():
-    """Initialisiert MQTT Client"""
+    """Initialisiert MQTT Client. Trennt zuerst eine ggf. bestehende Verbindung,
+    damit die Funktion auch für einen Reconnect mit neuer Broker-IP genutzt werden kann."""
     global mqtt_client
+    if mqtt_client is not None:
+        try:
+            mqtt_client.loop_stop()
+            mqtt_client.disconnect()
+        except Exception:
+            pass
+        mqtt_client = None
     try:
         broker = resolve_hostname(MQTT_BROKER)
         mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
@@ -139,6 +178,26 @@ HTML = '''
             .header { flex-direction: column; align-items: flex-start; }
             .logo { margin-left: 0; text-align: left; font-size: 22px; }
         }
+        .settings-bar {
+            background: #f8f8f8; border: 1px solid #ddd; border-radius: 8px;
+            padding: 10px 15px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        }
+        .settings-bar label { font-size: 13px; color: #666; }
+        .settings-bar input[type=text] {
+            padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px;
+            font-size: 13px; width: 170px;
+        }
+        .settings-bar button {
+            padding: 6px 14px; font-size: 13px; border: none; border-radius: 6px;
+            background: #8b1a1a; color: #fff; cursor: pointer;
+        }
+        .settings-bar button:hover { background: #6f1414; }
+        .mqtt-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .mqtt-dot.ok { background: #28a745; }
+        .mqtt-dot.fail { background: #dc3545; }
+        .mqtt-dot.pending { background: #ccc; }
+        #brokerStatusText { font-size: 12px; color: #666; }
         .tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn { padding: 12px 30px; font-size: 16px; border: none; border-radius: 8px 8px 0 0; cursor: pointer; background: #f0f0f0; color: #666; }
         .tab-btn.active { background: #8b1a1a; color: #fff; }
@@ -197,7 +256,14 @@ HTML = '''
             <span class="logo-underline"><span class="red-dot">j</span>akob</span><span class="red-dot">-</span><span class="logo-underline-red">preh</span><span class="red-dot">-</span><span class="logo-underline">schule</span><span class="red-dot">!</span>
         </div>
     </div>
-    
+
+    <div class="settings-bar">
+        <label for="brokerIp">Datenkrake-IP (MQTT):</label>
+        <input type="text" id="brokerIp" placeholder="z. B. 10.42.0.1">
+        <button onclick="saveBrokerIp()">Speichern &amp; verbinden</button>
+        <span id="brokerStatus"><span class="mqtt-dot pending" id="brokerDot"></span><span id="brokerStatusText">wird geprüft…</span></span>
+    </div>
+
     <div class="tabs">
         <button class="tab-btn active" onclick="showTab('collect')">Daten sammeln</button>
         <button class="tab-btn" onclick="showTab('train')">Modell trainieren</button>
@@ -896,9 +962,50 @@ HTML = '''
                 document.getElementById('status').textContent = 'Fehler: ' + e;
             }
         }
+        async function loadBrokerConfig() {
+            try {
+                const res = await fetch('/api/config');
+                const data = await res.json();
+                document.getElementById('brokerIp').value = data.broker_ip;
+                updateBrokerStatus(data.mqtt_connected, data.broker_ip);
+            } catch(e) {
+                document.getElementById('brokerStatusText').textContent = 'Konfiguration nicht ladbar';
+            }
+        }
+        function updateBrokerStatus(connected, ip) {
+            const dot = document.getElementById('brokerDot');
+            const text = document.getElementById('brokerStatusText');
+            dot.className = 'mqtt-dot ' + (connected ? 'ok' : 'fail');
+            text.textContent = connected ? ('verbunden mit ' + ip) : ('nicht erreichbar (' + ip + ')');
+        }
+        async function saveBrokerIp() {
+            const ip = document.getElementById('brokerIp').value.trim();
+            const dot = document.getElementById('brokerDot');
+            const text = document.getElementById('brokerStatusText');
+            dot.className = 'mqtt-dot pending';
+            text.textContent = 'verbinde…';
+            try {
+                const res = await fetch('/api/set_broker', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ip})
+                });
+                const data = await res.json();
+                if (data.status === 'ok') {
+                    updateBrokerStatus(data.mqtt_connected, data.broker_ip);
+                } else {
+                    dot.className = 'mqtt-dot fail';
+                    text.textContent = data.message || 'Fehler beim Speichern';
+                }
+            } catch(e) {
+                dot.className = 'mqtt-dot fail';
+                text.textContent = 'Fehler: ' + e;
+            }
+        }
         animateHeader();
         animateTabs();
         animateStats();
+        loadBrokerConfig();
         setInterval(update, 100);
     </script>
 </body>
@@ -934,6 +1041,36 @@ def api_set_recording():
 def api_stats():
     total = mqtt_send_count.get('gut', 0) + mqtt_send_count.get('schlecht', 0)
     return jsonify({"gut": mqtt_send_count.get('gut', 0), "schlecht": mqtt_send_count.get('schlecht', 0), "total": total})
+
+@app.route('/api/config')
+def api_config():
+    """Liefert die aktuell konfigurierte Datenkrake-IP und den MQTT-Verbindungsstatus."""
+    return jsonify({"broker_ip": MQTT_BROKER, "mqtt_connected": mqtt_connected})
+
+@app.route('/api/set_broker', methods=['POST'])
+def api_set_broker():
+    """Setzt die Datenkrake-IP (für MQTT und die MariaDB-Verbindung) neu, speichert sie
+    dauerhaft und baut die MQTT-Verbindung sofort neu auf. Gedacht als Alternative zu
+    datenkrake.local, falls mDNS im jeweiligen Netz (z. B. unter Linux) nicht funktioniert."""
+    global MQTT_BROKER, DB_HOST, mqtt_connected
+    data = request.get_json(silent=True) or {}
+    ip = (data.get('ip') or '').strip()
+
+    if not ip:
+        return jsonify({"status": "error", "message": "Keine IP-Adresse oder Hostname angegeben."}), 400
+
+    ipv4_pattern = r'^(\d{1,3}\.){3}\d{1,3}$'
+    hostname_pattern = r'^[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?$'
+    if not (re.match(ipv4_pattern, ip) or re.match(hostname_pattern, ip)):
+        return jsonify({"status": "error", "message": "Ungültige IP-Adresse oder Hostname."}), 400
+
+    MQTT_BROKER = ip
+    DB_HOST = ip
+    save_broker_ip(ip)
+    mqtt_connected = setup_mqtt()
+    print(f"Datenkrake-IP über Weboberfläche gesetzt: {ip} (MQTT verbunden: {mqtt_connected})")
+
+    return jsonify({"status": "ok", "broker_ip": MQTT_BROKER, "mqtt_connected": mqtt_connected})
 
 @app.route('/api/predict')
 def api_predict():
@@ -1188,7 +1325,7 @@ def start_flask():
     app.run(host='0.0.0.0', port=80, use_reloader=False, threaded=True)
 
 # MQTT verbinden
-setup_mqtt()
+mqtt_connected = setup_mqtt()
 
 # Flask in Thread starten
 threading.Thread(target=start_flask, daemon=True).start()

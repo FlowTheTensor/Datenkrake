@@ -1410,9 +1410,9 @@
 
   <div class="panel">
     <div class="panel-head"><h2>Netzwerktopologie</h2></div>
-    <svg viewBox="0 0 900 480" width="100%" role="img" style="max-width:100%; height:auto; display:block;">
+    <svg viewBox="0 0 1280 570" width="100%" role="img" style="max-width:100%; height:auto; display:block;">
       <title>Netzwerktopologie Datenkrake Raspberry Pi 5</title>
-      <desc>Der Raspberry Pi 5 verbindet zwei getrennte Netze: per Ethernet das Anlagen-Netz 192.168.36.0/24 mit Leitstand und Modellanlage, und per WLAN einen eigenen Hotspot 10.42.0.0/24 mit Laptop, Akustik-KI und YOLO-System. Zwischen beiden Netzen wird nicht geroutet.</desc>
+      <desc>Der Raspberry Pi 5 verbindet zwei getrennte Netze: per Ethernet das Anlagen-Netz 192.168.36.0/24 mit dem Leitstand und den zehn OPC-UA-Stationen der Modellanlage (angeordnet wie in der realen Aufstellung), plus einem separaten Hochregallager-IPC ohne OPC-UA-Anbindung; und per WLAN einen eigenen Hotspot 10.42.0.0/24 mit Laptop, Akustik-KI und YOLO-System. Zwischen beiden Netzen wird nicht geroutet.</desc>
       <defs>
         <marker id="arNetTopo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M1 1L8 5L1 9Z" fill="#2A5F8A"/>
@@ -1420,55 +1420,112 @@
       </defs>
 
       <g>
-        <rect x="370" y="30" width="160" height="54" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
-        <text x="450" y="52" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Raspberry Pi 5</text>
-        <text x="450" y="69" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Datenkrake</text>
+        <rect x="560" y="30" width="160" height="54" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <text x="640" y="52" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Raspberry Pi 5</text>
+        <text x="640" y="69" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Datenkrake</text>
       </g>
 
-      <path d="M392,84 L235,140" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
-      <text x="238" y="112" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">eth0 · 192.168.36.20</text>
+      <path d="M580,84 L460,150" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
+      <text x="270" y="118" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">eth0 · 192.168.36.20</text>
 
-      <path d="M508,84 L665,140" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
-      <text x="560" y="112" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">wlan0 · 10.42.0.1</text>
+      <path d="M700,84 L1065,150" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNetTopo)"/>
+      <text x="825" y="118" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">wlan0 · 10.42.0.1</text>
 
-      <line x1="450" y1="150" x2="450" y2="430" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="2 4"/>
+      <line x1="885" y1="160" x2="885" y2="514" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="2 4"/>
 
-      <rect x="40" y="140" width="380" height="300" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
-      <text x="230" y="166" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Anlagen-Netz</text>
-      <text x="230" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">192.168.36.0/24 · Ethernet</text>
+      <!-- ================= Anlagen-Netz: Leitstand + reale Aufstellung der Stationen ================= -->
+      <rect x="40" y="150" width="830" height="364" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
+      <text x="455" y="176" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Anlagen-Netz</text>
+      <text x="455" y="192" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">192.168.36.0/24 · Ethernet</text>
 
       <g>
-        <rect x="70" y="200" width="320" height="54" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
-        <text x="230" y="222" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Leitstand (SPS)</text>
-        <text x="230" y="239" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">.1 · OPC-UA · Port 4840</text>
-      </g>
-      <g>
-        <rect x="70" y="270" width="320" height="54" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
-        <text x="230" y="292" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Modellanlage</text>
-        <text x="230" y="309" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">.2–.10 · 9 Stationen · OPC-UA</text>
+        <rect x="345" y="204" width="220" height="50" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.6"/>
+        <text x="455" y="224" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13" fill="var(--ink)">Leitstand (SPS)</text>
+        <text x="455" y="241" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.1 · OPC-UA · Port 4840</text>
       </g>
 
-      <rect x="480" y="140" width="380" height="300" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
-      <text x="670" y="166" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Pi-Hotspot (WLAN)</text>
-      <text x="670" y="182" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">10.42.0.0/24</text>
+      <!-- Reihe 1 -->
+      <g>
+        <rect x="70" y="270" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="155" y="298" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Palettenlager 2</text>
+        <text x="155" y="316" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.8 · OPC-UA</text>
+      </g>
+      <g>
+        <rect x="260" y="270" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="345" y="298" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Presse</text>
+        <text x="345" y="316" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.7 · OPC-UA</text>
+      </g>
+      <g>
+        <rect x="450" y="270" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="535" y="292" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Handling</text>
+        <text x="535" y="306" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Saugarm</text>
+        <text x="535" y="323" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.6 · OPC-UA</text>
+      </g>
+      <g>
+        <rect x="640" y="270" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="725" y="292" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Qualität</text>
+        <text x="725" y="306" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Kamera</text>
+        <text x="725" y="323" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.5 · OPC-UA</text>
+      </g>
+
+      <!-- Reihe 2 (versetzt, wie in der realen Aufstellung) -->
+      <g>
+        <rect x="165" y="348" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="250" y="370" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Transfersystem</text>
+        <text x="250" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Hochregallager</text>
+        <text x="250" y="401" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.10 · OPC-UA</text>
+      </g>
+      <g>
+        <rect x="660" y="348" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="745" y="370" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Transfersystem</text>
+        <text x="745" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12" fill="var(--ink)">Roboter</text>
+        <text x="745" y="401" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.9 · OPC-UA</text>
+      </g>
+
+      <!-- Reihe 3 -->
+      <g>
+        <rect x="70" y="426" width="170" height="64" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="155" y="454" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Hochregallager</text>
+        <text x="155" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">IPC</text>
+      </g>
+      <g>
+        <rect x="260" y="426" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="345" y="454" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Palettenlager 1</text>
+        <text x="345" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.2 · OPC-UA</text>
+      </g>
+      <g>
+        <rect x="450" y="426" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="535" y="454" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Rohlager Dosen</text>
+        <text x="535" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.3 · OPC-UA</text>
+      </g>
+      <g>
+        <rect x="640" y="426" width="170" height="64" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="725" y="454" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Abfüllen</text>
+        <text x="725" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">.4 · OPC-UA</text>
+      </g>
+
+      <!-- ================= Pi-Hotspot ================= -->
+      <rect x="900" y="150" width="340" height="364" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
+      <text x="1070" y="176" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Pi-Hotspot (WLAN)</text>
+      <text x="1070" y="192" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">10.42.0.0/24</text>
 
       <g>
-        <rect x="510" y="200" width="320" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
-        <text x="670" y="222" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Laptop</text>
-        <text x="670" y="239" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">DHCP · Claude/MCP-Zugriff</text>
+        <rect x="930" y="250" width="280" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
+        <text x="1070" y="272" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Laptop</text>
+        <text x="1070" y="289" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">DHCP · Claude/MCP-Zugriff</text>
       </g>
       <g>
-        <rect x="510" y="270" width="320" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
-        <text x="670" y="292" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Akustik-KI</text>
-        <text x="670" y="309" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q · DHCP</text>
+        <rect x="930" y="330" width="280" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
+        <text x="1070" y="352" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Akustik-KI</text>
+        <text x="1070" y="369" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q · DHCP</text>
       </g>
       <g>
-        <rect x="510" y="340" width="320" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4" stroke-dasharray="3 3"/>
-        <text x="670" y="362" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">YOLO-System</text>
-        <text x="670" y="379" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q · geplant</text>
+        <rect x="930" y="410" width="280" height="54" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="1070" y="432" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">YOLO-System</text>
+        <text x="1070" y="449" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q · geplant</text>
       </g>
 
-      <text x="450" y="460" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">Kein Routing zwischen den Netzen — nur der Pi ist aus beiden erreichbar</text>
+      <text x="640" y="544" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">Kein Routing zwischen den Netzen — nur der Pi ist aus beiden erreichbar</text>
     </svg>
   </div>
 </section>
