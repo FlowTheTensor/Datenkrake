@@ -1,4 +1,4 @@
-FROM nodered/node-red:3.1
+FROM nodered/node-red:5.0.4
 
 # node-red-contrib-opcua bringt die OPC-UA-Client-Nodes mit, die den
 # eigentlichen Client stellt (S7-1500/ET200SP oder opcua_demo_server
@@ -12,4 +12,8 @@ FROM nodered/node-red:3.1
 # Die Vorlage liegt deshalb NICHT hier im Image, sondern wird von
 # setup_iot_stack.sh einmalig nach ../nodered/data/flows.json kopiert -
 # genau wie mosquitto.conf.example dort bereits gehandhabt wird.
-RUN npm install node-red-contrib-opcua
+# node-opcua-debug verwendet intern noch CommonJS require() auf hexy.
+# Neuere hexy-Versionen sind ESM-only und brechen mit ERR_REQUIRE_ESM.
+# Deshalb hexy per npm override auf eine CJS-kompatible Version festpinnen.
+RUN npm pkg set overrides.hexy=0.3.3 \
+ && npm install --no-audit --no-fund node-red-contrib-opcua@0.2.354
