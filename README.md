@@ -28,20 +28,25 @@ git add leitstand.html && git commit -m "OPC-UA-Dokumentations-Overlay ergänzt"
   **Thema D — Kommunikation & Industrie 4.0**.
 - Neues Vollbild-Overlay mit dem kompletten Inhalt von
   `UAExpertExport/Dokumentation_OPC_UA_Stationen.md`:
-  - Sprungnavigation (Stationen, Grundstruktur, Namenskonventionen,
-    Signalgruppen, Stationsdetails, MQTT-Modell, Datenbankmodell,
-    Sampling, KPI, Besonderheiten, Umsetzung, Dateien)
-  - Stationstabelle (Endpoint, Datensätze)
-  - Kartenraster für die 10 Stationen mit Charakteristik + Nutzen
-  - MQTT-Topic-Schema und formatiertes JSON-Beispiel
-  - Datenbankmodell (opc_raw, opc_mes_snapshot, opc_alarm_events)
-  - Datei-Links (relativ, verweisen auf `UAExpertExport/…`, inkl.
-    URL-Encoding für Leerzeichen/Umlaute)
+- Sprungnavigation (Stationen, Grundstruktur, Namenskonventionen,
+  Signalgruppen, Stationsdetails, MQTT-Modell, Datenbankmodell,
+  Sampling, KPI, Besonderheiten, Umsetzung, Dateien)
+- Stationstabelle (Endpoint, Datensätze)
+- Kartenraster für die 10 Stationen mit Charakteristik + Nutzen
+- MQTT-Topic-Schema und formatiertes JSON-Beispiel
+- Datenbankmodell (opc_raw, opc_mes_snapshot, opc_alarm_events)
+- Datei-Links (relativ, verweisen auf `UAExpertExport/…`, inkl.
+  URL-Encoding für Leerzeichen/Umlaute)
 - Schließen per ✕, Klick auf Hintergrund oder Escape — gleiches Verhalten
   wie beim bestehenden Architektur-Overlay; Öffnen/Schließen-Logik wurde
   dafür in eine gemeinsame `setupOverlay()`-Funktion refaktoriert, die
   jetzt für beide Overlays verwendet wird.
 - Kein externes JS/CSS, alles inline in der bestehenden Datei.
+
+### Web-Startseite
+
+- `http://datenkrake.local` öffnet standardmäßig den Leitstand (`leitstand.html`).
+- Das bisherige Audio-Live-Dashboard bleibt unter `http://datenkrake.local/index.php` erreichbar.
 
 ## Hinweis zu den Datei-Links
 

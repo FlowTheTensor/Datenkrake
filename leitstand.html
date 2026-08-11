@@ -252,6 +252,37 @@
   .panel-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
   .panel-head h2{font-size:15px;}
 
+  .quick-links{
+    margin-top:16px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--r);
+    padding:14px 16px;
+  }
+  .quick-links-head{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:10px;
+  }
+  .quick-links-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:10px;
+  }
+  .quick-link-card{
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--bg);
+    padding:10px 12px;
+  }
+  .quick-link-title{font-family:"Quicksand",sans-serif; font-weight:700; font-size:13px; margin:0 0 4px;}
+  .quick-link-card a{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--accent); text-decoration:none;}
+  .quick-link-card a:hover{text-decoration:underline;}
+  .quick-link-note{margin-top:8px; color:var(--ink-faint); font-size:11px;}
+
   /* ---------- Chat / Konsole (jetzt oben) ---------- */
   .tabs{display:flex; gap:6px; margin-bottom:14px;}
   .tab-btn{
@@ -536,6 +567,25 @@
       <div><div class="topic-title">Infrastruktur &amp; Hardware</div>
       <div class="topic-desc">Docker · Raspberry Pi · Arduino UNO Q</div></div>
     </a>
+  </div>
+
+  <div class="quick-links" aria-label="Schnellzugriff">
+    <div class="quick-links-head">Schnellzugriff</div>
+    <div class="quick-links-grid">
+      <div class="quick-link-card">
+        <p class="quick-link-title">Audio-Live-Dashboard (alt)</p>
+        <a href="index.php" target="_blank" rel="noopener">index.php öffnen ↗</a>
+      </div>
+      <div class="quick-link-card">
+        <p class="quick-link-title">Arduino UNO Q · Akustik-KI</p>
+        <a id="akustikQuickOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+      </div>
+      <div class="quick-link-card">
+        <p class="quick-link-title">Arduino UNO Q · YOLO-System</p>
+        <a id="yoloQuickOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+      </div>
+    </div>
+    <div class="quick-link-note">Die Arduino-Links verwenden dieselben URL-Felder wie im Abschnitt „KI- &amp; Datenanalyse-Systeme“ weiter unten.</div>
   </div>
 </section>
 
@@ -1630,6 +1680,8 @@
   }
   wireKiLink('akustikUrl','akustikOpen');
   wireKiLink('yoloUrl','yoloOpen');
+  wireKiLink('akustikUrl','akustikQuickOpen');
+  wireKiLink('yoloUrl','yoloQuickOpen');
   wireKiLink('historianUrl','historianOpen');
   wireKiLink('noderedUrl','noderedOpen');
   wireKiLink('minioUrl','minioOpen');

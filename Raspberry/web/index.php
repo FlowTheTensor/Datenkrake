@@ -131,6 +131,15 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         .chart-container { height: 250px; }
         .table-section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .table-section h2 { margin-top: 0; color: #8b1a1a; }
+        .influx-section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 20px; }
+        .influx-section h2 { margin-top: 0; color: #8b1a1a; }
+        .influx-links { margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .influx-link { color: #8b1a1a; font-size: 13px; text-decoration: none; }
+        .influx-link:hover { text-decoration: underline; }
+        .dashboard-switch { margin-bottom: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .switch-btn { padding: 7px 12px; border: 1px solid #ccc; border-radius: 5px; background: #f2f2f2; cursor: pointer; font-size: 13px; }
+        .switch-btn.active { background: #8b1a1a; color: white; border-color: #8b1a1a; }
+        .grafana-embed { width: 100%; height: 560px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; }
         table { border-collapse: collapse; width: 100%; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 13px; }
         th { background-color: #f8f8f8; position: sticky; top: 0; }
@@ -200,6 +209,21 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
                     <tbody id="dataTable"></tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="influx-section">
+            <h2>InfluxDB / Grafana (Zeitreihenansicht)</h2>
+            <div class="dashboard-switch">
+                <button id="btnOpcuaDashboard" class="switch-btn active" type="button">OPC-UA Stationen</button>
+                <button id="btnLiveDashboard" class="switch-btn" type="button">Datenkrake Live</button>
+            </div>
+            <div class="influx-links">
+                <a id="grafanaOpcuaDashboardLink" class="influx-link" href="#" target="_blank" rel="noopener">→ Grafana OPC-UA-Dashboard öffnen</a>
+                <a id="grafanaLiveDashboardLink" class="influx-link" href="#" target="_blank" rel="noopener">→ Grafana Live-Dashboard öffnen</a>
+                <a id="grafanaRootLink" class="influx-link" href="#" target="_blank" rel="noopener">→ Grafana Startseite öffnen</a>
+                <a id="influxLink" class="influx-link" href="#" target="_blank" rel="noopener">→ InfluxDB öffnen</a>
+            </div>
+            <iframe id="grafanaEmbed" class="grafana-embed" title="Grafana Dashboard" src="about:blank"></iframe>
         </div>
     </div>
 
@@ -319,6 +343,44 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
     <script>
         let freqChart, spectrumChart;
         let currentFilter = null;
+        let grafanaOpcuaDashboard = '';
+        let grafanaLiveDashboard = '';
+
+        function setDashboardButtonState(activeId) {
+            document.getElementById('btnOpcuaDashboard').classList.toggle('active', activeId === 'opcua');
+            document.getElementById('btnLiveDashboard').classList.toggle('active', activeId === 'live');
+        }
+
+        function loadGrafanaDashboard(kind) {
+            const embed = document.getElementById('grafanaEmbed');
+            if (kind === 'live') {
+                embed.src = grafanaLiveDashboard;
+                setDashboardButtonState('live');
+            } else {
+                embed.src = grafanaOpcuaDashboard;
+                setDashboardButtonState('opcua');
+            }
+        }
+
+        function initInfluxGrafanaLinks() {
+            const host = window.location.hostname || 'datenkrake.local';
+            const protocol = window.location.protocol || 'http:';
+            grafanaOpcuaDashboard = `${protocol}//${host}:3000/d/opcua-stationen-live/opc-ua-stationen-live?orgId=1&from=now-1h&to=now&kiosk`;
+            grafanaLiveDashboard = `${protocol}//${host}:3000/d/datenkrake-live/datenkrake-live?orgId=1&from=now-1h&to=now&kiosk`;
+            const grafanaRoot = `${protocol}//${host}:3000/`;
+            const influxRoot = `${protocol}//${host}:8086/`;
+
+            document.getElementById('grafanaOpcuaDashboardLink').href = grafanaOpcuaDashboard;
+            document.getElementById('grafanaLiveDashboardLink').href = grafanaLiveDashboard;
+            document.getElementById('grafanaRootLink').href = grafanaRoot;
+            document.getElementById('influxLink').href = influxRoot;
+
+            document.getElementById('btnOpcuaDashboard').addEventListener('click', () => loadGrafanaDashboard('opcua'));
+            document.getElementById('btnLiveDashboard').addEventListener('click', () => loadGrafanaDashboard('live'));
+
+            // Standardansicht ist das OPC-UA-Stationsdashboard.
+            loadGrafanaDashboard('opcua');
+        }
 
         function initCharts() {
             const ctxFreq = document.getElementById('freqChart').getContext('2d');
@@ -473,6 +535,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         }
 
         initCharts();
+        initInfluxGrafanaLinks();
         loadStats();
         loadData();
         

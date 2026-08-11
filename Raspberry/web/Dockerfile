@@ -7,5 +7,9 @@ RUN docker-php-ext-install mysqli
 COPY Raspberry/web/index.php /var/www/html/
 COPY leitstand.html /var/www/html/
 
+# datenkrake.local soll standardmäßig den Leitstand ausliefern.
+RUN printf "DirectoryIndex leitstand.html index.php\n" > /etc/apache2/conf-available/datenkrake.conf \
+ && a2enconf datenkrake
+
 # Setze Berechtigungen
 RUN chown -R www-data:www-data /var/www/html

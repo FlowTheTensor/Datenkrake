@@ -92,6 +92,26 @@ services:
       historian:
         condition: service_started
 
+  grafana:
+    image: grafana/grafana:11.1.4
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: changeMeGrafana
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_SECURITY_ALLOW_EMBEDDING: "true"
+    volumes:
+      - ../grafana/data:/var/lib/grafana
+      - ../grafana/provisioning:/etc/grafana/provisioning
+      - ../grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      historian:
+        condition: service_started
+
   # --- OPC-UA -> Node-RED -> MQTT -----------------------------------------
   # Node-RED liest Tags von einem OPC-UA-Server (S7-1500/ET200SP) und
   # veröffentlicht sie als JSON auf dem bestehenden Mosquitto-Broker.

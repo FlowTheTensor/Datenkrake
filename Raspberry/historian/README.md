@@ -14,7 +14,7 @@ Messwerten entstehen und die eine relationale Datenbank nicht gut oder nur
 mit viel Zusatzaufwand löst:
 
 | | MariaDB (hier: `audio_spectrum`) | Operational Historian (InfluxDB) |
-|---|---|---|
+| --- | --- | --- |
 | Datenmodell | Zeilen mit beliebigen Spalten, Fremdschlüsseln, JSON | Messpunkt = Zeitstempel + Tags (Label) + Felder (Zahlenwerte) |
 | Stärke | komplexe Abfragen, Verknüpfungen (z. B. mit `audio_anomalien`) | sehr hoher Schreibdurchsatz, effiziente Zeitraum-Abfragen |
 | Aufbewahrung | manuell per DELETE/Archivierung | eingebaute Retention-Policies (z. B. "nach 90 Tagen automatisch löschen/verdichten") |
@@ -60,21 +60,23 @@ weiterer Sensoren nichts umgebaut werden muss.
 
 ## Aufbau
 
-`historian_bridge/` abonniert **dasselbe** MQTT-Topic (`audio/spectrum`)
-wie der bestehende `subscriber/` und schreibt zusätzlich (nicht statt
-dessen!) in InfluxDB. Die bestehende Pipeline zur MariaDB bleibt komplett
-unverändert.
+`historian_bridge/` abonniert die MQTT-Topics `audio/spectrum` und `plc/#`
+und schreibt diese Messwerte zusätzlich (nicht statt dessen!) in InfluxDB.
+Die bestehende Pipeline zur MariaDB bleibt aktiv.
 
-```
-Arduino UNO Q --MQTT--> Mosquitto ---> subscriber      ---> MariaDB (bestehend)
-                                   \--> historian_bridge ---> InfluxDB (neu)
+```text
+Arduino UNO Q / Node-RED --MQTT--> Mosquitto ---> subscriber      ---> MariaDB
+                                               \--> historian_bridge ---> InfluxDB
 ```
 
 ## Zugriff
 
 - Web-UI: `http://datenkrake.local:8086` (Login: `admin` / im Compose-File hinterlegtes Passwort, bitte vor Produktivbetrieb ändern)
 - Org: `datenkrake`, Bucket: `telemetrie`
+- Optionales Dashboarding mit Grafana: `http://datenkrake.local:3000`
+  (Default-Login: `admin` / `changeMeGrafana`, Dashboards: `Datenkrake Live` und `OPC-UA Stationen Live`)
 - Beispiel-Query (Flux, im UI unter "Data Explorer"):
+
   ```flux
   from(bucket: "telemetrie")
     |> range(start: -6h)

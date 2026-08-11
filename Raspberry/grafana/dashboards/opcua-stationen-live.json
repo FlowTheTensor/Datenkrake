@@ -1,0 +1,774 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "Offline"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: -90s)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> count()",
+          "refId": "A"
+        }
+      ],
+      "title": "Ampel: Station aktiv (90s)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> filter(fn: (r) => r._field == \"wert_num\")\n  |> group(columns: [\"tag\"])\n  |> count()",
+          "refId": "A"
+        }
+      ],
+      "title": "Numerische Signale (1h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> filter(fn: (r) => r._field == \"wert_bool\")\n  |> group(columns: [\"tag\"])\n  |> count()",
+          "refId": "A"
+        }
+      ],
+      "title": "Bool-Signale (1h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> filter(fn: (r) => r._field == \"wert_text\")\n  |> group(columns: [\"tag\"])\n  |> count()",
+          "refId": "A"
+        }
+      ],
+      "title": "Text-/Status-Signale (1h)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 12,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> filter(fn: (r) => r._field == \"wert_num\")\n  |> aggregateWindow(every: 5s, fn: last, createEmpty: false)\n  |> group(columns: [\"tag\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Numerische Signale je Tag (Station)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "hidden",
+            "fillOpacity": 90,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "false"
+                },
+                "1": {
+                  "text": "true"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 6,
+      "options": {
+        "colWidth": 0.9,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "mergeValues": true,
+        "rowHeight": 0.8,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> filter(fn: (r) => r._field == \"wert_bool\")\n  |> aggregateWindow(every: 5s, fn: last, createEmpty: false)\n  |> group(columns: [\"tag\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Bool-Zustände (State Timeline)",
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 7,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "tag"
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: -24h)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station}\")\n  |> filter(fn: (r) => r.tag == \"${tag:regex}\" or \"${tag}\" == \"\")\n  |> last()\n  |> keep(columns: [\"_time\",\"tag\",\"datatype\",\"_field\",\"_value\",\"node_id\"])",
+          "refId": "A"
+        }
+      ],
+      "title": "Letzte Werte je Tag",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "influx-datenkrake"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "Offline"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 38
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "repeat": "station_all",
+      "repeatDirection": "h",
+      "maxPerRow": 6,
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influx-datenkrake"
+          },
+          "query": "from(bucket: \"telemetrie\")\n  |> range(start: -90s)\n  |> filter(fn: (r) => r._measurement == \"plc_telemetry\")\n  |> filter(fn: (r) => r.station == \"${station_all}\")\n  |> count()",
+          "refId": "A"
+        }
+      ],
+      "title": "Ampel ${station_all:text}",
+      "type": "stat"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": [
+    "datenkrake",
+    "opcua",
+    "stationen"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "Palettenlager 1",
+            "Rohlager Dosen",
+            "Abfüllen",
+            "Qualität Kamera",
+            "Handling Saugarm",
+            "Presse",
+            "Palettenlager 2",
+            "Transfersystem Roboter",
+            "Transfersystem Hochregallager"
+          ],
+          "value": [
+            "palettenlager1",
+            "rohlager_dosen",
+            "abf_llen",
+            "qualit_t_kamera",
+            "handling_saugarm",
+            "presse",
+            "palettenlager2",
+            "transfersystem_roboter",
+            "teansfersystem_hochregallager"
+          ]
+        },
+        "definition": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Stationen alle",
+        "multi": true,
+        "name": "station_all",
+        "options": [
+          {
+            "selected": true,
+            "text": "Palettenlager 1",
+            "value": "palettenlager1"
+          },
+          {
+            "selected": true,
+            "text": "Rohlager Dosen",
+            "value": "rohlager_dosen"
+          },
+          {
+            "selected": true,
+            "text": "Abfüllen",
+            "value": "abf_llen"
+          },
+          {
+            "selected": true,
+            "text": "Qualität Kamera",
+            "value": "qualit_t_kamera"
+          },
+          {
+            "selected": true,
+            "text": "Handling Saugarm",
+            "value": "handling_saugarm"
+          },
+          {
+            "selected": true,
+            "text": "Presse",
+            "value": "presse"
+          },
+          {
+            "selected": true,
+            "text": "Palettenlager 2",
+            "value": "palettenlager2"
+          },
+          {
+            "selected": true,
+            "text": "Transfersystem Roboter",
+            "value": "transfersystem_roboter"
+          },
+          {
+            "selected": true,
+            "text": "Transfersystem Hochregallager",
+            "value": "teansfersystem_hochregallager"
+          }
+        ],
+        "query": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "Abfüllen",
+          "value": "abf_llen"
+        },
+        "definition": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Station",
+        "multi": false,
+        "name": "station",
+        "options": [
+          {
+            "selected": false,
+            "text": "Palettenlager 1",
+            "value": "palettenlager1"
+          },
+          {
+            "selected": false,
+            "text": "Rohlager Dosen",
+            "value": "rohlager_dosen"
+          },
+          {
+            "selected": true,
+            "text": "Abfüllen",
+            "value": "abf_llen"
+          },
+          {
+            "selected": false,
+            "text": "Qualität Kamera",
+            "value": "qualit_t_kamera"
+          },
+          {
+            "selected": false,
+            "text": "Handling Saugarm",
+            "value": "handling_saugarm"
+          },
+          {
+            "selected": false,
+            "text": "Presse",
+            "value": "presse"
+          },
+          {
+            "selected": false,
+            "text": "Palettenlager 2",
+            "value": "palettenlager2"
+          },
+          {
+            "selected": false,
+            "text": "Transfersystem Roboter",
+            "value": "transfersystem_roboter"
+          },
+          {
+            "selected": false,
+            "text": "Transfersystem Hochregallager",
+            "value": "teansfersystem_hochregallager"
+          }
+        ],
+        "query": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "influx-datenkrake"
+        },
+        "definition": "import \"influxdata/influxdb/schema\"\nschema.tagValues(bucket: \"telemetrie\", tag: \"tag\", predicate: (r) => r._measurement == \"plc_telemetry\" and r.station == \"${station}\", start: -30d)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Tag",
+        "multi": true,
+        "name": "tag",
+        "options": [],
+        "query": "import \"influxdata/influxdb/schema\"\nschema.tagValues(bucket: \"telemetrie\", tag: \"tag\", predicate: (r) => r._measurement == \"plc_telemetry\" and r.station == \"${station}\", start: -30d)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "OPC-UA Stationen Live",
+  "uid": "opcua-stationen-live",
+  "version": 1,
+  "weekStart": ""
+}

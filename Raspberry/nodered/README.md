@@ -5,7 +5,7 @@ veröffentlicht sie als JSON auf dem bestehenden Mosquitto-Broker – auf
 einem neuen Topic-Namensraum `plc/#`, ohne das bestehende `audio/spectrum`
 anzurühren.
 
-```
+```text
 S7-1500 / ET200SP --OPC-UA--> Node-RED --MQTT (plc/...)--> Mosquitto (bestehend)
 ```
 
@@ -53,6 +53,34 @@ eingerichtet werden.
   "zeitstempel": "2026-07-21T10:15:00.000Z"
 }
 ```
+
+## Flow aus `NodesAuswahl.txt`
+
+Fuer den Unterricht mit mehreren Stationen gibt es einen vorbereiteten Import-
+Flow in `flows/flows_nodesauswahl.json`.
+
+Eigenschaften:
+
+- liest `/data/NodesAuswahl.txt` ein,
+- fragt alle dort gelisteten Node-IDs zyklisch ab,
+- sendet nur Wertaenderungen (`rbe`) per MQTT nach `plc/<station>/<tag>`.
+- legt die OPC-UA-Endpoints fuer die in der Datei verwendeten IPs an
+   (`192.168.36.2:4840` bis `192.168.36.10:4840`) und nutzt Login mit
+   Benutzer `MES` und Passwort `training`.
+
+Import in Node-RED:
+
+1. Editor oeffnen (`http://datenkrake.local:1880`)
+2. Menu -> Import -> Datei `flows/flows_nodesauswahl.json` waehlen
+3. Deploy
+
+Hinweis zur Dateiablage:
+
+- Der Flow liest aus `/data/NodesAuswahl.txt` im Container.
+- `setup_iot_stack.sh` kopiert `UAExpertExport/NodesAuswahl.txt` beim Setup
+   einmalig nach `Raspberry/nodered/data/NodesAuswahl.txt`.
+- Wenn sich die Auswahl aendert, Datei im `nodered/data`-Ordner aktualisieren
+   (oder Setup erneut ausfuehren) und dann in Node-RED neu deployen.
 
 ## Bekannte Einschränkungen
 

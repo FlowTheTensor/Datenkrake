@@ -46,6 +46,7 @@ prepare_directories() {
   mkdir -p "${SCRIPT_DIR}/mariadb/data"
   mkdir -p "${SCRIPT_DIR}/mariadb/init"
   mkdir -p "${SCRIPT_DIR}/historian/data"
+  mkdir -p "${SCRIPT_DIR}/grafana/data"
   mkdir -p "${SCRIPT_DIR}/nodered/data"
 
   if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf" ]] && [[ -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" ]]; then
@@ -59,9 +60,16 @@ prepare_directories() {
     cp "${SCRIPT_DIR}/nodered/flows/flows.json" "${SCRIPT_DIR}/nodered/data/flows.json"
   fi
 
+  # Node-Auswahlliste fuer den dynamischen OPC-UA->MQTT-Flow bereitstellen.
+  # Der Flow liest diese Datei aus /data innerhalb des Node-RED-Containers.
+  if [[ ! -f "${SCRIPT_DIR}/nodered/data/NodesAuswahl.txt" ]] && [[ -f "${SCRIPT_DIR}/../UAExpertExport/NodesAuswahl.txt" ]]; then
+    cp "${SCRIPT_DIR}/../UAExpertExport/NodesAuswahl.txt" "${SCRIPT_DIR}/nodered/data/NodesAuswahl.txt"
+  fi
+
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mariadb"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/historian"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/grafana"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/nodered"
 }
 
