@@ -123,6 +123,12 @@
     padding:32px clamp(12px,4vw,40px); overflow-y:auto;
   }
   #archOverlay.open{display:flex; align-items:flex-start; justify-content:center;}
+  #pollerOverlay{
+    display:none; position:fixed; inset:0; z-index:999;
+    background:rgba(29,29,28,.55); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+    padding:32px clamp(12px,4vw,40px); overflow-y:auto;
+  }
+  #pollerOverlay.open{display:flex; align-items:flex-start; justify-content:center;}
   .arch-overlay-card{
     background:var(--surface); border-radius:16px; width:100%; max-width:1020px;
     padding:24px clamp(16px,3vw,32px) 34px; position:relative;
@@ -1170,11 +1176,75 @@
       <div class="ki-card">
         <div class="name">🧠 Anomalie-Detektor → Agentensystem</div>
         <div class="chart-note">Ablauf: Akustikdaten → Detektor/Schwellwertlogik → anomalie_poller → offene Anomalien → Orchestrator/Report/Wartung.</div>
-        <a class="open-btn" href="#thema-a">Weiter zu Agentensystemen ↗</a>
+        <button class="arch-overlay-btn" id="pollerOverlayBtn" type="button" aria-haspopup="dialog" aria-controls="pollerOverlay">
+          <span class="sw"></span>anomalie_poller erklaert
+        </button>
       </div>
     </div>
   </div>
 </section>
+
+<div id="pollerOverlay" role="dialog" aria-modal="true" aria-labelledby="pollerOverlayHeading">
+  <div class="arch-overlay-card">
+    <div class="arch-overlay-head">
+      <div>
+        <h2 id="pollerOverlayHeading">Wie arbeitet anomalie_poller/poller.py?</h2>
+        <p>Diese Uebergangslogik verbindet die Akustik-Erkennung mit dem Agentensystem, bis ein echter Echtzeit-Inferenz-Output vom Arduino vorliegt.</p>
+      </div>
+      <button class="arch-overlay-close" id="pollerOverlayClose" type="button" aria-label="Schließen">✕</button>
+    </div>
+
+    <div class="arch-zone">
+      <div class="arch-zone-head"><span class="bar bar-accent-2"></span>Zweck</div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <h4>Uebergangsloesung</h4>
+          <div class="arch-desc">Der Poller schliesst die Luecke, solange die Anomalie-Erkennung noch nicht direkt vom Arduino als Event publiziert wird.</div>
+        </div>
+        <div class="arch-card">
+          <h4>Quelle waehlen</h4>
+          <div class="arch-desc">Per Umgebungsvariable <code>ANOMALIE_QUELLE</code> wird zwischen <code>influx</code> (Standard) und <code>mariadb</code> umgeschaltet.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-zone">
+      <div class="arch-zone-head"><span class="bar bar-blue"></span>Ablauf im Zyklus</div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <h4>1. Periodisches Pruefen</h4>
+          <div class="arch-desc">Alle 15 Sekunden wird <code>pruefzyklus()</code> aufgerufen und eine statistische Pruefung gestartet.</div>
+        </div>
+        <div class="arch-card">
+          <h4>2. Anomalie-Check</h4>
+          <div class="arch-desc">Aufruf von <code>pruefe_akustik_anomalie_influx()</code> oder <code>pruefe_akustik_anomalie()</code> je nach Quelle.</div>
+        </div>
+        <div class="arch-card">
+          <h4>3. Duplikate vermeiden</h4>
+          <div class="arch-desc">Mit <code>anomalie_bereits_erfasst(bezug_id)</code> werden Mehrfacheintraege fuer dieselbe Messung verhindert.</div>
+        </div>
+        <div class="arch-card">
+          <h4>4. Persistenz fuer Agenten</h4>
+          <div class="arch-desc">Bei Treffer schreibt <code>insert_anomalie(...)</code> einen Datensatz in <code>audio_anomalien</code> als Trigger fuer Orchestrator/Wartung/Report.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-zone">
+      <div class="arch-zone-head"><span class="bar bar-ink-soft"></span>Didaktischer Uebergang</div>
+      <div class="arch-grid">
+        <div class="arch-card">
+          <h4>Heute im Unterricht</h4>
+          <div class="arch-desc">ML-Modelle vergleichen (Orange3/Jupyter), daraus einen Detektor ableiten, dann den Weg in die Agentenkette nachvollziehen.</div>
+        </div>
+        <div class="arch-card">
+          <h4>Naechster Ausbauschritt</h4>
+          <div class="arch-desc">Wenn der Arduino echte Inferenz-Events liefert, kann diese Poller-Datei durch einen MQTT-Listener ersetzt werden.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="theme-section" id="thema-c" aria-labelledby="thema-c-heading">
   <div class="theme-head">
@@ -1739,6 +1809,7 @@
   }
   setupOverlay('archOverlayBtn', 'archOverlay', 'archOverlayClose');
   setupOverlay('uaxOverlayBtn', 'uaxOverlay', 'uaxOverlayClose');
+  setupOverlay('pollerOverlayBtn', 'pollerOverlay', 'pollerOverlayClose');
 
   function urlOf(fieldId){ return document.getElementById(fieldId).value.replace(/\/$/,''); }
 
