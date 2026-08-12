@@ -166,9 +166,17 @@
   .arch-legend{
     margin-top:24px; padding-top:16px; border-top:1px solid var(--line);
     display:flex; flex-wrap:wrap; gap:10px 22px;
-    font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-soft);
+    font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink);
   }
   .arch-legend .item{display:flex; align-items:center; gap:7px;}
+  .arch-legend .badge{
+    font-family:"JetBrains Mono",monospace;
+    font-size:9px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:#fff;
+    border-color:transparent;
+  }
   @media (max-width:560px){
     .arch-overlay-card{padding:18px 16px 26px;}
     .arch-grid{grid-template-columns:1fr;}
@@ -252,37 +260,6 @@
   .panel-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
   .panel-head h2{font-size:15px;}
 
-  .quick-links{
-    margin-top:16px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:var(--r);
-    padding:14px 16px;
-  }
-  .quick-links-head{
-    font-family:"JetBrains Mono",monospace;
-    font-size:11px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    margin-bottom:10px;
-  }
-  .quick-links-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:10px;
-  }
-  .quick-link-card{
-    border:1px solid var(--line);
-    border-radius:8px;
-    background:var(--bg);
-    padding:10px 12px;
-  }
-  .quick-link-title{font-family:"Quicksand",sans-serif; font-weight:700; font-size:13px; margin:0 0 4px;}
-  .quick-link-card a{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--accent); text-decoration:none;}
-  .quick-link-card a:hover{text-decoration:underline;}
-  .quick-link-note{margin-top:8px; color:var(--ink-faint); font-size:11px;}
-
   /* ---------- Chat / Konsole (jetzt oben) ---------- */
   .tabs{display:flex; gap:6px; margin-bottom:14px;}
   .tab-btn{
@@ -349,8 +326,6 @@
   .grid-2{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
   @media (max-width:880px){.grid-2{grid-template-columns:1fr;}}
   .chart-note{font-size:11.5px; color:var(--ink-faint); margin-top:8px; line-height:1.6;}
-  #procChart{width:100%; max-height:220px;}
-
   .ki-links{display:flex; flex-direction:column; gap:12px;}
   .ki-card{border:1px solid var(--line); border-radius:8px; padding:12px 14px; background:var(--surface-2);}
   .ki-card .name{font-family:"Quicksand",sans-serif; font-weight:600; font-size:13.5px; margin-bottom:8px; color:var(--ink);}
@@ -360,6 +335,7 @@
     color:#fff; background:var(--accent); padding:6px 12px; border-radius:6px; font-weight:600;
   }
   .ki-card a.open-btn:hover{background:var(--accent-bright);}
+  .mt-8{margin-top:8px;}
 
   /* ---------- MCP panel ---------- */
   .mcp-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:18px;}
@@ -561,11 +537,12 @@
 </div>
 
 <nav class="topnav" aria-label="Inhaltsnavigation">
-  <a href="#thema-a"><b>A</b> · Agentenprotokolle</a>
-  <a href="#thema-b"><b>B</b> · ML &amp; Data Lake</a>
-  <a href="#thema-c"><b>C</b> · Datenhaltung</a>
-  <a href="#thema-d"><b>D</b> · Kommunikation</a>
-  <a href="#thema-e"><b>E</b> · Infrastruktur</a>
+  <a href="#thema-e"><b>A</b> · Infrastruktur</a>
+  <a href="#thema-b"><b>B</b> · Datenerhebung</a>
+  <a href="#thema-d"><b>C</b> · Kommunikation</a>
+  <a href="#thema-c"><b>D</b> · Datenhaltung und -analyse</a>
+  <a href="#thema-ml"><b>E</b> · Machine Learning</a>
+  <a href="#thema-a"><b>F</b> · Agentensysteme</a>
   <a href="#quiz">✎ Quiz</a>
   <a href="#technologien">Glossar</a>
 </nav>
@@ -577,56 +554,42 @@
   verbindet eine kurze Erklärung mit den echten, laufenden Systemen dahinter — Agent-Cards, Live-Daten,
   Konfigurationslinks. Am Ende wartet ein kleines Quiz, mit dem sich das Gelernte direkt überprüfen lässt.</p>
   <div class="topic-grid">
-    <a class="topic-card" href="#thema-a">
-      <div class="topic-letter bg-accent">A</div>
-      <div><div class="topic-title">Agentenprotokolle &amp; KI-Integration</div>
-      <div class="topic-desc">MCP · A2A · LAP · Agent Harness</div></div>
-    </a>
-    <a class="topic-card" href="#thema-b">
-      <div class="topic-letter bg-accent-2">B</div>
-      <div><div class="topic-title">Machine Learning &amp; Data Lake</div>
-      <div class="topic-desc">Neuronale Netze · YOLO · Lakehouse</div></div>
-    </a>
-    <a class="topic-card" href="#thema-c">
-      <div class="topic-letter bg-green">C</div>
-      <div><div class="topic-title">Datenhaltung</div>
-      <div class="topic-desc">MariaDB · Historian · Polyglot Persistence</div></div>
-    </a>
-    <a class="topic-card" href="#thema-d">
-      <div class="topic-letter bg-blue">D</div>
-      <div><div class="topic-title">Kommunikation &amp; Industrie 4.0</div>
-      <div class="topic-desc">MQTT · OPC-UA · Node-RED</div></div>
-    </a>
     <a class="topic-card" href="#thema-e">
-      <div class="topic-letter bg-ink-soft">E</div>
+      <div class="topic-letter bg-ink-soft">A</div>
       <div><div class="topic-title">Infrastruktur &amp; Hardware</div>
       <div class="topic-desc">Docker · Raspberry Pi · Arduino UNO Q</div></div>
     </a>
-  </div>
-
-  <div class="quick-links" aria-label="Schnellzugriff">
-    <div class="quick-links-head">Schnellzugriff</div>
-    <div class="quick-links-grid">
-      <div class="quick-link-card">
-        <p class="quick-link-title">Trainingsdaten für Aktustik-KI</p>
-        <a href="index.php" target="_blank" rel="noopener">Datenbankübersicht ↗</a>
-      </div>
-      <div class="quick-link-card">
-        <p class="quick-link-title">Arduino UNO Q · Akustik-KI</p>
-        <a id="akustikQuickOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
-      </div>
-      <div class="quick-link-card">
-        <p class="quick-link-title">Arduino UNO Q · YOLO-System</p>
-        <a id="yoloQuickOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
-      </div>
-    </div>
-    <div class="quick-link-note">Die Arduino-Links verwenden dieselben URL-Felder wie im Abschnitt „KI- &amp; Datenanalyse-Systeme“ weiter unten.</div>
+    <a class="topic-card" href="#thema-b">
+      <div class="topic-letter bg-accent-2">B</div>
+      <div><div class="topic-title">Datenerhebung</div>
+      <div class="topic-desc">Akustik · SPS-Tags · Rohdatenfluss</div></div>
+    </a>
+    <a class="topic-card" href="#thema-d">
+      <div class="topic-letter bg-blue">C</div>
+      <div><div class="topic-title">Kommunikation &amp; Industrie 4.0</div>
+      <div class="topic-desc">MQTT · OPC-UA · Node-RED</div></div>
+    </a>
+    <a class="topic-card" href="#thema-c">
+      <div class="topic-letter bg-green">D</div>
+      <div><div class="topic-title">Datenhaltung und -analyse</div>
+      <div class="topic-desc">MariaDB · InfluxDB · Grafana · Data Lake</div></div>
+    </a>
+    <a class="topic-card" href="#thema-ml">
+      <div class="topic-letter bg-accent">E</div>
+      <div><div class="topic-title">Machine Learning</div>
+      <div class="topic-desc">Arduino UNO Q · Anomalie-Detektor</div></div>
+    </a>
+    <a class="topic-card" href="#thema-a">
+      <div class="topic-letter bg-accent">F</div>
+      <div><div class="topic-title">Agentensysteme &amp; KI-Integration</div>
+      <div class="topic-desc">MCP · A2A · LAP · Agent Harness</div></div>
+    </a>
   </div>
 </section>
 
 <main>
 
-  <section class="panel" aria-labelledby="chatHeading">
+  <section class="panel" id="chatConsolePanel" aria-labelledby="chatHeading">
     <div class="panel-head"><h2 id="chatHeading">Chat &amp; Konsole</h2></div>
     <div class="tabs">
       <button class="tab-btn active" data-tab="llm">LLM-Chat</button>
@@ -652,7 +615,7 @@
           <div class="msg sys">Sendet eine Textnachricht per A2A (JSON-RPC "message/send") an den gewählten Agenten.</div>
         </div>
         <div class="chat-row">
-          <select id="agentSelect">
+          <select id="agentSelect" title="Agent auswählen" aria-label="Agent auswählen">
             <option value="urlOrchestrator">Orchestrator-Agent</option>
             <option value="urlDb">DB-Agent</option>
             <option value="urlReport">Report-Agent</option>
@@ -667,8 +630,8 @@
 
 <section class="theme-section" id="thema-a" aria-labelledby="thema-a-heading">
   <div class="theme-head">
-    <div class="theme-letter bg-accent">A</div>
-    <div><h2 id="thema-a-heading">Agentenprotokolle &amp; KI-Integration</h2>
+    <div class="theme-letter bg-accent">F</div>
+    <div><h2 id="thema-a-heading">Agentensysteme &amp; KI-Integration</h2>
     <div class="eyebrow">Agentensystem/</div></div>
   </div>
   <div class="info-box">
@@ -1124,75 +1087,140 @@
 <section class="theme-section" id="thema-b" aria-labelledby="thema-b-heading">
   <div class="theme-head">
     <div class="theme-letter bg-accent-2">B</div>
-    <div><h2 id="thema-b-heading">Machine Learning &amp; Data Lake</h2>
-    <div class="eyebrow">ArduinoUnoQ/, DataLake/</div></div>
+    <div><h2 id="thema-b-heading">Datenerhebung</h2>
+    <div class="eyebrow">ArduinoUnoQ/, Raspberry/nodered/, UAExpertExport/</div></div>
   </div>
   <div class="info-box b">
-    Das eigentliche Ziel der Datensammlung: ein <b>neuronales Netz</b> lernt auf dem Arduino UNO Q
-    selbst, zwischen „gut" und „schlecht" klingenden Aufnahmen zu unterscheiden — trainiert mit dem
-    <b>vollständigen Frequenzspektrum</b>, nicht nur einzelnen Kennwerten wie <code>peak_db</code>.
-    Das YOLO-System für die optische Kontrolle ist im aktuellen Ausbaustand bewusst als „geplant"
-    markiert. Daneben zeigt der <b>Data Lake</b>, wie große Datenmengen offen und nachvollziehbar
-    verwaltet werden: mit Nessie lassen sich Tabellen wie in Git branchen und versionieren, bevor man
-    sie mit Spark auswertet — „Git für Daten".
+    In diesem Schritt entstehen die Rohdaten: Akustikwerte vom Arduino UNO Q, später optische Signale
+    (YOLO-System) sowie SPS-Tags aus der Modellanlage via OPC-UA. Diese Daten werden im Takt erfasst,
+    über MQTT/Node-RED zusammengeführt und als Grundlage für spätere Auswertung und Modelle abgelegt.
   </div>
 
   <div class="panel">
-    <div class="panel-head"><h2>KI- &amp; Datenanalyse-Systeme</h2></div>
+    <div class="panel-head"><h2>Quellen der Datenerhebung</h2></div>
     <div class="ki-links ki-links-grid">
         <div class="ki-card">
-          <div class="name">🎤 Akustik-KI (Arduino UNO Q)</div>
-          <input id="akustikUrl" placeholder="http://&lt;arduino-ip&gt;">
-          <a class="open-btn" id="akustikOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+          <div class="name">🎤 Akustik-Sensorik</div>
+          <div class="chart-note">FFT-/Pegelwerte vom Arduino UNO Q als Grundlage für den späteren Anomalie-Detektor.</div>
         </div>
         <div class="ki-card">
-          <div class="name">📷 YOLO-System (Arduino UNO Q)</div>
-          <input id="yoloUrl" placeholder="http://&lt;arduino-ip&gt;">
-          <a class="open-btn" id="yoloOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
-        </div>
-        <div class="ki-card">
-          <div class="name">🪣 MinIO-Konsole (Data Lake)</div>
-          <input id="minioUrl" placeholder="http://&lt;data-lake-host&gt;:9092">
-          <a class="open-btn" id="minioOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
-        </div>
-        <div class="ki-card">
-          <div class="name">📓 Jupyter (Spark/Nessie)</div>
-          <input id="jupyterUrl" placeholder="http://&lt;data-lake-host&gt;:8888">
-          <a class="open-btn" id="jupyterOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+          <div class="name">🏭 SPS-/Anlagen-Signale</div>
+          <div class="chart-note">OPC-UA-Knoten aus der Modellanlage werden über Node-RED in den Telemetriefluss gebracht.</div>
         </div>
     </div>
-    <div class="chart-note">MinIO und Jupyter laufen auf dem separaten Data-Lake-Rechner (siehe <code>DataLake/README.md</code>), deshalb ohne Standardwert — Adresse einmal eintragen.</div>
+    <div class="chart-note">Die eigentliche Modellanwendung folgt im Abschnitt „Machine Learning" mit dem Übergang zum Anomalie-Poller und Agentensystem.</div>
+  </div>
+</section>
+
+<section class="theme-section" id="thema-ml" aria-labelledby="thema-ml-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-accent">E</div>
+    <div><h2 id="thema-ml-heading">Machine Learning</h2>
+    <div class="eyebrow">ArduinoUnoQ/, Agentensystem/anomalie_poller/</div></div>
+  </div>
+  <div class="info-box b">
+    Hier wird aus den erhobenen Akustikdaten ein Anomalie-Detektor abgeleitet: Muster aus dem
+    Spektrum werden bewertet und als Abweichungen markiert. Genau diese Erkennung ist die Brücke
+    zum operativen Teil: der <b>anomalie_poller</b> schreibt erkannte Fälle und übergibt sie an
+    die Agentenkette für Reaktion, Wartung und Reporting.
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Vergleich von ML-Verfahren</h2></div>
+    <div class="ki-links ki-links-grid">
+      <div class="ki-card">
+        <div class="name">📈 Lineare Regression</div>
+        <div class="chart-note">Vorteile: gut interpretierbar, schnell trainiert. Nachteile: nur lineare Zusammenhänge, empfindlich bei Ausreißern.</div>
+      </div>
+      <div class="ki-card">
+        <div class="name">📉 Logistische Regression</div>
+        <div class="chart-note">Vorteile: robuste Baseline für Klassifikation, Wahrscheinlichkeiten. Nachteile: lineare Entscheidungsgrenze, ggf. Feature-Engineering nötig.</div>
+      </div>
+      <div class="ki-card">
+        <div class="name">🌳 Entscheidungsbaum</div>
+        <div class="chart-note">Vorteile: leicht erklärbar, nichtlineare Regeln möglich. Nachteile: overfitting-anfällig, instabil bei kleinen Datenänderungen.</div>
+      </div>
+      <div class="ki-card">
+        <div class="name">📬 Naiver Bayes</div>
+        <div class="chart-note">Vorteile: sehr schnell, wenig Datenbedarf. Nachteile: Unabhängigkeitsannahme oft zu stark, bei korrelierten Features schwächer.</div>
+      </div>
+      <div class="ki-card">
+        <div class="name">📍 kNN</div>
+        <div class="chart-note">Vorteile: kein explizites Training, flexibel. Nachteile: langsam bei vielen Daten, skalenempfindlich und abhängig von k/Distanzmaß.</div>
+      </div>
+      <div class="ki-card">
+        <div class="name">🧪 Vergleichsumgebung (Orange3 &amp; Jupyter)</div>
+        <input id="orangeUrl" placeholder="http://datenkrake.local:6080" value="http://datenkrake.local:6080">
+        <a class="open-btn" id="orangeOpen" href="#" target="_blank" rel="noopener">Orange3 öffnen ↗</a>
+        <input class="mt-8" id="jupyterMlUrl" placeholder="http://&lt;data-lake-host&gt;:8888" value="http://datenkrake.local:8888">
+        <a class="open-btn mt-8" id="jupyterMlOpen" href="#" target="_blank" rel="noopener">Jupyter öffnen ↗</a>
+      </div>
+    </div>
+    <div class="chart-note"><b>Arbeitsauftrag:</b> Vergleicht die Verfahren auf unseren Akustikdaten (z. B. FFT-Bänder, peak_db, Label gut/schlecht). Begründet pro Verfahren, wann es für unsere Datenlage sinnvoll ist und wann nicht.</div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Akustik-KI &amp; Übergang zu Agenten</h2></div>
+    <div class="ki-links ki-links-grid">
+      <div class="ki-card">
+        <div class="name">🎤 Arduino UNO Q · Akustik-KI</div>
+        <input id="akustikUrl" placeholder="http://&lt;arduino-ip&gt;">
+        <a class="open-btn" id="akustikOpen" href="#" target="_blank" rel="noopener">Web-UI öffnen ↗</a>
+      </div>
+      <div class="ki-card">
+        <div class="name">🧠 Anomalie-Detektor → Agentensystem</div>
+        <div class="chart-note">Ablauf: Akustikdaten → Detektor/Schwellwertlogik → anomalie_poller → offene Anomalien → Orchestrator/Report/Wartung.</div>
+        <a class="open-btn" href="#thema-a">Weiter zu Agentensystemen ↗</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="theme-section" id="thema-c" aria-labelledby="thema-c-heading">
   <div class="theme-head">
-    <div class="theme-letter bg-green">C</div>
-    <div><h2 id="thema-c-heading">Datenhaltung</h2>
-    <div class="eyebrow">Raspberry/mariadb/, Raspberry/historian/</div></div>
+    <div class="theme-letter bg-green">D</div>
+    <div><h2 id="thema-c-heading">Datenhaltung und -analyse</h2>
+    <div class="eyebrow">Raspberry/mariadb/, Raspberry/historian/, DataLake/</div></div>
   </div>
   <div class="info-box c">
     Zwei Datenbanken für dieselben Messwerte — das wirkt zunächst seltsam, ist aber ein anerkanntes
     Prinzip: <b>Polyglot Persistence</b>. Die MariaDB bleibt die einzige <b>vollständige</b> Quelle
     (inklusive des kompletten Spektrums, das fürs Training gebraucht wird), der Operational Historian
-    daneben ist auf schnelle Zeitreihen-Abfragen optimiert. Für die aktuelle Anlagengröße mit einem
-    Sensor ist er noch nicht zwingend nötig — er zahlt sich aus, sobald weitere Sensoren oder Stationen
-    dazukommen.
+    daneben ist auf schnelle Zeitreihen-Abfragen optimiert. Für Analyse und Aufbereitung kommen zusätzlich
+    Grafana sowie der Data-Lake-Stack (MinIO, Nessie/Spark) zum Einsatz.
   </div>
 
-  <section class="grid-2">
+  <section>
     <div class="panel">
-      <div class="panel-head"><h2>Prozessdaten — peak_db (audio_spectrum)</h2></div>
-      <canvas id="procChart"></canvas>
-      <div class="chart-note">Demo-Daten mit einer eingebauten Anomalie zur Veranschaulichung — für echte Werte an eine Abfrage gegen die Datenkrake-DB anbinden (z. B. über den DB-Agent).</div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h2>Operational Historian</h2></div>
-      <div class="ki-links">
+      <div class="panel-head"><h2>Daten- und Analyse-Zugriffe</h2></div>
+      <div class="ki-links ki-links-grid">
+          <div class="ki-card">
+            <div class="name">🗃 Trainingsdaten für Akustik-KI (MariaDB)</div>
+            <a class="open-btn" href="Raspberry/web/index.php" target="_blank" rel="noopener">Datenübersicht öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">🗄 MariaDB-Übersicht</div>
+            <a class="open-btn" href="Raspberry/web/index.php" target="_blank" rel="noopener">Übersicht öffnen ↗</a>
+          </div>
         <div class="ki-card">
           <div class="name">📈 Operational Historian (InfluxDB)</div>
           <input id="historianUrl" placeholder="http://datenkrake.local:8086" value="http://datenkrake.local:8086">
-          <a class="open-btn" id="historianOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+            <a class="open-btn" id="historianOpen" href="#" target="_blank" rel="noopener">InfluxDB öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">📊 Grafana-Dashboards</div>
+            <input id="grafanaUrl" placeholder="http://datenkrake.local:3000" value="http://datenkrake.local:3000/d/opcua-stationen-live/opc-ua-stationen-live">
+            <a class="open-btn" id="grafanaOpen" href="#" target="_blank" rel="noopener">Grafana öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">🪣 MinIO-Konsole (Data Lake)</div>
+            <input id="minioUrl" placeholder="http://&lt;data-lake-host&gt;:9092">
+            <a class="open-btn" id="minioOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">📓 Jupyter (Spark/Nessie)</div>
+            <input id="jupyterUrl" placeholder="http://&lt;data-lake-host&gt;:8888">
+            <a class="open-btn" id="jupyterOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
         </div>
       </div>
     </div>
@@ -1201,7 +1229,7 @@
 
 <section class="theme-section" id="thema-d" aria-labelledby="thema-d-heading">
   <div class="theme-head">
-    <div class="theme-letter bg-blue">D</div>
+    <div class="theme-letter bg-blue">C</div>
     <div><h2 id="thema-d-heading">Kommunikation &amp; Industrie 4.0</h2>
     <div class="eyebrow">Raspberry/mosquitto/, Raspberry/nodered/</div></div>
   </div>
@@ -1481,7 +1509,7 @@
 
 <section class="theme-section" id="thema-e" aria-labelledby="thema-e-heading">
   <div class="theme-head">
-    <div class="theme-letter bg-ink-soft">E</div>
+    <div class="theme-letter bg-ink-soft">A</div>
     <div><h2 id="thema-e-heading">Infrastruktur &amp; Hardware</h2>
     <div class="eyebrow">Raspberry/compose/, ArduinoUnoQ/</div></div>
   </div>
@@ -1656,10 +1684,9 @@
 </div>
 
 <footer>
-  <a href="index.php">← zurück zum Live-Dashboard</a> · Datenkrake Leitstand · Jakob-Preh-Schule · statische HTML-Seite, keine Daten verlassen euer Netz · gebaut auf <a href="https://github.com/FlowTheTensor/Datenkrake-Container" target="_blank" rel="noopener">github.com/FlowTheTensor/Datenkrake-Container</a>
+  <a href="Raspberry/web/index.php">← zurück zum Live-Dashboard</a> · Datenkrake Leitstand · Jakob-Preh-Schule · statische HTML-Seite, keine Daten verlassen euer Netz · gebaut auf <a href="https://github.com/FlowTheTensor/Datenkrake-Container" target="_blank" rel="noopener">github.com/FlowTheTensor/Datenkrake-Container</a>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -1715,19 +1742,54 @@
 
   function urlOf(fieldId){ return document.getElementById(fieldId).value.replace(/\/$/,''); }
 
+  /* ---------------- Reihenfolge der Themenblöcke ---------------- */
+  (function reorderThemeSections(){
+    var main = document.querySelector('main');
+    var themaA = document.getElementById('thema-a');
+    var themaB = document.getElementById('thema-b');
+    var themaC = document.getElementById('thema-c');
+    var themaD = document.getElementById('thema-d');
+    var themaE = document.getElementById('thema-e');
+    var themaML = document.getElementById('thema-ml');
+    var quiz = document.getElementById('quiz');
+    var chatPanel = document.getElementById('chatConsolePanel');
+    if(!main || !themaA || !themaB || !themaC || !themaD || !themaE || !themaML || !quiz) return;
+
+    if(chatPanel){
+      var infoA = themaA.querySelector('.info-box');
+      if(infoA){
+        infoA.insertAdjacentElement('afterend', chatPanel);
+      }
+    }
+
+    var archPanel = themaA.querySelector('section[aria-labelledby="archHeading"]');
+    var netPanel = themaE.querySelector('.panel');
+    if(archPanel && netPanel){
+      themaE.insertBefore(archPanel, netPanel);
+    }
+
+    main.insertBefore(themaE, quiz);
+    main.insertBefore(themaB, quiz);
+    main.insertBefore(themaD, quiz);
+    main.insertBefore(themaC, quiz);
+    main.insertBefore(themaML, quiz);
+    main.insertBefore(themaA, quiz);
+  })();
+
   /* ---------------- KI-System links ---------------- */
   function wireKiLink(inputId, linkId){
     var input = document.getElementById(inputId);
     var link = document.getElementById(linkId);
+    if(!input || !link) return;
     function update(){ link.href = input.value || '#'; }
     input.addEventListener('input', update);
     update();
   }
   wireKiLink('akustikUrl','akustikOpen');
-  wireKiLink('yoloUrl','yoloOpen');
-  wireKiLink('akustikUrl','akustikQuickOpen');
-  wireKiLink('yoloUrl','yoloQuickOpen');
+  wireKiLink('orangeUrl','orangeOpen');
+  wireKiLink('jupyterMlUrl','jupyterMlOpen');
   wireKiLink('historianUrl','historianOpen');
+  wireKiLink('grafanaUrl','grafanaOpen');
   wireKiLink('noderedUrl','noderedOpen');
   wireKiLink('minioUrl','minioOpen');
   wireKiLink('jupyterUrl','jupyterOpen');
@@ -1776,16 +1838,16 @@
 
   /* ---------------- Quiz ---------------- */
   var QUIZ = [
-    {cat:'A', color:'#C81E3A', q:'Was verbindet MCP typischerweise?',
+    {cat:'E', color:'#C81E3A', q:'Was verbindet MCP typischerweise?',
      options:['Zwei Agenten miteinander','Ein Sprachmodell mit Werkzeugen/Daten','Zwei Datenbanken miteinander','Einen Menschen mit einem anderen Menschen'],
      correct:1, exp:'MCP ist die "vertikale" Kante: ein Modell greift auf Tools/Resources/Prompts eines Servers zu — z.B. Claude Desktop auf mcpserver.py.'},
-    {cat:'A', color:'#C81E3A', q:'Wodurch entdeckt ein A2A-Agent die Fähigkeiten eines anderen Agenten?',
+    {cat:'E', color:'#C81E3A', q:'Wodurch entdeckt ein A2A-Agent die Fähigkeiten eines anderen Agenten?',
      options:['Über eine feste IP-Adressliste','Über ein MQTT-Topic','Über eine Agent Card unter /.well-known/agent-card.json','Über eine SQL-Abfrage'],
      correct:2, exp:'Die Agent Card ist das öffentliche "Türschild" eines A2A-Agenten mit seinen Skills.'},
-    {cat:'A', color:'#C81E3A', q:'Wozu dient der Safety-Fence-Mechanismus in LAP?',
+    {cat:'E', color:'#C81E3A', q:'Wozu dient der Safety-Fence-Mechanismus in LAP?',
      options:['Er verschlüsselt die Verbindung','Er holt vor gefährlichen/irreversiblen Aktionen eine Bestätigung ein','Er reserviert Speicherplatz','Er startet den Container neu'],
      correct:1, exp:'Bevor eine als gefährlich markierte Aktion ausgeführt wird, muss sie explizit bestätigt werden — siehe Wartungs-Agent.'},
-    {cat:'A', color:'#C81E3A', q:'Was macht ein "Agent Harness" konkret?',
+    {cat:'E', color:'#C81E3A', q:'Was macht ein "Agent Harness" konkret?',
      options:['Er trainiert das neuronale Netz','Er speichert Messwerte in der Datenbank','Er verschickt MQTT-Nachrichten','Er wechselt zwischen LLM-Aufruf und Tool-Ausführung ab, bis das Modell fertig ist'],
      correct:3, exp:'Genau diese Schleife macht aus einem rohen Sprachmodell etwas, das selbstständig Werkzeuge nutzen kann.'},
 
@@ -1802,39 +1864,39 @@
      options:['Kein Netzwerkzugang','Spark/Jupyter sind zu ressourcenhungrig für den Pi','MinIO läuft nur auf x86','Der Pi unterstützt kein Docker'],
      correct:1, exp:'Deshalb läuft der Stack als eigener Compose-Stack auf einem separaten, stärkeren Rechner.'},
 
-    {cat:'C', color:'#2F6B4F', q:'Was speichert der Operational Historian (InfluxDB) bewusst NICHT?',
+    {cat:'D', color:'#2F6B4F', q:'Was speichert der Operational Historian (InfluxDB) bewusst NICHT?',
      options:['Den Zeitstempel','Das vollständige FFT-Spektrum-Array','Den peak_db-Wert','Das Label'],
      correct:1, exp:'Zeitreihen-Datenbanken sind für skalare Werte optimiert, nicht für große verschachtelte Strukturen.'},
-    {cat:'C', color:'#2F6B4F', q:'Wie nennt man das Prinzip, bewusst mehrere Datenbanktypen parallel einzusetzen?',
+    {cat:'D', color:'#2F6B4F', q:'Wie nennt man das Prinzip, bewusst mehrere Datenbanktypen parallel einzusetzen?',
      options:['Sharding','Normalisierung','Replikation','Polyglot Persistence'],
      correct:3, exp:'Ein etabliertes Architekturprinzip, kein Sonderfall dieses Projekts.'},
-    {cat:'C', color:'#2F6B4F', q:'Welche Datenbank bleibt die einzige VOLLSTÄNDIGE Quelle für Trainingsdaten?',
+    {cat:'D', color:'#2F6B4F', q:'Welche Datenbank bleibt die einzige VOLLSTÄNDIGE Quelle für Trainingsdaten?',
      options:['InfluxDB','MinIO','MariaDB','Nessie'],
      correct:2, exp:'Nur dort liegen Label UND vollständiges Spektrum zusammen.'},
-    {cat:'C', color:'#2F6B4F', q:'Ab wann lohnt sich ein Operational Historian laut Projekt-Einschätzung wirklich?',
+    {cat:'D', color:'#2F6B4F', q:'Ab wann lohnt sich ein Operational Historian laut Projekt-Einschätzung wirklich?',
      options:['Sofort, unabhängig von der Anlagengröße','Erst bei mehreren Sensoren/Stationen, hoher Frequenz oder Bedarf an Datenalterung','Nie, er ist überflüssig','Nur ohne SQL-Datenbank'],
      correct:1, exp:'Für einen einzelnen Sensor ist er aktuell eher Lerninhalt als operative Notwendigkeit.'},
 
-    {cat:'D', color:'#2A5F8A', q:'Welches Kommunikationsmuster nutzt MQTT?',
+    {cat:'C', color:'#2A5F8A', q:'Welches Kommunikationsmuster nutzt MQTT?',
      options:['Publish/Subscribe','Request/Response','Peer-to-Peer-Streaming','Broadcast ohne Empfänger'],
      correct:0, exp:'Der Sender weiß nicht, wer (oder ob überhaupt jemand) mithört.'},
-    {cat:'D', color:'#2A5F8A', q:'Was macht Node-RED in diesem Projekt?',
+    {cat:'C', color:'#2A5F8A', q:'Was macht Node-RED in diesem Projekt?',
      options:['Es trainiert neuronale Netze','Es liest OPC-UA-Tags und veröffentlicht sie per MQTT','Es ist die Hauptdatenbank','Es ersetzt Mosquitto'],
      correct:1, exp:'Eine Low-Code-Brücke zwischen SPS-Welt (OPC-UA) und IoT-Welt (MQTT).'},
-    {cat:'D', color:'#2A5F8A', q:'Welches Protokoll ist der klassische Industriestandard für Maschinenkommunikation?',
+    {cat:'C', color:'#2A5F8A', q:'Welches Protokoll ist der klassische Industriestandard für Maschinenkommunikation?',
      options:['MQTT','HTTP','OPC-UA','FTP'],
      correct:2, exp:'S7-1500/ET200SP & Co. sprechen typischerweise OPC-UA.'},
-    {cat:'D', color:'#2A5F8A', q:'Auf welchem MQTT-Topic-Namensraum landen die aus OPC-UA gelesenen SPS-Werte?',
+    {cat:'C', color:'#2A5F8A', q:'Auf welchem MQTT-Topic-Namensraum landen die aus OPC-UA gelesenen SPS-Werte?',
      options:['audio/spectrum','sensor/data','opcua/raw','plc/<station>/<tag>'],
      correct:3, exp:'Bewusst getrennt vom bestehenden audio/spectrum-Topic.'},
 
-    {cat:'E', color:'#5B5852', q:'Warum laufen die Dienste dieses Projekts in Docker-Containern?',
+    {cat:'A', color:'#5B5852', q:'Warum laufen die Dienste dieses Projekts in Docker-Containern?',
      options:['Pflicht unter Raspberry Pi OS','Für Isolation und reproduzierbare Installation','Weil Python das erfordert','Um Strom zu sparen'],
      correct:1, exp:'Jeder Dienst läuft unabhängig vom restlichen System — leicht neu aufsetzbar.'},
-    {cat:'E', color:'#5B5852', q:'Was ist die Besonderheit des Arduino UNO Q gegenüber einem klassischen Arduino?',
+    {cat:'A', color:'#5B5852', q:'Was ist die Besonderheit des Arduino UNO Q gegenüber einem klassischen Arduino?',
      options:['Mehr USB-Ports','Er hat einen Linux-Teil und kann selbst KI-Inferenz rechnen','Nur für Audio gebaut','Er braucht kein Netzwerk'],
      correct:1, exp:'Genau das macht ihn zum Beispiel für Edge AI in diesem Projekt.'},
-    {cat:'E', color:'#5B5852', q:'Welche Rolle spielt der Raspberry Pi in der Gesamtarchitektur?',
+    {cat:'A', color:'#5B5852', q:'Welche Rolle spielt der Raspberry Pi in der Gesamtarchitektur?',
      options:['Nur ein Backup-Gerät','Der zentrale Edge-Server (Broker, DB, Historian, Webserver)','Er trainiert das neuronale Netz','Er ersetzt Claude Desktop'],
      correct:1, exp:'Die "Datenkrake" bündelt hier alle zentralen Dienste an einer Stelle.'}
   ];
@@ -1967,47 +2029,6 @@
   loadCards();
   ['urlOrchestrator','urlDb','urlReport','urlWartung'].forEach(function(id){
     document.getElementById(id).addEventListener('change', loadCards);
-  });
-
-  /* ---------------- Prozessdaten-Chart (Demo) ---------------- */
-  function demoSeries(){
-    var labels = [], values = [], anomalyIdx = 42;
-    var t = new Date(); t.setMinutes(t.getMinutes() - 60);
-    for (var i=0;i<60;i++){
-      var ts = new Date(t.getTime() + i*60000);
-      labels.push(ts.getHours()+':'+String(ts.getMinutes()).padStart(2,'0'));
-      var base = -32 + Math.sin(i/7)*1.5 + (Math.random()-0.5)*1.2;
-      if (i===anomalyIdx) base += 9.5;
-      values.push(Math.round(base*100)/100);
-    }
-    return {labels:labels, values:values, anomalyIdx:anomalyIdx};
-  }
-  var series = demoSeries();
-  var ctx = document.getElementById('procChart').getContext('2d');
-  new Chart(ctx, {
-    type:'line',
-    data:{
-      labels:series.labels,
-      datasets:[{
-        label:'peak_db',
-        data:series.values,
-        borderColor:'#C81E3A',
-        backgroundColor:'rgba(200,30,58,0.06)',
-        pointRadius:series.values.map(function(_,i){return i===series.anomalyIdx?5:0;}),
-        pointBackgroundColor:'#E4002B',
-        borderWidth:1.6,
-        tension:0.25,
-        fill:true
-      }]
-    },
-    options:{
-      responsive:true,
-      plugins:{ legend:{display:false} },
-      scales:{
-        x:{ ticks:{ color:'#7D7A72', maxTicksLimit:8, font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#E7E1D6' } },
-        y:{ ticks:{ color:'#7D7A72', font:{family:'JetBrains Mono', size:10} }, grid:{ color:'#E7E1D6' } }
-      }
-    }
   });
 
   /* ---------------- Tabs ---------------- */

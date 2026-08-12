@@ -112,6 +112,18 @@ services:
       historian:
         condition: service_started
 
+  # --- ML-Vergleich (Orange3) --------------------------------------------
+  # Interaktive Orange3-Umgebung fuer den Unterricht. Zugriff per Browser
+  # ueber noVNC auf Port 6080.
+  orange3:
+    image: biolab/orange3:latest
+    container_name: orange3
+    restart: unless-stopped
+    ports:
+      - "6080:6080"
+    volumes:
+      - ../orange3/data:/root/.local/share/orange3
+
   # --- OPC-UA -> Node-RED -> MQTT -----------------------------------------
   # Node-RED liest Tags von einem OPC-UA-Server (S7-1500/ET200SP) und
   # veröffentlicht sie als JSON auf dem bestehenden Mosquitto-Broker.
