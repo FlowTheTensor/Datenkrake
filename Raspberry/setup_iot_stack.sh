@@ -53,11 +53,12 @@ prepare_directories() {
     cp "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf"
   fi
 
-  # Node-RED läuft mit --userDir /data (Bind-Mount) - eine ins Image kopierte
-  # flows.json würde davon überdeckt. Die Vorlage deshalb hier einmalig an
-  # den tatsächlichen userDir-Pfad kopieren, wenn dort noch keine existiert.
-  if [[ ! -f "${SCRIPT_DIR}/nodered/data/flows.json" ]] && [[ -f "${SCRIPT_DIR}/nodered/flows/flows.json" ]]; then
-    cp "${SCRIPT_DIR}/nodered/flows/flows.json" "${SCRIPT_DIR}/nodered/data/flows.json"
+  # Node-RED läuft mit --userDir /data (Bind-Mount). Für den produktiven
+  # Anlagen-Flow werden die Nodes aus NodesAuswahl.txt automatisch geladen.
+  # Nur bei einer leeren Datenablage darf die Vorlage installiert werden,
+  # damit ein erneuter Setup-Lauf keine bestehenden Flows überschreibt.
+  if [[ ! -f "${SCRIPT_DIR}/nodered/data/flows.json" ]] && [[ -f "${SCRIPT_DIR}/nodered/flows/flows_nodesauswahl.json" ]]; then
+    cp "${SCRIPT_DIR}/nodered/flows/flows_nodesauswahl.json" "${SCRIPT_DIR}/nodered/data/flows.json"
   fi
 
   # Node-Auswahlliste fuer den dynamischen OPC-UA->MQTT-Flow bereitstellen.
@@ -91,7 +92,7 @@ post_install_notes() {
   echo "MQTT broker, database and web server are starting via docker compose."
   echo "Next steps:"
   echo "  - Verify containers with: (cd ${COMPOSE_DIR} && docker compose ps)"
-  echo "  - Access the web interface at: http://localhost:8080"
+  echo "  - Access the web interface at: http://localhost"
   if [[ ${NEED_RELOGIN} -eq 1 ]]; then
     echo "  - Log out and back in so ${TARGET_USER} can use docker without sudo."
   fi
@@ -129,4 +130,5 @@ EOF
 install_docker
 prepare_directories
 build_and_start
+setup_systemd_service
 post_install_notes
