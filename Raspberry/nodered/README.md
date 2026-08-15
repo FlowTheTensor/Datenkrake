@@ -88,7 +88,7 @@ Eigenschaften:
 - fragt alle dort gelisteten Node-IDs zyklisch ab,
 - sendet nur Wertaenderungen (`rbe`) per MQTT nach `plc/<station>/<tag>`.
 - legt die OPC-UA-Endpoints fuer die in der Datei verwendeten IPs an
-   (`192.168.36.2:4840` bis `192.168.36.10:4840`) und nutzt Login mit
+   (`192.168.36.1:4840` bis `192.168.36.10:4840`) und nutzt Login mit
    Benutzer `MES` und Passwort `training`.
 
 Import in Node-RED:

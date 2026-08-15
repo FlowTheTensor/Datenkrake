@@ -595,7 +595,8 @@
             "Presse",
             "Palettenlager 2",
             "Transfersystem Roboter",
-            "Transfersystem Hochregallager"
+            "Transfersystem Hochregallager",
+            "Leitstand"
           ],
           "value": [
             "palettenlager1",
@@ -606,10 +607,11 @@
             "presse",
             "palettenlager2",
             "transfersystem_roboter",
-            "teansfersystem_hochregallager"
+            "teansfersystem_hochregallager",
+            "leitstand"
           ]
         },
-        "definition": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "definition": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager,Leitstand : leitstand",
         "hide": 2,
         "includeAll": true,
         "label": "Stationen alle",
@@ -660,9 +662,14 @@
             "selected": true,
             "text": "Transfersystem Hochregallager",
             "value": "teansfersystem_hochregallager"
+          },
+          {
+            "selected": true,
+            "text": "Leitstand",
+            "value": "leitstand"
           }
         ],
-        "query": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "query": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager,Leitstand : leitstand",
         "refresh": 0,
         "regex": "",
         "skipUrlSync": false,
@@ -675,7 +682,7 @@
           "text": "Abfüllen",
           "value": "abf_llen"
         },
-        "definition": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "definition": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager,Leitstand : leitstand",
         "hide": 0,
         "includeAll": false,
         "label": "Station",
@@ -726,9 +733,14 @@
             "selected": false,
             "text": "Transfersystem Hochregallager",
             "value": "teansfersystem_hochregallager"
+          },
+          {
+            "selected": false,
+            "text": "Leitstand",
+            "value": "leitstand"
           }
         ],
-        "query": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager",
+        "query": "Palettenlager 1 : palettenlager1,Rohlager Dosen : rohlager_dosen,Abfüllen : abf_llen,Qualität Kamera : qualit_t_kamera,Handling Saugarm : handling_saugarm,Presse : presse,Palettenlager 2 : palettenlager2,Transfersystem Roboter : transfersystem_roboter,Transfersystem Hochregallager : teansfersystem_hochregallager,Leitstand : leitstand",
         "refresh": 0,
         "regex": "",
         "skipUrlSync": false,

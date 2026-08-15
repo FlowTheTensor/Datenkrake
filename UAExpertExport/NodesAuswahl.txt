@@ -1,3 +1,17 @@
+# Leitstand
+192.168.36.1:4840	ns=3;s="dbHMI"."uiHMIKugelnBlau"    UInt16
+192.168.36.1:4840	ns=3;s="dbHMI"."uiHMIKugelnGruen"   UInt16
+192.168.36.1:4840	ns=3;s="dbHMI"."uiHMIKugelnRot" UInt16
+192.168.36.1:4840	ns=3;s="dbHMI"."uiSeriennummer" UInt16
+192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Auftragsnummer"    Int16
+192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Farbe" Byte
+192.168.36.1:4840	ns=3;s="dbMESLeitstand"."Inhalt"    Byte
+192.168.36.1:4840	ns=3;s="dbMESLeitstand"."MengeInhalt1"  UInt16
+192.168.36.1:4840	ns=3;s="dbMESLeitstand"."MengeInhalt2"  UInt16
+192.168.36.1:4840	ns=3;s="dbMESLeitstand"."MengeInhalt3"  UInt16
+192.168.36.1:4840	ns=3;s="dbTransferV2"."xHMIProduktFehlerhaft"   Boolean
+192.168.36.1:4840	ns=3;s="dbTransferV2"."xHMIProduktOK"   Boolean
+
 # Palettenlager1
 192.168.36.2:4840	ns=3;s="+AL-BG1_Bandsensor_Links"	Boolean
 192.168.36.2:4840	ns=3;s="+AL-BG2_Bandsensor_Rechts"	Boolean
