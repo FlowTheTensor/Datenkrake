@@ -466,10 +466,14 @@
   .quiz-score-bar .score{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--ink);}
   .quiz-topic{margin:24px 0 12px;}
   .quiz-topic:first-child{margin-top:0;}
-  .quiz-topic-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding-bottom:7px; border-bottom:1px solid var(--line);}
+  .quiz-topic summary{display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--line); cursor:pointer; list-style:none;}
+  .quiz-topic summary::-webkit-details-marker{display:none;}
+  .quiz-topic summary:before{content:'+'; width:18px; color:var(--accent); font-family:"JetBrains Mono",monospace; font-size:16px; line-height:1;}
+  .quiz-topic[open] summary:before{content:'−';}
+  .quiz-topic summary:focus-visible{outline-offset:4px;}
   .quiz-topic-title{font-family:"Quicksand",sans-serif; font-size:17px;}
   .quiz-topic-score{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-faint); white-space:nowrap;}
-  .quiz-topic-list{display:flex; flex-direction:column; gap:12px; margin-top:12px;}
+  .quiz-topic-list{display:flex; flex-direction:column; gap:12px; margin-top:12px; padding-bottom:4px;}
 
   /* Schwebende Punktzahl, die während des Quiz am Rand mitscrollt */
   .quiz-float{
@@ -2111,25 +2115,25 @@
   ];
 
   var QUIZ_TOPICS = {
-    E:'Agentensysteme & KI-Integration',
-    F:'Datenerhebung',
+    A:'Infrastruktur & Hardware',
     B:'Machine Learning',
-    D:'Datenhaltung und -analyse',
     C:'Kommunikation & Industrie 4.0',
-    A:'Infrastruktur & Hardware'
+    D:'Datenhaltung und -analyse',
+    E:'Agentensysteme & KI-Integration',
+    F:'Datenerhebung'
   };
 
   function renderQuiz(){
     var container = document.getElementById('quizList');
     container.innerHTML = '';
-    var topicOrder = ['E','F','B','D','C','A'];
+    var topicOrder = ['A','B','C','D','E','F'];
     topicOrder.forEach(function(cat){
-      var topic = document.createElement('section');
+      var topic = document.createElement('details');
       topic.className = 'quiz-topic';
       topic.dataset.cat = cat;
-      topic.innerHTML = '<div class="quiz-topic-head">'+
+      topic.innerHTML = '<summary>'+ 
         '<h3 class="quiz-topic-title quiz-cat-'+cat.toLowerCase()+'">'+QUIZ_TOPICS[cat]+'</h3>'+
-        '<span class="quiz-topic-score" id="quizTopicScore'+cat+'">0 von 0 richtig</span></div>'+
+        '<span class="quiz-topic-score" id="quizTopicScore'+cat+'">0 von 0 richtig</span></summary>'+ 
         '<div class="quiz-topic-list"></div>';
       var topicList = topic.querySelector('.quiz-topic-list');
       QUIZ.forEach(function(item, qi){
@@ -2141,7 +2145,6 @@
             '<input type="radio" name="q'+qi+'" value="'+oi+'"> <span>'+opt+'</span></label>';
         }).join('');
         card.innerHTML =
-          '<div class="quiz-cat quiz-cat-'+item.cat.toLowerCase()+'">Thema '+item.cat+'</div>'+
           '<div class="quiz-q">'+item.q+'</div>'+
           '<div class="quiz-opts">'+optsHtml+'</div>'+
           '<div class="quiz-exp" id="exp'+qi+'" hidden></div>';
