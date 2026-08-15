@@ -1,63 +1,157 @@
-# OPC-UA-Dokumentations-Overlay: Bundle
+# Datenkrake — Agentensystem (MCP · A2A · LAP)
 
-Ergänzt `leitstand.html` (Branch `feature/agentensystem-mcp-a2a-lap`) um ein
-zweites Overlay für `UAExpertExport/Dokumentation_OPC_UA_Stationen.md`.
+Dieser Branch (`feature/agentensystem-mcp-a2a-lap`) baut auf dem
+IoT-Grundstack der Datenkrake auf (Audioerfassung, MQTT, MariaDB,
+Web-Dashboard) und erweitert ihn um eine industrielle SPS-Anbindung
+(OPC-UA/Node-RED), einen Operational Historian, einen Data-Lake-Stack
+sowie ein **Agentensystem**, das drei KI-Agentenprotokolle an einer
+realen Lernanlage demonstriert:
 
-## Inhalt
+- **MCP** (Model Context Protocol) — verbindet ein Sprachmodell (Claude
+  Desktop) mit Werkzeugen und Daten.
+- **A2A** (Agent-to-Agent) — verbindet eigenständige Agenten
+  miteinander (Orchestrator delegiert an DB- und Report-Agent).
+- **LAP** (Local Agent Protocol) — verbindet einen Agenten mit einem
+  physischen Zusatzgerät (Wartungs-Agent), inklusive expliziter
+  Sicherheitsbestätigung vor jeder Aktion.
+- **Agent Harness** — die Tool-Aufruf-Schleife, die aus einem rohen
+  Sprachmodell (lokal via LM Studio) überhaupt erst einen Agenten macht.
 
-- **`leitstand.html`** – fertige Datei, ersetzt die aktuelle im Repo-Root.
-- **`uax-overlay.patch`** – reiner `git diff`, getestet gegen einen frischen
-  Klon von `feature/agentensystem-mcp-a2a-lap` (`git apply --check` lief
-  sauber durch).
+Die interaktive Dokumentation und der Live-Leitstand liegen in
+[`leitstand.html`](leitstand.html): Architekturdiagramme, Agenten-Konsole,
+Vergleich der ML-Verfahren, OPC-UA-Signaldokumentation der Modellanlage
+und ein Quiz zum Gelernten — jeweils mit Verweisen auf die zugehörigen
+Ordner im Repo.
 
-## Anwenden
+![Unterrichtsthemen der Datenkrake: Agentenprotokolle & KI-Integration, Machine Learning & Datenanalyse, Datenhaltung, Kommunikation & Industrie 4.0, Infrastruktur & Hardware](Images/unterrichtsthemen.svg)
 
-```bash
-# Variante A – Datei ersetzen
-cp leitstand.html /pfad/zu/deinem/repo/leitstand.html
+*Themen auf einen Blick — hier in fünf Blöcken gebündelt; im Leitstand
+(siehe unten) ist „Datenerhebung" als eigener, sechster Themenblock
+zusätzlich ausdifferenziert.*
 
-# Variante B – Patch einspielen
-cd /pfad/zu/deinem/repo
-git apply /pfad/zu/uax-overlay.patch
-git add leitstand.html && git commit -m "OPC-UA-Dokumentations-Overlay ergänzt"
+## Systemvoraussetzungen (Hardware)
+
+| Komponente | Mindestanforderung | Wofür |
+| --- | --- | --- |
+| **Raspberry Pi** | Modell 4/5, 4 GB RAM oder mehr, Raspberry Pi OS (64-Bit) | zentraler Edge-Server: Docker-Stack mit MQTT, MariaDB, InfluxDB, Node-RED, Web-Dashboard |
+| **SD-Karte** | mind. 16 GB (mehr für längeres Logging) | Systemlaufwerk des Pi |
+| **SSD (M.2, passend zum Pi)** | empfohlen, z. B. per M.2-HAT/USB3 | InfluxDB schreibt sehr häufig kleine Datenpunkte; auf einer SD-Karte nutzt das die Flash-Zellen spürbar stärker ab und ist langsamer als auf einer SSD. Für Dauerbetrieb daher ratsam, zumindest für `Raspberry/historian/` und die Docker-Volumes |
+| **Internetverbindung** | für den Pi während der Installation | Docker-Installation, Image-Pull |
+| **Arduino UNO Q** | mit USB-Mikrofon/Webcam | Audio-Erfassung, FFT, lokale KI-Inferenz (Edge AI); Anschluss nur über PD-fähige Dockingstation, siehe Reihenfolge unten |
+| **SPS-Modellanlage** (optional) | z. B. S7-1500/ET200SP mit OPC-UA-Freigabe, 10 Stationen im Anlagen-Netz `192.168.36.0/24` | reale Prozesswerte via OPC-UA → Node-RED. Ohne echte Anlage übernimmt der mitgelieferte `opcua_demo_server` einen simulierten Tag |
+| **Windows-/Linux-PC oder Laptop** | mit Claude Desktop | MCP-Client, Anzeige des Leitstands, Bedienung der Agenten-Konsole |
+| **Optionaler zweiter Rechner** (Schulserver/Lehrer-PC) | mehrere GB freier RAM | eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) — bewusst **nicht** auf dem Pi, da deutlich ressourcenhungriger |
+| **LM Studio** (optional) | beliebiger Rechner mit genug RAM/VRAM für ein lokales LLM | Agent Harness (lokales Sprachmodell statt Claude) |
+| **Netzwerk** | Ethernet zum Anlagen-Netz + optional WLAN als Client in ein bestehendes DMZ-Netz | Pi verbindet Anlagen-Netz und DMZ, ist dabei aber **kein eigener Access Point** |
+
+Beim Anschluss von USB-Mikrofon/Webcam über eine Dockingstation auf
+Reihenfolge achten: **zuerst** Dockingstation an Strom, **dann** Webcam an
+die Dockingstation, **zuletzt** Arduino UNO Q an die Dockingstation — erst
+dann meldet sich die Dockingstation korrekt als USB-Hub/Host an.
+
+## Schnellstart: Klonen, Installieren, Updaten
+
+1. **Repository auf den Raspberry Pi klonen:**
+
+   ```bash
+   git clone --branch feature/agentensystem-mcp-a2a-lap https://github.com/FlowTheTensor/Datenkrake-Container.git
+   cd Datenkrake-Container
+   ```
+
+2. **Erstinstallation** — Setup-Skript im Ordner `Raspberry/` mit Root-Rechten ausführen:
+
+   ```bash
+   cd Raspberry
+   sudo ./setup_iot_stack.sh
+   ```
+
+   Das Skript installiert Docker und Docker Compose (falls nicht
+   vorhanden), legt die benötigten Verzeichnisse/Volumes an, baut die
+   Container-Images und startet den kompletten Stack.
+
+3. **Bestehende Installation aktualisieren** — nach einem `git pull` auf
+   dem Pi im selben Ordner:
+
+   ```bash
+   sudo ./update_iot_stack.sh
+   ```
+
+   Aktualisiert Container-Images, spielt neue (wiederholbare)
+   MariaDB-Schema-Änderungen ein und aktualisiert die Node-RED-Eingabeliste,
+   ohne bestehende Daten oder aktive Node-RED-Flows zu überschreiben.
+   Mit `--sync-nodered-flow` wird zusätzlich die im Repo mitgelieferte
+   Flow-Vorlage aktiviert (vorheriges Backup des Node-RED-Datenordners
+   inklusive).
+
+4. **Web-Oberflächen öffnen:**
+   - `http://datenkrake.local` — Leitstand (`leitstand.html`, siehe unten)
+   - `http://datenkrake.local/index.php` — bisheriges Audio-Live-Dashboard
+   - `http://datenkrake.local:1880` — Node-RED-Editor
+
+   Container-Status lässt sich jederzeit mit `docker compose ps` im Ordner
+   `Raspberry/compose` prüfen.
+
+5. **Agentensystem aktivieren** (optional, siehe
+   [`Agentensystem/README.md`](Agentensystem/README.md) für Details):
+   - `.env` aus `Agentensystem/.env.example` anlegen und anpassen.
+   - Python-Umgebung für die Agenten einrichten (`python -m venv .venv && pip install -r requirements.txt`).
+   - MCP-Server für Claude Desktop wie in
+     [`MCPLokalClaudDesktop/`](MCPLokalClaudDesktop) beschrieben konfigurieren.
+
+## Architekturübersicht
+
+![Systemarchitektur: Datenerhebung, Verarbeitung/Bereitstellung auf der Datenkrake (Raspberry Pi 5) und Analyse](Images/architektur.svg)
+
+Links erheben Akustik-KI und (geplant) YOLO-System per MQTT sowie die
+Modellanlage per OPC-UA über Node-RED die Rohdaten. In der Mitte bündelt
+die Datenkrake auf dem Raspberry Pi 5 als Docker-Stack Mosquitto,
+Node-RED, InfluxDB, MariaDB, den Anomalie-Poller sowie das Agentensystem
+(Orchestrator-, DB-, Wartungs- und Report-Agent, verbunden per A2A); der
+Wartungs-Agent greift per LAP ausschließlich auf sein eigenes
+Diagnosegerät zu, nie auf die Produktionssteuerung. Rechts liest ein
+separater, stärkerer Rechner per Batch-Import den Data-Lake-Stack aus der
+MariaDB, während ein MCP-Server auf einem PC dieselbe MariaDB abfragt und
+die Daten per MCP an Claude Desktop und einen eigenständigen Agent
+Harness weiterreicht. Dieselbe Grafik lässt sich interaktiv mit
+Detail-Overlay in `leitstand.html` unter „Architektur" ansehen.
+
+## Was das Projekt zeigt
+
+Der Leitstand (`leitstand.html`) gliedert das Projekt in sechs
+Themenblöcke, die jeweils Erklärung und laufendes System verbinden:
+
+| Thema | Inhalt | Zugehörige Ordner |
+| --- | --- | --- |
+| **Infrastruktur & Hardware** | Docker-Container, Raspberry Pi als Edge-Server, Arduino UNO Q für Edge-AI, Netzwerktopologie (Anlagen-Netz + WLAN-DMZ) | `Raspberry/compose/`, `ArduinoUnoQ/` |
+| **Datenerhebung** | Akustikdaten (Arduino UNO Q), SPS-Tags der Modellanlage (OPC-UA), Zusammenführung über MQTT/Node-RED | `ArduinoUnoQ/`, `Raspberry/nodered/`, `UAExpertExport/` |
+| **Kommunikation & Industrie 4.0** | MQTT als Publish/Subscribe-Protokoll, OPC-UA als Industriestandard, Node-RED als Übersetzer dazwischen | `Raspberry/mosquitto/`, `Raspberry/nodered/` |
+| **Datenhaltung und -analyse** | MariaDB als vollständige Quelle, InfluxDB als Operational Historian, Grafana und der Data-Lake-Stack (MinIO/Nessie/Spark) für Auswertung | `Raspberry/mariadb/`, `Raspberry/historian/`, `DataLake/` |
+| **Machine Learning** | Vergleich von ML-Verfahren, Anomalie-Detektor aus Akustikdaten, `anomalie_poller` als Brücke zur Agentenkette | `ArduinoUnoQ/`, `Agentensystem/anomalie_poller/` |
+| **Agentensysteme & KI-Integration** | MCP, A2A, LAP und Agent Harness im Zusammenspiel, live testbar über die Agenten-Konsole im Leitstand | `Agentensystem/`, `MCPLokalClaudDesktop/` |
+
+Für die vollständige Architekturübersicht (alle Komponenten,
+Kommunikationsprotokolle und Richtungen) siehe
+[`architektur-komponenten.md`](architektur-komponenten.md).
+
+## Projektstruktur
+
+```text
+Raspberry/            IoT-Grundstack (Docker Compose): MQTT, MariaDB, Subscriber,
+                       Web-Dashboard, Historian, Grafana, Node-RED, OPC-UA-Demo-Server
+ArduinoUnoQ/           Audio-Erfassung, FFT, Web-UI, ML-Training/Inferenz auf dem Arduino UNO Q
+UAExpertExport/        OPC-UA-Exporte und Dokumentation der 10 Stationen der Modellanlage
+Agentensystem/         MCP-Erweiterung, A2A-Agenten (Orchestrator/DB/Report), LAP-Wartungs-Agent, Agent Harness
+MCPLokalClaudDesktop/  MCP-Server für Claude Desktop (lesender Zugriff auf die MariaDB)
+DataLake/              eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) für einen separaten Rechner
+leitstand.html         interaktiver Leitstand & Lernmaterial (Startseite unter http://datenkrake.local)
 ```
 
-## Was wurde ergänzt
+## Weiterführende Dokumentation
 
-- Button **„OPC-UA-Signaldokumentation“** im Node-RED-Panel bei
-  **Thema D — Kommunikation & Industrie 4.0**.
-- Neues Vollbild-Overlay mit dem kompletten Inhalt von
-  `UAExpertExport/Dokumentation_OPC_UA_Stationen.md`:
-- Sprungnavigation (Stationen, Grundstruktur, Namenskonventionen,
-  Signalgruppen, Stationsdetails, MQTT-Modell, Datenbankmodell,
-  Sampling, KPI, Besonderheiten, Umsetzung, Dateien)
-- Stationstabelle (Endpoint, Datensätze)
-- Kartenraster für die 10 Stationen mit Charakteristik + Nutzen
-- MQTT-Topic-Schema und formatiertes JSON-Beispiel
-- Datenbankmodell (opc_raw, opc_mes_snapshot, opc_alarm_events)
-- Datei-Links (relativ, verweisen auf `UAExpertExport/…`, inkl.
-  URL-Encoding für Leerzeichen/Umlaute)
-- Schließen per ✕, Klick auf Hintergrund oder Escape — gleiches Verhalten
-  wie beim bestehenden Architektur-Overlay; Öffnen/Schließen-Logik wurde
-  dafür in eine gemeinsame `setupOverlay()`-Funktion refaktoriert, die
-  jetzt für beide Overlays verwendet wird.
-- Kein externes JS/CSS, alles inline in der bestehenden Datei.
-
-### Web-Startseite
-
-- `http://datenkrake.local` öffnet standardmäßig den Leitstand (`leitstand.html`).
-- Das bisherige Audio-Live-Dashboard bleibt unter `http://datenkrake.local/index.php` erreichbar.
-
-### Aktuelle Netz-Topologie
-
-- Der Raspberry Pi hängt per `eth0` im Anlagen-Netz `192.168.36.0/24`.
-- Zusätzlich ist der Pi per `wlan0` als Client in ein bestehendes DMZ-WLAN eingebucht.
-- Im DMZ-WLAN liegen Laptop und Arduino-Systeme (Akustik-KI/YOLO).
-- Der Pi ist dabei **kein eigener Access Point**.
-
-## Hinweis zu den Datei-Links
-
-Die Links im Abschnitt „Dateien“ zeigen relativ auf
-`UAExpertExport/<Datei>`. Das funktioniert nur, wenn `leitstand.html`
-und der Ordner `UAExpertExport/` im selben Verzeichnis ausgeliefert
-werden (so wie aktuell im Repo-Root der Fall).
+- [`Agentensystem/README.md`](Agentensystem/README.md) — Setup und Umgebungsvariablen des Agentensystems
+- [`Agentensystem/agent_harness/README.md`](Agentensystem/agent_harness/README.md) — didaktische Einordnung des Agent Harness
+- [`Raspberry/nodered/README.md`](Raspberry/nodered/README.md) — OPC-UA → Node-RED → MQTT
+- [`Raspberry/opcua_demo_server/README.md`](Raspberry/opcua_demo_server/README.md) — Testen ohne echte SPS
+- [`Raspberry/historian/README.md`](Raspberry/historian/README.md) — Operational Historian (InfluxDB)
+- [`DataLake/README.md`](DataLake/README.md) — Lakehouse-Stack (MinIO/Nessie/Spark)
+- [`architektur-komponenten.md`](architektur-komponenten.md) — vollständige Komponenten- und Protokollübersicht

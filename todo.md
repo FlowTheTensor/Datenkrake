@@ -1,8 +1,3 @@
-Leistandsinfo in NodeAuswahl.txt aufnehmen
-    Bestellnummer
-    Eigenschaften: kugelanzahl pro farbe, deckelfarbe
-    Lagerort
-
 opc-ua overlay überarbeiten
     NodesAuswahl.txt mit einbeziehen und erklären, wozu sie da ist und wie sie aufgebaut ist.
     Anomaliegn vom arduino q aus per mqtt an Datenbank melden
