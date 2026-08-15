@@ -18,7 +18,7 @@ mitgelieferte Beispiel-Flow zeigt standardmäßig auf diesen Demo-Server.
 ## Setup
 
 1. `../setup_iot_stack.sh` legt `nodered/data/` an und kopiert die
-   Flow-Vorlage aus `flows/flows.json` dorthin (analog zu
+   Flow-Vorlage aus `flows/flows_nodesauswahl.json` dorthin (analog zu
    `mosquitto.conf.example` → `mosquitto.conf`). **Wichtig:** Node-RED
    läuft mit `--userDir /data`, das ist ein Bind-Mount vom Host – eine
    Flow-Datei ausschließlich im Docker-Image (per `COPY`) würde beim
@@ -32,6 +32,29 @@ mitgelieferte Beispiel-Flow zeigt standardmäßig auf diesen Demo-Server.
    mitgelieferte `ns=2;s=Station1.Zykluszeit` passt nur zum Demo-Server).
 4. Diesen Ast (Item-Node → Client-Node → Function-Node → MQTT-Out) für
    jeden weiteren Tag/jede weitere Station duplizieren.
+
+## Bestehende Installation aktualisieren
+
+Nach einem `git pull` auf dem Raspberry das Update-Skript aus dem
+Repository-Root ausführen:
+
+```bash
+sudo ./Raspberry/update_iot_stack.sh
+```
+
+Das Skript erstellt zuerst ein Backup von MariaDB und dem Node-RED-
+Datenverzeichnis, aktualisiert die Container, spielt die MariaDB-Schemata
+für Agenten- und PLC-Telemetrie erneut ein und aktualisiert
+`NodesAuswahl.txt`. Bestehende Messdaten bleiben erhalten. Der aktive
+Node-RED-Flow bleibt standardmäßig ebenfalls erhalten. Soll die im Repository
+mitgelieferte `flows_nodesauswahl.json` aktiviert werden, ausdrücklich:
+
+```bash
+sudo ./Raspberry/update_iot_stack.sh --sync-nodered-flow
+```
+
+Die Backups liegen danach unter `Raspberry/backups/<Zeitstempel>/`. Das
+Update-Skript führt keinen `git pull` selbst aus.
 
 ## ⚠️ Sicherheitshinweis
 

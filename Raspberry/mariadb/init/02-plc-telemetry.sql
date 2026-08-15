@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS plc_telemetry (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_plc_ts ON plc_telemetry(ts);
-CREATE INDEX idx_plc_station_tag_ts ON plc_telemetry(station, tag, ts);
-CREATE INDEX idx_plc_node_id_ts ON plc_telemetry(node_id, ts);
+CREATE INDEX IF NOT EXISTS idx_plc_ts ON plc_telemetry(ts);
+CREATE INDEX IF NOT EXISTS idx_plc_station_tag_ts ON plc_telemetry(station, tag, ts);
+CREATE INDEX IF NOT EXISTS idx_plc_node_id_ts ON plc_telemetry(node_id, ts);
 
 -- Der bestehende read-only MCP-User darf die neuen Messwerte lesen.
 GRANT SELECT ON telemetry.plc_telemetry TO 'mcp_read'@'%';
