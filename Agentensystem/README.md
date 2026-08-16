@@ -1,3 +1,5 @@
+<img align="right" src="../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Agentensystem (MCP, A2A, LAP)
 
 Setzt auf dem bestehenden IoT-Stack (`../Raspberry/`) auf und ergänzt ihn

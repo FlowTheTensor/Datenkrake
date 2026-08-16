@@ -1,3 +1,5 @@
+<img align="right" src="../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Lokaler MCP-Server fuer Claude Desktop
 
 Dieser Ordner enthaelt einen lokalen [MCP](https://modelcontextprotocol.io/)-Server fuer Claude Desktop. Der Server verbindet Claude mit der MariaDB der Datenkrake und stellt Telemetrie sowie Informationen aus dem Agentensystem lesend bereit.

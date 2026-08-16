@@ -1,3 +1,5 @@
+<img align="right" src="Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Datenkrake — Agentensystem (MCP · A2A · LAP)
 
 Dieser Branch (`feature/agentensystem-mcp-a2a-lap`) baut auf dem

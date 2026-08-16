@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Anomalie Poller
 
 Dieser Dienst liest Telemetriedaten aus InfluxDB oder MariaDB und erkennt daraus akustische Anomalien. Erkannte Ereignisse werden in MariaDB gespeichert.

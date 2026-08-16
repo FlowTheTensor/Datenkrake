@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Gemeinsame LAP-Typen
 
 Dieser Bibliotheksordner enthaelt gemeinsame Referenztypen fuer das LAP-Agentensystem, darunter Instrument Cards, Reservierungen und Safety Fences.

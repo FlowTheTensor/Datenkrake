@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Operational Historian
 
 Ein **Operational Historian** ist eine auf Zeitreihen spezialisierte

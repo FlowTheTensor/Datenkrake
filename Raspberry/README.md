@@ -1,3 +1,5 @@
+<img align="right" src="../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Datenkrake-IoT-Stack fuer Raspberry Pi
 
 Dieser Ordner enthaelt den zentralen IoT-Stack der Datenkrake. Auf dem Raspberry Pi werden MQTT, MariaDB, InfluxDB, Node-RED, Grafana, die Weboberflaeche, der Historian und der OPC-UA-Demoserver als Docker-Container betrieben.

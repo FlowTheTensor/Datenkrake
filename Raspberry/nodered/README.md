@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # OPC-UA → Node-RED → MQTT
 
 Liest Tags von einem OPC-UA-Server (z. B. einer S7-1500/ET200SP) und
@@ -104,6 +106,65 @@ Hinweis zur Dateiablage:
    einmalig nach `Raspberry/nodered/data/NodesAuswahl.txt`.
 - Wenn sich die Auswahl aendert, Datei im `nodered/data`-Ordner aktualisieren
    (oder Setup erneut ausfuehren) und dann in Node-RED neu deployen.
+
+## Aufgabenstellung für die Schülerinnen und Schüler
+
+### Ziel
+
+Die Schülerinnen und Schüler sollen selbst die Struktur der OPC-UA-Daten eines echten oder simulierten Sensors/Stations erkunden und daraus einen eigenen Node-RED-Flow aufbauen. Dabei geht es nicht darum, nur einen vorgegebenen Flow zu importieren, sondern die Datenquelle selbst zu verstehen, zu analysieren und in ein sinnvolles MQTT-Format zu transformieren.
+
+### Arbeitsauftrag
+
+1. Startet den OPC-UA-Demo-Server oder verbindet euch mit einem vorhandenen OPC-UA-Server im Schulnetz.
+2. Öffnet im Browser den Node-RED-Editor unter `http://datenkrake.local:1880`.
+3. Legt in Node-RED einen neuen Flow an und fügt zunächst nur einen OPC-UA-Client-Node ein.
+4. Erkennt die Verbindung zum Server über die OPC-UA-Endpunktadresse und testet den Zugriff mit einem ersten `Read`-Befehl.
+5. Nutzt den "Browse"-Modus oder die OPC-UA-Explorer-Funktion, um die Struktur der Daten zu untersuchen:
+   - Welche Namespaces gibt es?
+   - Welche Objekte und Variablen sind sichtbar?
+   - Welche Variablen enthalten Messwerte?
+   - Welche Daten sind lesbar, welche Typen haben sie?
+6. Dokumentiert die gefundenen Daten in einer kurzen Tabelle:
+   - Stationsname
+   - Tag/Variablenname
+   - Node-ID
+   - Datentyp
+   - Beispielwert
+7. Baut danach den Flow schrittweise auf:
+   - OPC-UA-Client-Node zur Abfrage der Daten
+   - Debug-Node zur Prüfung der Rohdaten
+   - Function-Node zur Umstrukturierung des Payloads
+   - MQTT-Out-Node zum Veröffentlichen auf `plc/<station>/<tag>`
+8. Prüft mit dem Debug-Node, ob die Rohdaten richtig eingelesen werden. Passt danach die Funktion so an, dass die Meldungen im späteren MQTT-Format vorliegen.
+9. Testet den Flow mit mindestens zwei unterschiedlichen Tags und prüft die MQTT-Ausgabe mit einem zusätzlichen MQTT-Subscriber oder über den Debug-Output in Node-RED.
+
+### Leitfragen
+
+- Welche Informationen sind für eine Messung relevant?
+- Wie lässt sich eine Variable eindeutig einer Station zuordnen?
+- Wie sieht ein sinnvoller MQTT-Topic aus?
+- Welche Informationen müssen in `msg.payload` enthalten sein, damit die Daten später weiterverarbeitet werden können?
+- Welche Werte sind konstant und welche ändern sich zyklisch?
+
+### Erwartetes Ergebnis
+
+Ein eigener Node-RED-Flow, der aus der OPC-UA-Datenstruktur die relevanten Messwerte liest und sie als JSON-Nachrichten auf MQTT veröffentlicht. Die Nachrichten sollten dabei dem Muster folgen:
+
+```json
+{
+  "station": "station01",
+  "tag": "zykluszeit",
+  "wert": 8.4,
+  "zeitstempel": "2026-07-21T10:15:00.000Z"
+}
+```
+
+### Hinweise für die Umsetzung
+
+- Die Datenstruktur muss nicht vorgegeben sein – sie ist genau das, was die Schülerinnen und Schüler selbst untersuchen sollen.
+- Der erste Schritt ist immer die Analyse der Rohdaten mit einem Debug-Node. Erst danach wird ein Function-Node für die Transformation gebaut.
+- Wenn der OPC-UA-Server keine echten SPS-Daten liefert, kann der mitgelieferte Demo-Server verwendet werden.
+- Die Node-IDs und Bezeichnungen müssen in der Praxis je nach Server und Anlage unterschiedlich sein. Genau das ist Teil der Aufgabe: Sie selbst zu erkennen und sauber im Flow einzubauen.
 
 ## Bekannte Einschränkungen
 

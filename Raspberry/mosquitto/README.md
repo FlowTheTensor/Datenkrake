@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Mosquitto
 
 Mosquitto ist der MQTT-Broker des IoT-Stacks. Er verteilt Audio- und PLC-Nachrichten an Subscriber und Historian Bridge.

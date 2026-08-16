@@ -1,3 +1,5 @@
+<img align="right" src="../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Data Lake (MinIO, Nessie, Spark/Jupyter)
 
 Ein **Lakehouse** ergänzt die bisherigen Speicherorte (MariaDB, InfluxDB)

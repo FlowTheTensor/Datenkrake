@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # MQTT Subscriber
 
 Der Subscriber abonniert MQTT-Nachrichten und speichert Audio- sowie PLC-Daten in MariaDB. Verarbeitet werden die Topics `audio/spectrum` und `plc/#`.

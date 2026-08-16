@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # OPC-UA-Demo-Server
 
 Simuliert eine minimale OPC-UA-Gegenstelle für den Unterricht, falls keine

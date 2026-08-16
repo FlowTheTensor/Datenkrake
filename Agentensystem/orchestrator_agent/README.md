@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Orchestrator-Agent
 
 Der Orchestrator ueberwacht neue Anomalien und delegiert Wartungsaktionen sowie Report-Aufgaben an die passenden Agenten.

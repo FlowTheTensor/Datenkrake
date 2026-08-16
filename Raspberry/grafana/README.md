@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Grafana
 
 Dieser Ordner enthaelt die Grafana-Konfiguration und die Dashboards fuer die Zeitreihen aus InfluxDB.

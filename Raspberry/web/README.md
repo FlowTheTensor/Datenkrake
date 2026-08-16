@@ -1,3 +1,5 @@
+<img align="right" src="../../Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
+
 # Weboberflaeche
 
 Dieser Ordner enthaelt die Apache/PHP-Weboberflaeche mit Leitstand und Daten-Dashboard. `index.php` ist der Einstiegspunkt.
