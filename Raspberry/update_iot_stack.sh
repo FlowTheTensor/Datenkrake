@@ -103,7 +103,7 @@ sync_nodered() {
 }
 
 log "Pulling/rebuilding images and recreating services"
-compose pull historian grafana orange3
+compose pull historian grafana
 compose build --pull
 compose up -d
 wait_for_database

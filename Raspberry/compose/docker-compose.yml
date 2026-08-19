@@ -114,9 +114,10 @@ services:
 
   # --- ML-Vergleich (Orange3) --------------------------------------------
   # Interaktive Orange3-Umgebung fuer den Unterricht. Zugriff per Browser
-  # ueber noVNC auf Port 6080.
+  # ueber noVNC auf Port 6080. Es gibt kein offizielles biolab/orange3-Image
+  # auf Docker Hub, daher lokaler Build aus ../orange3/Dockerfile.
   orange3:
-    image: biolab/orange3:latest
+    build: ../orange3
     container_name: orange3
     restart: unless-stopped
     ports:

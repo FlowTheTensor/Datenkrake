@@ -48,6 +48,7 @@ prepare_directories() {
   mkdir -p "${SCRIPT_DIR}/historian/data"
   mkdir -p "${SCRIPT_DIR}/grafana/data"
   mkdir -p "${SCRIPT_DIR}/nodered/data"
+  mkdir -p "${SCRIPT_DIR}/orange3/data"
 
   if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf" ]] && [[ -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" ]]; then
     cp "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf"
