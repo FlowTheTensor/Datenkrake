@@ -1,4 +1,9 @@
 <?php
+if (!isset($_GET['api']) && !isset($_SERVER['PATH_INFO'])) {
+    header('Location: /leitstand.html', true, 302);
+    exit;
+}
+
 // API-Endpoint für JSON-Daten
 if (isset($_GET['api']) && $_GET['api'] === 'data') {
     header('Content-Type: application/json');
@@ -61,70 +66,102 @@ if (isset($_GET['api']) && $_GET['api'] === 'clear_database' && $_SERVER['REQUES
 }
 
 // Daten exportieren als CSV fuer lokale Orange3/Jupyter-Analyse
-if (isset($_GET['api']) && $_GET['api'] === 'export_csv') {
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="datenkrake_audio_spectrum.csv"');
-
+if (isset($_GET['api']) && in_array($_GET['api'], ['export_csv', 'export_sql'], true)) {
     $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
     if ($conn->connect_error) {
         http_response_code(500);
-        echo "error;" . $conn->connect_error . PHP_EOL;
+        if ($_GET['api'] === 'export_csv') {
+            header('Content-Type: text/plain; charset=utf-8');
+            echo "error;" . $conn->connect_error . PHP_EOL;
+        } else {
+            header('Content-Type: application/sql; charset=utf-8');
+            echo "-- error: " . $conn->connect_error . PHP_EOL;
+        }
         exit;
     }
 
-    $labelFilter = isset($_GET['label']) ? $_GET['label'] : null;
-    if ($labelFilter && in_array($labelFilter, ['gut', 'schlecht'])) {
-        $stmt = $conn->prepare("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum WHERE label = ? ORDER BY ts ASC");
-        $stmt->bind_param("s", $labelFilter);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    $table = isset($_GET['table']) ? $_GET['table'] : 'audio_spectrum';
+    $allowedTables = ['audio_spectrum', 'plc_telemetry', 'audio_anomalien', 'wartungsereignisse', 'all'];
+    if (!in_array($table, $allowedTables, true)) {
+        $table = 'audio_spectrum';
+    }
+
+    $exportRows = [];
+
+    if ($table === 'all') {
+        foreach (['audio_spectrum', 'plc_telemetry', 'audio_anomalien', 'wartungsereignisse'] as $name) {
+            $query = "SELECT * FROM `{$name}` ORDER BY id ASC";
+            $result = $conn->query($query);
+            if (!$result) { continue; }
+            while ($row = $result->fetch_assoc()) {
+                $row['_table'] = $name;
+                $exportRows[] = $row;
+            }
+        }
     } else {
-        $result = $conn->query("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum ORDER BY ts ASC");
+        $query = "SELECT * FROM `{$table}` ORDER BY id ASC";
+        $result = $conn->query($query);
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $exportRows[] = $row;
+            }
+        }
     }
 
-    $out = fopen('php://output', 'w');
-    fputcsv($out, ['id', 'ts', 'label', 'peak_freq', 'peak_db', 'spectrum', 'sample_rate'], ';');
-    while ($row = $result->fetch_assoc()) {
-        fputcsv($out, [$row['id'], $row['ts'], $row['label'], $row['peak_freq'], $row['peak_db'], $row['spectrum'], $row['sample_rate']], ';');
-    }
-    fclose($out);
     $conn->close();
-    exit;
-}
 
-// Daten exportieren als SQL-Insert-Skript fuer lokale Weiterverarbeitung
-if (isset($_GET['api']) && $_GET['api'] === 'export_sql') {
+    if ($_GET['api'] === 'export_csv') {
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="datenkrake_' . $table . '.csv"');
+        $out = fopen('php://output', 'w');
+        $columns = [];
+        foreach ($exportRows as $row) {
+            foreach (array_keys($row) as $key) {
+                if (!in_array($key, $columns, true)) {
+                    $columns[] = $key;
+                }
+            }
+        }
+        if ($table === 'all') {
+            $columns = array_values(array_unique(array_merge(['_table'], $columns)));
+        }
+        if (empty($columns)) {
+            $columns = ['_table', 'id'];
+        }
+        fputcsv($out, $columns, ';');
+        foreach ($exportRows as $row) {
+            $line = [];
+            foreach ($columns as $key) {
+                $line[] = $row[$key] ?? '';
+            }
+            fputcsv($out, $line, ';');
+        }
+        fclose($out);
+        exit;
+    }
+
     header('Content-Type: application/sql; charset=utf-8');
-    header('Content-Disposition: attachment; filename="datenkrake_audio_spectrum.sql"');
-
-    $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
-    if ($conn->connect_error) {
-        http_response_code(500);
-        echo "-- error: " . $conn->connect_error . PHP_EOL;
-        exit;
+    header('Content-Disposition: attachment; filename="datenkrake_' . $table . '.sql"');
+    echo "-- Datenkrake export: {$table}\n";
+    foreach ($exportRows as $row) {
+        $tableName = $table === 'all' ? ($row['_table'] ?? 'unknown') : $table;
+        $cols = [];
+        $vals = [];
+        foreach ($row as $key => $value) {
+            if ($key === '_table') { continue; }
+            $cols[] = "`{$key}`";
+            if ($value === null) {
+                $vals[] = 'NULL';
+            } else {
+                $val = str_replace("'", "''", (string)$value);
+                $vals[] = "'" . $val . "'";
+            }
+        }
+        if (empty($cols)) {
+            continue;
+        }
+        echo "INSERT INTO `{$tableName}` (" . implode(', ', $cols) . ") VALUES (" . implode(', ', $vals) . ");\n";
     }
-
-    $labelFilter = isset($_GET['label']) ? $_GET['label'] : null;
-    if ($labelFilter && in_array($labelFilter, ['gut', 'schlecht'])) {
-        $stmt = $conn->prepare("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum WHERE label = ? ORDER BY ts ASC");
-        $stmt->bind_param("s", $labelFilter);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    } else {
-        $result = $conn->query("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum ORDER BY ts ASC");
-    }
-
-    echo "-- Datenkrake audio_spectrum export\n";
-    while ($row = $result->fetch_assoc()) {
-        $ts = $conn->real_escape_string($row['ts']);
-        $label = $conn->real_escape_string($row['label']);
-        $peakFreq = $row['peak_freq'] === null ? 'NULL' : (float)$row['peak_freq'];
-        $peakDb = $row['peak_db'] === null ? 'NULL' : (float)$row['peak_db'];
-        $sampleRate = $row['sample_rate'] === null ? 'NULL' : (int)$row['sample_rate'];
-        $spectrum = $conn->real_escape_string($row['spectrum']);
-        echo "INSERT INTO audio_spectrum (ts, label, peak_freq, peak_db, spectrum, sample_rate) VALUES ('{$ts}', '{$label}', {$peakFreq}, {$peakDb}, '{$spectrum}', {$sampleRate});\n";
-    }
-    $conn->close();
     exit;
 }
 
@@ -253,8 +290,10 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         <button class="filter-btn all active" onclick="setFilter(null)">Alle</button>
         <button class="filter-btn gut" onclick="setFilter('gut')">Nur Gut</button>
         <button class="filter-btn schlecht" onclick="setFilter('schlecht')">Nur Schlecht</button>
-        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv" target="_blank" rel="noopener">📥 CSV exportieren</a>
-        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_sql" target="_blank" rel="noopener">📄 SQL exportieren</a>
+        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv&table=audio_spectrum" target="_blank" rel="noopener">📥 CSV: Spektrum</a>
+        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv&table=plc_telemetry" target="_blank" rel="noopener">📥 CSV: PLC</a>
+        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv&table=all" target="_blank" rel="noopener">📥 CSV: alle Daten</a>
+        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_sql&table=audio_spectrum" target="_blank" rel="noopener">📄 SQL: Spektrum</a>
         <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
     </div>
     

@@ -1169,8 +1169,9 @@
       <div class="ki-card">
         <div class="name">📦 Daten für lokale Analyse</div>
         <div class="chart-note">Die Messdaten werden aus der MariaDB exportiert, damit sie lokal in Orange3 oder Jupyter weiterverarbeitet werden können.</div>
-        <a class="open-btn" href="/Raspberry/web/index.php?api=export_csv" target="_blank" rel="noopener">CSV herunterladen ↗</a>
-        <a class="open-btn mt-8" href="/Raspberry/web/index.php?api=export_sql" target="_blank" rel="noopener">SQL-Skript herunterladen ↗</a>
+        <a class="open-btn" href="/?api=export_csv&table=audio_spectrum" target="_blank" rel="noopener">CSV: Spektrum ↗</a>
+        <a class="open-btn mt-8" href="/?api=export_csv&table=plc_telemetry" target="_blank" rel="noopener">CSV: PLC-Telemetrie ↗</a>
+        <a class="open-btn mt-8" href="/?api=export_csv&table=all" target="_blank" rel="noopener">CSV: alle Daten ↗</a>
       </div>
     </div>
     <div class="chart-note"><b>Arbeitsauftrag:</b> Vergleicht die Verfahren auf unseren Akustikdaten (z. B. FFT-Bänder, peak_db, Label gut/schlecht). Begründet pro Verfahren, wann es für unsere Datenlage sinnvoll ist und wann nicht.</div>
