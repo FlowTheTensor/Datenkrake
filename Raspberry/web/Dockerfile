@@ -9,6 +9,7 @@ COPY Raspberry/web/plcdaten.php /var/www/html/
 COPY Raspberry/web/index.html /var/www/html/
 COPY Images/DatenbankAkustik.jpg /var/www/html/DatenbankAkustik.jpg
 COPY Images/DatenbankPLC.jpg /var/www/html/DatenbankPLC.jpg
+COPY Images/krake_klein.jpg /var/www/html/krake_klein.jpg
 COPY Raspberry/web/api /var/www/html/api
 COPY Raspberry/web/includes /var/www/html/includes
 

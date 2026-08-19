@@ -31,6 +31,15 @@
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
+  .main-image{
+    display:block;
+    width:100%;
+    max-width:1100px;
+    height:220px;
+    object-fit:contain;
+    object-position:center;
+    margin:18px auto 0;
+  }
   a{color:var(--accent);}
   .eyebrow{
     font-family:"JetBrains Mono",monospace;
@@ -523,6 +532,8 @@
 </style>
 </head>
 <body>
+
+<img class="main-image" src="krake_klein.jpg" alt="Datenkrake">
 
 <header>
   <div class="brand">
@@ -1169,8 +1180,8 @@
       <div class="ki-card">
         <div class="name">📦 Daten für lokale Analyse</div>
         <div class="chart-note">Die Messdaten werden aus der MariaDB exportiert, damit sie lokal oder in Jupyter weiterverarbeitet werden können.</div>
-        <a class="open-btn" href="/audiodaten.php" target="_blank" rel="noopener">Audio-Datenübersicht ↗</a>
-        <a class="open-btn mt-8" href="/plcdaten.php" target="_blank" rel="noopener">PLC-Datenübersicht ↗</a>
+        <a class="open-btn" href="/api/export.php?table=audio_spectrum" download>Audio-Daten als CSV herunterladen ↓</a>
+        <a class="open-btn mt-8" href="/api/export.php?table=plc_telemetry" download>PLC-Daten als CSV herunterladen ↓</a>
       </div>
     </div>
     <div class="chart-note"><b>Arbeitsauftrag:</b> Vergleicht die Verfahren auf unseren Akustikdaten (z. B. FFT-Bänder, peak_db, Label gut/schlecht). Begründet pro Verfahren, wann es für unsere Datenlage sinnvoll ist und wann nicht.</div>
