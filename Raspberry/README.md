@@ -30,7 +30,6 @@ Nach erfolgreicher Installation sind die wichtigsten Oberflaechen unter diesen A
 Weboberflaeche: http://<raspberry-ip>/
 Grafana:        http://<raspberry-ip>:3000/
 Node-RED:       http://<raspberry-ip>:1880/
-Orange3:        http://<raspberry-ip>:6080/
 ```
 
 ## Update
@@ -65,7 +64,6 @@ Alle Container sind im Docker-Netzwerk `iot-net` verbunden.
 | `historian` | `historian` | `8086` | InfluxDB fuer Zeitreihen |
 | `historian_bridge` | `historian-bridge` | keine | Schreibt MQTT-Messwerte nach InfluxDB |
 | `grafana` | `grafana` | `3000` | Dashboards fuer InfluxDB-Daten |
-| `orange3` | `orange3` | `6080` | Orange3/noVNC fuer Unterricht und ML-Vergleiche |
 | `nodered` | `nodered` | `1880` | OPC-UA-Client und PLC-MQTT-Publisher |
 | `opcua_demo_server` | `opcua-demo-server` | `4840` | Simulierter OPC-UA-Server fuer Tests |
 

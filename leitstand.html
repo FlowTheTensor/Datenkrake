@@ -1167,11 +1167,10 @@
         <div class="chart-note">Vorteile: kein explizites Training, flexibel. Nachteile: langsam bei vielen Daten, skalenempfindlich und abhängig von k/Distanzmaß.</div>
       </div>
       <div class="ki-card">
-        <div class="name">🧪 Vergleichsumgebung (Orange3 &amp; Jupyter)</div>
-        <input id="orangeUrl" placeholder="http://datenkrake.local:6080" value="http://datenkrake.local:6080">
-        <a class="open-btn" id="orangeOpen" href="#" target="_blank" rel="noopener">Orange3 öffnen ↗</a>
-        <input class="mt-8" id="jupyterMlUrl" placeholder="http://&lt;data-lake-host&gt;:8888" value="http://datenkrake.local:8888">
-        <a class="open-btn mt-8" id="jupyterMlOpen" href="#" target="_blank" rel="noopener">Jupyter öffnen ↗</a>
+        <div class="name">📦 Daten für lokale Analyse</div>
+        <div class="chart-note">Die Messdaten werden aus der MariaDB exportiert, damit sie lokal in Orange3 oder Jupyter weiterverarbeitet werden können.</div>
+        <a class="open-btn" href="/Raspberry/web/index.php?api=export_csv" target="_blank" rel="noopener">CSV herunterladen ↗</a>
+        <a class="open-btn mt-8" href="/Raspberry/web/index.php?api=export_sql" target="_blank" rel="noopener">SQL-Skript herunterladen ↗</a>
       </div>
     </div>
     <div class="chart-note"><b>Arbeitsauftrag:</b> Vergleicht die Verfahren auf unseren Akustikdaten (z. B. FFT-Bänder, peak_db, Label gut/schlecht). Begründet pro Verfahren, wann es für unsere Datenlage sinnvoll ist und wann nicht.</div>
@@ -1869,8 +1868,6 @@
     update();
   }
   wireKiLink('akustikUrl','akustikOpen');
-  wireKiLink('orangeUrl','orangeOpen');
-  wireKiLink('jupyterMlUrl','jupyterMlOpen');
   wireKiLink('historianUrl','historianOpen');
   wireKiLink('grafanaUrl','grafanaOpen');
   wireKiLink('noderedUrl','noderedOpen');

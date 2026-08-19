@@ -60,6 +60,74 @@ if (isset($_GET['api']) && $_GET['api'] === 'clear_database' && $_SERVER['REQUES
     exit;
 }
 
+// Daten exportieren als CSV fuer lokale Orange3/Jupyter-Analyse
+if (isset($_GET['api']) && $_GET['api'] === 'export_csv') {
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="datenkrake_audio_spectrum.csv"');
+
+    $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
+    if ($conn->connect_error) {
+        http_response_code(500);
+        echo "error;" . $conn->connect_error . PHP_EOL;
+        exit;
+    }
+
+    $labelFilter = isset($_GET['label']) ? $_GET['label'] : null;
+    if ($labelFilter && in_array($labelFilter, ['gut', 'schlecht'])) {
+        $stmt = $conn->prepare("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum WHERE label = ? ORDER BY ts ASC");
+        $stmt->bind_param("s", $labelFilter);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    } else {
+        $result = $conn->query("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum ORDER BY ts ASC");
+    }
+
+    $out = fopen('php://output', 'w');
+    fputcsv($out, ['id', 'ts', 'label', 'peak_freq', 'peak_db', 'spectrum', 'sample_rate'], ';');
+    while ($row = $result->fetch_assoc()) {
+        fputcsv($out, [$row['id'], $row['ts'], $row['label'], $row['peak_freq'], $row['peak_db'], $row['spectrum'], $row['sample_rate']], ';');
+    }
+    fclose($out);
+    $conn->close();
+    exit;
+}
+
+// Daten exportieren als SQL-Insert-Skript fuer lokale Weiterverarbeitung
+if (isset($_GET['api']) && $_GET['api'] === 'export_sql') {
+    header('Content-Type: application/sql; charset=utf-8');
+    header('Content-Disposition: attachment; filename="datenkrake_audio_spectrum.sql"');
+
+    $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
+    if ($conn->connect_error) {
+        http_response_code(500);
+        echo "-- error: " . $conn->connect_error . PHP_EOL;
+        exit;
+    }
+
+    $labelFilter = isset($_GET['label']) ? $_GET['label'] : null;
+    if ($labelFilter && in_array($labelFilter, ['gut', 'schlecht'])) {
+        $stmt = $conn->prepare("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum WHERE label = ? ORDER BY ts ASC");
+        $stmt->bind_param("s", $labelFilter);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    } else {
+        $result = $conn->query("SELECT id, ts, label, peak_freq, peak_db, spectrum, sample_rate FROM audio_spectrum ORDER BY ts ASC");
+    }
+
+    echo "-- Datenkrake audio_spectrum export\n";
+    while ($row = $result->fetch_assoc()) {
+        $ts = $conn->real_escape_string($row['ts']);
+        $label = $conn->real_escape_string($row['label']);
+        $peakFreq = $row['peak_freq'] === null ? 'NULL' : (float)$row['peak_freq'];
+        $peakDb = $row['peak_db'] === null ? 'NULL' : (float)$row['peak_db'];
+        $sampleRate = $row['sample_rate'] === null ? 'NULL' : (int)$row['sample_rate'];
+        $spectrum = $conn->real_escape_string($row['spectrum']);
+        echo "INSERT INTO audio_spectrum (ts, label, peak_freq, peak_db, spectrum, sample_rate) VALUES ('{$ts}', '{$label}', {$peakFreq}, {$peakDb}, '{$spectrum}', {$sampleRate});\n";
+    }
+    $conn->close();
+    exit;
+}
+
 // Statistik-Endpoint
 if (isset($_GET['api']) && $_GET['api'] === 'stats') {
     header('Content-Type: application/json');
@@ -185,6 +253,8 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         <button class="filter-btn all active" onclick="setFilter(null)">Alle</button>
         <button class="filter-btn gut" onclick="setFilter('gut')">Nur Gut</button>
         <button class="filter-btn schlecht" onclick="setFilter('schlecht')">Nur Schlecht</button>
+        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv" target="_blank" rel="noopener">📥 CSV exportieren</a>
+        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_sql" target="_blank" rel="noopener">📄 SQL exportieren</a>
         <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
     </div>
     
