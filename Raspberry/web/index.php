@@ -1,5 +1,6 @@
 <?php
-if (!isset($_GET['api']) && !isset($_SERVER['PATH_INFO'])) {
+$requestedPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+if (!isset($_GET['api']) && !isset($_SERVER['PATH_INFO']) && $requestedPath === '/') {
     header('Location: /leitstand.html', true, 302);
     exit;
 }
