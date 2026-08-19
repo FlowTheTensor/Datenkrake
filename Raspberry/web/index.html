@@ -869,7 +869,7 @@
       <g>
         <rect x="280" y="610" width="540" height="54" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
         <text x="550" y="634" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Webserver</text>
-        <text x="550" y="651" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">leitstand.html (dieses Dashboard)</text>
+        <text x="550" y="651" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">index.html (dieses Dashboard)</text>
       </g>
 
       <!-- ================= Boxen: Zone 3 – Analyse ================= -->
@@ -1016,7 +1016,7 @@
           </div>
           <div class="arch-card">
             <h4>Webserver</h4>
-            <div class="arch-desc">Liefert leitstand.html (dieses Dashboard) aus</div>
+            <div class="arch-desc">Liefert index.html (dieses Dashboard) aus</div>
             <div class="arch-conn"><span class="arrow">←</span><span class="target">Browser</span><span class="badge badge-feed">HTTP</span><span class="dir">eingehend</span></div>
           </div>
         </div>
@@ -1168,10 +1168,9 @@
       </div>
       <div class="ki-card">
         <div class="name">📦 Daten für lokale Analyse</div>
-        <div class="chart-note">Die Messdaten werden aus der MariaDB exportiert, damit sie lokal in Orange3 oder Jupyter weiterverarbeitet werden können.</div>
-        <a class="open-btn" href="/?api=export_csv&table=audio_spectrum" target="_blank" rel="noopener">CSV: Spektrum ↗</a>
-        <a class="open-btn mt-8" href="/?api=export_csv&table=plc_telemetry" target="_blank" rel="noopener">CSV: PLC-Telemetrie ↗</a>
-        <a class="open-btn mt-8" href="/?api=export_csv&table=all" target="_blank" rel="noopener">CSV: alle Daten ↗</a>
+        <div class="chart-note">Die Messdaten werden aus der MariaDB exportiert, damit sie lokal oder in Jupyter weiterverarbeitet werden können.</div>
+        <a class="open-btn" href="/audiodaten.php" target="_blank" rel="noopener">Audio-Datenübersicht ↗</a>
+        <a class="open-btn mt-8" href="/plcdaten.php" target="_blank" rel="noopener">PLC-Datenübersicht ↗</a>
       </div>
     </div>
     <div class="chart-note"><b>Arbeitsauftrag:</b> Vergleicht die Verfahren auf unseren Akustikdaten (z. B. FFT-Bänder, peak_db, Label gut/schlecht). Begründet pro Verfahren, wann es für unsere Datenlage sinnvoll ist und wann nicht.</div>
@@ -1247,7 +1246,7 @@
       <div class="arch-grid">
         <div class="arch-card">
           <h4>Heute im Unterricht</h4>
-          <div class="arch-desc">ML-Modelle vergleichen (Orange3/Jupyter), daraus einen Detektor ableiten, dann den Weg in die Agentenkette nachvollziehen.</div>
+          <div class="arch-desc">ML-Modelle vergleichen (lokal/Jupyter), daraus einen Detektor ableiten, dann den Weg in die Agentenkette nachvollziehen.</div>
         </div>
         <div class="arch-card">
           <h4>Naechster Ausbauschritt</h4>
@@ -1278,7 +1277,8 @@
       <div class="ki-links ki-links-grid">
           <div class="ki-card">
             <div class="name">🗃 MariaDB / Trainingsdaten-Übersicht</div>
-            <a class="open-btn" href="/index.php" target="_blank" rel="noopener">Datenübersicht öffnen ↗</a>
+            <a class="open-btn" href="/audiodaten.php" target="_blank" rel="noopener">Audio-Daten öffnen ↗</a>
+            <a class="open-btn mt-8" href="/plcdaten.php" target="_blank" rel="noopener">PLC-Daten öffnen ↗</a>
           </div>
         <div class="ki-card">
           <div class="name">📈 Operational Historian (InfluxDB)</div>

@@ -2,6 +2,6 @@
 
 # Weboberflaeche
 
-Dieser Ordner enthaelt die Apache/PHP-Weboberflaeche mit Leitstand und Daten-Dashboard. `index.php` ist der Einstiegspunkt.
+Dieser Ordner enthaelt die Apache/PHP-Weboberflaeche mit Leitstand sowie getrennten Audio- und PLC-Uebersichten.
 
-Der Dienst wird ueber Docker Compose gestartet und ist auf Port `80` erreichbar. Der Build verwendet zusaetzlich die gemeinsame `leitstand.html` aus dem Repository-Root.
+Der Dienst wird ueber Docker Compose gestartet und ist auf Port `80` erreichbar. `index.html` ist die Startseite, `audiodaten.php` und `plcdaten.php` sind die Datenuebersichten. Die Endpunkte liegen unter `api/`, die gemeinsame Datenbankverbindung unter `includes/db.php`.

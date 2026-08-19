@@ -48,7 +48,6 @@ prepare_directories() {
   mkdir -p "${SCRIPT_DIR}/historian/data"
   mkdir -p "${SCRIPT_DIR}/grafana/data"
   mkdir -p "${SCRIPT_DIR}/nodered/data"
-  mkdir -p "${SCRIPT_DIR}/orange3/data"
 
   if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf" ]] && [[ -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" ]]; then
     cp "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf"
@@ -73,7 +72,6 @@ prepare_directories() {
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/historian"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/grafana"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/nodered"
-  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/orange3"
 
   # Grafana läuft im Container als UID/GID 472 (interner "grafana" User) und
   # braucht Schreibrechte auf sein Datenverzeichnis, unabhängig vom Host-User.
@@ -81,26 +79,6 @@ prepare_directories() {
   # /var/lib/grafana/plugins fehl.
   log "Fixing Grafana data directory ownership (uid/gid 472)"
   chown -R 472:472 "${SCRIPT_DIR}/grafana/data"
-}
-
-fix_orange3_entrypoint() {
-  local start_script="${SCRIPT_DIR}/orange3/start.sh"
-
-  if [[ ! -f "${start_script}" ]]; then
-    log "Warning: ${start_script} not found, skipping Orange3 entrypoint fix"
-    return
-  fi
-
-  # Der Entrypoint rief bislang "exec Orange3" auf, das Kommando existiert
-  # im Image aber nicht (Orange3 wird ueber das Konsolenscript
-  # "orange-canvas" aus dem venv unter /opt/orange-venv gestartet).
-  # Das fuehrte zu einem Crash-Loop (exit 127).
-  if grep -q "^exec Orange3" "${start_script}"; then
-    log "Fixing Orange3 entrypoint (exec Orange3 -> exec orange-canvas)"
-    sed -i 's/^exec Orange3/exec orange-canvas/' "${start_script}"
-  else
-    log "Orange3 entrypoint already fixed, skipping"
-  fi
 }
 
 build_and_start() {
@@ -158,7 +136,6 @@ EOF
 
 install_docker
 prepare_directories
-fix_orange3_entrypoint
 build_and_start
 setup_systemd_service
 post_install_notes

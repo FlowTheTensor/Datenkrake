@@ -4,11 +4,14 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli
 
 # Kopiere die Webseite (Build-Context ist die Repo-Wurzel, siehe compose/docker-compose.yml)
-COPY Raspberry/web/index.php /var/www/html/
-COPY leitstand.html /var/www/html/
+COPY Raspberry/web/audiodaten.php /var/www/html/
+COPY Raspberry/web/plcdaten.php /var/www/html/
+COPY Raspberry/web/index.html /var/www/html/
+COPY Raspberry/web/api /var/www/html/api
+COPY Raspberry/web/includes /var/www/html/includes
 
 # datenkrake.local soll standardmäßig den Leitstand ausliefern.
-RUN printf "DirectoryIndex leitstand.html index.php\n" > /etc/apache2/conf-available/datenkrake.conf \
+RUN printf "DirectoryIndex index.html audiodaten.php\n" > /etc/apache2/conf-available/datenkrake.conf \
  && a2enconf datenkrake
 
 # Setze Berechtigungen

@@ -1,203 +1,3 @@
-<?php
-$requestedPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
-if (!isset($_GET['api']) && !isset($_SERVER['PATH_INFO']) && $requestedPath === '/') {
-    header('Location: /leitstand.html', true, 302);
-    exit;
-}
-
-// API-Endpoint für JSON-Daten
-if (isset($_GET['api']) && $_GET['api'] === 'data') {
-    header('Content-Type: application/json');
-    
-    $servername = "db";
-    $username = "sensor";
-    $password = "changeMeSensor";
-    $dbname = "telemetry";
-    
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        echo json_encode(['error' => $conn->connect_error]);
-        exit;
-    }
-    
-    // Filter nach Label (optional)
-    $labelFilter = isset($_GET['label']) ? $_GET['label'] : null;
-    
-    // Letzte 100 Werte abfragen
-    if ($labelFilter && in_array($labelFilter, ['gut', 'schlecht'])) {
-        $sql = "SELECT * FROM audio_spectrum WHERE label = ? ORDER BY ts DESC LIMIT 100";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $labelFilter);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    } else {
-        $sql = "SELECT * FROM audio_spectrum ORDER BY ts DESC LIMIT 100";
-        $result = $conn->query($sql);
-    }
-    
-    $data = [];
-    while($row = $result->fetch_assoc()) {
-        // Spectrum JSON dekodieren
-        $row['spectrum'] = json_decode($row['spectrum'], true);
-        $data[] = $row;
-    }
-    $conn->close();
-    
-    // Umkehren für chronologische Reihenfolge
-    $data = array_reverse($data);
-    
-    echo json_encode($data);
-    exit;
-}
-
-// Datenbank leeren
-if (isset($_GET['api']) && $_GET['api'] === 'clear_database' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json');
-    $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
-    if ($conn->connect_error) {
-        echo json_encode(['error' => $conn->connect_error]);
-        exit;
-    }
-    $result = $conn->query("SELECT COUNT(*) as cnt FROM audio_spectrum");
-    $count = (int)$result->fetch_assoc()['cnt'];
-    $conn->query("TRUNCATE TABLE audio_spectrum");
-    $conn->close();
-    echo json_encode(['success' => true, 'deleted' => $count]);
-    exit;
-}
-
-// Daten exportieren als CSV fuer lokale Orange3/Jupyter-Analyse
-if (isset($_GET['api']) && in_array($_GET['api'], ['export_csv', 'export_sql'], true)) {
-    $conn = new mysqli("db", "sensor", "changeMeSensor", "telemetry");
-    if ($conn->connect_error) {
-        http_response_code(500);
-        if ($_GET['api'] === 'export_csv') {
-            header('Content-Type: text/plain; charset=utf-8');
-            echo "error;" . $conn->connect_error . PHP_EOL;
-        } else {
-            header('Content-Type: application/sql; charset=utf-8');
-            echo "-- error: " . $conn->connect_error . PHP_EOL;
-        }
-        exit;
-    }
-
-    $table = isset($_GET['table']) ? $_GET['table'] : 'audio_spectrum';
-    $allowedTables = ['audio_spectrum', 'plc_telemetry', 'audio_anomalien', 'wartungsereignisse', 'all'];
-    if (!in_array($table, $allowedTables, true)) {
-        $table = 'audio_spectrum';
-    }
-
-    $exportRows = [];
-
-    if ($table === 'all') {
-        foreach (['audio_spectrum', 'plc_telemetry', 'audio_anomalien', 'wartungsereignisse'] as $name) {
-            $query = "SELECT * FROM `{$name}` ORDER BY id ASC";
-            $result = $conn->query($query);
-            if (!$result) { continue; }
-            while ($row = $result->fetch_assoc()) {
-                $row['_table'] = $name;
-                $exportRows[] = $row;
-            }
-        }
-    } else {
-        $query = "SELECT * FROM `{$table}` ORDER BY id ASC";
-        $result = $conn->query($query);
-        if ($result) {
-            while ($row = $result->fetch_assoc()) {
-                $exportRows[] = $row;
-            }
-        }
-    }
-
-    $conn->close();
-
-    if ($_GET['api'] === 'export_csv') {
-        header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename="datenkrake_' . $table . '.csv"');
-        $out = fopen('php://output', 'w');
-        $columns = [];
-        foreach ($exportRows as $row) {
-            foreach (array_keys($row) as $key) {
-                if (!in_array($key, $columns, true)) {
-                    $columns[] = $key;
-                }
-            }
-        }
-        if ($table === 'all') {
-            $columns = array_values(array_unique(array_merge(['_table'], $columns)));
-        }
-        if (empty($columns)) {
-            $columns = ['_table', 'id'];
-        }
-        fputcsv($out, $columns, ';');
-        foreach ($exportRows as $row) {
-            $line = [];
-            foreach ($columns as $key) {
-                $line[] = $row[$key] ?? '';
-            }
-            fputcsv($out, $line, ';');
-        }
-        fclose($out);
-        exit;
-    }
-
-    header('Content-Type: application/sql; charset=utf-8');
-    header('Content-Disposition: attachment; filename="datenkrake_' . $table . '.sql"');
-    echo "-- Datenkrake export: {$table}\n";
-    foreach ($exportRows as $row) {
-        $tableName = $table === 'all' ? ($row['_table'] ?? 'unknown') : $table;
-        $cols = [];
-        $vals = [];
-        foreach ($row as $key => $value) {
-            if ($key === '_table') { continue; }
-            $cols[] = "`{$key}`";
-            if ($value === null) {
-                $vals[] = 'NULL';
-            } else {
-                $val = str_replace("'", "''", (string)$value);
-                $vals[] = "'" . $val . "'";
-            }
-        }
-        if (empty($cols)) {
-            continue;
-        }
-        echo "INSERT INTO `{$tableName}` (" . implode(', ', $cols) . ") VALUES (" . implode(', ', $vals) . ");\n";
-    }
-    exit;
-}
-
-// Statistik-Endpoint
-if (isset($_GET['api']) && $_GET['api'] === 'stats') {
-    header('Content-Type: application/json');
-    
-    $servername = "db";
-    $username = "sensor";
-    $password = "changeMeSensor";
-    $dbname = "telemetry";
-    
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        echo json_encode(['error' => $conn->connect_error]);
-        exit;
-    }
-    
-    $stats = [];
-    
-    // Anzahl pro Label
-    $result = $conn->query("SELECT label, COUNT(*) as count FROM audio_spectrum GROUP BY label");
-    while($row = $result->fetch_assoc()) {
-        $stats[$row['label']] = (int)$row['count'];
-    }
-    
-    // Gesamtanzahl
-    $result = $conn->query("SELECT COUNT(*) as total FROM audio_spectrum");
-    $stats['total'] = (int)$result->fetch_assoc()['total'];
-    
-    $conn->close();
-    echo json_encode($stats);
-    exit;
-}
-?>
 <?php // Prevent duplicate HTML output
 if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
     $GLOBALS['__DASHBOARD_RENDERED__'] = true;
@@ -237,15 +37,6 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         .chart-container { height: 250px; }
         .table-section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .table-section h2 { margin-top: 0; color: #8b1a1a; }
-        .influx-section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 20px; }
-        .influx-section h2 { margin-top: 0; color: #8b1a1a; }
-        .influx-links { margin-bottom: 12px; display: flex; flex-wrap: wrap; gap: 10px; }
-        .influx-link { color: #8b1a1a; font-size: 13px; text-decoration: none; }
-        .influx-link:hover { text-decoration: underline; }
-        .dashboard-switch { margin-bottom: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .switch-btn { padding: 7px 12px; border: 1px solid #ccc; border-radius: 5px; background: #f2f2f2; cursor: pointer; font-size: 13px; }
-        .switch-btn.active { background: #8b1a1a; color: white; border-color: #8b1a1a; }
-        .grafana-embed { width: 100%; height: 560px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; }
         table { border-collapse: collapse; width: 100%; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 13px; }
         th { background-color: #f8f8f8; position: sticky; top: 0; }
@@ -268,7 +59,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         </div>
     </div>
     <div style="margin-bottom: 15px;">
-        <a href="leitstand.html" style="color:#8b1a1a; font-size: 13px;">→ Agentensystem-Leitstand (MCP · A2A · LAP)</a>
+        <a href="index.html" style="color:#8b1a1a; font-size: 13px;">→ Agentensystem-Leitstand (MCP · A2A · LAP)</a>
     </div>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>
     
@@ -291,11 +82,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         <button class="filter-btn all active" onclick="setFilter(null)">Alle</button>
         <button class="filter-btn gut" onclick="setFilter('gut')">Nur Gut</button>
         <button class="filter-btn schlecht" onclick="setFilter('schlecht')">Nur Schlecht</button>
-        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv&table=audio_spectrum" target="_blank" rel="noopener">📥 CSV: Spektrum</a>
-        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv&table=plc_telemetry" target="_blank" rel="noopener">📥 CSV: PLC</a>
-        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_csv&table=all" target="_blank" rel="noopener">📥 CSV: alle Daten</a>
-        <a class="filter-btn" style="display:inline-block;text-decoration:none;background:#e8f1ff;color:#0b3d91;" href="?api=export_sql&table=audio_spectrum" target="_blank" rel="noopener">📄 SQL: Spektrum</a>
-        <button class="btn-danger" onclick="clearDatabase()">🗑️ Datenbank leeren</button>
+        <button class="btn-danger" onclick="clearDatabase()">🗑️ Audio-Daten löschen</button>
     </div>
     
     <div class="main-data-container">
@@ -321,20 +108,6 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
             </div>
         </div>
 
-        <div class="influx-section">
-            <h2>InfluxDB / Grafana (Zeitreihenansicht)</h2>
-            <div class="dashboard-switch">
-                <button id="btnOpcuaDashboard" class="switch-btn active" type="button">OPC-UA Stationen</button>
-                <button id="btnLiveDashboard" class="switch-btn" type="button">Datenkrake Live</button>
-            </div>
-            <div class="influx-links">
-                <a id="grafanaOpcuaDashboardLink" class="influx-link" href="#" target="_blank" rel="noopener">→ Grafana OPC-UA-Dashboard öffnen</a>
-                <a id="grafanaLiveDashboardLink" class="influx-link" href="#" target="_blank" rel="noopener">→ Grafana Live-Dashboard öffnen</a>
-                <a id="grafanaRootLink" class="influx-link" href="#" target="_blank" rel="noopener">→ Grafana Startseite öffnen</a>
-                <a id="influxLink" class="influx-link" href="#" target="_blank" rel="noopener">→ InfluxDB öffnen</a>
-            </div>
-            <iframe id="grafanaEmbed" class="grafana-embed" title="Grafana Dashboard" src="about:blank"></iframe>
-        </div>
     </div>
 
     <style>
@@ -453,45 +226,6 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
     <script>
         let freqChart, spectrumChart;
         let currentFilter = null;
-        let grafanaOpcuaDashboard = '';
-        let grafanaLiveDashboard = '';
-
-        function setDashboardButtonState(activeId) {
-            document.getElementById('btnOpcuaDashboard').classList.toggle('active', activeId === 'opcua');
-            document.getElementById('btnLiveDashboard').classList.toggle('active', activeId === 'live');
-        }
-
-        function loadGrafanaDashboard(kind) {
-            const embed = document.getElementById('grafanaEmbed');
-            if (kind === 'live') {
-                embed.src = grafanaLiveDashboard;
-                setDashboardButtonState('live');
-            } else {
-                embed.src = grafanaOpcuaDashboard;
-                setDashboardButtonState('opcua');
-            }
-        }
-
-        function initInfluxGrafanaLinks() {
-            const host = window.location.hostname || 'datenkrake.local';
-            const protocol = window.location.protocol || 'http:';
-            grafanaOpcuaDashboard = `${protocol}//${host}:3000/d/opcua-stationen-live/opc-ua-stationen-live?orgId=1&from=now-1h&to=now&kiosk`;
-            grafanaLiveDashboard = `${protocol}//${host}:3000/d/datenkrake-live/datenkrake-live?orgId=1&from=now-1h&to=now&kiosk`;
-            const grafanaRoot = `${protocol}//${host}:3000/`;
-            const influxRoot = `${protocol}//${host}:8086/`;
-
-            document.getElementById('grafanaOpcuaDashboardLink').href = grafanaOpcuaDashboard;
-            document.getElementById('grafanaLiveDashboardLink').href = grafanaLiveDashboard;
-            document.getElementById('grafanaRootLink').href = grafanaRoot;
-            document.getElementById('influxLink').href = influxRoot;
-
-            document.getElementById('btnOpcuaDashboard').addEventListener('click', () => loadGrafanaDashboard('opcua'));
-            document.getElementById('btnLiveDashboard').addEventListener('click', () => loadGrafanaDashboard('live'));
-
-            // Standardansicht ist das OPC-UA-Stationsdashboard.
-            loadGrafanaDashboard('opcua');
-        }
-
         function initCharts() {
             const ctxFreq = document.getElementById('freqChart').getContext('2d');
             freqChart = new Chart(ctxFreq, {
@@ -549,7 +283,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         async function clearDatabase() {
             if (!confirm('Wirklich ALLE Daten aus der Datenbank löschen? Dies kann nicht rückgängig gemacht werden!')) return;
             try {
-                const response = await fetch('?api=clear_database', { method: 'POST' });
+                const response = await fetch('api/audio.php?action=clear', { method: 'POST' });
                 const data = await response.json();
                 if (data.error) {
                     alert('Fehler: ' + data.error);
@@ -576,7 +310,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
 
         async function loadStats() {
             try {
-                const response = await fetch('?api=stats');
+                const response = await fetch('api/audio.php?action=stats');
                 const stats = await response.json();
                 document.getElementById('statTotal').textContent = stats.total || 0;
                 document.getElementById('statGut').textContent = stats.gut || 0;
@@ -588,7 +322,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
 
         async function loadData() {
             try {
-                let url = '?api=data';
+                let url = 'api/audio.php?action=data';
                 if (currentFilter) {
                     url += '&label=' + currentFilter;
                 }
@@ -645,7 +379,6 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         }
 
         initCharts();
-        initInfluxGrafanaLinks();
         loadStats();
         loadData();
         

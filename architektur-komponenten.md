@@ -1,6 +1,6 @@
 # Architektur-Komponenten & Kommunikationsprotokolle
 
-Übersicht aller Bausteine aus dem Architekturdiagramm (`leitstand.html`), gegliedert nach den drei Zonen **Datenerhebung**, **Verarbeiten + Bereitstellen** (Datenkrake, Raspberry Pi 5) und **Analyse**.
+Übersicht aller Bausteine aus dem Architekturdiagramm (`index.html`), gegliedert nach den drei Zonen **Datenerhebung**, **Verarbeiten + Bereitstellen** (Datenkrake, Raspberry Pi 5) und **Analyse**.
 
 ---
 
@@ -43,7 +43,7 @@
 | **Report-Agent** | A2A-Server | MariaDB | SQL | bidirektional |
 | | | Browser (Analyse-Zone) | HTTP | eingehend (Agenten-Konsole spricht Agent Card direkt an) |
 | **Zusatzgerät (Diagnose)** | Physisches Diagnosegerät, kein Produktionssystem | Wartungs-Agent | LAP | eingehend, nur nach expliziter Sicherheitsbestätigung |
-| **Webserver** | Liefert `leitstand.html` (dieses Dashboard) aus | Browser (Analyse-Zone) | HTTP | eingehend |
+| **Webserver** | Liefert `index.html` (dieses Dashboard) aus | Browser (Analyse-Zone) | HTTP | eingehend |
 
 ---
 

@@ -198,7 +198,7 @@
       <g>
         <rect x="280" y="610" width="540" height="54" rx="10" fill="#FFFFFF" stroke="#5B5852" stroke-width="1.4"/>
         <text x="550" y="634" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="#1D1D1C">Webserver</text>
-        <text x="550" y="651" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="#7D7A72">leitstand.html (dieses Dashboard)</text>
+        <text x="550" y="651" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="#7D7A72">index.html (dieses Dashboard)</text>
       </g>
 
       <!-- ================= Boxen: Zone 3 – Analyse ================= -->

@@ -20,7 +20,7 @@ realen Lernanlage demonstriert:
   Sprachmodell (lokal via LM Studio) überhaupt erst einen Agenten macht.
 
 Die interaktive Dokumentation und der Live-Leitstand liegen in
-[`leitstand.html`](leitstand.html): Architekturdiagramme, Agenten-Konsole,
+[`index.html`](Raspberry/web/index.html): Architekturdiagramme, Agenten-Konsole,
 Vergleich der ML-Verfahren, OPC-UA-Signaldokumentation der Modellanlage
 und ein Quiz zum Gelernten — jeweils mit Verweisen auf die zugehörigen
 Ordner im Repo.
@@ -86,8 +86,9 @@ dann meldet sich die Dockingstation korrekt als USB-Hub/Host an.
    inklusive).
 
 4. **Web-Oberflächen öffnen:**
-   - `http://datenkrake.local` — Leitstand (`leitstand.html`, siehe unten)
-   - `http://datenkrake.local/index.php` — bisheriges Audio-Live-Dashboard
+  - `http://datenkrake.local` — Leitstand (`index.html`, siehe unten)
+  - `http://datenkrake.local/audiodaten.php` — Audio-Live-Dashboard
+  - `http://datenkrake.local/plcdaten.php` — PLC-Telemetrie-Übersicht
    - `http://datenkrake.local:1880` — Node-RED-Editor
 
    Container-Status lässt sich jederzeit mit `docker compose ps` im Ordner
@@ -115,11 +116,11 @@ separater, stärkerer Rechner per Batch-Import den Data-Lake-Stack aus der
 MariaDB, während ein MCP-Server auf einem PC dieselbe MariaDB abfragt und
 die Daten per MCP an Claude Desktop und einen eigenständigen Agent
 Harness weiterreicht. Dieselbe Grafik lässt sich interaktiv mit
-Detail-Overlay in `leitstand.html` unter „Architektur" ansehen.
+Detail-Overlay in `index.html` unter „Architektur" ansehen.
 
 ## Was das Projekt zeigt
 
-Der Leitstand (`leitstand.html`) gliedert das Projekt in sechs
+Der Leitstand (`index.html`) gliedert das Projekt in sechs
 Themenblöcke, die jeweils Erklärung und laufendes System verbinden:
 
 | Thema | Inhalt | Zugehörige Ordner |
@@ -145,7 +146,7 @@ UAExpertExport/        OPC-UA-Exporte und Dokumentation der 10 Stationen der Mod
 Agentensystem/         MCP-Erweiterung, A2A-Agenten (Orchestrator/DB/Report), LAP-Wartungs-Agent, Agent Harness
 MCPLokalClaudDesktop/  MCP-Server für Claude Desktop (lesender Zugriff auf die MariaDB)
 DataLake/              eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) für einen separaten Rechner
-leitstand.html         interaktiver Leitstand & Lernmaterial (Startseite unter http://datenkrake.local)
+Raspberry/web/         interaktiver Leitstand sowie Audio- und PLC-Datenübersichten
 ```
 
 ## Weiterführende Dokumentation

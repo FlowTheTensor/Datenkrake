@@ -17,7 +17,7 @@ Mosquitto, MariaDB, Subscriber, Web-Dashboard) wird verändert oder ersetzt.
 | --- | --- |
 | `../MCPLokalClaudDesktop/mcpserver.py` | **erweitert** (alle 5 bestehenden Tools unverändert) um 1 Tool, 2 Resources, 1 Prompt |
 | `../Raspberry/mariadb/init/01-agentensystem.sql` | **ergänzt** `00-create-database.sql` um 2 Tabellen + 1 User |
-| `../leitstand.html` | **ergänzt** `index.php` um eine zweite, verlinkte Seite — bewusst im Repo-Root, damit sie beim Durchstöbern des Repos sofort sichtbar ist |
+| `../Raspberry/web/index.html` | **ergänzt** die getrennten Audio- und PLC-Datenübersichten um den Leitstand |
 | `anomalie_poller/` | überbrückt die im Haupt-README unter "Nächste Schritte" genannten offenen Punkte "Echtzeit-Inferenz" / "Alarm-System" |
 | `wartungs_agent/`, `lap_common/` | LAP-Instrument-Agent |
 | `db_agent/`, `orchestrator_agent/`, `report_agent/` | A2A-Schicht |
@@ -111,21 +111,18 @@ REPORT_LLM_TIMEOUT=30
 **→ `audio_anomalien`** *(neu)*
 **→ Orchestrator-Agent (A2A) erkennt offene Fälle → delegiert per LAP an Wartungs-Agent → Report-Agent (A2A) meldet**
 
-Parallel dazu unverändert: **MariaDB → PHP-Dashboard** (`../Raspberry/web/index.php`) und **MariaDB → MCP-Server → Claude Desktop**.
+Parallel dazu unverändert: **MariaDB → PHP-Dashboards** (`../Raspberry/web/audiodaten.php` und `../Raspberry/web/plcdaten.php`) und **MariaDB → MCP-Server → Claude Desktop**.
 
 ## Leitstand-Dashboard
 
-`../leitstand.html` liegt bewusst im Repo-Root statt in `Raspberry/web/`,
-damit sie beim Durchstöbern des Repos sofort auffällt. Trotzdem wird sie
-weiterhin live vom selben Web-Container mit ausgeliefert: der Build-Context
-des `web`-Service in `docker-compose.yml` wurde dafür auf die Repo-Wurzel
-erweitert, das Dockerfile kopiert `index.php` und `leitstand.html` von dort
-in denselben `/var/www/html/`-Ordner. Am Ergebnis ändert sich nichts – beide
-Seiten liegen im Container weiterhin nebeneinander.
+`../Raspberry/web/index.html` liegt zusammen mit den beiden
+Datenübersichten im Webroot. Der Dockerfile kopiert die Seiten sowie die
+getrennt organisierten APIs in denselben `/var/www/html/`-Ordner.
+Erreichbar unter `http://datenkrake.local/index.html`, verlinkt von beiden Übersichten aus.
 
 Sie zeigt Agent-/Instrument-Cards, das Architektur-Diagramm, einen
 LLM-Chat (LM Studio) sowie eine A2A-Konsole. Erreichbar unter
-`http://datenkrake.local/leitstand.html`, verlinkt von `index.php` aus.
+`http://datenkrake.local/index.html`, verlinkt von beiden Übersichten aus.
 
 Live-Abrufe der Agent-Cards funktionieren nur, wenn die Agenten CORS für
 den Browser-Ursprung erlauben (Standard-FastAPI/Starlette tut das nicht
