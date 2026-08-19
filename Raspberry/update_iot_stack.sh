@@ -47,6 +47,22 @@ compose() {
   (cd "${COMPOSE_DIR}" && docker compose "$@")
 }
 
+prepare_directories() {
+  mkdir -p "${SCRIPT_DIR}/grafana/data"
+  mkdir -p "${SCRIPT_DIR}/orange3/data"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/grafana"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/orange3"
+  chown -R 472:472 "${SCRIPT_DIR}/grafana/data"
+}
+
+fix_orange3_entrypoint() {
+  local start_script="${SCRIPT_DIR}/orange3/start.sh"
+  if [[ -f "${start_script}" ]] && grep -q "^exec Orange3" "${start_script}"; then
+    log "Fixing Orange3 entrypoint (exec Orange3 -> exec orange-canvas)"
+    sed -i 's/^exec Orange3/exec orange-canvas/' "${start_script}"
+  fi
+}
+
 backup_database() {
   mkdir -p "${BACKUP_DIR}"
   log "Creating MariaDB backup in ${BACKUP_DIR}"
@@ -103,6 +119,8 @@ sync_nodered() {
 }
 
 log "Pulling/rebuilding images and recreating services"
+prepare_directories
+fix_orange3_entrypoint
 compose pull historian grafana
 compose build --pull
 compose up -d

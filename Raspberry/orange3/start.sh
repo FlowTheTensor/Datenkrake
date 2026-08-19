@@ -11,4 +11,4 @@ websockify --web=/usr/share/novnc/ 6080 localhost:5900 &
 # Orange3-Datenordner (per Volume gemountet) muss vorhanden sein
 mkdir -p /root/.local/share/orange3
 
-exec Orange3
+exec orange-canvas
