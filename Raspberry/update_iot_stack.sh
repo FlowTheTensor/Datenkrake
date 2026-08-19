@@ -53,6 +53,11 @@ prepare_directories() {
   chown -R 472:472 "${SCRIPT_DIR}/grafana/data"
 }
 
+repair_database_permissions() {
+  log "Repairing MariaDB data directory ownership"
+  compose exec -T -u 0 db sh -c 'chown -R mysql:mysql /var/lib/mysql'
+}
+
 backup_database() {
   mkdir -p "${BACKUP_DIR}"
   log "Creating MariaDB backup in ${BACKUP_DIR}"
@@ -113,6 +118,7 @@ prepare_directories
 compose pull historian grafana
 compose build --pull
 compose up -d
+repair_database_permissions
 wait_for_database
 backup_database
 apply_schema_updates

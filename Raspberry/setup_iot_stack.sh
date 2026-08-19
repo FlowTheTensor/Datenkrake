@@ -68,7 +68,6 @@ prepare_directories() {
   fi
 
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mosquitto"
-  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/mariadb"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/historian"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/grafana"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/nodered"

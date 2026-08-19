@@ -10,6 +10,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f8f8f8; }
+        .audio-hero-image { display: block; width: 100%; max-width: 1100px; height: 180px; object-fit: contain; object-position: center; margin: 0 auto 14px; }
         h1 { display: flex; align-items: center; gap: 10px; color: #8b1a1a; }
         .live-indicator { width: 12px; height: 12px; background: #28a745; border-radius: 50%; animation: pulse 1s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -52,6 +53,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
 <?php } // End prevent duplicate HTML ?>
 </head>
 <body>
+    <img class="audio-hero-image" src="DatenbankAkustik.jpg" alt="Datenbank für Akustikdaten">
     <div class="header">
         <h1 style="margin: 0;">Audio-Spektrum Dashboard <span class="live-indicator" title="Live-Aktualisierung aktiv"></span></h1>
         <div class="logo">
@@ -59,7 +61,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
         </div>
     </div>
     <div style="margin-bottom: 15px;">
-        <a href="index.html" style="color:#8b1a1a; font-size: 13px;">→ Agentensystem-Leitstand (MCP · A2A · LAP)</a>
+        <a href="index.html" style="color:#8b1a1a; font-size: 13px;">→ Hauptseite (MCP · A2A · LAP)</a>
     </div>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: <span id="lastUpdate">-</span></div>
     
