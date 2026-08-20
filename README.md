@@ -81,7 +81,7 @@ dann meldet sich die Dockingstation korrekt als USB-Hub/Host an.
 1. **Repository auf den Raspberry Pi klonen:**
 
    ```bash
-   git clone --branch feature/agentensystem-mcp-a2a-lap https://github.com/FlowTheTensor/Datenkrake-Container.git
+   git clone --branch feature/agentensystem-mcp-a2a-lap https://github.com/FlowTheTensor/Datenkrake.git
    cd Datenkrake-Container
    ```
 
