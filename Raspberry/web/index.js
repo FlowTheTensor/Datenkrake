@@ -337,7 +337,38 @@
       correct:0, exp:'Einheitliche Daten erleichtern Speicherung, Abfragen und spätere Auswertung.'},
      {cat:'F', color:'#7A4E2D', q:'Was sollte bei einem Sensorausfall erkennbar sein?',
       options:['Ob ein Wert fehlt, ungültig ist oder außerhalb des erwarteten Bereichs liegt','Nur die Farbe des Dashboards','Das Passwort des Brokers','Die Version des Browsers'],
-      correct:0, exp:'Datenqualität und Ausfallzustände müssen von gültigen Messwerten unterscheidbar sein.'}
+      correct:0, exp:'Datenqualität und Ausfallzustände müssen von gültigen Messwerten unterscheidbar sein.'},
+
+     {cat:'G', color:'#6B4E71', q:'Was ist CRISP-DM?',
+      options:['Ein Vorgehensmodell für Data-Mining-Projekte in sechs Phasen','Ein MQTT-Broker','Ein Datenbankschema für PLC-Daten','Ein Agentenprotokoll wie MCP oder A2A'],
+      correct:0, exp:'CRISP-DM steht für Cross-Industry Standard Process for Data Mining und beschreibt einen wiederholbaren Ablauf.'},
+     {cat:'G', color:'#6B4E71', q:'In welcher Phase wird geklärt, warum überhaupt Akustik- und SPS-Daten überwacht werden?',
+      options:['Business Understanding','Data Preparation','Deployment','Evaluation'],
+      correct:0, exp:'Business Understanding klärt Ziel und Nutzen, bevor überhaupt Daten betrachtet werden.'},
+     {cat:'G', color:'#6B4E71', q:'Welche Phase entspricht dem Sichten von audio_spectrum und plc_telemetry?',
+      options:['Modeling','Data Understanding','Deployment','Business Understanding'],
+      correct:1, exp:'Data Understanding bedeutet, die vorhandenen Rohdaten zu sichten und ihre Qualität einzuschätzen.'},
+     {cat:'G', color:'#6B4E71', q:'Was passiert typischerweise in der Data-Preparation-Phase dieses Projekts?',
+      options:['Messwerte werden bereinigt, normalisiert und in MariaDB/Historian abgelegt','Der Orchestrator-Agent wird gestartet','Ein Quiz wird erzeugt','Ein neuer Docker-Container wird gebaut'],
+      correct:0, exp:'Erst nach Bereinigung und Ablage sind die Daten für Modellierung und Analyse nutzbar.'},
+     {cat:'G', color:'#6B4E71', q:'Welche Phase vergleicht unterschiedliche ML-Verfahren auf den Akustikdaten?',
+      options:['Modeling','Deployment','Business Understanding','Data Preparation'],
+      correct:0, exp:'In der Modeling-Phase werden verschiedene Modelle trainiert und miteinander verglichen.'},
+     {cat:'G', color:'#6B4E71', q:'Wozu dient die Evaluation-Phase im Projekt?',
+      options:['Um zu prüfen, ob der Anomalie-Detektor auf echten Messwerten zuverlässig funktioniert','Um Docker-Images zu bauen','Um MQTT-Topics zu benennen','Um die Datenbank zu löschen'],
+      correct:0, exp:'Evaluation prüft, ob das Modell die gesteckten Ziele tatsächlich erreicht, bevor es produktiv genutzt wird.'},
+     {cat:'G', color:'#6B4E71', q:'Was entspricht im Projekt der Deployment-Phase?',
+      options:['Der Orchestrator-Agent delegiert Ergebnisse per LAP an den Wartungs-Agent','Das Sichten roher OPC-UA-Werte','Das Definieren des Projektziels','Das Trainieren des ersten Modells'],
+      correct:0, exp:'Deployment bedeutet, ein Ergebnis tatsächlich in einem laufenden System wirksam werden zu lassen.'},
+     {cat:'G', color:'#6B4E71', q:'Warum ist CRISP-DM ein Kreislauf und keine Einbahnstraße?',
+      options:['Weil Erkenntnisse aus Evaluation und Deployment ins Business bzw. Data Understanding zurückfließen können','Weil jede Phase nur einmal durchlaufen werden darf','Weil MQTT das so vorschreibt','Weil Docker-Container neu gestartet werden müssen'],
+      correct:0, exp:'Neue Erkenntnisse aus späteren Phasen führen häufig dazu, frühere Phasen erneut zu durchlaufen.'},
+     {cat:'G', color:'#6B4E71', q:'Welche zwei Datenquellen stehen im Zentrum des CRISP-DM-Kreislaufs dieses Projekts?',
+      options:['audio_spectrum und plc_telemetry','Agent Cards und MQTT-Broker','Docker-Images und Volumes','Grafana-Dashboards und InfluxDB-Token'],
+      correct:0, exp:'Beide Tabellen liefern die Rohdaten, auf die sich alle sechs CRISP-DM-Phasen beziehen.'},
+     {cat:'G', color:'#6B4E71', q:'Warum eignet sich CRISP-DM besonders gut, um dieses Projekt zu erklären?',
+      options:['Weil es Business-Ziel, Daten, Modellierung und Betrieb an einem realen Beispiel zusammenführt','Weil es nur für SQL-Datenbanken gilt','Weil es MQTT ersetzt','Weil es ausschließlich für neuronale Netze entwickelt wurde'],
+      correct:0, exp:'CRISP-DM verbindet fachliche Ziele mit Daten, Modellierung und Betrieb - genau das zeigt die Datenkrake praktisch.'}
   ];
 
   var QUIZ_TOPICS = {
@@ -346,7 +377,8 @@
     C:'Kommunikation & Industrie 4.0',
     D:'Datenhaltung und -analyse',
     E:'Agentensysteme & KI-Integration',
-    F:'Datenerhebung'
+    F:'Datenerhebung',
+    G:'CRISP-DM'
   };
 
   function renderQuiz(){

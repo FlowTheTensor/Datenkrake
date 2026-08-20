@@ -31,6 +31,31 @@ Ordner im Repo.
 (siehe unten) ist „Datenerhebung" als eigener, sechster Themenblock
 zusätzlich ausdifferenziert.*
 
+## Zugrunde liegendes Vorgehensmodell: CRISP-DM
+
+Dem gesamten Projekt liegt das **CRISP-DM**-Modell (Cross-Industry
+Standard Process for Data Mining) zugrunde. Die Datenkrake ist damit
+nicht nur ein IoT-Stack, sondern ein durchgehendes Beispiel für den
+klassischen Data-Mining-Kreislauf, angewendet auf echte Akustik- und
+SPS-Daten:
+
+1. **Business Understanding** — Warum überwachen wir Akustik- und
+   SPS-Daten? Ziel: frühzeitige Anomalieerkennung an der Modellanlage.
+2. **Data Understanding** — Audio-Spektren (`audio_spectrum`) und
+   PLC-Tags (`plc_telemetry`) über MQTT/OPC-UA sichten.
+3. **Data Preparation** — Werte bereinigen, normalisieren und in
+   MariaDB bzw. dem Operational Historian ablegen.
+4. **Modeling** — ML-Verfahren vergleichen (Arduino UNO Q, Data-Lake-Stack).
+5. **Evaluation** — den Anomalie-Detektor gegen reale Messwerte prüfen.
+6. **Deployment** — Ergebnis geht ins Agentensystem: der
+   Orchestrator-Agent delegiert per LAP an den Wartungs-Agent.
+
+![CRISP-DM-Zyklus der Datenkrake: sechs Phasen von Business Understanding bis Deployment im Kreis um die zentralen Datenquellen audio_spectrum und plc_telemetry](Images/crisp-dm.svg)
+
+*Die sechs CRISP-DM-Phasen sind ein Kreislauf statt einer Einbahnstraße:
+Evaluation und Deployment liefern neue Erkenntnisse, die wieder ins
+Business bzw. Data Understanding zurückfließen.*
+
 ## Systemvoraussetzungen (Hardware)
 
 | Komponente | Mindestanforderung | Wofür |

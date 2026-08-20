@@ -14,6 +14,8 @@ COPY Raspberry/web/content /var/www/html/content
 COPY Images/DatenbankAkustik.jpg /var/www/html/DatenbankAkustik.jpg
 COPY Images/DatenbankPLC.jpg /var/www/html/DatenbankPLC.jpg
 COPY Images/krake_klein.jpg /var/www/html/krake_klein.jpg
+COPY Images/krake_klein.png /var/www/html/krake_klein.png
+COPY Images/crisp-dm.svg /var/www/html/crisp-dm.svg
 COPY Raspberry/web/api /var/www/html/api
 COPY Raspberry/web/includes /var/www/html/includes
 
