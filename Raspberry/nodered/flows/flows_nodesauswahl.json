@@ -427,7 +427,7 @@
     "localkeyfile": "",
     "securitymode": "None",
     "securitypolicy": "None",
-    "name": "PL1 192.168.36.2",
+    "name": "Palettenlager1 192.168.36.2",
     "x": 1240,
     "y": 80,
     "wires": [
@@ -571,7 +571,7 @@
     "localkeyfile": "",
     "securitymode": "None",
     "securitypolicy": "None",
-    "name": "PL2 192.168.36.8",
+    "name": "Palettenlager2 192.168.36.8",
     "x": 1230,
     "y": 320,
     "wires": [
