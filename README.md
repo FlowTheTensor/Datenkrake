@@ -1,6 +1,6 @@
 <img align="right" src="Images/krake_klein.jpg" alt="Datenkrake Logo" width="120">
 
-# Üebrsichtsseite für den Unterricht, mit der die Schüler arbeiten können, findet man unter [Übersichtsseite](https://flowthetensor.github.io/Datenkrake/)
+# Übersichtsseite für den Unterricht, mit der die Schüler arbeiten können, findet man unter [https://flowthetensor.github.io/Datenkrake/](https://flowthetensor.github.io/Datenkrake/)
 Diese wird auch angezeigt, wenn man datenkrake.local im Browser aufruft, sobald alles auf dem Raspberry läuft.
 
 # Datenkrake — Agentensystem (MCP · A2A · LAP)
