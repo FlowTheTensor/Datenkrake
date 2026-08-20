@@ -5,9 +5,8 @@ Diese wird auch angezeigt, wenn man datenkrake.local im Browser aufruft, sobald 
 
 # Datenkrake — Agentensystem (MCP · A2A · LAP)
 
-Dieser Branch (`feature/agentensystem-mcp-a2a-lap`) baut auf dem
-IoT-Grundstack der Datenkrake auf (Audioerfassung, MQTT, MariaDB,
-Web-Dashboard) und erweitert ihn um eine industrielle SPS-Anbindung
+IoT-Grundstack der Datenkrake sind Audioerfassung, MQTT, MariaDB und 
+Web-Dashboard und eine industrielle SPS-Anbindung
 (OPC-UA/Node-RED), einen Operational Historian, einen Data-Lake-Stack
 sowie ein **Agentensystem**, das drei KI-Agentenprotokolle an einer
 realen Lernanlage demonstriert:
