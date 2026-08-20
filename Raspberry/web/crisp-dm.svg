@@ -1,0 +1,81 @@
+<svg width="940" height="780" viewBox="0 0 940 780" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="titel desc">
+  <title id="titel">CRISP-DM-Zyklus der Datenkrake</title>
+  <desc id="desc">Sechs Phasen von Business Understanding bis Deployment, im Kreis angeordnet um die zentralen Datenquellen audio_spectrum und plc_telemetry, mit Beispielen aus diesem Projekt je Phase.</desc>
+  <style>
+    .bg { fill: #FBF9F5; }
+    .ring { stroke: #E7E1D6; stroke-width: 2.5; fill: none; }
+    .spoke { stroke: #C9C2B4; stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; }
+    .node-title { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 15px; fill: #FFFFFF; text-anchor: middle; }
+    .node-note { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 9.8px; fill: #FFFFFF; text-anchor: middle; }
+    .center-title { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 17px; fill: #1D1D1C; text-anchor: middle; }
+    .center-note { font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 10.5px; fill: #5B5852; text-anchor: middle; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5B5852"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="940" height="780"/>
+
+  <!-- Zyklus-Pfeile zwischen den sechs Phasen -->
+  <path class="ring" marker-end="url(#arrow)" d="M552.3,187.5 L604.2,217.5"/>
+  <path class="ring" marker-end="url(#arrow)" d="M686.5,360 L686.5,420"/>
+  <path class="ring" marker-end="url(#arrow)" d="M604.2,562.5 L552.3,592.5"/>
+  <path class="ring" marker-end="url(#arrow)" d="M387.7,592.5 L335.8,562.5"/>
+  <path class="ring" marker-end="url(#arrow)" d="M253.5,420 L253.5,360"/>
+  <path class="ring" marker-end="url(#arrow)" d="M335.8,217.5 L387.7,187.5"/>
+
+  <!-- gestrichelte Verbindungen zu den zentralen Datenquellen -->
+  <path class="spoke" d="M470,324 L470,228"/>
+  <path class="spoke" d="M527.2,357 L610.3,309"/>
+  <path class="spoke" d="M527.2,423 L610.3,471"/>
+  <path class="spoke" d="M470,456 L470,552"/>
+  <path class="spoke" d="M412.8,423 L329.7,471"/>
+  <path class="spoke" d="M412.8,357 L329.7,309"/>
+
+  <!-- Zentrum: die beiden zentralen Tabellen -->
+  <circle cx="470" cy="390" r="66" fill="#F3EEE6" stroke="#E7E1D6" stroke-width="1.5"/>
+  <text class="center-title" x="470" y="380">Daten</text>
+  <text class="center-note" x="470" y="398">audio_spectrum</text>
+  <text class="center-note" x="470" y="411">plc_telemetry</text>
+
+  <!-- 1 Business Understanding -->
+  <circle cx="470" cy="140" r="82" fill="#5B5852"/>
+  <text class="node-title" x="470" y="122">1. Business</text>
+  <text class="node-title" x="470" y="140">Understanding</text>
+  <text class="node-note" x="470" y="160">Warum überwachen wir</text>
+  <text class="node-note" x="470" y="172">Akustik &amp; SPS-Daten?</text>
+
+  <!-- 2 Data Understanding -->
+  <circle cx="686.5" cy="265" r="82" fill="#B87A1C"/>
+  <text class="node-title" x="686.5" y="247">2. Data</text>
+  <text class="node-title" x="686.5" y="265">Understanding</text>
+  <text class="node-note" x="686.5" y="285">Audio-Spektren &amp;</text>
+  <text class="node-note" x="686.5" y="297">PLC-Tags sichten</text>
+
+  <!-- 3 Data Preparation -->
+  <circle cx="686.5" cy="515" r="82" fill="#2A5F8A"/>
+  <text class="node-title" x="686.5" y="497">3. Data</text>
+  <text class="node-title" x="686.5" y="515">Preparation</text>
+  <text class="node-note" x="686.5" y="535">Bereinigen,</text>
+  <text class="node-note" x="686.5" y="547">normalisieren, ablegen</text>
+
+  <!-- 4 Modeling -->
+  <circle cx="470" cy="640" r="82" fill="#C81E3A"/>
+  <text class="node-title" x="470" y="630">4. Modeling</text>
+  <text class="node-note" x="470" y="650">ML-Verfahren vergleichen</text>
+  <text class="node-note" x="470" y="662">(Arduino UNO Q, Data Lake)</text>
+
+  <!-- 5 Evaluation -->
+  <circle cx="253.5" cy="515" r="82" fill="#2F6B4F"/>
+  <text class="node-title" x="253.5" y="505">5. Evaluation</text>
+  <text class="node-note" x="253.5" y="525">Anomalie-Erkennung</text>
+  <text class="node-note" x="253.5" y="537">überprüfen</text>
+
+  <!-- 6 Deployment -->
+  <circle cx="253.5" cy="265" r="82" fill="#6B4E71"/>
+  <text class="node-title" x="253.5" y="255">6. Deployment</text>
+  <text class="node-note" x="253.5" y="275">Agentensystem: Orchestrator</text>
+  <text class="node-note" x="253.5" y="287">→ Wartungs-Agent (LAP)</text>
+</svg>
