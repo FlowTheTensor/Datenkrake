@@ -7,6 +7,10 @@ RUN docker-php-ext-install mysqli
 COPY Raspberry/web/audiodaten.php /var/www/html/
 COPY Raspberry/web/plcdaten.php /var/www/html/
 COPY Raspberry/web/index.html /var/www/html/
+COPY Raspberry/web/index.css /var/www/html/index.css
+COPY Raspberry/web/index.js /var/www/html/index.js
+COPY Raspberry/web/content-loader.js /var/www/html/content-loader.js
+COPY Raspberry/web/content /var/www/html/content
 COPY Images/DatenbankAkustik.jpg /var/www/html/DatenbankAkustik.jpg
 COPY Images/DatenbankPLC.jpg /var/www/html/DatenbankPLC.jpg
 COPY Images/krake_klein.jpg /var/www/html/krake_klein.jpg

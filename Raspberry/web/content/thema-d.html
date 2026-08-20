@@ -1,0 +1,280 @@
+<section class="theme-section" id="thema-d" aria-labelledby="thema-d-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-blue">C</div>
+    <div><h2 id="thema-d-heading">Kommunikation &amp; Industrie 4.0</h2>
+    <div class="eyebrow">Raspberry/mosquitto/, Raspberry/nodered/</div></div>
+  </div>
+  <div class="info-box d">
+    MQTT und OPC-UA lösen unterschiedliche Probleme. <b>MQTT</b> ist ein schlankes
+    Publish/Subscribe-Protokoll, mit dem der Arduino seine Messwerte „hinausruft", ohne zu wissen, wer
+    zuhört. <b>OPC-UA</b> ist der etablierte Industriestandard, mit dem Maschinen wie eine S7-1500 ihre
+    Daten strukturiert bereitstellen. <b>Node-RED</b> übersetzt zwischen beiden Welten, ganz ohne
+    eigenen Code — die SPS-Werte landen anschließend auf dem MQTT-Topic-Namensraum <code>plc/&lt;station&gt;/&lt;tag&gt;</code>.
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Node-RED</h2>
+      <button class="arch-overlay-btn" id="uaxOverlayBtn" type="button" aria-haspopup="dialog" aria-controls="uaxOverlay">
+        <span class="sw sw-blue"></span>OPC-UA-Signaldokumentation
+      </button>
+    </div>
+    <div class="ki-links">
+        <div class="ki-card">
+          <div class="name">🔌 Node-RED (OPC-UA → MQTT)</div>
+          <input id="noderedUrl" placeholder="http://datenkrake.local:1880" value="http://datenkrake.local:1880">
+          <a class="open-btn" id="noderedOpen" href="#" target="_blank" rel="noopener">Editor öffnen ↗</a>
+        </div>
+    </div>
+  </div>
+</section>
+
+<div id="uaxOverlay" role="dialog" aria-modal="true" aria-labelledby="uaxOverlayHeading">
+  <div class="uax-card">
+    <div class="uax-head">
+      <div>
+        <h2 id="uaxOverlayHeading">OPC-UA Signaldokumentation der Modellanlage</h2>
+        <p>Aus <code>UAExpertExport/Dokumentation_OPC_UA_Stationen.md</code> — die mit UAExpert exportierten OPC-UA-Knoten aller S7-1500-Stationen, als einheitliche Datengrundlage für Node-RED, MQTT und Datenbankaufzeichnung. Stand der Exporte: 2026-08-05.</p>
+      </div>
+      <button class="uax-close" id="uaxOverlayClose" type="button" aria-label="Schließen">✕</button>
+    </div>
+
+    <nav class="uax-toc" aria-label="Abschnitte">
+      <a href="#uax-stationen">Stationen</a>
+      <a href="#uax-struktur">Grundstruktur</a>
+      <a href="#uax-namen">Namenskonventionen</a>
+      <a href="#uax-gruppen">Signalgruppen</a>
+      <a href="#uax-stationsdetails">Stationsdetails</a>
+      <a href="#uax-mqtt">MQTT-Modell</a>
+      <a href="#uax-db">Datenbankmodell</a>
+      <a href="#uax-sampling">Sampling</a>
+      <a href="#uax-kpi">KPI</a>
+      <a href="#uax-besonderheiten">Besonderheiten</a>
+      <a href="#uax-umsetzung">Umsetzung</a>
+      <a href="#uax-dateien">Dateien</a>
+    </nav>
+
+    <div class="uax-section" id="uax-stationen">
+      <h3><span class="bar"></span>Geltungsbereich (exportierte Stationen)</h3>
+      <div class="uax-table-wrap">
+        <table class="uax-table">
+          <thead><tr><th>Station</th><th>Datei</th><th>OPC-UA-Endpoint</th><th class="num">Datensätze</th></tr></thead>
+          <tbody>
+            <tr><td>Leitstand</td><td>Leitstand.txt</td><td>192.168.36.1:4840</td><td class="num">1000</td></tr>
+            <tr><td>Palettenlager 1</td><td>Palettenlager1.txt</td><td>192.168.36.2:4840</td><td class="num">200</td></tr>
+            <tr><td>Rohlager Dosen</td><td>Rohlager Dosen.txt</td><td>192.168.36.3:4840</td><td class="num">198</td></tr>
+            <tr><td>Abfüllen</td><td>Abfüllen.txt</td><td>192.168.36.4:4840</td><td class="num">191</td></tr>
+            <tr><td>Qualität Kamera</td><td>Qualitaet Kamera.txt</td><td>192.168.36.5:4840</td><td class="num">210</td></tr>
+            <tr><td>Handling Saugarm</td><td>Handling Saugarm.txt</td><td>192.168.36.6:4840</td><td class="num">194</td></tr>
+            <tr><td>Presse (Montage/Demontage)</td><td>Presse.txt</td><td>192.168.36.7:4840</td><td class="num">186</td></tr>
+            <tr><td>Palettenlager 2</td><td>Palettenlager2.txt</td><td>192.168.36.8:4840</td><td class="num">200</td></tr>
+            <tr><td>Transfersystem Roboter</td><td>Transfersystem Roboter.txt</td><td>192.168.36.9:4840</td><td class="num">172</td></tr>
+            <tr><td>Transfersystem Hochregallager</td><td>Transfersystem Hochregallager.txt</td><td>192.168.36.10:4840</td><td class="num">172</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="uax-note-top">Die meisten Anlagenstationen haben ein nahezu identisches Kommunikations-Grundmodell. Der Leitstand bildet die Zentrale und hat deutlich mehr Signale und eigene Strukturtypen.</p>
+    </div>
+
+    <div class="uax-section" id="uax-struktur">
+      <h3><span class="bar"></span>Gemeinsame OPC-UA-Grundstruktur je Station</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card">
+          <h4>1. Geräte-Metadaten</h4>
+          <ul><li>DeviceManual, DeviceRevision, EngineeringRevision</li><li>Manufacturer, Model, SerialNumber, SoftwareRevision</li><li>OperatingMode (typisch: 8 = Run)</li></ul>
+        </div>
+        <div class="uax-mini-card">
+          <h4>2. Inputs</h4>
+          <ul><li>Sensoren, Bedienbits, Handshake-Eingänge</li><li>Typisch viele Boolean-Signale, einige UInt16/Int16/UInt32</li></ul>
+        </div>
+        <div class="uax-mini-card">
+          <h4>3. Outputs</h4>
+          <ul><li>Aktoren, Stellbits, Handshake-Ausgänge</li><li>Typisch viele Boolean-Signale</li></ul>
+        </div>
+        <div class="uax-mini-card">
+          <h4>4. DataBlocksGlobal/dbMESStation</h4>
+          <ul><li>MES-relevante Kennzahlen und Strukturfelder</li><li>z. B. Arbeitsgang, Auftragsnummern, Fehler, Füllstände, Mengen, Zustand</li></ul>
+        </div>
+        <div class="uax-mini-card">
+          <h4>5. DataBlocksGlobal/dbOPCLeitstand</h4>
+          <ul><li>Auftrags- und Statusaustausch mit Leitstand</li><li>z. B. uvlaVonLeitstandAuftrag, uzlsZuLeitstandStatus</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-namen">
+      <h3><span class="bar"></span>Namenskonventionen (praktische Bedeutung)</h3>
+      <p>Nicht offiziell dokumentiert, aber konsistent genug für eine belastbare Arbeitsdefinition. Präfixmuster wie <code>+AL</code>, <code>+AM</code>, <code>+AN</code>, <code>+AO</code> kennzeichnen Unterbereiche bzw. Funktionsgruppen einer Station.</p>
+      <div class="uax-table-wrap">
+        <table class="uax-table">
+          <thead><tr><th>Kürzel</th><th>Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td>BG</td><td>Grenz-/Binärsensor, Endlage, Lichtschranke</td></tr>
+            <tr><td>BL</td><td>Analoger Messwert (z. B. Füllstand)</td></tr>
+            <tr><td>MA</td><td>Motor/Aktor (häufig Förderband)</td></tr>
+            <tr><td>MB</td><td>Ventil/Zylinder/Ausgangsaktor</td></tr>
+            <tr><td>e…</td><td>eingehendes Handshake-/Steuersignal</td></tr>
+            <tr><td>s…</td><td>ausgehendes Status-/Meldesignal</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-gruppen">
+      <h3><span class="bar"></span>Einheitliche Signalgruppen für Datenbank und MQTT</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card"><h4>heartbeat</h4><div class="sub">OperatingMode, ggf. Clock (Leitstand)</div><div class="nutzen">Verfügbarkeit, Offline-Erkennung</div></div>
+        <div class="uax-mini-card"><h4>process_io</h4><div class="sub">alle Signals aus Inputs/Outputs</div><div class="nutzen">Prozessverlauf, Zyklusanalyse, Störungsdiagnose</div></div>
+        <div class="uax-mini-card"><h4>mes</h4><div class="sub">dbMESStation.*</div><div class="nutzen">KPI, Auftragsbezug, Qualität, OEE-nahe Kennzahlen</div></div>
+        <div class="uax-mini-card"><h4>order_link</h4><div class="sub">dbOPCLeitstand.uvlaVonLeitstandAuftrag.*</div><div class="nutzen">geplanter Auftrag/Produkt/Weg</div></div>
+        <div class="uax-mini-card"><h4>status_link</h4><div class="sub">dbOPCLeitstand.uzlsZuLeitstandStatus.*</div><div class="nutzen">Rückmeldung an Leitstand</div></div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-stationsdetails">
+      <h3><span class="bar"></span>Stationsspezifische Hinweise</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card">
+          <h4>Leitstand</h4>
+          <ul><li>Zentrale Sammel-/Steuerinstanz, 1000 Datensätze</li><li>viele stationsübergreifende Handshake-Signale</li><li>eigene Strukturtypen (AUFTRAG_VERFOLGUNG, KREUZUNG, DP_BELEGUNG)</li><li>Empfang/SendeProfinet pro Teilstation (BF, DU, H, HR, K, MD, MF, PL)</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> beste Quelle für End-to-End Materialfluss und Auftragsverfolgung</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Palettenlager 1 &amp; 2</h4>
+          <ul><li>spiegelbildliche Struktur</li><li>Position, Stopper, Vereinzeler, Hub, Füllstand</li><li>+AM-BGx / +AN-BGx für Positionen/Endlagen</li><li>dbMESStation.Fuellstand1..3</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> Lagerbelegung, Materialnachschub, Verklemmung/Blockade-Erkennung</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Rohlager Dosen</h4>
+          <ul><li>ähnlich Palettenlager, zusätzliche Untergruppe AO</li><li>Schwerpunkt Zuführung/Füllstandsmanagement</li><li>Füllstandssignale als UInt16</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> Früherkennung von Materialmangel, Taktverlust durch Leerstand</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Abfüllen</h4>
+          <ul><li>Füll- und Vereinzelungsprozess</li><li>FuellstandMag1..3</li><li>WaageGS / WaageAS</li><li>Zylinder-/Stoppersignale in MesZylinder</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> qualitätsrelevante Prozesslage, Engpassanalyse, Füllstandsabläufe</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Handling Saugarm</h4>
+          <ul><li>Pick-and-Place-artige Funktion</li><li>Vakuum, Hub1/Hub2, Schwenkarm Band/Magazin</li><li>Werkstückpräsenz</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> Zykluszeit, Fehlgriff-/Vakuumprobleme, mechanische Belastungsindikatoren</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Presse (Montage/Demontage)</h4>
+          <ul><li>Hub- und Stopper-Logik</li><li>HubMontageOben/Unten, HubDemontageOben/Unten</li><li>AnalogInduktiv (Int16)</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> kraft-/positionsnahe Proxy-Daten, Erkennung von Press-/Hubabweichungen</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Qualität Kamera</h4>
+          <ul><li>einzige Station mit Kamera-/Vision-Schnittstelle</li><li>Status_Trigger_ready, Status_Data_valid, Status_Error, Status_Online</li><li>Command_Code/Argument, Result_/Return_Command_Code</li><li>FarbeErkannt, AnzahlKugeln, Belichtung</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> Qualitätsmetriken, Bildverarbeitungszustand, Traceability auf Produktebene</div>
+        </div>
+        <div class="uax-mini-card">
+          <h4>Transfersystem Roboter &amp; Hochregallager</h4>
+          <ul><li>sehr ähnliche Struktur</li><li>Stopperlogik zwischen GS/AS und Automatposition</li><li>Stopper links/rechts für AS und GS</li><li>PositionAutomat, StopperAutomat</li></ul>
+          <div class="nutzen"><b>Nutzen:</b> Materialfluss-Synchronisation, Stau- und Taktabweichungen</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-mqtt">
+      <h3><span class="bar"></span>Datenmodell für MQTT</h3>
+      <p>Empfohlenes Topic-Schema: <code>fabrik/linie1/&lt;station&gt;/heartbeat</code> · <code>.../process_io</code> · <code>.../mes</code> · <code>.../order_link</code> · <code>.../status_link</code><br>
+      Beispielstationen: leitstand, palettenlager1, rohlager, abfuellen, qualitaet, handling, presse, palettenlager2, transfer_roboter, transfer_hochregal</p>
+      <div class="uax-code">{
+  "ts": "2026-08-05T10:00:00.000Z",
+  "station": "abfuellen",
+  "group": "process_io",
+  "quality": "Good",
+  "values": {
+    "+AM-BG11_FuellstandMag1": true,
+    "+AN-BG1_WaageGS": true,
+    "sWartet": true
+  }
+}</div>
+      <p class="uax-note-top">Hinweise: <code>ts</code> immer in UTC (ISO-8601) · <code>quality</code> aus dem OPC-UA-StatusCode mitgeben · bei Arrays/Strukturen flache Key-Namen mit Pfad verwenden.</p>
+    </div>
+
+    <div class="uax-section" id="uax-db">
+      <h3><span class="bar"></span>Datenbankmodell (minimal, robust)</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card">
+          <h4>opc_raw</h4>
+          <div class="sub">Rohhistorie für KI-Training und Re-Processing</div>
+          <ul><li>ts_utc, station, node_path</li><li>value_num, value_bool, value_text</li><li>datatype, quality</li></ul>
+        </div>
+        <div class="uax-mini-card">
+          <h4>opc_mes_snapshot</h4>
+          <div class="sub">schnelle MES-/Dashboard-Abfragen</div>
+          <ul><li>ts_utc, station, arbeitsgang, auftragsnummer</li><li>zustand, menge_produziert, menge_ausschuss</li><li>fehler_code, fehler_bezeichnung</li></ul>
+        </div>
+        <div class="uax-mini-card">
+          <h4>opc_alarm_events</h4>
+          <div class="sub">ereignisorientierte Analyse</div>
+          <ul><li>ts_start_utc, ts_end_utc, station</li><li>event_key, severity</li><li>context_json</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-sampling">
+      <h3><span class="bar"></span>Sampling- und Logging-Strategie</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card"><h4>1. Zyklische Erfassung</h4><ul><li>Prozessbits und MES-Werte alle 500–1000 ms</li></ul></div>
+        <div class="uax-mini-card"><h4>2. Event-basierte Ergänzung</h4><ul><li>zusätzlich bei Flankenwechsel von Status_Error, sStillstand, sInReset, Schlüsselsensoren (Stopper, Hub, Vakuum)</li></ul></div>
+        <div class="uax-mini-card"><h4>3. Datenqualität</h4><ul><li>nur quality = Good für Modelltraining</li><li>ungültige/fehlende Werte als eigene Klasse markieren, nicht still löschen</li></ul></div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-kpi">
+      <h3><span class="bar"></span>KPI-Vorschläge für KI und Instandhaltung</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card"><h4>Taktzeit je Station</h4><div class="nutzen">Zeit zwischen zwei gültigen Produkt-/Auftrags-Events</div></div>
+        <div class="uax-mini-card"><h4>Stillstandsquote</h4><div class="nutzen">Anteil Zeit mit sStillstand = true</div></div>
+        <div class="uax-mini-card"><h4>Mikrostau-Indikator</h4><div class="nutzen">Häufigkeit schneller Stopper-/Bandsensor-Flanken ohne Auftragsfortschritt</div></div>
+        <div class="uax-mini-card"><h4>Materialmangel-Indikator</h4><div class="nutzen">Füllstandstrends aus BL/Füllstand-Feldern</div></div>
+        <div class="uax-mini-card"><h4>Qualitätsdrift</h4><div class="nutzen">Kamera: Veränderungen in FarbeErkannt/AnzahlKugeln/Status_Data_valid</div></div>
+        <div class="uax-mini-card"><h4>Wartungsindikatoren</h4><div class="nutzen">Anstieg Hub-/Stopper-Schaltzyklen pro Stunde, zunehmende Verweilzeiten in Warte-/Reset-Zuständen</div></div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-besonderheiten">
+      <h3><span class="bar"></span>Bekannte Besonderheiten aus den Exporten</h3>
+      <ul class="uax-list-compact">
+        <li>Umlaute kommen in Feldnamen vor (z. B. Füllstand mit Umlaut im Original).</li>
+        <li>Einzelne Felder haben Schreibvarianten, z. B. SchalterPruefungIgnorieren vs. SchalterPruefungIgnoriren.</li>
+        <li>Einige Stationsnamen in dbMESStation.Name stehen auf unknown oder 0 und sollten in SPS/HMI gepflegt werden.</li>
+        <li>Leitstand nutzt zusätzliche benutzerdefinierte Strukturtypen, die getrennt dokumentiert werden sollten.</li>
+      </ul>
+    </div>
+
+    <div class="uax-section" id="uax-umsetzung">
+      <h3><span class="bar"></span>Konkrete Umsetzungsschritte im Projekt</h3>
+      <div class="uax-grid">
+        <div class="uax-mini-card"><h4>1. Node-RED</h4><ul><li>pro Station ein OPC-UA-Client-Flow</li><li>Gruppierung nach den 5 Signalgruppen</li><li>Ausgabe als MQTT-JSON nach obigem Topic-Schema</li></ul></div>
+        <div class="uax-mini-card"><h4>2. MQTT-Broker</h4><ul><li>Retain nur für heartbeat</li><li>process_io nicht retainen</li></ul></div>
+        <div class="uax-mini-card"><h4>3. Datenbank</h4><ul><li>erst in opc_raw schreiben</li><li>danach per View/ETL nach opc_mes_snapshot verdichten</li></ul></div>
+        <div class="uax-mini-card"><h4>4. KI-Training</h4><ul><li>Feature-Store aus opc_raw aufbauen</li><li>Labels aus Ereignissen/Fehlern/Qualitätsbits erzeugen</li></ul></div>
+      </div>
+    </div>
+
+    <div class="uax-section" id="uax-dateien">
+      <h3><span class="bar"></span>Dateireferenzen</h3>
+      <div class="uax-files">
+        <a href="UAExpertExport/Leitstand.txt" target="_blank" rel="noopener">Leitstand.txt</a>
+        <a href="UAExpertExport/Palettenlager1.txt" target="_blank" rel="noopener">Palettenlager1.txt</a>
+        <a href="UAExpertExport/Rohlager%20Dosen.txt" target="_blank" rel="noopener">Rohlager Dosen.txt</a>
+        <a href="UAExpertExport/Abf%C3%BCllen.txt" target="_blank" rel="noopener">Abfüllen.txt</a>
+        <a href="UAExpertExport/Qualitaet%20Kamera.txt" target="_blank" rel="noopener">Qualitaet Kamera.txt</a>
+        <a href="UAExpertExport/Handling%20Saugarm.txt" target="_blank" rel="noopener">Handling Saugarm.txt</a>
+        <a href="UAExpertExport/Presse.txt" target="_blank" rel="noopener">Presse.txt</a>
+        <a href="UAExpertExport/Palettenlager2.txt" target="_blank" rel="noopener">Palettenlager2.txt</a>
+        <a href="UAExpertExport/Transfersystem%20Roboter.txt" target="_blank" rel="noopener">Transfersystem Roboter.txt</a>
+        <a href="UAExpertExport/Transfersystem%20Hochregallager.txt" target="_blank" rel="noopener">Transfersystem Hochregallager.txt</a>
+        <a href="UAExpertExport/Dokumentation_OPC_UA_Stationen.md" target="_blank" rel="noopener">Dokumentation_OPC_UA_Stationen.md</a>
+        <a href="UAExpertExport/Signal_Legende_Stationen.md" target="_blank" rel="noopener">Signal_Legende_Stationen.md</a>
+        <a href="UAExpertExport/SQL_Schema_Datenkrake.sql" target="_blank" rel="noopener">SQL_Schema_Datenkrake.sql</a>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,456 @@
+<section class="theme-section" id="thema-a" aria-labelledby="thema-a-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-accent">F</div>
+    <div><h2 id="thema-a-heading">Agentensysteme &amp; KI-Integration</h2>
+    <div class="eyebrow">Agentensystem/</div></div>
+  </div>
+  <div class="info-box">
+    Drei Protokolle verbinden hier unterschiedliche Dinge — und genau diese Unterscheidung ist der Kern
+    des Themas. <b>MCP</b> verbindet ein Sprachmodell mit Werkzeugen und Daten (die „vertikale" Kante) —
+    so bekommt Claude Desktop unten Zugriff auf die MariaDB. <b>A2A</b> verbindet zwei eigenständige
+    Agenten miteinander (die „horizontale" Kante) — der Orchestrator delegiert Aufgaben an den DB- und
+    Report-Agenten. <b>LAP</b> verbindet einen Agenten mit einem physischen Gerät — hier ein
+    Diagnosegerät, das der Wartungs-Agent erst nach einer expliziten Sicherheitsbestätigung ansteuern
+    darf. Der <b>Agent Harness</b> schließlich ist die Schleife, die aus einem rohen Sprachmodell
+    überhaupt erst etwas macht, das Werkzeuge selbstständig benutzen kann — genau das lässt sich oben im
+    Chat-Tab „Agenten-Konsole" gegen die echten A2A-Agenten ausprobieren.
+  </div>
+
+  <section class="panel" aria-labelledby="archHeading">
+    <div class="panel-head">
+      <h2 id="archHeading">Architektur</h2>
+      <button class="arch-overlay-btn" id="archOverlayBtn" type="button" aria-haspopup="dialog" aria-controls="archOverlay">
+        <span class="sw"></span>Komponenten-Übersicht
+      </button>
+    </div>
+    <svg viewBox="0 0 1100 760" width="100%" role="img" class="svg-responsive">
+      <title>Systemarchitektur: Datenerhebung, Verarbeitung/Bereitstellung auf der Datenkrake (Raspberry Pi 5) und Analyse</title>
+      <desc>Links erheben Akustik-KI, YOLO-System (Arduino UNO Q, per MQTT) und die Modellanlage (per OPC-UA über Node-RED) Rohdaten. In der Mitte bündelt die Datenkrake auf einem Raspberry Pi 5 als Docker-Stack den Mosquitto-Broker, Node-RED als OPC-UA/MQTT-Brücke, den Operational Historian InfluxDB, die MariaDB als vollständige Datenquelle, einen Anomalie-Poller, der zusätzlich Zeitreihenanalysen aus InfluxDB abruft, sowie das Agentensystem aus Orchestrator-, DB-, Wartungs- und Report-Agent, die per A2A kommunizieren; ein Webserver liefert dieses Dashboard aus. Rechts liest ein separater Server/PC per Batch-Import einen Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) aus der MariaDB, während ein MCP-Server auf einem PC dieselbe MariaDB abfragt und die Daten per MCP sowohl an Claude Desktop als auch an einen eigenständigen Agent Harness weiterreicht, die beide gleichwertig als MCP-Clients auftreten; ein Browser greift per HTTP auf den Webserver zu.</desc>
+      <defs>
+        <marker id="arMcp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--accent)"/>
+        </marker>
+        <marker id="arA2a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--ink-soft)"/>
+        </marker>
+        <marker id="arLap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--accent-bright)"/>
+        </marker>
+        <marker id="arFeed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="var(--ink-faint)"/>
+        </marker>
+        <marker id="arNet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M1 1L8 5L1 9Z" fill="#2A5F8A"/>
+        </marker>
+      </defs>
+
+      <!-- Zonen: Dividers + Labels -->
+      <line x1="238" y1="50" x2="238" y2="705" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="2 4"/>
+      <line x1="865" y1="50" x2="865" y2="705" stroke="var(--line)" stroke-width="1.2" stroke-dasharray="2 4"/>
+      <g font-family="JetBrains Mono" font-size="11" letter-spacing="1.5" fill="var(--ink-faint)">
+        <text x="122" y="30" text-anchor="middle">DATENERHEBUNG</text>
+        <text x="550" y="30" text-anchor="middle">VERARBEITEN + BEREITSTELLEN</text>
+        <text x="975" y="30" text-anchor="middle">ANALYSE</text>
+      </g>
+
+      <!-- Container: Datenkrake Raspberry Pi 5 -->
+      <rect x="250" y="45" width="600" height="660" rx="14" fill="var(--surface-2)" fill-opacity="0.35" stroke="var(--line)" stroke-width="1.4"/>
+      <text x="270" y="68" font-family="JetBrains Mono" font-size="10.5" fill="var(--ink-faint)">Datenkrake · Raspberry Pi 5 (Docker-Stack)</text>
+
+      <!-- ================= Verbindungen ================= -->
+      <!-- MQTT / OPC-UA (Zone 1 -> Mosquitto/Node-RED) -->
+      <path d="M220,103 L280,112" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNet)"/>
+      <text x="240" y="97" font-family="JetBrains Mono" font-size="10" fill="#2A5F8A">MQTT</text>
+
+      <path d="M220,178 L280,132" fill="none" stroke="#2A5F8A" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arNet)"/>
+      <text x="222" y="163" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">MQTT (geplant)</text>
+
+      <path d="M220,300 L280,195" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNet)"/>
+      <text x="228" y="252" font-family="JetBrains Mono" font-size="10" fill="#2A5F8A" transform="rotate(-60 228 252)">OPC-UA</text>
+
+      <!-- Node-RED -> Mosquitto (Bridge publiziert selbst per MQTT) -->
+      <path d="M372,166 L372,146" fill="none" stroke="#2A5F8A" stroke-width="1.6" marker-end="url(#arNet)"/>
+      <text x="388" y="160" font-family="JetBrains Mono" font-size="9.5" fill="#2A5F8A">MQTT</text>
+
+      <!-- Mosquitto -> MariaDB (Subscriber) -->
+      <path d="M460,118 L650,118" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="555" y="111" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)">Subscriber</text>
+
+      <!-- Node-RED <-> InfluxDB -->
+      <path d="M372,222 L372,242" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="388" y="236" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Historian-Bridge</text>
+
+      <!-- InfluxDB -> Anomalie-Poller (Zeitreihenanalysen) -->
+      <path d="M370,298 L370,318" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="388" y="312" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">Flux-Query</text>
+
+      <!-- Anomalie-Poller <-> MariaDB -->
+      <path d="M455,332 L650,110" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-start="url(#arFeed)" marker-end="url(#arFeed)"/>
+      <text x="552" y="221" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)" transform="rotate(-49 552 221)">SQL · offene Anomalien</text>
+
+      <!-- Anomalie-Poller -> Orchestrator (Trigger) -->
+      <path d="M440,346 L472,428" fill="none" stroke="var(--ink-faint)" stroke-width="1.4" stroke-dasharray="3 3" marker-end="url(#arFeed)"/>
+      <text x="415" y="400" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)" transform="rotate(66 415 400)">Trigger</text>
+
+      <!-- Orchestrator -A2A-> DB-Agent / Wartungs-Agent / Report-Agent -->
+      <path d="M525,464 L365,494" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arA2a)"/>
+      <text x="452" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-soft)">A2A</text>
+
+      <path d="M558,464 L552,494" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arA2a)"/>
+      <text x="575" y="480" font-family="JetBrains Mono" font-size="10" fill="var(--ink-soft)">A2A</text>
+
+      <path d="M592,464 L738,494" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" marker-end="url(#arA2a)"/>
+      <text x="668" y="472" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-soft)">A2A</text>
+
+      <!-- DB-Agent / Report-Agent <-> MariaDB -->
+      <path d="M412,494 L688,148" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-start="url(#arFeed)" marker-end="url(#arFeed)"/>
+      <text x="500" y="330" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)" transform="rotate(-53 500 330)">SQL</text>
+
+      <path d="M735,494 L795,148" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-start="url(#arFeed)" marker-end="url(#arFeed)"/>
+      <text x="768" y="330" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)" transform="rotate(65 768 330)">SQL</text>
+
+      <!-- Wartungs-Agent -LAP-> Diagnose-/Zusatzgerät (NICHT die Modellanlage) -->
+      <path d="M552,548 L552,566" fill="none" stroke="var(--accent-bright)" stroke-width="1.8" marker-end="url(#arLap)"/>
+      <text x="570" y="560" font-family="JetBrains Mono" font-size="10" fill="var(--accent-bright)">LAP</text>
+
+      <!-- MariaDB -> Data-Lake (Batch Import) -->
+      <path d="M780,90 L878,80" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arFeed)"/>
+      <text x="790" y="74" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Batch Import</text>
+
+      <!-- MariaDB -> MCP-Server (SQL übers Netz) -->
+      <path d="M818,140 L890,306" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="843" y="228" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)" transform="rotate(66 843 228)">SQL (Netzwerk)</text>
+
+      <!-- MCP-Server -> Claude Desktop (gleichwertiger MCP-Client) -->
+      <path d="M930,328 L930,344" fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arMcp)"/>
+      <text x="898" y="340" font-family="JetBrains Mono" font-size="9.5" fill="var(--accent)">MCP</text>
+
+      <!-- MCP-Server -> Agent Harness (gleichwertiger MCP-Client) -->
+      <path d="M1020,328 L1020,344" fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arMcp)"/>
+      <text x="1027" y="340" font-family="JetBrains Mono" font-size="9.5" fill="var(--accent)">MCP</text>
+
+      <!-- Browser -> Webserver (HTTP) -->
+      <path d="M890,428 L822,635" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="838" y="535" font-family="JetBrains Mono" font-size="10" fill="var(--ink-faint)" transform="rotate(72 838 535)">HTTP</text>
+
+      <!-- Browser -> Report-Agent (Agenten-Konsole spricht Agent Card direkt an) -->
+      <path d="M890,420 L825,497" fill="none" stroke="var(--ink-faint)" stroke-width="1.6" marker-end="url(#arFeed)"/>
+      <text x="832" y="460" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)" transform="rotate(44 832 460)">HTTP</text>
+
+      <!-- ================= Boxen: Zone 1 – Datenerhebung ================= -->
+      <g>
+        <rect x="30" y="75" width="190" height="56" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="125" y="99" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Akustik-KI</text>
+        <text x="125" y="116" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q</text>
+      </g>
+      <g>
+        <rect x="30" y="150" width="190" height="56" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="125" y="174" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">YOLO-System</text>
+        <text x="125" y="191" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Arduino UNO Q</text>
+      </g>
+      <g>
+        <rect x="30" y="250" width="190" height="190" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <text x="125" y="274" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Modellanlage</text>
+        <text x="125" y="290" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">SPS-Prozesswerte</text>
+        <!-- 10 Quadrate im Oval: oben 4, unten 4, links/rechts je 1 -->
+        <rect x="68" y="305" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="100" y="305" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="132" y="305" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="164" y="305" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="34" y="346" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="196" y="346" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="68" y="387" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="100" y="387" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="132" y="387" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+        <rect x="164" y="387" width="18" height="18" rx="3" fill="none" stroke="var(--ink-faint)" stroke-width="1.2"/>
+      </g>
+
+      <!-- ================= Boxen: Zone 2 – Verarbeiten + Bereitstellen ================= -->
+      <g>
+        <rect x="280" y="90" width="180" height="56" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="370" y="114" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Mosquitto</text>
+        <text x="370" y="131" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">MQTT-Broker</text>
+      </g>
+      <g>
+        <rect x="280" y="166" width="180" height="56" rx="10" fill="var(--surface)" stroke="#2A5F8A" stroke-width="1.4"/>
+        <text x="370" y="190" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Node-RED</text>
+      </g>
+      <g>
+        <rect x="280" y="242" width="180" height="56" rx="10" fill="var(--surface)" stroke="#2F6B4F" stroke-width="1.4"/>
+        <text x="370" y="266" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">InfluxDB</text>
+        <text x="370" y="283" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">Historian · skalare Werte</text>
+      </g>
+      <g>
+        <rect x="280" y="318" width="180" height="56" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
+        <text x="370" y="342" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Anomalie-Poller</text>
+        <text x="370" y="359" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">pollt offene Anomalien</text>
+      </g>
+
+      <g>
+        <rect x="650" y="90" width="170" height="56" rx="10" fill="var(--surface-2)" stroke="#2F6B4F" stroke-width="1.4"/>
+        <text x="735" y="114" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">MariaDB</text>
+        <text x="735" y="131" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--ink-faint)">Telemetrie + Trainingsdaten</text>
+      </g>
+
+      <g>
+        <rect x="470" y="410" width="180" height="54" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="560" y="434" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Orchestrator-Agent</text>
+        <text x="560" y="451" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">A2A-Server + -Client</text>
+      </g>
+      <g>
+        <rect x="280" y="494" width="160" height="54" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="360" y="518" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">DB-Agent</text>
+        <text x="360" y="535" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">A2A-Server</text>
+      </g>
+      <g>
+        <rect x="470" y="494" width="164" height="54" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="552" y="518" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Wartungs-Agent</text>
+        <text x="552" y="535" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">LAP-Instrument</text>
+      </g>
+      <g>
+        <rect x="660" y="494" width="160" height="54" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="740" y="518" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13.5" fill="var(--ink)">Report-Agent</text>
+        <text x="740" y="535" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">A2A-Server</text>
+      </g>
+
+      <g>
+        <rect x="470" y="566" width="164" height="34" rx="8" fill="var(--surface)" stroke="var(--accent-bright)" stroke-width="1.3" stroke-dasharray="3 3"/>
+        <text x="552" y="587" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--ink-soft)">Zusatzgerät (Diagnose)</text>
+      </g>
+
+      <g>
+        <rect x="280" y="610" width="540" height="54" rx="10" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <text x="550" y="634" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="14" fill="var(--ink)">Webserver</text>
+        <text x="550" y="651" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">index.html (dieses Dashboard)</text>
+      </g>
+
+      <!-- ================= Boxen: Zone 3 – Analyse ================= -->
+      <g>
+        <rect x="875" y="75" width="200" height="150" rx="10" fill="var(--surface)" stroke="var(--accent-2)" stroke-width="1.4"/>
+        <text x="975" y="99" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="13" fill="var(--ink)">Server/PC · Data-Lake</text>
+        <text x="975" y="119" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">MinIO · Nessie</text>
+        <text x="975" y="135" text-anchor="middle" font-family="JetBrains Mono" font-size="9.5" fill="var(--ink-faint)">Spark + Jupyter</text>
+        <text x="975" y="158" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="var(--ink-faint)">separater, stärkerer Rechner</text>
+        <text x="975" y="172" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="var(--ink-faint)">(nicht der Pi)</text>
+      </g>
+
+      <g>
+        <rect x="875" y="260" width="200" height="210" rx="10" fill="var(--surface-2)" fill-opacity="0.4" stroke="var(--line)" stroke-width="1.4"/>
+        <text x="888" y="278" font-family="JetBrains Mono" font-size="10.5" fill="var(--ink-faint)">PC</text>
+
+        <rect x="890" y="288" width="170" height="40" rx="8" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="975" y="313" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">MCP-Server</text>
+
+        <rect x="890" y="344" width="80" height="48" rx="8" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="930" y="371" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="11" fill="var(--ink)">Claude</text>
+        <text x="930" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="11" fill="var(--ink)">Desktop</text>
+
+        <rect x="980" y="344" width="80" height="48" rx="8" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.4"/>
+        <text x="1020" y="371" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="11" fill="var(--ink)">Agent</text>
+        <text x="1020" y="384" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="11" fill="var(--ink)">Harness</text>
+
+        <rect x="890" y="408" width="170" height="34" rx="8" fill="var(--surface)" stroke="var(--ink-soft)" stroke-width="1.4"/>
+        <text x="975" y="430" text-anchor="middle" font-family="Quicksand" font-weight="700" font-size="12.5" fill="var(--ink)">Browser</text>
+      </g>
+
+
+      <!-- ================= Legende ================= -->
+      <g font-family="JetBrains Mono" font-size="10.5" fill="var(--ink-soft)">
+        <circle cx="46" cy="730" r="4" fill="var(--accent)"/><text x="56" y="734">MCP</text>
+        <circle cx="130" cy="730" r="4" fill="var(--ink-soft)"/><text x="140" y="734">A2A</text>
+        <circle cx="212" cy="730" r="4" fill="var(--accent-bright)"/><text x="222" y="734">LAP</text>
+        <circle cx="296" cy="730" r="4" fill="#2A5F8A"/><text x="306" y="734">MQTT / OPC-UA</text>
+        <circle cx="450" cy="730" r="4" fill="var(--ink-faint)"/><text x="460" y="734">SQL / Datenfluss</text>
+        <line x1="620" y1="730" x2="644" y2="730" stroke="var(--ink-faint)" stroke-width="1.6" stroke-dasharray="4 3"/><text x="652" y="734">geplant / periodisch</text>
+      </g>
+    </svg>
+    <div class="chart-note">Der Orchestrator-Agent überwacht die Datenkrake und greift bei Bedarf per LAP auf sein eigenes Zusatzgerät zu — nie auf eine Produktionssteuerung. Das YOLO-System ist im Schema als "geplant" markiert, siehe README zur aktuellen Datenlage.</div>
+  </section>
+
+  <div id="archOverlay" role="dialog" aria-modal="true" aria-labelledby="archOverlayHeading">
+    <div class="arch-overlay-card">
+      <div class="arch-overlay-head">
+        <div>
+          <h2 id="archOverlayHeading">Architektur-Komponenten &amp; Protokolle</h2>
+          <p>Alle Bausteine aus dem Diagramm oben, gegliedert nach Datenerhebung, Verarbeiten/Bereitstellen (Datenkrake · Raspberry Pi 5) und Analyse — jeweils mit Zielsystem, Protokoll und Richtung.</p>
+        </div>
+        <button class="arch-overlay-close" id="archOverlayClose" type="button" aria-label="Schließen">✕</button>
+      </div>
+
+      <div class="arch-zone">
+        <div class="arch-zone-head"><span class="bar bar-ink-soft"></span>Datenerhebung</div>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <h4>Akustik-KI</h4>
+            <div class="arch-desc">Arduino UNO Q · Edge-Gerät, live</div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Mosquitto</span><span class="badge badge-net">MQTT</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>YOLO-System</h4>
+            <div class="arch-desc">Arduino UNO Q · Edge-Gerät, geplant</div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Mosquitto</span><span class="badge badge-net">MQTT</span><span class="dir">(geplant)</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Modellanlage</h4>
+            <div class="arch-desc">Physische Anlage, SPS-Prozesswerte, ausschließlich lesender Zugriff</div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Node-RED</span><span class="badge badge-net">OPC-UA</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-zone">
+        <div class="arch-zone-head"><span class="bar bar-blue"></span>Verarbeiten + Bereitstellen (Datenkrake · Raspberry Pi 5)</div>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <h4>Mosquitto</h4>
+            <div class="arch-desc">MQTT-Broker</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Akustik-KI, YOLO-System</span><span class="badge badge-net">MQTT</span><span class="dir">eingehend</span></div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Node-RED</span><span class="badge badge-net">MQTT</span><span class="dir">eingehend</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">MariaDB</span><span class="badge badge-feed">Subscriber</span><span class="dir">schreibt via SQL</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Node-RED</h4>
+            <div class="arch-desc">Bridge zwischen SPS-Welt (OPC-UA) und IoT-Welt (MQTT)</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Modellanlage</span><span class="badge badge-net">OPC-UA</span><span class="dir">liest SPS-Tags</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Mosquitto</span><span class="badge badge-net">MQTT</span><span class="dir">publiziert Tags</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">InfluxDB</span><span class="badge badge-feed">Historian-Bridge</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>InfluxDB</h4>
+            <div class="arch-desc">Operational Historian, nur skalare Werte (kein FFT-Array)</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Node-RED</span><span class="badge badge-feed">Historian-Bridge</span><span class="dir">eingehend</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Anomalie-Poller</span><span class="badge badge-feed">Flux-Query</span><span class="dir">liefert Zeitreihen</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>MariaDB</h4>
+            <div class="arch-desc">Zentrale Datenquelle, vollständige Telemetrie + Trainingsdaten</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Mosquitto</span><span class="badge badge-feed">SQL</span><span class="dir">Subscriber-Insert</span></div>
+            <div class="arch-conn"><span class="arrow">↔</span><span class="target">Anomalie-Poller</span><span class="badge badge-feed">SQL</span><span class="dir">bidirektional</span></div>
+            <div class="arch-conn"><span class="arrow">↔</span><span class="target">DB-Agent</span><span class="badge badge-feed">SQL</span><span class="dir">bidirektional</span></div>
+            <div class="arch-conn"><span class="arrow">↔</span><span class="target">Report-Agent</span><span class="badge badge-feed">SQL</span><span class="dir">bidirektional</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Data-Lake-Server</span><span class="badge badge-feed">Batch Import</span><span class="dir">periodisch</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">MCP-Server</span><span class="badge badge-feed">SQL (Netzwerk)</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Anomalie-Poller</h4>
+            <div class="arch-desc">Pollt offene Anomalien, wertet Zeitreihen aus</div>
+            <div class="arch-conn"><span class="arrow">↔</span><span class="target">MariaDB</span><span class="badge badge-feed">SQL</span><span class="dir">bidirektional</span></div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">InfluxDB</span><span class="badge badge-feed">Flux-Query</span><span class="dir">ruft Zeitreihen ab</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Orchestrator-Agent</span><span class="badge badge-feed">Trigger</span><span class="dir">internes Event</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Orchestrator-Agent</h4>
+            <div class="arch-desc">A2A-Server + -Client, delegiert Aufgaben</div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">DB-Agent</span><span class="badge badge-a2a">A2A</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Wartungs-Agent</span><span class="badge badge-a2a">A2A</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Report-Agent</span><span class="badge badge-a2a">A2A</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>DB-Agent</h4>
+            <div class="arch-desc">A2A-Server</div>
+            <div class="arch-conn"><span class="arrow">↔</span><span class="target">MariaDB</span><span class="badge badge-feed">SQL</span><span class="dir">bidirektional</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Wartungs-Agent</h4>
+            <div class="arch-desc">A2A-Server, LAP-Instrument</div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Zusatzgerät (Diagnose)</span><span class="badge badge-lap">LAP</span><span class="dir">nie Modellanlage</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Report-Agent</h4>
+            <div class="arch-desc">A2A-Server</div>
+            <div class="arch-conn"><span class="arrow">↔</span><span class="target">MariaDB</span><span class="badge badge-feed">SQL</span><span class="dir">bidirektional</span></div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Browser</span><span class="badge badge-feed">HTTP</span><span class="dir">Agenten-Konsole</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Zusatzgerät (Diagnose)</h4>
+            <div class="arch-desc">Physisches Diagnosegerät, kein Produktionssystem</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Wartungs-Agent</span><span class="badge badge-lap">LAP</span><span class="dir">nach Sicherheitsbestätigung</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Webserver</h4>
+            <div class="arch-desc">Liefert index.html (dieses Dashboard) aus</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">Browser</span><span class="badge badge-feed">HTTP</span><span class="dir">eingehend</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-zone">
+        <div class="arch-zone-head"><span class="bar bar-accent-2"></span>Analyse</div>
+        <div class="arch-grid">
+          <div class="arch-card">
+            <h4>Server/PC · Data-Lake</h4>
+            <div class="arch-desc">MinIO · Nessie · Spark + Jupyter — separater, stärkerer Rechner (nicht der Pi)</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">MariaDB</span><span class="badge badge-feed">Batch Import</span><span class="dir">periodisch</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>MCP-Server</h4>
+            <div class="arch-desc">mcpserver.py · lokal auf dem PC, stdio-Anbindung</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">MariaDB</span><span class="badge badge-feed">SQL (Netzwerk)</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Claude Desktop</span><span class="badge badge-mcp">MCP</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Agent Harness</span><span class="badge badge-mcp">MCP</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Claude Desktop</h4>
+            <div class="arch-desc">Fertige Chat-App mit MCP-Unterstützung, ein MCP-Client unter mehreren</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">MCP-Server</span><span class="badge badge-mcp">MCP</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Agent Harness</h4>
+            <div class="arch-desc">Eigenständige Tool-Use-Schleife (z. B. Agenten-Konsole), gleichwertiger MCP-Client neben Claude Desktop</div>
+            <div class="arch-conn"><span class="arrow">←</span><span class="target">MCP-Server</span><span class="badge badge-mcp">MCP</span></div>
+          </div>
+          <div class="arch-card">
+            <h4>Browser</h4>
+            <div class="arch-desc">HTTP-Client</div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Webserver</span><span class="badge badge-feed">HTTP</span></div>
+            <div class="arch-conn"><span class="arrow">→</span><span class="target">Report-Agent</span><span class="badge badge-feed">HTTP</span><span class="dir">Agent Card direkt</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arch-legend">
+        <div class="item"><span class="badge badge-mcp badge-legend">MCP</span>Sprachmodell ↔ Werkzeug</div>
+        <div class="item"><span class="badge badge-a2a badge-legend">A2A</span>Agent ↔ Agent</div>
+        <div class="item"><span class="badge badge-lap badge-legend">LAP</span>Agent ↔ physisches Gerät</div>
+        <div class="item"><span class="badge badge-net badge-legend">MQTT / OPC-UA</span>Industrie-4.0-Kommunikation</div>
+        <div class="item"><span class="badge badge-feed badge-legend">SQL / HTTP / …</span>sonstiger Datenfluss</div>
+      </div>
+    </div>
+  </div>
+
+  <section aria-labelledby="cardsHeading">
+    <span class="eyebrow" id="cardsHeading">Agent- &amp; Instrument-Cards</span>
+    <div class="cards-row" id="cardsRow"></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>MCP-Werkzeuge <span class="mcp-note">(mcpserver.py, lokal via stdio in Claude Desktop — Referenz, nicht live abrufbar)</span></h2></div>
+    <div class="mcp-grid">
+      <div>
+        <div class="mcp-sub">Tools</div>
+        <ul class="mcp-list">
+          <li><div class="k">get_recent(limit)</div><div class="v">Neueste Einträge aus audio_spectrum</div></li>
+          <li><div class="k">get_stats()</div><div class="v">Kennzahlen je Label (gut/schlecht)</div></li>
+          <li><div class="k">get_spectrum(record_id)</div><div class="v">Vollständiger Datensatz inkl. FFT-Array</div></li>
+          <li><div class="k">query(sql)</div><div class="v">Freie SELECT/SHOW/DESCRIBE-Abfrage</div></li>
+          <li><div class="k">get_table_info()</div><div class="v">Tabellenstruktur von audio_spectrum</div></li>
+          <li><div class="k">pruefe_akustik_anomalie(fenster)</div><div class="v">Statistische Ausreißerprüfung auf peak_db</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="mcp-sub">Resources</div>
+        <ul class="mcp-list">
+          <li><div class="k">schema://overview</div><div class="v">Read-only Tabellenübersicht</div></li>
+          <li><div class="k">anomalien://offen</div><div class="v">Noch nicht erledigte Anomalien</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="mcp-sub">Prompt</div>
+        <ul class="mcp-list">
+          <li><div class="k">anomalie_analysieren()</div><div class="v">Vorlage zur Einordnung des aktuellen Zustands</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</section>
+

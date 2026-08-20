@@ -1,0 +1,39 @@
+  <section class="panel" id="chatConsolePanel" aria-labelledby="chatHeading">
+    <div class="panel-head"><h2 id="chatHeading">Chat &amp; Konsole</h2></div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="llm">LLM-Chat</button>
+      <button class="tab-btn" data-tab="agents">Agenten-Konsole</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-llm">
+      <div class="chat-side">
+        <div class="chat-log" id="llmLog">
+          <div class="msg sys">Verbunden mit lokalem LLM über LM Studio (OpenAI-kompatibel). Endpunkt in ⚙ Einstellungen anpassen.</div>
+        </div>
+        <div class="chat-row">
+          <input id="llmInput" placeholder="Frage an das lokale LLM…" autocomplete="off">
+          <button class="send-btn" id="llmSend">Senden</button>
+        </div>
+      </div>
+      <div class="hint">Erwartet einen laufenden lokalen Server unter LM Studio → "Local Server" → Start. Antworten laufen über einen Systemprompt mit Kontext zum Datenkrake-Agentensystem.</div>
+    </div>
+
+    <div class="tab-panel" id="tab-agents">
+      <div class="chat-side">
+        <div class="chat-log" id="agentLog">
+          <div class="msg sys">Sendet eine Textnachricht per A2A (JSON-RPC "message/send") an den gewählten Agenten.</div>
+        </div>
+        <div class="chat-row">
+          <select id="agentSelect" title="Agent auswählen" aria-label="Agent auswählen">
+            <option value="urlOrchestrator">Orchestrator-Agent</option>
+            <option value="urlDb">DB-Agent</option>
+            <option value="urlReport">Report-Agent</option>
+          </select>
+          <input id="agentInput" placeholder="z.B. 'Offene Anomalien?'" autocomplete="off">
+          <button class="send-btn" id="agentSend">Senden</button>
+        </div>
+      </div>
+      <div class="hint">Genauer RPC-Pfad kann je nach a2a-sdk-Version abweichen — bei Fehlern zuerst mit curl gegen die Agent Card prüfen.</div>
+    </div>
+  </section>
+

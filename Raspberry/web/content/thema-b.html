@@ -1,0 +1,28 @@
+<section class="theme-section" id="thema-b" aria-labelledby="thema-b-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-accent-2">B</div>
+    <div><h2 id="thema-b-heading">Datenerhebung</h2>
+    <div class="eyebrow">ArduinoUnoQ/, Raspberry/nodered/, UAExpertExport/</div></div>
+  </div>
+  <div class="info-box b">
+    In diesem Schritt entstehen die Rohdaten: Akustikwerte vom Arduino UNO Q, später optische Signale
+    (YOLO-System) sowie SPS-Tags aus der Modellanlage via OPC-UA. Diese Daten werden im Takt erfasst,
+    über MQTT/Node-RED zusammengeführt und als Grundlage für spätere Auswertung und Modelle abgelegt.
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Quellen der Datenerhebung</h2></div>
+    <div class="ki-links ki-links-grid">
+        <div class="ki-card">
+          <div class="name">🎤 Akustik-Sensorik</div>
+          <div class="chart-note">FFT-/Pegelwerte vom Arduino UNO Q als Grundlage für den späteren Anomalie-Detektor.</div>
+        </div>
+        <div class="ki-card">
+          <div class="name">🏭 SPS-/Anlagen-Signale</div>
+          <div class="chart-note">OPC-UA-Knoten aus der Modellanlage werden über Node-RED in den Telemetriefluss gebracht.</div>
+        </div>
+    </div>
+    <div class="chart-note">Die eigentliche Modellanwendung folgt im Abschnitt „Machine Learning" mit dem Übergang zum Anomalie-Poller und Agentensystem.</div>
+  </div>
+</section>
+

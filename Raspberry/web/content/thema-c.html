@@ -1,0 +1,48 @@
+<section class="theme-section" id="thema-c" aria-labelledby="thema-c-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-green">D</div>
+    <div><h2 id="thema-c-heading">Datenhaltung und -analyse</h2>
+    <div class="eyebrow">Raspberry/mariadb/, Raspberry/historian/, DataLake/</div></div>
+  </div>
+  <div class="info-box c">
+    Zwei Datenbanken für dieselben Messwerte — das wirkt zunächst seltsam, ist aber ein anerkanntes
+    Prinzip: <b>Polyglot Persistence</b>. Die MariaDB bleibt die einzige <b>vollständige</b> Quelle
+    (inklusive des kompletten Spektrums, das fürs Training gebraucht wird), der Operational Historian
+    daneben ist auf schnelle Zeitreihen-Abfragen optimiert. Für Analyse und Aufbereitung kommen zusätzlich
+    Grafana sowie der Data-Lake-Stack (MinIO, Nessie/Spark) zum Einsatz.
+  </div>
+
+  <section>
+    <div class="panel">
+      <div class="panel-head"><h2>Daten- und Analyse-Zugriffe</h2></div>
+      <div class="ki-links ki-links-grid">
+          <div class="ki-card">
+            <div class="name">🗃 MariaDB / Trainingsdaten-Übersicht</div>
+            <a class="open-btn" href="/audiodaten.php" target="_blank" rel="noopener">Audio-Daten öffnen ↗</a>
+            <a class="open-btn mt-8" href="/plcdaten.php" target="_blank" rel="noopener">PLC-Daten öffnen ↗</a>
+          </div>
+        <div class="ki-card">
+          <div class="name">📈 Operational Historian (InfluxDB)</div>
+          <input id="historianUrl" placeholder="http://datenkrake.local:8086" value="http://datenkrake.local:8086">
+            <a class="open-btn" id="historianOpen" href="#" target="_blank" rel="noopener">InfluxDB öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">📊 Grafana-Dashboards</div>
+            <input id="grafanaUrl" placeholder="http://datenkrake.local:3000" value="http://datenkrake.local:3000/d/opcua-stationen-live/opc-ua-stationen-live">
+            <a class="open-btn" id="grafanaOpen" href="#" target="_blank" rel="noopener">Grafana öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">🪣 MinIO-Konsole (Data Lake)</div>
+            <input id="minioUrl" placeholder="http://&lt;data-lake-host&gt;:9092">
+            <a class="open-btn" id="minioOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+          </div>
+          <div class="ki-card">
+            <div class="name">📓 Jupyter (Spark/Nessie)</div>
+            <input id="jupyterUrl" placeholder="http://&lt;data-lake-host&gt;:8888">
+            <a class="open-btn" id="jupyterOpen" href="#" target="_blank" rel="noopener">Öffnen ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
