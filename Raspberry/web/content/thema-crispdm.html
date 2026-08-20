@@ -1,0 +1,21 @@
+<section class="theme-section" id="thema-crispdm" aria-labelledby="thema-crispdm-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-plum">A</div>
+    <div><h2 id="thema-crispdm-heading">Theoretischer Unterbau: CRISP-DM</h2>
+    <div class="eyebrow">Vorgehensmodell dieses Projekts</div></div>
+  </div>
+  <div class="info-box crispdm">
+    Der gesamten Datenkrake liegt <b>CRISP-DM</b> (Cross-Industry Standard Process for Data Mining)
+    zugrunde: ein Kreislauf aus sechs Phasen, der hier direkt an echten Akustik- und SPS-Daten
+    durchlaufen wird — nicht nur als Theorie, sondern als laufendes System.
+  </div>
+  <img class="crisp-dm-figure" src="crisp-dm.svg" alt="CRISP-DM-Zyklus der Datenkrake: sechs Phasen von Business Understanding bis Deployment im Kreis um die zentralen Datenquellen audio_spectrum und plc_telemetry">
+  <ol class="crisp-dm-list">
+    <li><b>Business Understanding</b> — warum wir Akustik- und SPS-Daten überhaupt überwachen.</li>
+    <li><b>Data Understanding</b> — Audio-Spektren und PLC-Tags über MQTT/OPC-UA sichten.</li>
+    <li><b>Data Preparation</b> — Werte bereinigen, normalisieren, in MariaDB/Historian ablegen.</li>
+    <li><b>Modeling</b> — ML-Verfahren vergleichen (Arduino UNO Q, Data-Lake-Stack).</li>
+    <li><b>Evaluation</b> — den Anomalie-Detektor gegen reale Messwerte prüfen.</li>
+    <li><b>Deployment</b> — Orchestrator-Agent delegiert per LAP an den Wartungs-Agent.</li>
+  </ol>
+</section>

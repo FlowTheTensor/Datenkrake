@@ -3,6 +3,7 @@
 
   const fragments = [
     ['heroContent', 'content/hero.html'],
+    ['mainContent', 'content/thema-crispdm.html'],
     ['mainContent', 'content/chat.html'],
     ['mainContent', 'content/thema-a.html'],
     ['mainContent', 'content/thema-b.html'],

@@ -418,6 +418,7 @@
   .bg-blue{background:#2A5F8A;}
   .bg-ink-soft{background:var(--ink-soft);}
   .bg-accent-bright{background:var(--accent-bright);}
+  .bg-plum{background:#6B4E71;}
   .bar-ink-soft{background:var(--ink-soft);}
   .bar-blue{background:#2A5F8A;}
   .bar-accent-2{background:var(--accent-2);}
@@ -458,6 +459,7 @@
   .info-box.c{border-left-color:#2F6B4F;}
   .info-box.d{border-left-color:#2A5F8A;}
   .info-box.e{border-left-color:var(--ink-soft);}
+  .info-box.crispdm{border-left-color:#6B4E71;}
 
   /* ---------- Quiz ---------- */
   .quiz-score-bar{

@@ -1,20 +1,3 @@
-<section class="panel crisp-dm-intro" aria-labelledby="crispDmHeading">
-  <span class="eyebrow">Vorgehensmodell dieses Projekts</span>
-  <h2 id="crispDmHeading">CRISP-DM als roter Faden</h2>
-  <p class="hero-lead">Der gesamten Datenkrake liegt <b>CRISP-DM</b> (Cross-Industry Standard Process
-  for Data Mining) zugrunde: ein Kreislauf aus sechs Phasen, der hier direkt an echten Akustik- und
-  SPS-Daten durchlaufen wird — nicht nur als Theorie, sondern als laufendes System.</p>
-  <img class="crisp-dm-figure" src="crisp-dm.svg" alt="CRISP-DM-Zyklus der Datenkrake: sechs Phasen von Business Understanding bis Deployment im Kreis um die zentralen Datenquellen audio_spectrum und plc_telemetry">
-  <ol class="crisp-dm-list">
-    <li><b>Business Understanding</b> — warum wir Akustik- und SPS-Daten überhaupt überwachen.</li>
-    <li><b>Data Understanding</b> — Audio-Spektren und PLC-Tags über MQTT/OPC-UA sichten.</li>
-    <li><b>Data Preparation</b> — Werte bereinigen, normalisieren, in MariaDB/Historian ablegen.</li>
-    <li><b>Modeling</b> — ML-Verfahren vergleichen (Arduino UNO Q, Data-Lake-Stack).</li>
-    <li><b>Evaluation</b> — den Anomalie-Detektor gegen reale Messwerte prüfen.</li>
-    <li><b>Deployment</b> — Orchestrator-Agent delegiert per LAP an den Wartungs-Agent.</li>
-  </ol>
-</section>
-
 <section class="hero" aria-labelledby="heroHeading">
   <span class="eyebrow">Werkzeuge &amp; Wissen an einem Ort</span>
   <div class="hero-heading-row">
@@ -25,33 +8,38 @@
   verbindet eine kurze Erklärung mit den echten, laufenden Systemen dahinter — Agent-Cards, Live-Daten,
   Konfigurationslinks. Am Ende wartet ein kleines Quiz, mit dem sich das Gelernte direkt überprüfen lässt.</p>
   <div class="topic-grid">
+    <a class="topic-card" href="#thema-crispdm">
+      <div class="topic-letter bg-plum">A</div>
+      <div><div class="topic-title">Theoretischer Unterbau</div>
+      <div class="topic-desc">CRISP-DM als Vorgehensmodell</div></div>
+    </a>
     <a class="topic-card" href="#thema-e">
-      <div class="topic-letter bg-ink-soft">A</div>
+      <div class="topic-letter bg-ink-soft">B</div>
       <div><div class="topic-title">Infrastruktur &amp; Hardware</div>
       <div class="topic-desc">Docker · Raspberry Pi · Arduino UNO Q</div></div>
     </a>
     <a class="topic-card" href="#thema-b">
-      <div class="topic-letter bg-accent-2">B</div>
+      <div class="topic-letter bg-accent-2">C</div>
       <div><div class="topic-title">Datenerhebung</div>
       <div class="topic-desc">Akustik · SPS-Tags · Rohdatenfluss</div></div>
     </a>
     <a class="topic-card" href="#thema-d">
-      <div class="topic-letter bg-blue">C</div>
+      <div class="topic-letter bg-blue">D</div>
       <div><div class="topic-title">Kommunikation &amp; Industrie 4.0</div>
       <div class="topic-desc">MQTT · OPC-UA · Node-RED</div></div>
     </a>
     <a class="topic-card" href="#thema-c">
-      <div class="topic-letter bg-green">D</div>
+      <div class="topic-letter bg-green">E</div>
       <div><div class="topic-title">Datenhaltung und -analyse</div>
       <div class="topic-desc">MariaDB · InfluxDB · Grafana · Data Lake</div></div>
     </a>
     <a class="topic-card" href="#thema-ml">
-      <div class="topic-letter bg-accent">E</div>
+      <div class="topic-letter bg-accent">F</div>
       <div><div class="topic-title">Machine Learning</div>
       <div class="topic-desc">Arduino UNO Q · Anomalie-Detektor</div></div>
     </a>
     <a class="topic-card" href="#thema-a">
-      <div class="topic-letter bg-accent">F</div>
+      <div class="topic-letter bg-accent">G</div>
       <div><div class="topic-title">Agentensysteme &amp; KI-Integration</div>
       <div class="topic-desc">MCP · A2A · LAP · Agent Harness</div></div>
     </a>

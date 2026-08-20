@@ -56,6 +56,7 @@
   /* ---------------- Reihenfolge der Themenblöcke ---------------- */
   (function reorderThemeSections(){
     var main = document.querySelector('main');
+    var themaCrispDm = document.getElementById('thema-crispdm');
     var themaA = document.getElementById('thema-a');
     var themaB = document.getElementById('thema-b');
     var themaC = document.getElementById('thema-c');
@@ -64,7 +65,7 @@
     var themaML = document.getElementById('thema-ml');
     var quiz = document.getElementById('quiz');
     var chatPanel = document.getElementById('chatConsolePanel');
-    if(!main || !themaA || !themaB || !themaC || !themaD || !themaE || !themaML || !quiz) return;
+    if(!main || !themaCrispDm || !themaA || !themaB || !themaC || !themaD || !themaE || !themaML || !quiz) return;
 
     if(chatPanel){
       var infoA = themaA.querySelector('.info-box');
@@ -79,6 +80,7 @@
       themaE.insertBefore(archPanel, netPanel);
     }
 
+    main.insertBefore(themaCrispDm, quiz);
     main.insertBefore(themaE, quiz);
     main.insertBefore(themaB, quiz);
     main.insertBefore(themaD, quiz);
@@ -384,8 +386,8 @@
   function renderQuiz(){
     var container = document.getElementById('quizList');
     container.innerHTML = '';
-    // Reihenfolge wie in Topnav/Hero: Infrastruktur, Datenerhebung, Kommunikation, Datenhaltung, ML, Agentensysteme, CRISP-DM.
-    var topicOrder = ['A','F','C','D','B','E','G'];
+    // Reihenfolge wie in Topnav/Hero: CRISP-DM, Infrastruktur, Datenerhebung, Kommunikation, Datenhaltung, ML, Agentensysteme.
+    var topicOrder = ['G','A','F','C','D','B','E'];
     topicOrder.forEach(function(cat){
       var topic = document.createElement('details');
       topic.className = 'quiz-topic';
