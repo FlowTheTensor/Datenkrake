@@ -22,3 +22,6 @@ Datenkrake.local als Webserver für alle:
         Schreibzugriffe auf zentrale Node-RED-Flows und produktive Datenbanken schützen.
         Jupyter mit Ressourcenlimits versehen.
         Die aktuelle Architektur ist also eher eine gemeinsame Demonstrations- und Analyseumgebung, nicht eine isolierte Mehrbenutzerumgebung.
+
+
+LangGraph (mit Mermaid und human-in-the-loop) für Agenten einbauen. 

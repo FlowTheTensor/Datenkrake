@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LangGraph-Werkstatt</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: false, theme: "neutral" });
+    window.mermaid = mermaid;
+  </script>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Agentensysteme</p>
+    <h1>LangGraph-Werkstatt</h1>
+    <p>Der Python-Quellcode definiert den Ablauf. Die Darstellung rechts wird daraus erzeugt.</p>
+  </header>
+  <main>
+    <section aria-labelledby="code-titel">
+      <div class="section-title"><h2 id="code-titel">Graph-Definition</h2><button id="aktualisieren" title="Python-Code neu einlesen">Aktualisieren</button></div>
+      <pre><code id="quellcode">Lade Quellcode ...</code></pre>
+    </section>
+    <section aria-labelledby="graph-titel">
+      <div class="section-title"><h2 id="graph-titel">Mermaid-Diagramm</h2><span id="status">Bereit</span></div>
+      <div id="diagramm" aria-live="polite"></div>
+      <h2>Simulation</h2>
+      <div class="simulation">
+        <article><h3>Freigabe</h3><p id="freigabe">Lade ...</p></article>
+        <article><h3>Ablehnung</h3><p id="ablehnung">Lade ...</p></article>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
