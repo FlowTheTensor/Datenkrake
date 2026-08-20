@@ -384,7 +384,8 @@
   function renderQuiz(){
     var container = document.getElementById('quizList');
     container.innerHTML = '';
-    var topicOrder = ['A','B','C','D','E','F'];
+    // Reihenfolge wie in Topnav/Hero: Infrastruktur, Datenerhebung, Kommunikation, Datenhaltung, ML, Agentensysteme, CRISP-DM.
+    var topicOrder = ['A','F','C','D','B','E','G'];
     topicOrder.forEach(function(cat){
       var topic = document.createElement('details');
       topic.className = 'quiz-topic';
