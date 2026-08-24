@@ -43,6 +43,66 @@
         }
         .btn-danger:hover { background: #c82333; }
         .actions { margin-bottom: 15px; }
+        .station-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .station-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 420px;
+        }
+        .station-card-header {
+            background: #8b1a1a;
+            color: white;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .station-card-header h2 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .station-card-meta {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        .station-card-body {
+            padding: 0;
+            overflow: auto;
+            flex: 1;
+        }
+        .station-card table {
+            width: 100%;
+            min-width: 0;
+            border-collapse: collapse;
+        }
+        .station-card th,
+        .station-card td {
+            border: 1px solid #eee;
+            padding: 6px 8px;
+            font-size: 12px;
+            text-align: left;
+        }
+        .station-card th {
+            background: #f8f8f8;
+            position: sticky;
+            top: 0;
+        }
+        .station-card .empty {
+            padding: 20px;
+            color: #666;
+            text-align: center;
+        }
         .main-data-container { max-width: 1100px; margin: 0 auto; width: 100%; }
         @media (max-width: 600px) {
             .header { flex-direction: column; align-items: flex-start; }
@@ -80,17 +140,7 @@
                 <div class="stat-label">Stationen</div>
             </div>
         </div>
-        <div class="table-section">
-            <h2>Letzte PLC-Messungen</h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr><th>Zeit</th><th>Station</th><th>Endpoint</th><th>Tag</th><th>Datentyp</th><th>Wert</th><th>MQTT-Topic</th></tr>
-                    </thead>
-                    <tbody id="data"></tbody>
-                </table>
-            </div>
-        </div>
+        <div class="station-grid" id="stationGrid"></div>
     </div>
 <script>
     function escapeHtml(value) {
@@ -153,6 +203,98 @@
             document.getElementById('status').className = 'status error';
         }
     }
+
+    function groupByStation(rows) {
+    const map = {};
+    (rows || []).forEach(row => {
+        const key = row.station || 'unbekannt';
+        if (!map[key]) map[key] = [];
+        map[key].push(row);
+    });
+    return map;
+}
+
+function renderStationCards(stats, rows) {
+    const grid = document.getElementById('stationGrid');
+    const byStation = groupByStation(rows);
+    const stations = (stats.stations || []).map(s => s.station);
+
+    // Stationen aus Stats + evtl. weitere aus den Daten
+    Object.keys(byStation).forEach(name => {
+        if (!stations.includes(name)) stations.push(name);
+    });
+    stations.sort((a, b) => a.localeCompare(b, 'de'));
+
+    if (stations.length === 0) {
+        grid.innerHTML = '<div class="station-card"><div class="empty">Keine PLC-Daten vorhanden.</div></div>';
+        return;
+    }
+
+    const countByStation = {};
+    (stats.stations || []).forEach(s => { countByStation[s.station] = s.count; });
+
+    grid.innerHTML = stations.map(station => {
+        const list = (byStation[station] || []).slice().reverse(); // neueste zuerst
+        const total = countByStation[station] ?? list.length;
+        const rowsHtml = list.length
+            ? list.map(row => `
+                <tr>
+                    <td>${escapeHtml(row.ts)}</td>
+                    <td>${escapeHtml(row.tag)}</td>
+                    <td>${escapeHtml(row.datatype)}</td>
+                    <td>${escapeHtml(valueOf(row))}</td>
+                </tr>
+              `).join('')
+            : `<tr><td colspan="4" class="empty">Keine aktuellen Zeilen in der Abfrage</td></tr>`;
+
+        return `
+            <article class="station-card">
+                <header class="station-card-header">
+                    <h2>${escapeHtml(station)}</h2>
+                    <span class="station-card-meta">${total} Messwerte</span>
+                </header>
+                <div class="station-card-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Zeit</th>
+                                <th>Tag</th>
+                                <th>Typ</th>
+                                <th>Wert</th>
+                            </tr>
+                        </thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                </div>
+            </article>
+        `;
+    }).join('');
+}
+
+async function loadPlcData() {
+    try {
+        const [dataResponse, statsResponse] = await Promise.all([
+            fetch('api/plc.php?action=data'),
+            fetch('api/plc.php?action=stats')
+        ]);
+        const data = await dataResponse.json();
+        const stats = await statsResponse.json();
+        if (data.error || stats.error) throw new Error(data.error || stats.error);
+
+        document.getElementById('total').textContent = stats.total || 0;
+        document.getElementById('stations').textContent = (stats.stations || []).length;
+
+        renderStationCards(stats, data);
+
+        document.getElementById('status').textContent =
+            'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' +
+            new Date().toLocaleTimeString('de-DE');
+        document.getElementById('status').className = 'status';
+    } catch (error) {
+        document.getElementById('status').textContent = 'Fehler: ' + error.message;
+        document.getElementById('status').className = 'status error';
+    }
+}
 
     loadPlcData();
     setInterval(loadPlcData, 2000);
