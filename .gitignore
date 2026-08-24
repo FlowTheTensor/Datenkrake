@@ -2,3 +2,24 @@
 *jahresbericht*
 __pycache__/
 *.pyc
+
+# Selbst trainierte ML-Modelle (siehe Agentensystem/ml_training/)
+Agentensystem/ml_training/models/
+
+# Node-RED data – nur die versionierten Dateien behalten
+nodered/data/*
+!nodered/data/flows.json
+!nodered/data/flows_nodesauswahl.json
+!nodered/data/NodesAuswahl.txt
+!nodered/data/package.json
+!nodered/data/settings.js
+
+# Laufzeit-Kram sicher ausschließen
+nodered/data/node_modules/
+nodered/data/.config*/
+nodered/data/lib/
+nodered/data/context/
+nodered/data/*.log
+nodered/data/.npm/
+nodered/data/package-lock.json
+nodered/data/flows_cred.json   # Credentials besser nicht committen
