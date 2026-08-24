@@ -33,7 +33,7 @@ try {
             }
             $result = $statement->get_result();
             if ($result === false) {
-                throw new RuntimeException('get_result failed (mysqlnd?).');
+                throw new RuntimeException('get_result failed.');
             }
         } else {
             $sql = 'SELECT id, ts, station, endpoint, node_id, tag, datatype, wert_num, '
@@ -49,10 +49,9 @@ try {
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
-
         echo json_encode(array_reverse($data));
     } elseif ($action === 'stats') {
-        $stats = ['total' => 0, 'stations' => []];
+        $stats = ['total' => 0, 'stations' => [], 'tags' => []];
 
         $result = $connection->query('SELECT COUNT(*) AS total FROM plc_telemetry');
         if ($result === false) {
@@ -73,7 +72,71 @@ try {
             ];
         }
 
+        $result = $connection->query(
+            'SELECT DISTINCT tag FROM plc_telemetry ORDER BY tag'
+        );
+        if ($result === false) {
+            throw new RuntimeException($connection->error);
+        }
+        while ($row = $result->fetch_assoc()) {
+            $stats['tags'][] = $row['tag'];
+        }
+
         echo json_encode($stats);
+    } elseif ($action === 'series') {
+        $station = isset($_GET['station']) ? trim((string) $_GET['station']) : '';
+        $tag = isset($_GET['tag']) ? trim((string) $_GET['tag']) : '';
+        $limit = (int) ($_GET['limit'] ?? 200);
+        if ($limit < 1) {
+            $limit = 1;
+        }
+        if ($limit > 1000) {
+            $limit = 1000;
+        }
+
+        $sql = 'SELECT ts, station, tag, datatype, wert_num, wert_bool, wert_text '
+            . 'FROM plc_telemetry WHERE 1=1';
+        $types = '';
+        $params = [];
+
+        if ($station !== '') {
+            $sql .= ' AND station = ?';
+            $types .= 's';
+            $params[] = $station;
+        }
+        if ($tag !== '') {
+            $sql .= ' AND tag = ?';
+            $types .= 's';
+            $params[] = $tag;
+        }
+
+        $sql .= ' ORDER BY ts DESC, id DESC LIMIT ' . $limit;
+
+        if ($types !== '') {
+            $statement = $connection->prepare($sql);
+            if ($statement === false) {
+                throw new RuntimeException('Prepare failed: ' . $connection->error);
+            }
+            $statement->bind_param($types, ...$params);
+            if (!$statement->execute()) {
+                throw new RuntimeException('Execute failed: ' . $statement->error);
+            }
+            $result = $statement->get_result();
+            if ($result === false) {
+                throw new RuntimeException('get_result failed.');
+            }
+        } else {
+            $result = $connection->query($sql);
+            if ($result === false) {
+                throw new RuntimeException('Query failed: ' . $connection->error);
+            }
+        }
+
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        echo json_encode(array_reverse($rows));
     } elseif ($action === 'clear' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $connection->query('SELECT COUNT(*) AS count FROM plc_telemetry');
         if ($result === false) {
