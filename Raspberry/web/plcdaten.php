@@ -32,6 +32,17 @@
         .logo-underline-red { display: inline-block; border-bottom: 2px solid #c00; padding-bottom: 2px; }
         .page-nav { margin-bottom: 15px; }
         .page-nav a { color: #8b1a1a; font-size: 13px; margin-right: 15px; }
+        .btn-danger {
+            padding: 8px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-danger:hover { background: #c82333; }
+        .actions { margin-bottom: 15px; }
         .main-data-container { max-width: 1100px; margin: 0 auto; width: 100%; }
         @media (max-width: 600px) {
             .header { flex-direction: column; align-items: flex-start; }
@@ -55,7 +66,9 @@
         <a href="audiodaten.php">→ Audio-Daten</a>
     </div>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: -</div>
-
+    <div class="actions">
+        <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
+    </div>
     <div class="main-data-container">
         <div class="stats-container">
             <div class="stat-card total">
@@ -90,6 +103,24 @@
         if (row.wert_num !== null) return row.wert_num;
         if (row.wert_bool !== null) return row.wert_bool ? 'true' : 'false';
         return row.wert_text ?? '';
+    }
+
+    async function clearPlcDatabase() {
+        if (!confirm('Wirklich ALLE PLC-Daten aus der Datenbank löschen? Das kann nicht rückgängig gemacht werden!')) {
+            return;
+        }
+        try {
+            const response = await fetch('api/plc.php?action=clear', { method: 'POST' });
+            const data = await response.json();
+            if (data.error) {
+                alert('Fehler: ' + data.error);
+                return;
+            }
+            alert((data.deleted ?? 0) + ' Einträge gelöscht.');
+            loadPlcData();
+        } catch (error) {
+            alert('Fehler: ' + error.message);
+        }
     }
 
     async function loadPlcData() {
