@@ -12,7 +12,7 @@ try {
         $result = $connection->query(
             'SELECT id, ts, station, endpoint, node_id, tag, datatype, wert_num, '
             . 'wert_bool, wert_text, payload_json, mqtt_topic, created_at '
-            . 'FROM plc_telemetry ORDER BY ts DESC, id DESC LIMIT 100'
+            . 'FROM plc_telemetry ORDER BY ts DESC, id DESC LIMIT 1000'
         );
 
         $data = [];
