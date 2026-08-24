@@ -150,11 +150,17 @@
 
     /** @type {Object.<string, Chart>} */
     const charts = {};
+    let knownStations = [];
+    let pauseRefresh = false;
 
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, character => ({
             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
         }[character]));
+    }
+
+    function safeId(station) {
+        return String(station).replace(/[^a-zA-Z0-9_-]/g, '_');
     }
 
     function valueOf(row) {
@@ -192,7 +198,7 @@
         const limits = loadLimits();
         limits[station] = limit;
         saveLimits(limits);
-        loadPlcData();
+        loadPlcData(true);
     }
 
     function loadChartTags() {
@@ -207,10 +213,10 @@
     function getChartTag(station, availableTags) {
         const saved = loadChartTags()[station];
         if (saved && availableTags.includes(saved)) return saved;
-        const preferred = availableTags.find(t => /F_?llstand|Fuellstand|Füllstand/i.test(t))
+        return availableTags.find(t => /F_?llstand|Fuellstand|Füllstand/i.test(t))
             || availableTags.find(t => /Seriennummer/i.test(t))
-            || availableTags[0];
-        return preferred || '';
+            || availableTags[0]
+            || '';
     }
 
     async function clearPlcDatabase() {
@@ -226,7 +232,8 @@
             }
             alert((data.deleted ?? 0) + ' Einträge gelöscht.');
             Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
-            loadPlcData();
+            knownStations = [];
+            loadPlcData(true);
         } catch (error) {
             alert('Fehler: ' + error.message);
         }
@@ -253,53 +260,32 @@
         return data;
     }
 
-    function destroyUnusedCharts(activeStations) {
-        Object.keys(charts).forEach(station => {
-            if (!activeStations.includes(station)) {
-                charts[station].destroy();
-                delete charts[station];
-            }
-        });
-    }
-
     function upsertStemChart(station, canvas, labels, values) {
-        const data = {
-            labels,
-            datasets: [{
-                label: station,
-                data: values,
-                backgroundColor: '#8b1a1a',
-                borderColor: '#8b1a1a',
-                borderWidth: 1,
-                barPercentage: 0.15,
-                categoryPercentage: 1.0,
-                maxBarThickness: 3
-            }]
-        };
-
         if (charts[station]) {
             charts[station].data.labels = labels;
             charts[station].data.datasets[0].data = values;
             charts[station].update('none');
             return;
         }
-
         charts[station] = new Chart(canvas.getContext('2d'), {
             type: 'bar',
-            data,
+            data: {
+                labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: '#8b1a1a',
+                    borderColor: '#8b1a1a',
+                    borderWidth: 1,
+                    barPercentage: 0.15,
+                    categoryPercentage: 1.0,
+                    maxBarThickness: 3
+                }]
+            },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            title: (items) => items[0]?.label ?? '',
-                            label: (item) => ' ' + item.raw
-                        }
-                    }
-                },
+                plugins: { legend: { display: false } },
                 scales: {
                     x: {
                         ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 6, font: { size: 9 } },
@@ -315,8 +301,10 @@
         });
     }
 
-    async function loadStationChart(station, tag, canvas) {
-        if (!tag || !canvas) return;
+    async function loadStationChart(station, tag) {
+        if (!tag) return;
+        const canvas = document.getElementById('chart-canvas-' + safeId(station));
+        if (!canvas) return;
         const rows = await fetchSeries(station, tag);
         const labels = rows.map(r => {
             const t = String(r.ts || '');
@@ -329,23 +317,26 @@
     function onChartTagChange(station, selectEl) {
         const tag = selectEl.value;
         saveChartTag(station, tag);
-        const canvas = document.getElementById('chart-' + CSS.escape(station));
-        // CSS.escape may not exist in very old browsers; fallback:
-        const el = document.querySelector(`canvas[data-station="${CSS.escape ? CSS.escape(station) : station}"]`)
-            || document.getElementById('chart-canvas-' + station.replace(/[^a-zA-Z0-9_-]/g, '_'));
-        const canvasEl = el || document.querySelector(`canvas[data-station="${station}"]`);
-        if (canvasEl) {
-            loadStationChart(station, tag, canvasEl).catch(console.error);
-        }
+        loadStationChart(station, tag).catch(console.error);
+    }
+
+    function bindPauseOnSelects(root) {
+        root.querySelectorAll('select').forEach(sel => {
+            sel.addEventListener('focus', () => { pauseRefresh = true; });
+            sel.addEventListener('blur', () => {
+                // kurz warten, damit Klick auf Option noch durchkommt
+                setTimeout(() => { pauseRefresh = false; }, 300);
+            });
+        });
     }
 
     function renderStationCard(station, totalCount, rows, limit, tags) {
         const list = (rows || []).slice().reverse();
-        const safeId = station.replace(/[^a-zA-Z0-9_-]/g, '_');
+        const sid = safeId(station);
         const selectedTag = getChartTag(station, tags);
         const tagOptions = tags.map(t =>
             `<option value="${escapeHtml(t)}" ${t === selectedTag ? 'selected' : ''}>${escapeHtml(t)}</option>`
-        ).join('');
+        ).join('') || '<option value="">–</option>';
 
         const rowsHtml = list.length
             ? list.map(row => `
@@ -354,8 +345,7 @@
                     <td>${escapeHtml(row.tag)}</td>
                     <td>${escapeHtml(row.datatype)}</td>
                     <td>${escapeHtml(valueOf(row))}</td>
-                </tr>
-              `).join('')
+                </tr>`).join('')
             : `<tr><td colspan="4" class="empty">Keine Daten</td></tr>`;
 
         const limitOptions = LIMIT_OPTIONS.map(n =>
@@ -363,15 +353,16 @@
         ).join('');
 
         return `
-            <article class="station-card" data-station="${escapeHtml(station)}">
+            <article class="station-card" data-station="${escapeHtml(station)}" id="card-${sid}">
                 <header class="station-card-header">
                     <div>
                         <h2>${escapeHtml(station)}</h2>
-                        <span class="station-card-meta">${totalCount} gesamt · Tabelle ${limit}</span>
+                        <span class="station-card-meta" id="meta-${sid}">${totalCount} gesamt · Tabelle ${limit}</span>
                     </div>
                     <div class="station-card-controls">
                         <label>Limit</label>
-                        <select onchange="setLimit(this.dataset.station, parseInt(this.value, 10))" data-station="${escapeHtml(station)}">
+                        <select data-station="${escapeHtml(station)}"
+                            onchange="setLimit(this.dataset.station, parseInt(this.value, 10))">
                             ${limitOptions}
                         </select>
                     </div>
@@ -379,13 +370,13 @@
                 <div class="station-chart-wrap">
                     <div class="station-chart-toolbar">
                         <label>Variable</label>
-                        <select data-station="${escapeHtml(station)}"
+                        <select id="tag-${sid}" data-station="${escapeHtml(station)}"
                             onchange="onChartTagChange(this.dataset.station, this)">
-                            ${tagOptions || '<option value="">–</option>'}
+                            ${tagOptions}
                         </select>
                     </div>
                     <div class="station-chart-canvas-wrap">
-                        <canvas id="chart-canvas-${safeId}" data-station="${escapeHtml(station)}"></canvas>
+                        <canvas id="chart-canvas-${sid}" data-station="${escapeHtml(station)}"></canvas>
                     </div>
                 </div>
                 <div class="station-card-body">
@@ -393,23 +384,77 @@
                         <thead>
                             <tr><th>Zeit</th><th>Tag</th><th>Typ</th><th>Wert</th></tr>
                         </thead>
-                        <tbody>${rowsHtml}</tbody>
+                        <tbody id="tbody-${sid}">${rowsHtml}</tbody>
                     </table>
                 </div>
             </article>
         `;
     }
 
-    async function loadPlcData() {
+    function updateStationCardInPlace(station, totalCount, rows, limit, tags) {
+        const sid = safeId(station);
+        const meta = document.getElementById('meta-' + sid);
+        const tbody = document.getElementById('tbody-' + sid);
+        if (!meta || !tbody) return false;
+
+        meta.textContent = `${totalCount} gesamt · Tabelle ${limit}`;
+
+        const list = (rows || []).slice().reverse();
+        tbody.innerHTML = list.length
+            ? list.map(row => `
+                <tr>
+                    <td>${escapeHtml(row.ts)}</td>
+                    <td>${escapeHtml(row.tag)}</td>
+                    <td>${escapeHtml(row.datatype)}</td>
+                    <td>${escapeHtml(valueOf(row))}</td>
+                </tr>`).join('')
+            : `<tr><td colspan="4" class="empty">Keine Daten</td></tr>`;
+
+        // Tag-Dropdown nur erweitern, Auswahl nicht zurücksetzen
+        const tagSelect = document.getElementById('tag-' + sid);
+        if (tagSelect && tags.length) {
+            const current = tagSelect.value;
+            const existing = new Set([...tagSelect.options].map(o => o.value));
+            tags.forEach(t => {
+                if (!existing.has(t)) {
+                    const opt = document.createElement('option');
+                    opt.value = t;
+                    opt.textContent = t;
+                    tagSelect.appendChild(opt);
+                }
+            });
+            if (current) tagSelect.value = current;
+        }
+        return true;
+    }
+
+    function stationsEqual(a, b) {
+        if (a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) {
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param {boolean} forceRebuild  true = Kacheln neu aufbauen (z.B. nach Limit-Änderung)
+     */
+    async function loadPlcData(forceRebuild = false) {
+        if (pauseRefresh && !forceRebuild) return;
+
         try {
             const statsResponse = await fetch('api/plc.php?action=stats');
             const stats = await statsResponse.json();
             if (stats.error) throw new Error(stats.error);
 
             document.getElementById('total').textContent = stats.total || 0;
-            const stations = stats.stations || [];
+            const stations = (stats.stations || []).slice().sort((a, b) =>
+                a.station.localeCompare(b.station, 'de')
+            );
             document.getElementById('stations').textContent = stations.length;
             const tagsByStation = stats.tags_by_station || {};
+            const stationNames = stations.map(s => s.station);
+            const needRebuild = forceRebuild || !stationsEqual(stationNames, knownStations);
 
             const results = await Promise.all(
                 stations.map(async item => {
@@ -421,25 +466,30 @@
             );
 
             const grid = document.getElementById('stationGrid');
-            const active = results.map(r => r.station);
-            destroyUnusedCharts(active);
 
             if (results.length === 0) {
+                Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
+                knownStations = [];
                 grid.innerHTML = '<div class="station-card"><div class="empty">Keine PLC-Daten vorhanden.</div></div>';
-            } else {
+            } else if (needRebuild) {
+                Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
                 grid.innerHTML = results
-                    .sort((a, b) => a.station.localeCompare(b.station, 'de'))
                     .map(r => renderStationCard(r.station, r.count, r.rows, r.limit, r.tags))
                     .join('');
+                bindPauseOnSelects(grid);
+                knownStations = stationNames;
 
-                await Promise.all(results.map(async r => {
+                await Promise.all(results.map(r => {
                     const tag = getChartTag(r.station, r.tags);
-                    if (!tag) return;
-                    const safeId = r.station.replace(/[^a-zA-Z0-9_-]/g, '_');
-                    const canvas = document.getElementById('chart-canvas-' + safeId);
-                    if (canvas) {
-                        await loadStationChart(r.station, tag, canvas);
-                    }
+                    return loadStationChart(r.station, tag);
+                }));
+            } else {
+                // nur Daten aktualisieren – DOM/Charts/Dropdowns bleiben
+                await Promise.all(results.map(async r => {
+                    updateStationCardInPlace(r.station, r.count, r.rows, r.limit, r.tags);
+                    const tagSelect = document.getElementById('tag-' + safeId(r.station));
+                    const tag = (tagSelect && tagSelect.value) || getChartTag(r.station, r.tags);
+                    await loadStationChart(r.station, tag);
                 }));
             }
 
@@ -453,12 +503,11 @@
         }
     }
 
-    // global für inline onchange
     window.setLimit = setLimit;
     window.onChartTagChange = onChartTagChange;
 
-    loadPlcData();
-    setInterval(loadPlcData, 2000);
+    loadPlcData(true);
+    setInterval(() => loadPlcData(false), 2000);
 </script>
 </body>
 </html>
