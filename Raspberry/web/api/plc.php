@@ -50,8 +50,8 @@ try {
             $data[] = $row;
         }
         echo json_encode(array_reverse($data));
-    } elseif ($action === 'stats') {
-        $stats = ['total' => 0, 'stations' => [], 'tags' => []];
+        } elseif ($action === 'stats') {
+        $stats = ['total' => 0, 'stations' => [], 'tags' => [], 'tags_by_station' => []];
 
         $result = $connection->query('SELECT COUNT(*) AS total FROM plc_telemetry');
         if ($result === false) {
@@ -80,6 +80,20 @@ try {
         }
         while ($row = $result->fetch_assoc()) {
             $stats['tags'][] = $row['tag'];
+        }
+
+        $result = $connection->query(
+            'SELECT station, tag FROM plc_telemetry GROUP BY station, tag ORDER BY station, tag'
+        );
+        if ($result === false) {
+            throw new RuntimeException($connection->error);
+        }
+        while ($row = $result->fetch_assoc()) {
+            $st = $row['station'];
+            if (!isset($stats['tags_by_station'][$st])) {
+                $stats['tags_by_station'][$st] = [];
+            }
+            $stats['tags_by_station'][$st][] = $row['tag'];
         }
 
         echo json_encode($stats);
