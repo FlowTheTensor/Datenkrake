@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PLC-Telemetrie Dashboard - Live</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f8f8f8; }
         .plc-hero-image { display: block; width: 100%; max-width: 1100px; height: 180px; object-fit: contain; object-position: center; margin: 0 auto 14px; }
@@ -29,6 +30,18 @@
         .actions { margin-bottom: 15px; }
         .btn-danger { padding: 8px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
         .btn-danger:hover { background: #c82333; }
+        .btn-secondary { padding: 8px 16px; background: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .btn-secondary:hover { background: #5a6268; }
+        .chart-box {
+            background: white; padding: 15px; border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 16px;
+        }
+        .chart-box h2 { margin-top: 0; color: #8b1a1a; font-size: 16px; }
+        .chart-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; align-items: center; }
+        .chart-controls select, .chart-controls button {
+            padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 13px;
+        }
+        .chart-container { height: 280px; }
         .station-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -36,22 +49,12 @@
             margin-top: 10px;
         }
         .station-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            max-height: 420px;
+            background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden; display: flex; flex-direction: column; max-height: 420px;
         }
         .station-card-header {
-            background: #8b1a1a;
-            color: white;
-            padding: 12px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
+            background: #8b1a1a; color: white; padding: 12px 14px;
+            display: flex; justify-content: space-between; align-items: center; gap: 8px;
         }
         .station-card-header h2 { margin: 0; font-size: 16px; font-weight: 600; }
         .station-card-meta { font-size: 12px; opacity: 0.9; }
@@ -71,6 +74,7 @@
             .header { flex-direction: column; align-items: flex-start; }
             .logo { margin-left: 0; text-align: left; font-size: 22px; }
             .main-data-container { padding: 0 2px; }
+            .chart-container { height: 220px; }
         }
     </style>
 </head>
@@ -104,6 +108,18 @@
             <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
         </div>
 
+        <div class="chart-box">
+            <h2>Verlauf (Station + Tag)</h2>
+            <div class="chart-controls">
+                <label for="chartStation">Station</label>
+                <select id="chartStation"></select>
+                <label for="chartTag">Tag</label>
+                <select id="chartTag"></select>
+                <button class="btn-secondary" type="button" onclick="loadChart()">Diagramm laden</button>
+            </div>
+            <div class="chart-container"><canvas id="fillChart"></canvas></div>
+        </div>
+
         <div class="station-grid" id="stationGrid"></div>
     </div>
 
@@ -111,6 +127,8 @@
     const LIMIT_OPTIONS = [10, 25, 50, 100, 200];
     const DEFAULT_LIMIT = 25;
     const limitsKey = 'plcStationLimits';
+    let fillChart = null;
+    let lastStats = { stations: [], tags: [] };
 
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -119,9 +137,23 @@
     }
 
     function valueOf(row) {
-        if (row.wert_num !== null && row.wert_num !== undefined) return row.wert_num;
-        if (row.wert_bool !== null && row.wert_bool !== undefined) return row.wert_bool ? 'true' : 'false';
+        if (row.wert_num !== null && row.wert_num !== undefined && row.wert_num !== '') {
+            return row.wert_num;
+        }
+        if (row.wert_bool !== null && row.wert_bool !== undefined && row.wert_bool !== '') {
+            return (row.wert_bool == 1 || row.wert_bool === true || row.wert_bool === '1') ? 'true' : 'false';
+        }
         return row.wert_text ?? '';
+    }
+
+    function numericValue(row) {
+        if (row.wert_num !== null && row.wert_num !== undefined && row.wert_num !== '') {
+            return Number(row.wert_num);
+        }
+        if (row.wert_bool !== null && row.wert_bool !== undefined && row.wert_bool !== '') {
+            return (row.wert_bool == 1 || row.wert_bool === true || row.wert_bool === '1') ? 1 : 0;
+        }
+        return null;
     }
 
     function loadLimits() {
@@ -161,13 +193,14 @@
             }
             alert((data.deleted ?? 0) + ' Einträge gelöscht.');
             loadPlcData();
+            loadChart();
         } catch (error) {
             alert('Fehler: ' + error.message);
         }
     }
 
     function limitSelectHtml(station, current) {
-        const safeStation = escapeHtml(station).replace(/'/g, '&#039;');
+        const safeStation = escapeHtml(station);
         const options = LIMIT_OPTIONS.map(n =>
             `<option value="${n}" ${n === current ? 'selected' : ''}>${n}</option>`
         ).join('');
@@ -225,15 +258,96 @@
         return data;
     }
 
+    function fillSelect(selectEl, values, preferred) {
+        const current = selectEl.value;
+        selectEl.innerHTML = values.map(v =>
+            `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`
+        ).join('');
+        if (values.includes(current)) {
+            selectEl.value = current;
+        } else if (preferred && values.includes(preferred)) {
+            selectEl.value = preferred;
+        } else if (values.length) {
+            selectEl.value = values[0];
+        }
+    }
+
+    function updateChartSelectors(stats) {
+        const stations = (stats.stations || []).map(s => s.station);
+        const tags = stats.tags || [];
+        const preferredTag = tags.find(t => /F_?llstand|Fuellstand|Füllstand/i.test(t))
+            || tags.find(t => /Seriennummer/i.test(t))
+            || tags[0];
+
+        fillSelect(document.getElementById('chartStation'), stations, stations[0]);
+        fillSelect(document.getElementById('chartTag'), tags, preferredTag);
+    }
+
+    function ensureChart() {
+        if (fillChart) return fillChart;
+        const ctx = document.getElementById('fillChart').getContext('2d');
+        fillChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Wert',
+                    data: [],
+                    borderColor: '#8b1a1a',
+                    backgroundColor: 'rgba(139, 26, 26, 0.15)',
+                    fill: true,
+                    tension: 0.15,
+                    pointRadius: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 200 },
+                scales: {
+                    x: { title: { display: true, text: 'Zeit' } },
+                    y: { title: { display: true, text: 'Wert' } }
+                }
+            }
+        });
+        return fillChart;
+    }
+
+    async function loadChart() {
+        try {
+            const station = document.getElementById('chartStation').value;
+            const tag = document.getElementById('chartTag').value;
+            if (!station || !tag) return;
+
+            const url = 'api/plc.php?action=series'
+                + '&station=' + encodeURIComponent(station)
+                + '&tag=' + encodeURIComponent(tag)
+                + '&limit=200';
+            const response = await fetch(url);
+            const rows = await response.json();
+            if (rows.error) throw new Error(rows.error);
+
+            const chart = ensureChart();
+            chart.data.labels = rows.map(r => r.ts);
+            chart.data.datasets[0].data = rows.map(r => numericValue(r));
+            chart.data.datasets[0].label = station + ' / ' + tag;
+            chart.update();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     async function loadPlcData() {
         try {
             const statsResponse = await fetch('api/plc.php?action=stats');
             const stats = await statsResponse.json();
             if (stats.error) throw new Error(stats.error);
+            lastStats = stats;
 
             document.getElementById('total').textContent = stats.total || 0;
             const stations = stats.stations || [];
             document.getElementById('stations').textContent = stations.length;
+            updateChartSelectors(stats);
 
             const results = await Promise.all(
                 stations.map(async item => {
@@ -253,6 +367,8 @@
                     .join('');
             }
 
+            await loadChart();
+
             document.getElementById('status').textContent =
                 'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' +
                 new Date().toLocaleTimeString('de-DE');
@@ -262,6 +378,9 @@
             document.getElementById('status').className = 'status error';
         }
     }
+
+    document.getElementById('chartStation').addEventListener('change', loadChart);
+    document.getElementById('chartTag').addEventListener('change', loadChart);
 
     loadPlcData();
     setInterval(loadPlcData, 2000);
