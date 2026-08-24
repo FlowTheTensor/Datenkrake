@@ -9,11 +9,34 @@ try {
     $action = $_GET['action'] ?? 'data';
 
     if ($action === 'data') {
-        $result = $connection->query(
-            'SELECT id, ts, station, endpoint, node_id, tag, datatype, wert_num, '
-            . 'wert_bool, wert_text, payload_json, mqtt_topic, created_at '
-            . 'FROM plc_telemetry ORDER BY ts DESC, id DESC LIMIT 1000'
-        );
+        $station = $_GET['station'] ?? null;
+        $limit = (int) ($_GET['limit'] ?? 50);
+        if ($limit < 1) {
+            $limit = 1;
+        }
+        if ($limit > 500) {
+            $limit = 500;
+        }
+
+        if ($station !== null && $station !== '') {
+            $statement = $connection->prepare(
+                'SELECT id, ts, station, endpoint, node_id, tag, datatype, wert_num, '
+                . 'wert_bool, wert_text, payload_json, mqtt_topic, created_at '
+                . 'FROM plc_telemetry WHERE station = ? ORDER BY ts DESC, id DESC LIMIT ?'
+            );
+            $statement->bind_param('si', $station, $limit);
+            $statement->execute();
+            $result = $statement->get_result();
+        } else {
+            $statement = $connection->prepare(
+                'SELECT id, ts, station, endpoint, node_id, tag, datatype, wert_num, '
+                . 'wert_bool, wert_text, payload_json, mqtt_topic, created_at '
+                . 'FROM plc_telemetry ORDER BY ts DESC, id DESC LIMIT ?'
+            );
+            $statement->bind_param('i', $limit);
+            $statement->execute();
+            $result = $statement->get_result();
+        }
 
         $data = [];
         while ($row = $result->fetch_assoc()) {
@@ -47,8 +70,4 @@ try {
         echo json_encode(['error' => 'Unbekannte PLC-API-Aktion.']);
     }
 
-    $connection->close();
-} catch (Throwable $error) {
-    http_response_code(500);
-    echo json_encode(['error' => $error->getMessage()]);
-}
+    $connection->close
