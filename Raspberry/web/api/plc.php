@@ -37,6 +37,11 @@ try {
             ];
         }
         echo json_encode($stats);
+    } elseif ($action === 'clear' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $result = $connection->query('SELECT COUNT(*) AS count FROM plc_telemetry');
+        $count = (int) $result->fetch_assoc()['count'];
+        $connection->query('TRUNCATE TABLE plc_telemetry');
+        echo json_encode(['success' => true, 'deleted' => $count]);
     } else {
         http_response_code(404);
         echo json_encode(['error' => 'Unbekannte PLC-API-Aktion.']);
