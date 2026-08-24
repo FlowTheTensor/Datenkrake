@@ -30,51 +30,81 @@
         .actions { margin-bottom: 15px; }
         .btn-danger { padding: 8px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
         .btn-danger:hover { background: #c82333; }
-        .btn-secondary { padding: 8px 16px; background: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
-        .btn-secondary:hover { background: #5a6268; }
-        .chart-box {
-            background: white; padding: 15px; border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 16px;
-        }
-        .chart-box h2 { margin-top: 0; color: #8b1a1a; font-size: 16px; }
-        .chart-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; align-items: center; }
-        .chart-controls select, .chart-controls button {
-            padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 13px;
-        }
-        .chart-container { height: 280px; }
+
         .station-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
             gap: 16px;
             margin-top: 10px;
         }
+        /* feste Kachelgröße */
         .station-card {
-            background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden; display: flex; flex-direction: column; max-height: 420px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 480px;
         }
         .station-card-header {
-            background: #8b1a1a; color: white; padding: 12px 14px;
-            display: flex; justify-content: space-between; align-items: center; gap: 8px;
+            background: #8b1a1a;
+            color: white;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
         }
-        .station-card-header h2 { margin: 0; font-size: 16px; font-weight: 600; }
-        .station-card-meta { font-size: 12px; opacity: 0.9; }
+        .station-card-header h2 { margin: 0; font-size: 15px; font-weight: 600; }
+        .station-card-meta { font-size: 11px; opacity: 0.9; }
         .station-card-controls { display: flex; align-items: center; gap: 6px; font-size: 12px; }
         .station-card-controls select {
             border: none; border-radius: 4px; padding: 2px 6px; font-size: 12px;
-            background: rgba(255,255,255,0.95); color: #333;
+            background: rgba(255,255,255,0.95); color: #333; max-width: 140px;
         }
-        .station-card-body { padding: 0; overflow: auto; flex: 1; }
+        .station-chart-wrap {
+            height: 160px;
+            padding: 8px 10px 4px;
+            border-bottom: 1px solid #eee;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .station-chart-toolbar {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+        .station-chart-toolbar select {
+            flex: 1;
+            min-width: 0;
+            padding: 3px 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .station-chart-canvas-wrap { height: 125px; }
+        .station-card-body {
+            padding: 0;
+            overflow: auto;
+            flex: 1;
+            min-height: 0;
+        }
         .station-card table { width: 100%; border-collapse: collapse; min-width: 0; }
         .station-card th, .station-card td {
-            border: 1px solid #eee; padding: 6px 8px; font-size: 12px; text-align: left;
+            border: 1px solid #eee; padding: 5px 7px; font-size: 11px; text-align: left;
         }
         .station-card th { background: #f8f8f8; position: sticky; top: 0; }
-        .station-card .empty { padding: 20px; color: #666; text-align: center; }
+        .station-card .empty { padding: 16px; color: #666; text-align: center; }
+
         @media (max-width: 600px) {
             .header { flex-direction: column; align-items: flex-start; }
             .logo { margin-left: 0; text-align: left; font-size: 22px; }
             .main-data-container { padding: 0 2px; }
-            .chart-container { height: 220px; }
+            .station-card { height: 460px; }
         }
     </style>
 </head>
@@ -108,27 +138,18 @@
             <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
         </div>
 
-        <div class="chart-box">
-            <h2>Verlauf (Station + Tag)</h2>
-            <div class="chart-controls">
-                <label for="chartStation">Station</label>
-                <select id="chartStation"></select>
-                <label for="chartTag">Tag</label>
-                <select id="chartTag"></select>
-                <button class="btn-secondary" type="button" onclick="loadChart()">Diagramm laden</button>
-            </div>
-            <div class="chart-container"><canvas id="fillChart"></canvas></div>
-        </div>
-
         <div class="station-grid" id="stationGrid"></div>
     </div>
 
 <script>
     const LIMIT_OPTIONS = [10, 25, 50, 100, 200];
     const DEFAULT_LIMIT = 25;
+    const SERIES_LIMIT = 80;
     const limitsKey = 'plcStationLimits';
-    let fillChart = null;
-    let lastStats = { stations: [], tags: [] };
+    const chartTagKey = 'plcStationChartTags';
+
+    /** @type {Object.<string, Chart>} */
+    const charts = {};
 
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -157,27 +178,39 @@
     }
 
     function loadLimits() {
-        try {
-            return JSON.parse(localStorage.getItem(limitsKey) || '{}') || {};
-        } catch (e) {
-            return {};
-        }
+        try { return JSON.parse(localStorage.getItem(limitsKey) || '{}') || {}; }
+        catch (e) { return {}; }
     }
-
     function saveLimits(limits) {
         localStorage.setItem(limitsKey, JSON.stringify(limits));
     }
-
     function getLimit(station) {
         const value = parseInt(loadLimits()[station], 10);
         return LIMIT_OPTIONS.includes(value) ? value : DEFAULT_LIMIT;
     }
-
     function setLimit(station, limit) {
         const limits = loadLimits();
         limits[station] = limit;
         saveLimits(limits);
         loadPlcData();
+    }
+
+    function loadChartTags() {
+        try { return JSON.parse(localStorage.getItem(chartTagKey) || '{}') || {}; }
+        catch (e) { return {}; }
+    }
+    function saveChartTag(station, tag) {
+        const map = loadChartTags();
+        map[station] = tag;
+        localStorage.setItem(chartTagKey, JSON.stringify(map));
+    }
+    function getChartTag(station, availableTags) {
+        const saved = loadChartTags()[station];
+        if (saved && availableTags.includes(saved)) return saved;
+        const preferred = availableTags.find(t => /F_?llstand|Fuellstand|Füllstand/i.test(t))
+            || availableTags.find(t => /Seriennummer/i.test(t))
+            || availableTags[0];
+        return preferred || '';
     }
 
     async function clearPlcDatabase() {
@@ -192,60 +225,11 @@
                 return;
             }
             alert((data.deleted ?? 0) + ' Einträge gelöscht.');
+            Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
             loadPlcData();
-            loadChart();
         } catch (error) {
             alert('Fehler: ' + error.message);
         }
-    }
-
-    function limitSelectHtml(station, current) {
-        const safeStation = escapeHtml(station);
-        const options = LIMIT_OPTIONS.map(n =>
-            `<option value="${n}" ${n === current ? 'selected' : ''}>${n}</option>`
-        ).join('');
-        return `
-            <div class="station-card-controls">
-                <label>Limit</label>
-                <select onchange="setLimit(this.dataset.station, parseInt(this.value, 10))" data-station="${safeStation}">
-                    ${options}
-                </select>
-            </div>
-        `;
-    }
-
-    function renderStationCard(station, totalCount, rows, limit) {
-        const list = (rows || []).slice().reverse();
-        const rowsHtml = list.length
-            ? list.map(row => `
-                <tr>
-                    <td>${escapeHtml(row.ts)}</td>
-                    <td>${escapeHtml(row.tag)}</td>
-                    <td>${escapeHtml(row.datatype)}</td>
-                    <td>${escapeHtml(valueOf(row))}</td>
-                </tr>
-              `).join('')
-            : `<tr><td colspan="4" class="empty">Keine Daten</td></tr>`;
-
-        return `
-            <article class="station-card">
-                <header class="station-card-header">
-                    <div>
-                        <h2>${escapeHtml(station)}</h2>
-                        <span class="station-card-meta">${totalCount} gesamt · letzte ${limit}</span>
-                    </div>
-                    ${limitSelectHtml(station, limit)}
-                </header>
-                <div class="station-card-body">
-                    <table>
-                        <thead>
-                            <tr><th>Zeit</th><th>Tag</th><th>Typ</th><th>Wert</th></tr>
-                        </thead>
-                        <tbody>${rowsHtml}</tbody>
-                    </table>
-                </div>
-            </article>
-        `;
     }
 
     async function fetchStationData(station, limit) {
@@ -258,83 +242,162 @@
         return data;
     }
 
-    function fillSelect(selectEl, values, preferred) {
-        const current = selectEl.value;
-        selectEl.innerHTML = values.map(v =>
-            `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`
-        ).join('');
-        if (values.includes(current)) {
-            selectEl.value = current;
-        } else if (preferred && values.includes(preferred)) {
-            selectEl.value = preferred;
-        } else if (values.length) {
-            selectEl.value = values[0];
+    async function fetchSeries(station, tag) {
+        const url = 'api/plc.php?action=series'
+            + '&station=' + encodeURIComponent(station)
+            + '&tag=' + encodeURIComponent(tag)
+            + '&limit=' + encodeURIComponent(SERIES_LIMIT);
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+        return data;
+    }
+
+    function destroyUnusedCharts(activeStations) {
+        Object.keys(charts).forEach(station => {
+            if (!activeStations.includes(station)) {
+                charts[station].destroy();
+                delete charts[station];
+            }
+        });
+    }
+
+    function upsertStemChart(station, canvas, labels, values) {
+        const data = {
+            labels,
+            datasets: [{
+                label: station,
+                data: values,
+                backgroundColor: '#8b1a1a',
+                borderColor: '#8b1a1a',
+                borderWidth: 1,
+                barPercentage: 0.15,
+                categoryPercentage: 1.0,
+                maxBarThickness: 3
+            }]
+        };
+
+        if (charts[station]) {
+            charts[station].data.labels = labels;
+            charts[station].data.datasets[0].data = values;
+            charts[station].update('none');
+            return;
         }
-    }
 
-    function updateChartSelectors(stats) {
-        const stations = (stats.stations || []).map(s => s.station);
-        const tags = stats.tags || [];
-        const preferredTag = tags.find(t => /F_?llstand|Fuellstand|Füllstand/i.test(t))
-            || tags.find(t => /Seriennummer/i.test(t))
-            || tags[0];
-
-        fillSelect(document.getElementById('chartStation'), stations, stations[0]);
-        fillSelect(document.getElementById('chartTag'), tags, preferredTag);
-    }
-
-    function ensureChart() {
-        if (fillChart) return fillChart;
-        const ctx = document.getElementById('fillChart').getContext('2d');
-        fillChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Wert',
-                    data: [],
-                    borderColor: '#8b1a1a',
-                    backgroundColor: 'rgba(139, 26, 26, 0.15)',
-                    fill: true,
-                    tension: 0.15,
-                    pointRadius: 2
-                }]
-            },
+        charts[station] = new Chart(canvas.getContext('2d'), {
+            type: 'bar',
+            data,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                animation: { duration: 200 },
+                animation: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: (items) => items[0]?.label ?? '',
+                            label: (item) => ' ' + item.raw
+                        }
+                    }
+                },
                 scales: {
-                    x: { title: { display: true, text: 'Zeit' } },
-                    y: { title: { display: true, text: 'Wert' } }
+                    x: {
+                        ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 6, font: { size: 9 } },
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: { font: { size: 9 } },
+                        grid: { color: 'rgba(0,0,0,0.06)' }
+                    }
                 }
             }
         });
-        return fillChart;
     }
 
-    async function loadChart() {
-        try {
-            const station = document.getElementById('chartStation').value;
-            const tag = document.getElementById('chartTag').value;
-            if (!station || !tag) return;
+    async function loadStationChart(station, tag, canvas) {
+        if (!tag || !canvas) return;
+        const rows = await fetchSeries(station, tag);
+        const labels = rows.map(r => {
+            const t = String(r.ts || '');
+            return t.length > 19 ? t.slice(11, 19) : t;
+        });
+        const values = rows.map(r => numericValue(r));
+        upsertStemChart(station, canvas, labels, values);
+    }
 
-            const url = 'api/plc.php?action=series'
-                + '&station=' + encodeURIComponent(station)
-                + '&tag=' + encodeURIComponent(tag)
-                + '&limit=200';
-            const response = await fetch(url);
-            const rows = await response.json();
-            if (rows.error) throw new Error(rows.error);
-
-            const chart = ensureChart();
-            chart.data.labels = rows.map(r => r.ts);
-            chart.data.datasets[0].data = rows.map(r => numericValue(r));
-            chart.data.datasets[0].label = station + ' / ' + tag;
-            chart.update();
-        } catch (error) {
-            console.error(error);
+    function onChartTagChange(station, selectEl) {
+        const tag = selectEl.value;
+        saveChartTag(station, tag);
+        const canvas = document.getElementById('chart-' + CSS.escape(station));
+        // CSS.escape may not exist in very old browsers; fallback:
+        const el = document.querySelector(`canvas[data-station="${CSS.escape ? CSS.escape(station) : station}"]`)
+            || document.getElementById('chart-canvas-' + station.replace(/[^a-zA-Z0-9_-]/g, '_'));
+        const canvasEl = el || document.querySelector(`canvas[data-station="${station}"]`);
+        if (canvasEl) {
+            loadStationChart(station, tag, canvasEl).catch(console.error);
         }
+    }
+
+    function renderStationCard(station, totalCount, rows, limit, tags) {
+        const list = (rows || []).slice().reverse();
+        const safeId = station.replace(/[^a-zA-Z0-9_-]/g, '_');
+        const selectedTag = getChartTag(station, tags);
+        const tagOptions = tags.map(t =>
+            `<option value="${escapeHtml(t)}" ${t === selectedTag ? 'selected' : ''}>${escapeHtml(t)}</option>`
+        ).join('');
+
+        const rowsHtml = list.length
+            ? list.map(row => `
+                <tr>
+                    <td>${escapeHtml(row.ts)}</td>
+                    <td>${escapeHtml(row.tag)}</td>
+                    <td>${escapeHtml(row.datatype)}</td>
+                    <td>${escapeHtml(valueOf(row))}</td>
+                </tr>
+              `).join('')
+            : `<tr><td colspan="4" class="empty">Keine Daten</td></tr>`;
+
+        const limitOptions = LIMIT_OPTIONS.map(n =>
+            `<option value="${n}" ${n === limit ? 'selected' : ''}>${n}</option>`
+        ).join('');
+
+        return `
+            <article class="station-card" data-station="${escapeHtml(station)}">
+                <header class="station-card-header">
+                    <div>
+                        <h2>${escapeHtml(station)}</h2>
+                        <span class="station-card-meta">${totalCount} gesamt · Tabelle ${limit}</span>
+                    </div>
+                    <div class="station-card-controls">
+                        <label>Limit</label>
+                        <select onchange="setLimit(this.dataset.station, parseInt(this.value, 10))" data-station="${escapeHtml(station)}">
+                            ${limitOptions}
+                        </select>
+                    </div>
+                </header>
+                <div class="station-chart-wrap">
+                    <div class="station-chart-toolbar">
+                        <label>Variable</label>
+                        <select data-station="${escapeHtml(station)}"
+                            onchange="onChartTagChange(this.dataset.station, this)">
+                            ${tagOptions || '<option value="">–</option>'}
+                        </select>
+                    </div>
+                    <div class="station-chart-canvas-wrap">
+                        <canvas id="chart-canvas-${safeId}" data-station="${escapeHtml(station)}"></canvas>
+                    </div>
+                </div>
+                <div class="station-card-body">
+                    <table>
+                        <thead>
+                            <tr><th>Zeit</th><th>Tag</th><th>Typ</th><th>Wert</th></tr>
+                        </thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                </div>
+            </article>
+        `;
     }
 
     async function loadPlcData() {
@@ -342,32 +405,43 @@
             const statsResponse = await fetch('api/plc.php?action=stats');
             const stats = await statsResponse.json();
             if (stats.error) throw new Error(stats.error);
-            lastStats = stats;
 
             document.getElementById('total').textContent = stats.total || 0;
             const stations = stats.stations || [];
             document.getElementById('stations').textContent = stations.length;
-            updateChartSelectors(stats);
+            const tagsByStation = stats.tags_by_station || {};
 
             const results = await Promise.all(
                 stations.map(async item => {
                     const limit = getLimit(item.station);
                     const rows = await fetchStationData(item.station, limit);
-                    return { station: item.station, count: item.count, rows, limit };
+                    const tags = tagsByStation[item.station] || [];
+                    return { station: item.station, count: item.count, rows, limit, tags };
                 })
             );
 
             const grid = document.getElementById('stationGrid');
+            const active = results.map(r => r.station);
+            destroyUnusedCharts(active);
+
             if (results.length === 0) {
                 grid.innerHTML = '<div class="station-card"><div class="empty">Keine PLC-Daten vorhanden.</div></div>';
             } else {
                 grid.innerHTML = results
                     .sort((a, b) => a.station.localeCompare(b.station, 'de'))
-                    .map(r => renderStationCard(r.station, r.count, r.rows, r.limit))
+                    .map(r => renderStationCard(r.station, r.count, r.rows, r.limit, r.tags))
                     .join('');
-            }
 
-            await loadChart();
+                await Promise.all(results.map(async r => {
+                    const tag = getChartTag(r.station, r.tags);
+                    if (!tag) return;
+                    const safeId = r.station.replace(/[^a-zA-Z0-9_-]/g, '_');
+                    const canvas = document.getElementById('chart-canvas-' + safeId);
+                    if (canvas) {
+                        await loadStationChart(r.station, tag, canvas);
+                    }
+                }));
+            }
 
             document.getElementById('status').textContent =
                 'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' +
@@ -379,8 +453,9 @@
         }
     }
 
-    document.getElementById('chartStation').addEventListener('change', loadChart);
-    document.getElementById('chartTag').addEventListener('change', loadChart);
+    // global für inline onchange
+    window.setLimit = setLimit;
+    window.onChartTagChange = onChartTagChange;
 
     loadPlcData();
     setInterval(loadPlcData, 2000);
