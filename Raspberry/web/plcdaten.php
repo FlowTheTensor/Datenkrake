@@ -18,13 +18,6 @@
         .stat-card.stations { border-left: 4px solid #28a745; }
         .stat-value { font-size: 32px; font-weight: bold; color: #333; }
         .stat-label { color: #666; margin-top: 5px; }
-        .table-section { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .table-section h2 { margin-top: 0; color: #8b1a1a; }
-        table { border-collapse: collapse; width: 100%; min-width: 900px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 13px; vertical-align: top; }
-        th { background-color: #f8f8f8; position: sticky; top: 0; }
-        .table-wrapper { max-height: 560px; overflow: auto; }
-        code { white-space: pre-wrap; word-break: break-word; }
         .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; }
         .logo { font-family: 'Times New Roman', serif; font-size: 28px; font-weight: normal; color: #333; letter-spacing: 1px; margin-left: 20px; text-align: right; line-height: 1.1; }
         .logo .red-dot { color: #c00; }
@@ -32,17 +25,10 @@
         .logo-underline-red { display: inline-block; border-bottom: 2px solid #c00; padding-bottom: 2px; }
         .page-nav { margin-bottom: 15px; }
         .page-nav a { color: #8b1a1a; font-size: 13px; margin-right: 15px; }
-        .btn-danger {
-            padding: 8px 20px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .btn-danger:hover { background: #c82333; }
+        .main-data-container { max-width: 1100px; margin: 0 auto; width: 100%; }
         .actions { margin-bottom: 15px; }
+        .btn-danger { padding: 8px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .btn-danger:hover { background: #c82333; }
         .station-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -67,49 +53,24 @@
             align-items: center;
             gap: 8px;
         }
-        .station-card-header h2 {
-            margin: 0;
-            font-size: 16px;
-            font-weight: 600;
+        .station-card-header h2 { margin: 0; font-size: 16px; font-weight: 600; }
+        .station-card-meta { font-size: 12px; opacity: 0.9; }
+        .station-card-controls { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+        .station-card-controls select {
+            border: none; border-radius: 4px; padding: 2px 6px; font-size: 12px;
+            background: rgba(255,255,255,0.95); color: #333;
         }
-        .station-card-meta {
-            font-size: 12px;
-            opacity: 0.9;
+        .station-card-body { padding: 0; overflow: auto; flex: 1; }
+        .station-card table { width: 100%; border-collapse: collapse; min-width: 0; }
+        .station-card th, .station-card td {
+            border: 1px solid #eee; padding: 6px 8px; font-size: 12px; text-align: left;
         }
-        .station-card-body {
-            padding: 0;
-            overflow: auto;
-            flex: 1;
-        }
-        .station-card table {
-            width: 100%;
-            min-width: 0;
-            border-collapse: collapse;
-        }
-        .station-card th,
-        .station-card td {
-            border: 1px solid #eee;
-            padding: 6px 8px;
-            font-size: 12px;
-            text-align: left;
-        }
-        .station-card th {
-            background: #f8f8f8;
-            position: sticky;
-            top: 0;
-        }
-        .station-card .empty {
-            padding: 20px;
-            color: #666;
-            text-align: center;
-        }
-        .main-data-container { max-width: 1100px; margin: 0 auto; width: 100%; }
+        .station-card th { background: #f8f8f8; position: sticky; top: 0; }
+        .station-card .empty { padding: 20px; color: #666; text-align: center; }
         @media (max-width: 600px) {
             .header { flex-direction: column; align-items: flex-start; }
             .logo { margin-left: 0; text-align: left; font-size: 22px; }
             .main-data-container { padding: 0 2px; }
-            .table-section { padding: 6px; }
-            th, td { font-size: 11px; }
         }
     </style>
 </head>
@@ -126,9 +87,7 @@
         <a href="audiodaten.php">→ Audio-Daten</a>
     </div>
     <div class="status" id="status">Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: -</div>
-    <div class="actions">
-        <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
-    </div>
+
     <div class="main-data-container">
         <div class="stats-container">
             <div class="stat-card total">
@@ -140,9 +99,19 @@
                 <div class="stat-label">Stationen</div>
             </div>
         </div>
+
+        <div class="actions">
+            <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
+        </div>
+
         <div class="station-grid" id="stationGrid"></div>
     </div>
+
 <script>
+    const LIMIT_OPTIONS = [10, 25, 50, 100, 200];
+    const DEFAULT_LIMIT = 25;
+    const limitsKey = 'plcStationLimits';
+
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, character => ({
             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
@@ -150,9 +119,33 @@
     }
 
     function valueOf(row) {
-        if (row.wert_num !== null) return row.wert_num;
-        if (row.wert_bool !== null) return row.wert_bool ? 'true' : 'false';
+        if (row.wert_num !== null && row.wert_num !== undefined) return row.wert_num;
+        if (row.wert_bool !== null && row.wert_bool !== undefined) return row.wert_bool ? 'true' : 'false';
         return row.wert_text ?? '';
+    }
+
+    function loadLimits() {
+        try {
+            return JSON.parse(localStorage.getItem(limitsKey) || '{}') || {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function saveLimits(limits) {
+        localStorage.setItem(limitsKey, JSON.stringify(limits));
+    }
+
+    function getLimit(station) {
+        const value = parseInt(loadLimits()[station], 10);
+        return LIMIT_OPTIONS.includes(value) ? value : DEFAULT_LIMIT;
+    }
+
+    function setLimit(station, limit) {
+        const limits = loadLimits();
+        limits[station] = limit;
+        saveLimits(limits);
+        loadPlcData();
     }
 
     async function clearPlcDatabase() {
@@ -173,69 +166,23 @@
         }
     }
 
-    async function loadPlcData() {
-        try {
-            const [dataResponse, statsResponse] = await Promise.all([
-                fetch('api/plc.php?action=data'),
-                fetch('api/plc.php?action=stats')
-            ]);
-            const data = await dataResponse.json();
-            const stats = await statsResponse.json();
-            if (data.error || stats.error) throw new Error(data.error || stats.error);
-
-            document.getElementById('total').textContent = stats.total || 0;
-            document.getElementById('stations').textContent = (stats.stations || []).length;
-            document.getElementById('data').innerHTML = data.slice().reverse().map(row => `
-                <tr>
-                    <td>${escapeHtml(row.ts)}</td>
-                    <td>${escapeHtml(row.station)}</td>
-                    <td>${escapeHtml(row.endpoint)}</td>
-                    <td>${escapeHtml(row.tag)}</td>
-                    <td>${escapeHtml(row.datatype)}</td>
-                    <td>${escapeHtml(valueOf(row))}</td>
-                    <td><code>${escapeHtml(row.mqtt_topic)}</code></td>
-                </tr>
-            `).join('');
-            document.getElementById('status').textContent = 'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' + new Date().toLocaleTimeString('de-DE');
-            document.getElementById('status').className = 'status';
-        } catch (error) {
-            document.getElementById('status').textContent = 'Fehler: ' + error.message;
-            document.getElementById('status').className = 'status error';
-        }
+    function limitSelectHtml(station, current) {
+        const safeStation = escapeHtml(station).replace(/'/g, '&#039;');
+        const options = LIMIT_OPTIONS.map(n =>
+            `<option value="${n}" ${n === current ? 'selected' : ''}>${n}</option>`
+        ).join('');
+        return `
+            <div class="station-card-controls">
+                <label>Limit</label>
+                <select onchange="setLimit(this.dataset.station, parseInt(this.value, 10))" data-station="${safeStation}">
+                    ${options}
+                </select>
+            </div>
+        `;
     }
 
-    function groupByStation(rows) {
-    const map = {};
-    (rows || []).forEach(row => {
-        const key = row.station || 'unbekannt';
-        if (!map[key]) map[key] = [];
-        map[key].push(row);
-    });
-    return map;
-}
-
-function renderStationCards(stats, rows) {
-    const grid = document.getElementById('stationGrid');
-    const byStation = groupByStation(rows);
-    const stations = (stats.stations || []).map(s => s.station);
-
-    // Stationen aus Stats + evtl. weitere aus den Daten
-    Object.keys(byStation).forEach(name => {
-        if (!stations.includes(name)) stations.push(name);
-    });
-    stations.sort((a, b) => a.localeCompare(b, 'de'));
-
-    if (stations.length === 0) {
-        grid.innerHTML = '<div class="station-card"><div class="empty">Keine PLC-Daten vorhanden.</div></div>';
-        return;
-    }
-
-    const countByStation = {};
-    (stats.stations || []).forEach(s => { countByStation[s.station] = s.count; });
-
-    grid.innerHTML = stations.map(station => {
-        const list = (byStation[station] || []).slice().reverse(); // neueste zuerst
-        const total = countByStation[station] ?? list.length;
+    function renderStationCard(station, totalCount, rows, limit) {
+        const list = (rows || []).slice().reverse();
         const rowsHtml = list.length
             ? list.map(row => `
                 <tr>
@@ -245,56 +192,76 @@ function renderStationCards(stats, rows) {
                     <td>${escapeHtml(valueOf(row))}</td>
                 </tr>
               `).join('')
-            : `<tr><td colspan="4" class="empty">Keine aktuellen Zeilen in der Abfrage</td></tr>`;
+            : `<tr><td colspan="4" class="empty">Keine Daten</td></tr>`;
 
         return `
             <article class="station-card">
                 <header class="station-card-header">
-                    <h2>${escapeHtml(station)}</h2>
-                    <span class="station-card-meta">${total} Messwerte</span>
+                    <div>
+                        <h2>${escapeHtml(station)}</h2>
+                        <span class="station-card-meta">${totalCount} gesamt · letzte ${limit}</span>
+                    </div>
+                    ${limitSelectHtml(station, limit)}
                 </header>
                 <div class="station-card-body">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Zeit</th>
-                                <th>Tag</th>
-                                <th>Typ</th>
-                                <th>Wert</th>
-                            </tr>
+                            <tr><th>Zeit</th><th>Tag</th><th>Typ</th><th>Wert</th></tr>
                         </thead>
                         <tbody>${rowsHtml}</tbody>
                     </table>
                 </div>
             </article>
         `;
-    }).join('');
-}
-
-async function loadPlcData() {
-    try {
-        const [dataResponse, statsResponse] = await Promise.all([
-            fetch('api/plc.php?action=data'),
-            fetch('api/plc.php?action=stats')
-        ]);
-        const data = await dataResponse.json();
-        const stats = await statsResponse.json();
-        if (data.error || stats.error) throw new Error(data.error || stats.error);
-
-        document.getElementById('total').textContent = stats.total || 0;
-        document.getElementById('stations').textContent = (stats.stations || []).length;
-
-        renderStationCards(stats, data);
-
-        document.getElementById('status').textContent =
-            'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' +
-            new Date().toLocaleTimeString('de-DE');
-        document.getElementById('status').className = 'status';
-    } catch (error) {
-        document.getElementById('status').textContent = 'Fehler: ' + error.message;
-        document.getElementById('status').className = 'status error';
     }
-}
+
+    async function fetchStationData(station, limit) {
+        const url = 'api/plc.php?action=data'
+            + '&station=' + encodeURIComponent(station)
+            + '&limit=' + encodeURIComponent(limit);
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+        return data;
+    }
+
+    async function loadPlcData() {
+        try {
+            const statsResponse = await fetch('api/plc.php?action=stats');
+            const stats = await statsResponse.json();
+            if (stats.error) throw new Error(stats.error);
+
+            document.getElementById('total').textContent = stats.total || 0;
+            const stations = stats.stations || [];
+            document.getElementById('stations').textContent = stations.length;
+
+            const results = await Promise.all(
+                stations.map(async item => {
+                    const limit = getLimit(item.station);
+                    const rows = await fetchStationData(item.station, limit);
+                    return { station: item.station, count: item.count, rows, limit };
+                })
+            );
+
+            const grid = document.getElementById('stationGrid');
+            if (results.length === 0) {
+                grid.innerHTML = '<div class="station-card"><div class="empty">Keine PLC-Daten vorhanden.</div></div>';
+            } else {
+                grid.innerHTML = results
+                    .sort((a, b) => a.station.localeCompare(b.station, 'de'))
+                    .map(r => renderStationCard(r.station, r.count, r.rows, r.limit))
+                    .join('');
+            }
+
+            document.getElementById('status').textContent =
+                'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' +
+                new Date().toLocaleTimeString('de-DE');
+            document.getElementById('status').className = 'status';
+        } catch (error) {
+            document.getElementById('status').textContent = 'Fehler: ' + error.message;
+            document.getElementById('status').className = 'status error';
+        }
+    }
 
     loadPlcData();
     setInterval(loadPlcData, 2000);
