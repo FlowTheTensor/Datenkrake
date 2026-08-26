@@ -133,6 +133,13 @@
                 <div class="stat-label">Stationen</div>
             </div>
         </div>
+        <div class="production-bar" style="background:#fff;padding:12px 14px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin-bottom:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+            <label for="serialSelect" style="font-weight:600;color:#8b1a1a;">Produktion / Seriennummer</label>
+            <select id="serialSelect" style="padding:6px 10px;border:1px solid #ccc;border-radius:5px;min-width:220px;">
+                <option value="">– Live (alle Daten) –</option>
+            </select>
+            <span id="serialMeta" style="font-size:13px;color:#555;"></span>
+        </div>
 
         <div class="actions">
             <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
@@ -144,7 +151,7 @@
 <script>
     const LIMIT_OPTIONS = [10, 25, 50, 100, 200];
     const DEFAULT_LIMIT = 25;
-    const SERIES_LIMIT = 80;
+    const SERIES_LIMIT = 200;
     const limitsKey = 'plcStationLimits';
     const chartTagKey = 'plcStationChartTags';
 
@@ -152,6 +159,9 @@
     const charts = {};
     let knownStations = [];
     let pauseRefresh = false;
+    let selectedFrom = '';
+    let selectedTo = '';
+    let productionsCache = [];
 
     function escapeHtml(value) {
         return String(value ?? '').replace(/[&<>"']/g, character => ({
@@ -181,6 +191,13 @@
             return (row.wert_bool == 1 || row.wert_bool === true || row.wert_bool === '1') ? 1 : 0;
         }
         return null;
+    }
+
+    function timeQuery() {
+        let q = '';
+        if (selectedFrom) q += '&from=' + encodeURIComponent(selectedFrom);
+        if (selectedTo) q += '&to=' + encodeURIComponent(selectedTo);
+        return q;
     }
 
     function loadLimits() {
@@ -233,6 +250,10 @@
             alert((data.deleted ?? 0) + ' Einträge gelöscht.');
             Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
             knownStations = [];
+            selectedFrom = '';
+            selectedTo = '';
+            document.getElementById('serialSelect').value = '';
+            document.getElementById('serialMeta').textContent = '';
             loadPlcData(true);
         } catch (error) {
             alert('Fehler: ' + error.message);
@@ -242,7 +263,8 @@
     async function fetchStationData(station, limit) {
         const url = 'api/plc.php?action=data'
             + '&station=' + encodeURIComponent(station)
-            + '&limit=' + encodeURIComponent(limit);
+            + '&limit=' + encodeURIComponent(limit)
+            + timeQuery();
         const response = await fetch(url);
         const data = await response.json();
         if (data.error) throw new Error(data.error);
@@ -253,11 +275,60 @@
         const url = 'api/plc.php?action=series'
             + '&station=' + encodeURIComponent(station)
             + '&tag=' + encodeURIComponent(tag)
-            + '&limit=' + encodeURIComponent(SERIES_LIMIT);
+            + '&limit=' + encodeURIComponent(SERIES_LIMIT)
+            + timeQuery();
         const response = await fetch(url);
         const data = await response.json();
         if (data.error) throw new Error(data.error);
         return data;
+    }
+
+    async function loadProductions() {
+        const res = await fetch('api/plc.php?action=productions');
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        productionsCache = data.productions || [];
+
+        const sel = document.getElementById('serialSelect');
+        if (!sel) return;
+        const previous = sel.value;
+        sel.innerHTML = '<option value="">– Live (alle Daten) –</option>';
+        productionsCache.forEach((p, idx) => {
+            const label = p.open
+                ? `${p.serial} · ab ${p.start} (läuft)`
+                : `${p.serial} · ${p.start} → ${p.end}`;
+            const opt = document.createElement('option');
+            opt.value = String(idx);
+            opt.textContent = label;
+            sel.appendChild(opt);
+        });
+        if (previous !== '' && [...sel.options].some(o => o.value === previous)) {
+            sel.value = previous;
+        }
+    }
+
+    function onSerialChange() {
+        const sel = document.getElementById('serialSelect');
+        const meta = document.getElementById('serialMeta');
+        const idx = sel.value;
+
+        if (idx === '') {
+            selectedFrom = '';
+            selectedTo = '';
+            meta.textContent = '';
+        } else {
+            const p = productionsCache[parseInt(idx, 10)];
+            if (!p) return;
+            selectedFrom = p.start || '';
+            selectedTo = p.end || '';
+            meta.textContent = p.open
+                ? `Filter: ab ${p.start} (noch offen)`
+                : `Filter: ${p.start} – ${p.end}`;
+        }
+
+        Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
+        knownStations = [];
+        loadPlcData(true);
     }
 
     function upsertStemChart(station, canvas, labels, values) {
@@ -324,7 +395,6 @@
         root.querySelectorAll('select').forEach(sel => {
             sel.addEventListener('focus', () => { pauseRefresh = true; });
             sel.addEventListener('blur', () => {
-                // kurz warten, damit Klick auf Option noch durchkommt
                 setTimeout(() => { pauseRefresh = false; }, 300);
             });
         });
@@ -410,7 +480,6 @@
                 </tr>`).join('')
             : `<tr><td colspan="4" class="empty">Keine Daten</td></tr>`;
 
-        // Tag-Dropdown nur erweitern, Auswahl nicht zurücksetzen
         const tagSelect = document.getElementById('tag-' + sid);
         if (tagSelect && tags.length) {
             const current = tagSelect.value;
@@ -437,13 +506,15 @@
     }
 
     /**
-     * @param {boolean} forceRebuild  true = Kacheln neu aufbauen (z.B. nach Limit-Änderung)
+     * @param {boolean} forceRebuild
      */
     async function loadPlcData(forceRebuild = false) {
         if (pauseRefresh && !forceRebuild) return;
 
         try {
-            const statsResponse = await fetch('api/plc.php?action=stats');
+            await loadProductions();
+
+            const statsResponse = await fetch('api/plc.php?action=stats' + timeQuery());
             const stats = await statsResponse.json();
             if (stats.error) throw new Error(stats.error);
 
@@ -484,7 +555,6 @@
                     return loadStationChart(r.station, tag);
                 }));
             } else {
-                // nur Daten aktualisieren – DOM/Charts/Dropdowns bleiben
                 await Promise.all(results.map(async r => {
                     updateStationCardInPlace(r.station, r.count, r.rows, r.limit, r.tags);
                     const tagSelect = document.getElementById('tag-' + safeId(r.station));
@@ -493,9 +563,9 @@
                 }));
             }
 
+            const mode = selectedFrom ? 'Produktion gefiltert' : 'Live-Aktualisierung alle 2 Sekunden';
             document.getElementById('status').textContent =
-                'Live-Aktualisierung alle 2 Sekunden | Letzte Aktualisierung: ' +
-                new Date().toLocaleTimeString('de-DE');
+                mode + ' | Letzte Aktualisierung: ' + new Date().toLocaleTimeString('de-DE');
             document.getElementById('status').className = 'status';
         } catch (error) {
             document.getElementById('status').textContent = 'Fehler: ' + error.message;
@@ -506,8 +576,22 @@
     window.setLimit = setLimit;
     window.onChartTagChange = onChartTagChange;
 
+    const serialSelect = document.getElementById('serialSelect');
+    if (serialSelect) {
+        serialSelect.addEventListener('change', onSerialChange);
+        serialSelect.addEventListener('focus', () => { pauseRefresh = true; });
+        serialSelect.addEventListener('blur', () => {
+            setTimeout(() => { pauseRefresh = false; }, 300);
+        });
+    }
+
     loadPlcData(true);
-    setInterval(() => loadPlcData(false), 2000);
+    setInterval(() => {
+        // Im Live-Modus alle 2 s; bei gewählter Seriennummer seltener
+        if (!selectedFrom) {
+            loadPlcData(false);
+        }
+    }, 2000);
 </script>
 </body>
 </html>
