@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digitaler Zwilling – Anlage</title>
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --station-fill: #ffffff;
+      --station-stroke: #333;
+      --station-no-data: #e8e8e8;
+      --station-no-data-stroke: #999;
+      --flow-main: #555;
+      --flow-hochregal: #999;
+      --flow-active: #8b1a1a;
+      --signal-off: #c8c8c8;
+      --signal-on: #28a745;
+      --aktor-on: #007bff;
+      --meta-fill: #8b1a1a;
+      --workpiece: #e67e22;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: #222;
+    }
+    header {
+      padding: 12px 20px 14px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .header-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+      color: #8b1a1a;
+    }
+    header .hint { font-size: 13px; color: #666; }
+    .replay-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px 14px;
+      padding: 10px 12px;
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    .rb-btn {
+      width: 40px;
+      height: 36px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      color: #333;
+    }
+    .rb-btn:hover:not(:disabled) {
+      background: #eee;
+      border-color: #bbb;
+    }
+    .rb-btn.primary {
+      background: #8b1a1a;
+      border-color: #8b1a1a;
+      color: #fff;
+    }
+    .rb-btn.primary:hover:not(:disabled) {
+      background: #a32222;
+    }
+    .rb-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .rb-speed, .rb-serial {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #555;
+    }
+    .rb-speed select, .rb-serial select {
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .rb-scrub {
+      flex: 1 1 200px;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .rb-scrub input[type="range"] {
+      width: 100%;
+      accent-color: #8b1a1a;
+    }
+    .rb-time {
+      font-size: 12px;
+      color: #666;
+      font-variant-numeric: tabular-nums;
+    }
+    .rb-sep { margin: 0 2px; color: #aaa; }
+    .rb-serial select { min-width: 160px; }
+    #stage {
+      padding: 16px;
+      overflow: auto;
+    }
+    svg.anlage {
+      display: block;
+      margin: 0 auto;
+      background: #fafafa;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .station-box {
+      fill: var(--station-fill);
+      stroke: var(--station-stroke);
+      stroke-width: 2;
+      rx: 10;
+    }
+    .station.no-data .station-box {
+      fill: var(--station-no-data);
+      stroke: var(--station-no-data-stroke);
+      stroke-dasharray: 6 4;
+    }
+    .station.active .station-box {
+      stroke: var(--flow-active);
+      stroke-width: 3;
+    }
+    .station-label {
+      font-size: 13px;
+      font-weight: 600;
+      fill: #222;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+    .station.no-data .station-label { fill: #777; }
+    .station-badge {
+      font-size: 10px;
+      fill: #888;
+      text-anchor: middle;
+    }
+    .meta-box {
+      fill: var(--meta-fill);
+      stroke: #5c0f0f;
+      stroke-width: 2;
+      rx: 10;
+    }
+    .meta-label {
+      font-size: 14px;
+      font-weight: 600;
+      fill: #fff;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+    .flow-segment {
+      fill: none;
+      stroke: var(--flow-main);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      marker-end: url(#arrowMain);
+    }
+    .flow-segment.hochregal {
+      stroke: var(--flow-hochregal);
+      stroke-dasharray: 10 6;
+      marker-end: url(#arrowDashed);
+    }
+    .flow-segment.junction {
+      marker-end: url(#arrowMain);
+    }
+    .flow-segment.logical {
+      stroke: #bbb;
+      stroke-dasharray: 2 6;
+      stroke-width: 2;
+      marker-end: none;
+    }
+    .flow-segment.active {
+      stroke: var(--flow-active);
+      stroke-width: 4;
+    }
+    .band-sensor {
+      fill: #d0d0d0;
+      stroke: #2e7d32;
+      stroke-width: 1.5;
+      width: 12px;
+      height: 12px;
+    }
+    .band-sensor.on {
+      fill: #4caf50;
+      stroke: #1b5e20;
+    }
+    .direction-arrow {
+      fill: none;
+      stroke: #90caf9;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.35;
+    }
+    .direction-arrow.on-right,
+    .direction-arrow.on-left {
+      opacity: 1;
+    }
+    .direction-arrow.on-right { stroke: #1976d2; }
+    .direction-arrow.on-left { stroke: #1976d2; }
+    .workpiece {
+      fill: var(--workpiece);
+      stroke: #a85a12;
+      stroke-width: 2;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .workpiece.visible { opacity: 1; }
+    .legend {
+      margin: 12px auto 24px;
+      max-width: 960px;
+      font-size: 12px;
+      color: #555;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 0 16px;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid #666;
+    }
+    .error {
+      margin: 20px;
+      padding: 12px;
+      background: #f8d7da;
+      color: #721c24;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1>Digitaler Zwilling</h1>
+      <span class="hint">SVG aus <code>anlage.json</code> · Replay-Steuerung (noch ohne Funktion)</span>
+    </div>
+    <div class="replay-bar" id="replayBar" aria-label="Replay-Steuerung">
+      <button type="button" class="rb-btn" id="btnBack" title="Zurückspulen" disabled>
+        <span aria-hidden="true">⏮</span>
+      </button>
+      <button type="button" class="rb-btn primary" id="btnPlay" title="Play" disabled>
+        <span aria-hidden="true">▶</span>
+      </button>
+      <button type="button" class="rb-btn" id="btnPause" title="Pause" disabled>
+        <span aria-hidden="true">⏸</span>
+      </button>
+      <button type="button" class="rb-btn" id="btnFwd" title="Vorspulen" disabled>
+        <span aria-hidden="true">⏭</span>
+      </button>
+      <label class="rb-speed" title="Geschwindigkeit">
+        <span>Tempo</span>
+        <select id="replaySpeed" disabled>
+          <option value="0.5">0,5×</option>
+          <option value="1" selected>1×</option>
+          <option value="2">2×</option>
+          <option value="5">5×</option>
+          <option value="10">10×</option>
+          <option value="20">20×</option>
+        </select>
+      </label>
+      <div class="rb-scrub">
+        <input type="range" id="replayScrub" min="0" max="1000" value="0" disabled
+               aria-label="Zeitposition">
+        <div class="rb-time">
+          <span id="replayTime">00:00</span>
+          <span class="rb-sep">/</span>
+          <span id="replayDuration">00:00</span>
+        </div>
+      </div>
+      <label class="rb-serial">
+        <span>Seriennr.</span>
+        <select id="serialSelect" disabled>
+          <option value="">— Produktion wählen —</option>
+        </select>
+      </label>
+    </div>
+  </header>
+  <div id="stage">
+    <p class="hint">Lade Konfiguration…</p>
+  </div>
+  <div class="legend">
+    <span><i style="background:#fff;border-radius:3px;"></i> Station mit Daten</span>
+    <span><i style="background:#e8e8e8;border-radius:3px;border-style:dashed;"></i> Platzhalter</span>
+    <span><i style="background:#4caf50;border-color:#1b5e20;border-radius:2px;"></i> Bandsensor aktiv</span>
+    <span><i style="background:#d0d0d0;border-color:#2e7d32;border-radius:2px;"></i> Bandsensor inaktiv</span>
+    <span style="color:#1976d2;">↻</span> Rechts-/Linkslauf
+    <span style="border-bottom:3px solid #555;width:24px;height:0;display:inline-block;"></span> Hauptkreis
+    <span style="border-bottom:3px dashed #999;width:24px;height:0;display:inline-block;"></span> Hochregal-Ast
+  </div>
+
+<script>
+/**
+ * Erzeugt das Anlagenschema als SVG aus anlage.json.
+ * Layer: flows → stations → signals → workpiece
+ */
+(async function () {
+  const stage = document.getElementById('stage');
+
+  // Eingebettete Config (funktioniert auch bei file://). Optional per Fetch überschreibbar.
+  const EMBEDDED_CONFIG = {"version": 1, "name": "Datenkrake Anlage", "description": "Digitaler Zwilling – Layout, Materialfluss und Signale. Hochregal-Pfad vorbereitet, bisher ungenutzt.", "layout": {"cols": 5, "rows": 3, "cellWidth": 200, "cellHeight": 130, "gapX": 40, "gapY": 50, "padding": 40}, "meta": {"id": "leitstand", "label": "Leitstand", "dbKey": "leitstand", "role": "control", "hasData": true, "position": {"anchor": "top-center", "offsetY": -20}, "signals": [{"tag": "dbHMI_uiSeriennummer", "label": "Seriennummer", "kind": "process", "type": "uint16", "role": "production_id", "description": "Start = Wert > 0, Ende = 0"}]}, "stations": [{"id": "palettenlager2", "label": "Palettenlager 2", "dbKey": "palettenlager2", "hasData": true, "grid": {"col": 0, "row": 0}, "role": "storage_out", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}]}, {"id": "presse", "label": "Presse", "dbKey": "presse", "hasData": true, "grid": {"col": 1, "row": 0}, "role": "process", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_MA1_Linkslauf", "label": "Linkslauf", "kind": "aktor", "type": "bool", "role": "direction_left"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}]}, {"id": "handling_saugarm", "label": "Handling Sauger\nDosenoberteile", "dbKey": "handling_saugarm", "hasData": true, "grid": {"col": 2, "row": 0}, "role": "process", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_MA1_Linkslauf", "label": "Linkslauf", "kind": "aktor", "type": "bool", "role": "direction_left"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}]}, {"id": "qualitaet_kamera", "label": "Qualität Kamera", "dbKey": "qualit_t_kamera", "hasData": true, "grid": {"col": 3, "row": 0}, "role": "process", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_MA1_Linkslauf", "label": "Linkslauf", "kind": "aktor", "type": "bool", "role": "direction_left"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}]}, {"id": "transfersystem_hochregal", "label": "Transfersystem\nHochregal", "dbKey": "transfersystem_hochregal", "hasData": false, "grid": {"col": 0.5, "row": 1}, "role": "transfer", "signals": [], "description": "Sitzt vertikal zwischen den beiden T-Kreuzungen: oben Palettenlager2/Presse, unten Hochregallager/Palettenlager1.", "orientation": "vertical"}, {"id": "transfersystem_roboter", "label": "Transfersystem\nRoboter", "dbKey": "transfersystem_roboter", "hasData": true, "grid": {"col": 4, "row": 1}, "role": "transfer", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}], "orientation": "vertical"}, {"id": "hochregallager", "label": "Hochregallager", "dbKey": "hochregallager", "hasData": false, "grid": {"col": 0, "row": 2}, "role": "storage_out", "signals": []}, {"id": "palettenlager1", "label": "Palettenlager 1", "dbKey": "palettenlager1", "hasData": true, "grid": {"col": 1, "row": 2}, "role": "storage_in", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}]}, {"id": "rohlager_dosen", "label": "Rohlager\nDosenunterteile", "dbKey": "rohlager_dosen", "hasData": true, "grid": {"col": 2, "row": 2}, "role": "storage_in", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_MA1_Linkslauf", "label": "Linkslauf", "kind": "aktor", "type": "bool", "role": "direction_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}]}, {"id": "abfuellen", "label": "Abfüllen", "dbKey": "abf_llen", "hasData": true, "grid": {"col": 3, "row": 2}, "role": "process", "signals": [{"tag": "AL_MA1_Rechtslauf", "label": "Rechtslauf", "kind": "aktor", "type": "bool", "role": "direction_right"}, {"tag": "AL_BG1_Bandsensor_Links", "label": "Bandsensor links", "kind": "sensor", "type": "bool", "role": "band_left"}, {"tag": "AL_BG2_Bandsensor_Rechts", "label": "Bandsensor rechts", "kind": "sensor", "type": "bool", "role": "band_right"}]}], "flows": {"main": {"id": "hauptkreis", "label": "Hauptkreis", "style": "solid", "animated": true, "segments": [{"from": "palettenlager1", "to": "rohlager_dosen", "fromSide": "right", "toSide": "left"}, {"from": "rohlager_dosen", "to": "abfuellen", "fromSide": "right", "toSide": "left"}, {"from": "abfuellen", "to": "transfersystem_roboter", "fromSide": "right", "toSide": "bottom"}, {"from": "transfersystem_roboter", "to": "qualitaet_kamera", "fromSide": "top", "toSide": "right"}, {"from": "qualitaet_kamera", "to": "handling_saugarm", "fromSide": "left", "toSide": "right"}, {"from": "handling_saugarm", "to": "presse", "fromSide": "left", "toSide": "right"}, {"from": "presse", "to": "palettenlager2", "fromSide": "left", "toSide": "right"}]}, "hochregal": {"id": "hochregal_ast", "label": "Hochregal-Ast", "style": "dashed", "animated": true, "unused": true, "description": "T oben (PL2/Presse) → TS Hochregal → T unten (Hochregallager/PL1)", "segments": [{"from": "kreuzung_oben", "to": "transfersystem_hochregal", "fromSide": "center", "toSide": "top"}, {"from": "transfersystem_hochregal", "to": "kreuzung_unten", "fromSide": "bottom", "toSide": "center"}, {"from": "hochregallager", "to": "palettenlager1", "fromSide": "right", "toSide": "left"}]}}, "workpiece": {"enabled": true, "defaultPath": "main", "symbol": "circle", "description": "Ein Werkstück-Symbol bewegt sich segmentweise entlang flows.main (später auch hochregal)."}, "production": {"station": "leitstand", "tag": "dbHMI_uiSeriennummer", "startRule": "value > 0", "endRule": "value == 0", "endStorageOptions": [{"id": "palettenlager2", "label": "Palettenlager 2", "path": "main", "via": "kreuzung_presse_palettenlager2"}, {"id": "hochregallager", "label": "Hochregallager", "path": "hochregal", "unused": true, "via": "transfersystem_hochregal"}]}, "ui": {"inactiveStationClass": "station-no-data", "signalOnClass": "signal-on", "signalOffClass": "signal-off", "flowActiveClass": "flow-active", "stationActiveClass": "station-active"}, "junctions": [{"id": "kreuzung_oben", "label": "Kreuzung Presse / Palettenlager 2", "between": ["palettenlager2", "presse"], "vertical_to": "transfersystem_hochregal"}, {"id": "kreuzung_unten", "label": "Kreuzung Hochregallager / Palettenlager 1", "between": ["hochregallager", "palettenlager1"], "vertical_to": "transfersystem_hochregal"}]};
+
+  let config = EMBEDDED_CONFIG;
+  try {
+    const res = await fetch('anlage.json', { cache: 'no-store' });
+    if (res.ok) {
+      config = await res.json();
+      console.info('anlage.json per Fetch geladen');
+    } else {
+      console.info('Fetch nicht ok, nutze eingebettete Config');
+    }
+  } catch (err) {
+    console.info('Fetch fehlgeschlagen, nutze eingebettete Config:', err.message);
+  }
+
+  const L = config.layout;
+  const boxW = L.cellWidth;
+  const boxH = L.cellHeight;
+  const gapX = L.gapX;
+  const gapY = L.gapY;
+  const pad = L.padding;
+  const metaH = 56;
+  const topExtra = 80;
+
+  const gridW = L.cols * boxW + (L.cols - 1) * gapX;
+  const gridH = L.rows * boxH + (L.rows - 1) * gapY;
+  const svgW = pad * 2 + gridW;
+  const svgH = pad * 2 + topExtra + gridH;
+
+  /** Box-Größe einer Station (vertikale Transfersysteme = hochkant) */
+  function stationSize(station) {
+    if (station.orientation === 'vertical') {
+      return { w: Math.min(boxW, 110), h: boxH + gapY * 0.35 };
+    }
+    return { w: boxW, h: boxH };
+  }
+
+  /** Mittelpunkt einer Station (SVG-Koordinaten) */
+  function stationCenter(station) {
+    const { w, h } = stationSize(station);
+    const x = pad + station.grid.col * (boxW + gapX) + boxW / 2;
+    const y = pad + topExtra + station.grid.row * (boxH + gapY) + boxH / 2;
+    return { x, y };
+  }
+
+  function stationOrigin(station) {
+    const c = stationCenter(station);
+    const { w, h } = stationSize(station);
+    return { x: c.x - w / 2, y: c.y - h / 2, w, h };
+  }
+
+  const byId = Object.fromEntries(config.stations.map(s => [s.id, s]));
+  const junctions = config.junctions || [];
+
+  /** Punkt für Station-ID oder Kreuzungs-ID */
+  function pointFor(id) {
+    if (byId[id]) return stationCenter(byId[id]);
+    const j = junctions.find(x => x.id === id);
+    if (j && j.between && j.between.length === 2) {
+      const a = byId[j.between[0]];
+      const b = byId[j.between[1]];
+      if (a && b) {
+        const pa = stationCenter(a);
+        const pb = stationCenter(b);
+        return { x: (pa.x + pb.x) / 2, y: (pa.y + pb.y) / 2 };
+      }
+    }
+    return null;
+  }
+
+  /** Anschlusspunkt am Rand einer Station (left|right|top|bottom|center) */
+  function portPoint(id, side) {
+    if (!byId[id]) return pointFor(id);
+    const c = stationCenter(byId[id]);
+    const { w, h } = stationSize(byId[id]);
+    const side_ = side || 'center';
+    if (side_ === 'left') return { x: c.x - w / 2, y: c.y };
+    if (side_ === 'right') return { x: c.x + w / 2, y: c.y };
+    if (side_ === 'top') return { x: c.x, y: c.y - h / 2 };
+    if (side_ === 'bottom') return { x: c.x, y: c.y + h / 2 };
+    return c;
+  }
+
+  /**
+   * Orthogonale Verbindung mit Ports (fromSide/toSide).
+   * Linie startet am Rand der Quell-Station und endet am Rand der Ziel-Station (mit Pfeil).
+   */
+  function segmentPath(fromId, toId, fromSide, toSide) {
+    const p1 = portPoint(fromId, fromSide || 'center');
+    const p2 = portPoint(toId, toSide || 'center');
+    if (!p1 || !p2) return null;
+
+    const dx = Math.abs(p1.x - p2.x);
+    const dy = Math.abs(p1.y - p2.y);
+    if (dx < 2 || dy < 2) {
+      return `M ${p1.x} ${p1.y} L ${p2.x} ${p2.y}`;
+    }
+
+    // Routing abhängig vom Zieleintritt
+    if (toSide === 'right') {
+      // von rechts andocken: erst auf Ziel-Y, dann nach links/rechts an den Rand
+      return `M ${p1.x} ${p1.y} L ${p1.x} ${p2.y} L ${p2.x} ${p2.y}`;
+    }
+    if (toSide === 'left') {
+      return `M ${p1.x} ${p1.y} L ${p1.x} ${p2.y} L ${p2.x} ${p2.y}`;
+    }
+    if (toSide === 'top') {
+      return `M ${p1.x} ${p1.y} L ${p2.x} ${p1.y} L ${p2.x} ${p2.y}`;
+    }
+    if (toSide === 'bottom') {
+      return `M ${p1.x} ${p1.y} L ${p2.x} ${p1.y} L ${p2.x} ${p2.y}`;
+    }
+    // Fallback
+    return `M ${p1.x} ${p1.y} L ${p2.x} ${p1.y} L ${p2.x} ${p2.y}`;
+  }
+
+  const NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs = {}, text) {
+    const node = document.createElementNS(NS, name);
+    Object.entries(attrs).forEach(([k, v]) => {
+      if (v !== undefined && v !== null) node.setAttribute(k, String(v));
+    });
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  const svg = el('svg', {
+    class: 'anlage',
+    width: svgW,
+    height: svgH,
+    viewBox: `0 0 ${svgW} ${svgH}`,
+    role: 'img',
+    'aria-label': config.name || 'Anlagenschema'
+  });
+
+  // Marker für Pfeile
+  const defs = el('defs');
+  function arrowMarker(id, color) {
+    const m = el('marker', {
+      id,
+      markerWidth: 10,
+      markerHeight: 10,
+      refX: 9,
+      refY: 3,
+      orient: 'auto',
+      markerUnits: 'userSpaceOnUse'
+    });
+    m.appendChild(el('path', { d: 'M0,0 L9,3 L0,6 Z', fill: color }));
+    return m;
+  }
+  defs.appendChild(arrowMarker('arrowMain', '#555'));
+  defs.appendChild(arrowMarker('arrowDashed', '#999'));
+  svg.appendChild(defs);
+
+  // --- Layer 1: flows ---
+  const layerFlows = el('g', { id: 'layer-flows', class: 'layer flows' });
+
+  function addFlowGroup(flowKey, flow) {
+    if (!flow || !flow.segments) return;
+    const g = el('g', {
+      id: 'flow-' + (flow.id || flowKey),
+      'data-flow': flowKey,
+      class: 'flow-group'
+    });
+    flow.segments.forEach((seg, i) => {
+      const d = segmentPath(seg.from, seg.to, seg.fromSide, seg.toSide);
+      if (!d) return;
+      const classes = ['flow-segment'];
+      if (flowKey === 'hochregal' || flow.unused || flow.style === 'dashed') classes.push('hochregal');
+      if (seg.logical || flow.style === 'dotted') classes.push('logical');
+      if (seg.junction || flowKey.startsWith('kreuzung')) classes.push('junction');
+      g.appendChild(el('path', {
+        id: `flow-${seg.from}-zu-${seg.to}`,
+        class: classes.join(' '),
+        d,
+        'data-from': seg.from,
+        'data-to': seg.to,
+        'data-flow': flowKey
+      }));
+    });
+    layerFlows.appendChild(g);
+  }
+
+  if (config.flows) {
+    // return_hint zuerst (hinten), dann hochregal, dann main oben
+    if (config.flows.return_hint) addFlowGroup('return_hint', config.flows.return_hint);
+    if (config.flows.hochregal) addFlowGroup('hochregal', config.flows.hochregal);
+    if (config.flows.main) addFlowGroup('main', config.flows.main);
+  }
+  svg.appendChild(layerFlows);
+
+  // T-Kreuzungen als kleine Kreuze markieren
+  const layerJunctions = el('g', { id: 'layer-junctions', class: 'layer junctions' });
+  junctions.forEach(j => {
+    const p = pointFor(j.id);
+    if (!p) return;
+    const g = el('g', { id: 'junction-' + j.id, 'data-junction': j.id });
+    const arm = 14;
+    g.appendChild(el('line', { x1: p.x - arm, y1: p.y, x2: p.x + arm, y2: p.y, stroke: '#8b1a1a', 'stroke-width': 3 }));
+    g.appendChild(el('line', { x1: p.x, y1: p.y - arm, x2: p.x, y2: p.y + arm, stroke: '#8b1a1a', 'stroke-width': 3 }));
+    g.appendChild(el('title', {}, j.label || j.id));
+    layerJunctions.appendChild(g);
+  });
+  svg.appendChild(layerJunctions);
+
+  // --- Layer 2: stations ---
+  const layerStations = el('g', { id: 'layer-stations', class: 'layer stations' });
+
+  // Leitstand (Meta)
+  if (config.meta) {
+    const metaW = 200;
+    const metaX = (svgW - metaW) / 2;
+    const metaY = pad;
+    const g = el('g', {
+      id: 'station-leitstand',
+      class: 'station meta',
+      'data-station': 'leitstand',
+      'data-dbkey': config.meta.dbKey
+    });
+    g.appendChild(el('rect', {
+      class: 'meta-box',
+      x: metaX,
+      y: metaY,
+      width: metaW,
+      height: metaH
+    }));
+    g.appendChild(el('text', {
+      class: 'meta-label',
+      x: metaX + metaW / 2,
+      y: metaY + 24
+    }, 'Leitstand'));
+    g.appendChild(el('text', {
+      class: 'meta-label',
+      x: metaX + metaW / 2,
+      y: metaY + 44,
+      'font-size': '12'
+    }, 'Seriennummer'));
+    layerStations.appendChild(g);
+  }
+
+  config.stations.forEach(station => {
+    const o = stationOrigin(station);
+    const g = el('g', {
+      id: 'station-' + station.id,
+      class: 'station' + (station.hasData ? '' : ' no-data') +
+        (station.orientation === 'vertical' ? ' vertical' : ''),
+      'data-station': station.id,
+      'data-dbkey': station.dbKey,
+      'data-has-data': station.hasData ? '1' : '0'
+    });
+    g.appendChild(el('rect', {
+      class: 'station-box',
+      x: o.x,
+      y: o.y,
+      width: o.w,
+      height: o.h
+    }));
+
+    const lines = String(station.label || station.id).split('\n');
+    const labelX = o.x + o.w / 2;
+    const labelStartY = o.y + (station.orientation === 'vertical' ? 36 : 28);
+    lines.forEach((line, i) => {
+      g.appendChild(el('text', {
+        class: 'station-label',
+        x: labelX,
+        y: labelStartY + i * 15
+      }, line));
+    });
+
+    if (!station.hasData) {
+      g.appendChild(el('text', {
+        class: 'station-badge',
+        x: labelX,
+        y: o.y + o.h - 12
+      }, 'keine Telemetrie'));
+    }
+
+    // --- Layer 3: nur Bandsensoren + Richtungs-Pfeil ---
+    const signals = station.signals || [];
+    const sigG = el('g', { class: 'signals', 'data-station': station.id });
+    const byRole = {};
+    signals.forEach(s => { if (s.role) byRole[s.role] = s; });
+
+    const sq = 11;
+    const inset = 6;
+
+    function addBand(role, x, y) {
+      const sig = byRole[role];
+      if (!sig) return;
+      const rect = el('rect', {
+        class: 'band-sensor',
+        x: x,
+        y: y,
+        width: sq,
+        height: sq,
+        rx: 2,
+        'data-tag': sig.tag,
+        'data-role': role,
+        'data-type': 'bool',
+        'data-station': station.id
+      });
+      rect.appendChild(el('title', {}, sig.label || sig.tag));
+      sigG.appendChild(rect);
+    }
+
+    if (station.orientation === 'vertical') {
+      // Bandsensoren oben/unten an der schmalen Box (= links/rechts am Band)
+      addBand('band_left', o.x + o.w / 2 - sq / 2, o.y + inset);
+      addBand('band_right', o.x + o.w / 2 - sq / 2, o.y + o.h - inset - sq);
+    } else {
+      addBand('band_left', o.x + inset, o.y + o.h / 2 - sq / 2);
+      addBand('band_right', o.x + o.w - inset - sq, o.y + o.h / 2 - sq / 2);
+    }
+
+    // Richtungs-Pfeil (Kreisbogen) in der Stationsmitte
+    if (byRole.direction_right || byRole.direction_left) {
+      const cx = o.x + o.w / 2;
+      const cy = o.y + o.h / 2 + (station.orientation === 'vertical' ? 10 : 8);
+      const r = Math.min(16, o.w / 4, o.h / 4);
+      // Bogen nach rechts (Rechtslauf)
+      if (byRole.direction_right) {
+        const pathR = el('path', {
+          class: 'direction-arrow dir-right',
+          d: `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`,
+          'data-tag': byRole.direction_right.tag,
+          'data-role': 'direction_right',
+          'data-station': station.id
+        });
+        // Pfeilspitze rechts
+        pathR.appendChild(el('title', {}, 'Rechtslauf'));
+        sigG.appendChild(pathR);
+        sigG.appendChild(el('polygon', {
+          class: 'direction-arrow dir-right',
+          points: `${cx + r},${cy} ${cx + r - 6},${cy - 5} ${cx + r - 6},${cy + 5}`,
+          'data-tag': byRole.direction_right.tag,
+          'data-role': 'direction_right',
+          'data-station': station.id,
+          fill: '#90caf9',
+          stroke: 'none'
+        }));
+      }
+      // Bogen nach links (Linkslauf) – unterer Halbbogen
+      if (byRole.direction_left) {
+        const pathL = el('path', {
+          class: 'direction-arrow dir-left',
+          d: `M ${cx + r} ${cy} A ${r} ${r} 0 0 1 ${cx - r} ${cy}`,
+          'data-tag': byRole.direction_left.tag,
+          'data-role': 'direction_left',
+          'data-station': station.id
+        });
+        pathL.appendChild(el('title', {}, 'Linkslauf'));
+        sigG.appendChild(pathL);
+        sigG.appendChild(el('polygon', {
+          class: 'direction-arrow dir-left',
+          points: `${cx - r},${cy} ${cx - r + 6},${cy - 5} ${cx - r + 6},${cy + 5}`,
+          'data-tag': byRole.direction_left.tag,
+          'data-role': 'direction_left',
+          'data-station': station.id,
+          fill: '#90caf9',
+          stroke: 'none'
+        }));
+      }
+    }
+
+    g.appendChild(sigG);
+    layerStations.appendChild(g);
+  });
+  svg.appendChild(layerStations);
+
+  // --- Layer 4: workpiece ---
+  const layerWp = el('g', { id: 'layer-workpiece', class: 'layer workpiece' });
+  const firstMain = config.flows && config.flows.main && config.flows.main.segments[0];
+  let wpX = svgW / 2;
+  let wpY = svgH / 2;
+  if (firstMain && byId[firstMain.from]) {
+    const c = stationCenter(byId[firstMain.from]);
+    wpX = c.x;
+    wpY = c.y;
+  }
+  layerWp.appendChild(el('circle', {
+    id: 'workpiece',
+    class: 'workpiece',
+    cx: wpX,
+    cy: wpY,
+    r: 12,
+    'data-segment': firstMain ? `${firstMain.from}->${firstMain.to}` : ''
+  }));
+  svg.appendChild(layerWp);
+
+  stage.innerHTML = '';
+  stage.appendChild(svg);
+
+  // --- API für spätere Animation (Live / Replay) ---
+  window.AnlageTwin = {
+    config,
+    svg,
+
+    setSignal(stationId, tag, value) {
+      const on = value === true || value === 1 || value === '1' || value === 'true';
+      const nodes = svg.querySelectorAll(
+        `[data-station="${CSS.escape(stationId)}"][data-tag="${CSS.escape(tag)}"]`
+      );
+      nodes.forEach(node => {
+        node.classList.toggle('on', on);
+        const role = node.getAttribute('data-role') || '';
+        if (role === 'direction_right') {
+          node.classList.toggle('on-right', on);
+          if (node.tagName === 'polygon') {
+            node.setAttribute('fill', on ? '#1976d2' : '#90caf9');
+          }
+        }
+        if (role === 'direction_left') {
+          node.classList.toggle('on-left', on);
+          if (node.tagName === 'polygon') {
+            node.setAttribute('fill', on ? '#1976d2' : '#90caf9');
+          }
+        }
+      });
+    },
+
+    setStationActive(stationId, active) {
+      const node = svg.querySelector(`#station-${CSS.escape(stationId)}`);
+      if (node) node.classList.toggle('active', !!active);
+    },
+
+    setFlowActive(fromId, toId, active) {
+      const node = svg.querySelector(`#flow-${CSS.escape(fromId)}-zu-${CSS.escape(toId)}`);
+      if (node) node.classList.toggle('active', !!active);
+    },
+
+    showWorkpiece(visible) {
+      const wp = svg.querySelector('#workpiece');
+      if (wp) wp.classList.toggle('visible', !!visible);
+    },
+
+    /** Fortschritt 0…1 entlang eines flow-Segments (für spätere Animation) */
+    moveWorkpieceOnSegment(fromId, toId, t) {
+      const path = svg.querySelector(`#flow-${CSS.escape(fromId)}-zu-${CSS.escape(toId)}`);
+      const wp = svg.querySelector('#workpiece');
+      if (!path || !wp) return;
+      const len = path.getTotalLength();
+      const p = path.getPointAtLength(Math.max(0, Math.min(1, t)) * len);
+      wp.setAttribute('cx', p.x);
+      wp.setAttribute('cy', p.y);
+      wp.classList.add('visible');
+      wp.setAttribute('data-segment', fromId + '->' + toId);
+    },
+
+    /** Demo: Werkstück einmal den Hauptkreis abfahren */
+    async demoRunMain(durationMs = 8000) {
+      const segs = (config.flows && config.flows.main && config.flows.main.segments) || [];
+      if (!segs.length) return;
+      this.showWorkpiece(true);
+      const per = durationMs / segs.length;
+      for (const seg of segs) {
+        this.setFlowActive(seg.from, seg.to, true);
+        this.setStationActive(seg.from, true);
+        const start = performance.now();
+        await new Promise(resolve => {
+          const step = (now) => {
+            const t = Math.min(1, (now - start) / per);
+            this.moveWorkpieceOnSegment(seg.from, seg.to, t);
+            if (t < 1) requestAnimationFrame(step);
+            else resolve();
+          };
+          requestAnimationFrame(step);
+        });
+        this.setFlowActive(seg.from, seg.to, false);
+        this.setStationActive(seg.from, false);
+        this.setStationActive(seg.to, true);
+      }
+    }
+  };
+
+  console.info('AnlageTwin bereit. Demo: AnlageTwin.demoRunMain()');
+})();
+</script>
+</body>
+</html>
