@@ -3,6 +3,8 @@
 # Übersichtsseite für den Unterricht, mit der die Schüler arbeiten können, findet man unter [https://flowthetensor.github.io/Datenkrake/](https://flowthetensor.github.io/Datenkrake/)
 Diese wird auch angezeigt, wenn man datenkrake.local im Browser aufruft, sobald alles auf dem Raspberry läuft.
 
+# Digitaler Zwilling mit Live-Mitschnitt-Demo [https://flowthetensor.github.io/Datenkrake/anlage-zwilling.html](https://flowthetensor.github.io/Datenkrake/anlage-zwilling.html)
+
 # Datenkrake — Agentensystem (MCP · A2A · LAP)
 
 IoT-Grundstack der Datenkrake sind Audioerfassung, MQTT, MariaDB und 
