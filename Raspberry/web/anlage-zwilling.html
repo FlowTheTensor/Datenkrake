@@ -243,6 +243,110 @@
       border-radius: 50%;
       border: 1px solid #666;
     }
+    .process-panel {
+      max-width: 1100px;
+      margin: 8px auto 32px;
+      padding: 0 16px;
+    }
+    .process-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px 16px;
+      margin-bottom: 12px;
+    }
+    .process-head h2 {
+      margin: 0;
+      font-size: 16px;
+      color: #8b1a1a;
+    }
+    .process-status {
+      font-size: 13px;
+      color: #666;
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 800px) {
+      .process-grid { grid-template-columns: 1fr; }
+    }
+    .process-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .process-card-wide {
+      grid-column: 1 / -1;
+    }
+    .process-card h3 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #666;
+    }
+    .process-meta {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+    }
+    .process-meta div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .process-meta dt {
+      font-size: 11px;
+      color: #888;
+    }
+    .process-meta dd {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .signal-live {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 180px;
+      overflow: auto;
+      font-size: 13px;
+    }
+    .signal-live li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 4px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .signal-live .on { color: #1b5e20; font-weight: 600; }
+    .signal-live .off { color: #999; }
+    .signal-live .muted, .event-log .muted { color: #999; font-size: 13px; }
+    .event-log {
+      max-height: 220px;
+      overflow: auto;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .event-log .ev {
+      display: grid;
+      grid-template-columns: 52px 140px 1fr 36px;
+      gap: 8px;
+      padding: 2px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .event-log .ev .t { color: #888; }
+    .event-log .ev .st { color: #333; }
+    .event-log .ev .tag { color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .event-log .ev .v-on { color: #2e7d32; font-weight: 700; }
+    .event-log .ev .v-off { color: #999; }
     .error {
       margin: 20px;
       padding: 12px;
@@ -302,6 +406,36 @@
   <div id="stage">
     <p class="hint">Lade Konfiguration…</p>
   </div>
+
+  <section class="process-panel" id="processPanel" aria-label="Visualisierung der Prozessdaten">
+    <div class="process-head">
+      <h2>Visualisierung der Prozessdaten</h2>
+      <span id="processStatus" class="process-status">Demo-CSV wird geladen…</span>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <h3>Produktion</h3>
+        <dl class="process-meta" id="processMeta">
+          <div><dt>Seriennummer</dt><dd id="metaSerial">—</dd></div>
+          <div><dt>Start</dt><dd id="metaStart">—</dd></div>
+          <div><dt>Ende</dt><dd id="metaEnd">—</dd></div>
+          <div><dt>Events</dt><dd id="metaEvents">—</dd></div>
+        </dl>
+      </div>
+      <div class="process-card">
+        <h3>Aktive Signale</h3>
+        <ul class="signal-live" id="signalLive">
+          <li class="muted">Noch keine Produktion gewählt</li>
+        </ul>
+      </div>
+      <div class="process-card process-card-wide">
+        <h3>Ereignisprotokoll</h3>
+        <div class="event-log" id="eventLog">
+          <div class="muted">Replay starten, um Ereignisse zu sehen</div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="legend">
     <span><i style="background:#fff;border-radius:3px;"></i> Station mit Daten</span>
     <span><i style="background:#e8e8e8;border-radius:3px;border-style:dashed;"></i> Platzhalter</span>
@@ -959,16 +1093,15 @@
   }
 
   function applyEventsUpTo(posMs) {
-    // Neu aufbauen: alles aus, dann Events bis pos
     resetAllSignals();
-    const state = {}; // station|tag -> value
+    const state = {};
+    const seen = [];
     for (const ev of replay.events) {
       if (ev.t > posMs) break;
       state[ev.station + '|' + ev.tag] = ev;
+      seen.push(ev);
       window.AnlageTwin.setSignal(ev.station, ev.tag, ev.value);
-      if (ev.value) window.AnlageTwin.setStationActive(ev.station, true);
     }
-    // Station aktiv nur wenn irgendein true-Signal
     const active = new Set();
     Object.values(state).forEach(ev => {
       if (ev.value) active.add(ev.station);
@@ -977,6 +1110,41 @@
       window.AnlageTwin.setStationActive(st.id, active.has(st.id));
     });
     replay.appliedUntil = posMs;
+    renderSignalLive(state);
+    renderEventLog(seen);
+  }
+
+  function renderSignalLive(state) {
+    const ul = document.getElementById('signalLive');
+    if (!ul) return;
+    const items = Object.values(state).sort((a, b) => a.station.localeCompare(b.station) || a.tag.localeCompare(b.tag));
+    if (!items.length) {
+      ul.innerHTML = '<li class="muted">Keine Signale in diesem Zeitraum</li>';
+      return;
+    }
+    ul.innerHTML = items.map(ev => {
+      const cls = ev.value ? 'on' : 'off';
+      const val = ev.value ? 'AN' : 'AUS';
+      return '<li class="' + cls + '"><span>' + ev.station + ' · ' + ev.tag + '</span><span>' + val + '</span></li>';
+    }).join('');
+  }
+
+  function renderEventLog(seen) {
+    const box = document.getElementById('eventLog');
+    if (!box) return;
+    const last = seen.slice(-80);
+    if (!last.length) {
+      box.innerHTML = '<div class="muted">Noch keine Ereignisse</div>';
+      return;
+    }
+    box.innerHTML = last.map(ev => {
+      const vcls = ev.value ? 'v-on' : 'v-off';
+      const v = ev.value ? 'AN' : 'AUS';
+      return '<div class="ev"><span class="t">' + formatMs(ev.t) + '</span><span class="st">' +
+        ev.station + '</span><span class="tag" title="' + ev.tag + '">' + ev.tag +
+        '</span><span class="' + vcls + '">' + v + '</span></div>';
+    }).join('');
+    box.scrollTop = box.scrollHeight;
   }
 
   function loadProduction(serial) {
@@ -998,6 +1166,16 @@
     const meta = document.getElementById('serialMeta');
     // optional
     console.info('Produktion', serial, 'Events:', replay.events.length, 'Dauer ms:', replay.duration);
+    const metaSerial = document.getElementById('metaSerial');
+    const metaStart = document.getElementById('metaStart');
+    const metaEnd = document.getElementById('metaEnd');
+    const metaEvents = document.getElementById('metaEvents');
+    const status = document.getElementById('processStatus');
+    if (metaSerial) metaSerial.textContent = '#' + serial;
+    if (metaStart) metaStart.textContent = prod.start.toLocaleString('de-DE');
+    if (metaEnd) metaEnd.textContent = prod.end ? prod.end.toLocaleString('de-DE') : 'offen';
+    if (metaEvents) metaEvents.textContent = String(replay.events.length);
+    if (status) status.textContent = 'Demo-Modus · ' + replay.events.length + ' relevante Signalwechsel';
   }
 
   function tick(now) {
@@ -1075,6 +1253,12 @@
       }
     }
     setControlsEnabled(true);
+    const status = document.getElementById('processStatus');
+    if (status) {
+      status.textContent = replay.productions.length
+        ? (replay.productions.length + ' Produktionen in plc_daten.csv')
+        : 'CSV geladen, keine Seriennummern gefunden';
+    }
   }
 
   // UI-Bindungen
