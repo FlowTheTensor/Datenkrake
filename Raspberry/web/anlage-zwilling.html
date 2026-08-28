@@ -256,7 +256,7 @@
   <header>
     <div class="header-top">
       <h1>Digitaler Zwilling</h1>
-      <span class="hint">SVG aus <code>anlage.json</code> · Replay-Steuerung (noch ohne Funktion)</span>
+      <span class="hint">SVG aus <code>anlage.json</code> · Demo-Replay aus plc_daten.csv</span>
     </div>
     <div class="replay-bar" id="replayBar" aria-label="Replay-Steuerung">
       <button type="button" class="rb-btn" id="btnBack" title="Zurückspulen" disabled>
@@ -795,8 +795,321 @@
     }
   };
 
-  console.info('AnlageTwin bereit. Demo: AnlageTwin.demoRunMain()');
+
+  // ========== Demo-Replay aus plc_daten.csv (GitHub Pages tauglich) ==========
+  const CSV_CANDIDATES = [
+    'plc_daten.csv',
+    './plc_daten.csv',
+    'Raspberry/web/plc_daten.csv'
+  ];
+
+  // dbKey in Config ↔ station-Spalte in CSV
+  const stationByDbKey = {};
+  config.stations.forEach(s => { stationByDbKey[s.dbKey] = s.id; });
+  stationByDbKey['leitstand'] = 'leitstand';
+  // CSV nutzt oft Umlaute als _
+  stationByDbKey['qualit_t_kamera'] = 'qualitaet_kamera';
+  stationByDbKey['abf_llen'] = 'abfuellen';
+
+  const RELEVANT_TAG_RE = /(Rechtslauf|Linkslauf|Bandsensor)/i;
+
+  function parseCsv(text) {
+    const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/).filter(Boolean);
+    if (!lines.length) return [];
+    const delim = lines[0].includes(';') ? ';' : ',';
+    function splitLine(line) {
+      const out = [];
+      let cur = '', inQ = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQ && line[i + 1] === '"') { cur += '"'; i++; }
+          else inQ = !inQ;
+        } else if (c === delim && !inQ) {
+          out.push(cur); cur = '';
+        } else cur += c;
+      }
+      out.push(cur);
+      return out;
+    }
+    const headers = splitLine(lines[0]);
+    return lines.slice(1).map(line => {
+      const cols = splitLine(line);
+      const row = {};
+      headers.forEach((h, i) => { row[h] = cols[i] !== undefined ? cols[i] : ''; });
+      return row;
+    });
+  }
+
+  function parseTs(s) {
+    // "2026-08-24 09:32:48" → Date
+    if (!s) return null;
+    const d = new Date(s.replace(' ', 'T'));
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function boolVal(row) {
+    if (row.wert_bool === '1' || row.wert_bool === 'true' || row.wert_bool === true) return true;
+    if (row.wert_bool === '0' || row.wert_bool === 'false' || row.wert_bool === false) return false;
+    if (row.wert_num !== '' && row.wert_num != null) {
+      const n = Number(row.wert_num);
+      if (!isNaN(n)) return n !== 0;
+    }
+    return false;
+  }
+
+  function buildProductions(rows) {
+    const serialEvents = rows
+      .filter(r => r.station === 'leitstand' && r.tag === 'dbHMI_uiSeriennummer')
+      .map(r => ({ ts: parseTs(r.ts), value: Number(r.wert_num) }))
+      .filter(e => e.ts && !isNaN(e.value))
+      .sort((a, b) => a.ts - b.ts);
+
+    const productions = [];
+    for (let i = 0; i < serialEvents.length; i++) {
+      const e = serialEvents[i];
+      if (e.value > 0) {
+        let end = null;
+        for (let j = i + 1; j < serialEvents.length; j++) {
+          if (serialEvents[j].value === 0) { end = serialEvents[j].ts; break; }
+          if (serialEvents[j].value > 0) break;
+        }
+        productions.push({
+          serial: String(Math.round(e.value)),
+          start: e.ts,
+          end: end,
+          open: !end
+        });
+      }
+    }
+    return productions;
+  }
+
+  function eventsInWindow(rows, start, end) {
+    const t0 = start.getTime();
+    const t1 = end ? end.getTime() : Infinity;
+    const events = [];
+    rows.forEach(r => {
+      if (!RELEVANT_TAG_RE.test(r.tag || '')) return;
+      const ts = parseTs(r.ts);
+      if (!ts) return;
+      const t = ts.getTime();
+      if (t < t0 || t > t1) return;
+      const stationId = stationByDbKey[r.station] || r.station;
+      events.push({
+        t: t - t0, // ms relative
+        abs: t,
+        station: stationId,
+        tag: r.tag,
+        value: boolVal(r)
+      });
+    });
+    events.sort((a, b) => a.t - b.t);
+    return events;
+  }
+
+  function formatMs(ms) {
+    const s = Math.max(0, Math.floor(ms / 1000));
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return String(m).padStart(2, '0') + ':' + String(r).padStart(2, '0');
+  }
+
+  const replay = {
+    rows: [],
+    productions: [],
+    events: [],
+    duration: 0,
+    pos: 0, // ms
+    playing: false,
+    speed: 1,
+    raf: null,
+    lastTick: 0,
+    appliedUntil: -1
+  };
+
+  function setControlsEnabled(on) {
+    ['btnPlay', 'btnPause', 'btnBack', 'btnFwd', 'replaySpeed', 'replayScrub', 'serialSelect']
+      .forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.disabled = !on;
+      });
+  }
+
+  function updateTimeUi() {
+    const timeEl = document.getElementById('replayTime');
+    const durEl = document.getElementById('replayDuration');
+    const scrub = document.getElementById('replayScrub');
+    if (timeEl) timeEl.textContent = formatMs(replay.pos);
+    if (durEl) durEl.textContent = formatMs(replay.duration);
+    if (scrub && replay.duration > 0) {
+      scrub.max = String(replay.duration);
+      scrub.value = String(Math.min(replay.pos, replay.duration));
+    }
+  }
+
+  function resetAllSignals() {
+    // alle bekannten Signal-Nodes aus
+    config.stations.forEach(st => {
+      (st.signals || []).forEach(sig => {
+        window.AnlageTwin.setSignal(st.id, sig.tag, false);
+      });
+    });
+    config.stations.forEach(st => window.AnlageTwin.setStationActive(st.id, false));
+  }
+
+  function applyEventsUpTo(posMs) {
+    // Neu aufbauen: alles aus, dann Events bis pos
+    resetAllSignals();
+    const state = {}; // station|tag -> value
+    for (const ev of replay.events) {
+      if (ev.t > posMs) break;
+      state[ev.station + '|' + ev.tag] = ev;
+      window.AnlageTwin.setSignal(ev.station, ev.tag, ev.value);
+      if (ev.value) window.AnlageTwin.setStationActive(ev.station, true);
+    }
+    // Station aktiv nur wenn irgendein true-Signal
+    const active = new Set();
+    Object.values(state).forEach(ev => {
+      if (ev.value) active.add(ev.station);
+    });
+    config.stations.forEach(st => {
+      window.AnlageTwin.setStationActive(st.id, active.has(st.id));
+    });
+    replay.appliedUntil = posMs;
+  }
+
+  function loadProduction(serial) {
+    const prod = replay.productions.find(p => p.serial === serial);
+    if (!prod) return;
+    const end = prod.end || new Date(prod.start.getTime() + 5 * 60 * 1000);
+    replay.events = eventsInWindow(replay.rows, prod.start, end);
+    replay.duration = Math.max(1000, end.getTime() - prod.start.getTime());
+    replay.pos = 0;
+    replay.playing = false;
+    applyEventsUpTo(0);
+    updateTimeUi();
+    document.getElementById('btnPlay')?.removeAttribute('disabled');
+    document.getElementById('btnPause')?.removeAttribute('disabled');
+    document.getElementById('btnBack')?.removeAttribute('disabled');
+    document.getElementById('btnFwd')?.removeAttribute('disabled');
+    document.getElementById('replaySpeed')?.removeAttribute('disabled');
+    document.getElementById('replayScrub')?.removeAttribute('disabled');
+    const meta = document.getElementById('serialMeta');
+    // optional
+    console.info('Produktion', serial, 'Events:', replay.events.length, 'Dauer ms:', replay.duration);
+  }
+
+  function tick(now) {
+    if (!replay.playing) return;
+    const dt = (now - replay.lastTick) * replay.speed;
+    replay.lastTick = now;
+    replay.pos = Math.min(replay.duration, replay.pos + dt);
+    applyEventsUpTo(replay.pos);
+    updateTimeUi();
+    if (replay.pos >= replay.duration) {
+      replay.playing = false;
+      return;
+    }
+    replay.raf = requestAnimationFrame(tick);
+  }
+
+  function play() {
+    if (!replay.events.length) return;
+    if (replay.pos >= replay.duration) replay.pos = 0;
+    replay.playing = true;
+    replay.lastTick = performance.now();
+    replay.raf = requestAnimationFrame(tick);
+  }
+
+  function pause() {
+    replay.playing = false;
+    if (replay.raf) cancelAnimationFrame(replay.raf);
+  }
+
+  function seek(ms) {
+    replay.pos = Math.max(0, Math.min(replay.duration, ms));
+    applyEventsUpTo(replay.pos);
+    updateTimeUi();
+  }
+
+  async function loadCsv() {
+    let text = null;
+    let lastErr = null;
+    for (const url of CSV_CANDIDATES) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) {
+          text = await res.text();
+          console.info('CSV geladen:', url);
+          break;
+        }
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    if (!text) {
+      console.warn('plc_daten.csv nicht gefunden', lastErr);
+      const hint = document.querySelector('header .hint');
+      if (hint) hint.textContent += ' · Demo-CSV fehlt (plc_daten.csv neben die HTML legen)';
+      return;
+    }
+    replay.rows = parseCsv(text);
+    replay.productions = buildProductions(replay.rows);
+    const sel = document.getElementById('serialSelect');
+    if (sel) {
+      sel.innerHTML = '<option value="">— Produktion wählen —</option>';
+      replay.productions.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.serial;
+        const endStr = p.end ? p.end.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'offen';
+        opt.textContent = `#${p.serial}  (${p.start.toLocaleString('de-DE')} → ${endStr})`;
+        sel.appendChild(opt);
+      });
+      sel.disabled = false;
+      // Auto erste geschlossene Produktion
+      const first = replay.productions.find(p => p.end) || replay.productions[0];
+      if (first) {
+        sel.value = first.serial;
+        loadProduction(first.serial);
+      }
+    }
+    setControlsEnabled(true);
+  }
+
+  // UI-Bindungen
+  document.getElementById('btnPlay')?.addEventListener('click', () => play());
+  document.getElementById('btnPause')?.addEventListener('click', () => pause());
+  document.getElementById('btnBack')?.addEventListener('click', () => {
+    pause();
+    seek(replay.pos - 5000);
+  });
+  document.getElementById('btnFwd')?.addEventListener('click', () => {
+    pause();
+    seek(replay.pos + 5000);
+  });
+  document.getElementById('replaySpeed')?.addEventListener('change', (e) => {
+    replay.speed = parseFloat(e.target.value) || 1;
+  });
+  document.getElementById('replayScrub')?.addEventListener('input', (e) => {
+    pause();
+    seek(Number(e.target.value));
+  });
+  document.getElementById('serialSelect')?.addEventListener('change', (e) => {
+    pause();
+    if (e.target.value) loadProduction(e.target.value);
+  });
+
+  window.AnlageTwin.replay = replay;
+  window.AnlageTwin.loadProduction = loadProduction;
+  window.AnlageTwin.play = play;
+  window.AnlageTwin.pause = pause;
+
+  loadCsv();
+
+  console.info('AnlageTwin bereit. Demo-Replay: Produktion wählen + Play');
 })();
+
 </script>
 </body>
 </html>
