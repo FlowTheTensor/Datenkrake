@@ -11,8 +11,10 @@ from a2a.server.apps import A2AStarletteApplication
 from a2a.server.request_handlers import DefaultRequestHandler
 from a2a.server.tasks import InMemoryTaskStore
 from a2a.types import AgentCapabilities, AgentCard, AgentSkill
+from starlette.responses import PlainTextResponse
 
 from orchestrator_agent.agent_executor import OrchestratorAgentExecutor
+from orchestrator_agent.graph import build_graph
 from orchestrator_agent.monitor import loop as ueberwachungsschleife
 
 skill = AgentSkill(
@@ -40,10 +42,22 @@ request_handler = DefaultRequestHandler(
 )
 
 app = A2AStarletteApplication(agent_card=agent_card, http_handler=request_handler)
+built_app = app.build()
+
+GRAPH = build_graph()
+
+
+async def graph_mermaid(request):
+    """Mermaid-Quelltext des Überwachungs-Graphen aus graph.py - vom
+    Leitstand-Dashboard (Tab "Agenten-Graphen") live abgerufen."""
+    return PlainTextResponse(GRAPH.get_graph().draw_mermaid())
+
+
+built_app.add_route("/graph/mermaid", graph_mermaid, methods=["GET"])
 
 
 async def main() -> None:
-    config = uvicorn.Config(app.build(), host="0.0.0.0", port=9200, log_level="info")
+    config = uvicorn.Config(built_app, host="0.0.0.0", port=9200, log_level="info")
     server = uvicorn.Server(config)
     await asyncio.gather(server.serve(), ueberwachungsschleife())
 

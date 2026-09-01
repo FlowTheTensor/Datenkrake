@@ -1,7 +1,7 @@
 """
-A2A-Fassade des DB-Agent - nutzt dieselbe shared/db_service.py wie der
-Poller und der Orchestrator. Nach außen bietet dieser Agent den Skill
-'telemetrie_abfragen' an.
+A2A-Fassade des DB-Agent - ruft den in graph.py definierten LangGraph-
+Ablauf auf (LLM-Werkzeugwahl bzw. Keyword-Fallback, siehe dort). Nach
+außen bietet dieser Agent weiterhin den Skill 'telemetrie_abfragen' an.
 """
 from typing_extensions import override
 
@@ -9,30 +9,18 @@ from a2a.server.agent_execution import AgentExecutor, RequestContext
 from a2a.server.events import EventQueue
 from a2a.utils import new_agent_text_message
 
-from shared import db_service
+from db_agent.graph import build_graph
+
+GRAPH = build_graph()
 
 
 class TelemetrieAgentExecutor(AgentExecutor):
     @override
     async def execute(self, context: RequestContext, event_queue: EventQueue) -> None:
-        text = (context.get_user_input() or "").lower()
-
-        if "anomalie" in text or "wartung" in text:
-            offene = db_service.get_offene_anomalien()
-            antwort = (
-                "\n".join(
-                    f"#{a['id']}: {a['peak_db']} dB vs. Referenz {a['referenz_mittel']} dB "
-                    f"(Messung #{a['bezug_id']})"
-                    for a in offene
-                )
-                or "Keine offenen Anomalien."
-            )
-        elif "stats" in text or "statistik" in text:
-            antwort = str(db_service.get_stats())
-        else:
-            antwort = "Ich kenne: 'anomalie'/'wartung' (offene Fälle), 'stats' (Statistik)."
-
-        event_queue.enqueue_event(new_agent_text_message(antwort))
+        ergebnis = await GRAPH.ainvoke(
+            {"anfrage": context.get_user_input() or "", "werkzeug": "unbekannt", "antwort": ""}
+        )
+        event_queue.enqueue_event(new_agent_text_message(ergebnis["antwort"]))
 
     @override
     async def cancel(self, context: RequestContext, event_queue: EventQueue) -> None:

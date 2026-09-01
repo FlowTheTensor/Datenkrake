@@ -158,7 +158,7 @@
     {cat:'E', color:'#C81E3A', q:'Wozu dient der Safety-Fence-Mechanismus in LAP?',
      options:['Er verschlüsselt die Verbindung','Er holt vor gefährlichen/irreversiblen Aktionen eine Bestätigung ein','Er reserviert Speicherplatz','Er startet den Container neu'],
      correct:1, exp:'Bevor eine als gefährlich markierte Aktion ausgeführt wird, muss sie explizit bestätigt werden — siehe Wartungs-Agent.'},
-    {cat:'E', color:'#C81E3A', q:'Was macht ein "Agent Harness" konkret?',
+    {cat:'E', color:'#C81E3A', q:'Was macht der "Harness" eines Agenten konkret?',
      options:['Er trainiert das neuronale Netz','Er speichert Messwerte in der Datenbank','Er verschickt MQTT-Nachrichten','Er wechselt zwischen LLM-Aufruf und Tool-Ausführung ab, bis das Modell fertig ist'],
      correct:3, exp:'Genau diese Schleife macht aus einem rohen Sprachmodell etwas, das selbstständig Werkzeuge nutzen kann.'},
 
@@ -236,7 +236,7 @@
      {cat:'E', color:'#C81E3A', q:'Welche Information enthält eine Agent Card?',
       options:['Nur das Passwort des Agenten','Fähigkeiten, Endpunkte und Metadaten des Agenten','Die vollständige Datenbank','Das Docker-Image'],
       correct:1, exp:'Die Agent Card beschreibt, was ein Agent kann und wie andere Agenten ihn erreichen.'},
-     {cat:'E', color:'#C81E3A', q:'Warum braucht ein Agent Harness einen Werkzeugaufruf-Zyklus?',
+     {cat:'E', color:'#C81E3A', q:'Warum braucht der Harness eines Agenten einen Werkzeugaufruf-Zyklus?',
       options:['Damit das Modell Ergebnisse von Tools verarbeiten und weitere Schritte planen kann','Damit die CPU langsamer läuft','Damit Antworten verschlüsselt werden','Damit MQTT Topics anlegt'],
       correct:0, exp:'Der Zyklus verbindet Modellentscheidung, Werkzeugausführung und die nächste Modellantwort.'},
      {cat:'E', color:'#C81E3A', q:'Was bedeutet Human-in-the-loop bei einem Wartungs-Agenten?',
@@ -632,6 +632,31 @@
   }
   document.getElementById('agentSend').addEventListener('click', sendAgent);
   document.getElementById('agentInput').addEventListener('keydown', function(e){ if(e.key==='Enter') sendAgent(); });
+
+  /* ---------------- Agenten-Graphen (LangGraph, Mermaid-Live-Abruf) ---------------- */
+  if (window.mermaid) { mermaid.initialize({ startOnLoad: false, theme: 'neutral' }); }
+
+  async function ladeAgentGraph(){
+    var select = document.getElementById('graphSelect');
+    var container = document.getElementById('graphContainer');
+    var btn = document.getElementById('graphLoad');
+    btn.disabled = true;
+    container.innerHTML = '<div class="msg sys">Lade Graph…</div>';
+    try{
+      var base = urlOf(select.value);
+      var res = await fetch(base+'/graph/mermaid');
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      var mermaidText = await res.text();
+      if(!window.mermaid) throw new Error('mermaid.js konnte nicht geladen werden');
+      var render = await mermaid.render('agentGraph'+Date.now(), mermaidText);
+      container.innerHTML = render.svg;
+    } catch(e){
+      container.innerHTML = '<div class="msg sys">Fehler: '+e.message+' — läuft der Agent unter '+urlOf(select.value)+' und erlaubt er CORS?</div>';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  document.getElementById('graphLoad').addEventListener('click', ladeAgentGraph);
 
   /* ---------------- Technologie-Übersicht ---------------- */
   var TECH = [

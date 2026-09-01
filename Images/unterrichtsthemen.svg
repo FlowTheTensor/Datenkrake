@@ -75,10 +75,8 @@
 <text class="tag" x="150.0" y="671" text-anchor="middle">A2A</text>
 <rect class="tagbg" x="190" y="654" width="60" height="26" rx="6"/>
 <text class="tag" x="220.0" y="671" text-anchor="middle">LAP</text>
-<rect class="tagbg" x="260" y="654" width="107.8" height="26" rx="6"/>
-<text class="tag" x="313.9" y="671" text-anchor="middle">Agent Harness</text>
-<rect class="tagbg" x="377.8" y="654" width="74.8" height="26" rx="6"/>
-<text class="tag" x="415.2" y="671" text-anchor="middle">JSON-RPC</text>
+<rect class="tagbg" x="260" y="654" width="74.8" height="26" rx="6"/>
+<text class="tag" x="297.4" y="671" text-anchor="middle">JSON-RPC</text>
 <rect class="tagbg" x="50" y="688" width="173.79999999999998" height="26" rx="6"/>
 <text class="tag" x="136.89999999999998" y="705" text-anchor="middle">Lokale LLMs (LM Studio)</text>
 <rect class="tagbg" x="233.79999999999998" y="688" width="68.19999999999999" height="26" rx="6"/>

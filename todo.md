@@ -24,4 +24,20 @@ Datenkrake.local als Webserver für alle:
         Die aktuelle Architektur ist also eher eine gemeinsame Demonstrations- und Analyseumgebung, nicht eine isolierte Mehrbenutzerumgebung.
 
 
-LangGraph (mit Mermaid und human-in-the-loop) für Agenten einbauen. 
+Human-in-the-loop für die Safety-Fence-Bestätigung im Orchestrator-Graph ergänzen (aktuell automatisch bestätigt, siehe Agentensystem/README.md "Bekannte Vereinfachungen").
+
+
+
+Füllstände:
+    Palettenlager1: BL1 voll, 12 Stück: 28396, 30485
+                              11 Stück: 25930
+                              10 Stück: 23773
+    Erst Füllstand messen, wenn Auslagerung abgeschlossen, wenn AL-BG2_Bandsensor_Rechts aktiviert
+
+    Rohlager, Dosenoberteile
+        Ultraschallsensor hat sehr große Streuung
+        Dosenunterteile verkippt im Turm, ggf. per 3D-Druck Seitenteile als Führung
+
+
+
+exportierte csv-Daten importierbar machen, die dann als Demo-Daten verwendet werden können. csv per github mit bereitstellen.

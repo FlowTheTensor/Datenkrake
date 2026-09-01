@@ -18,22 +18,40 @@ Start:  python -m anomalie_poller.poller
 import os
 import time
 
-from shared import db_service
+from shared import db_service, predictive_models
 
 INTERVALL_SEKUNDEN = 15
 QUELLE = os.environ.get("ANOMALIE_QUELLE", "influx").strip().lower()
+METHODE = os.environ.get("ANOMALIE_METHODE", "zscore").strip().lower()
+
+
+def _ergebnis_ermitteln() -> dict:
+    """Liefert das Anomalie-Ergebnis - per Isolation Forest, wenn
+    ANOMALIE_METHODE=isolation_forest gesetzt UND ein Modell trainiert
+    wurde (siehe ml_training/), sonst per fester Mittelwert/Std-
+    Heuristik. Ohne trainiertes Modell faellt die Methode automatisch auf
+    die Heuristik zurueck, statt den Poller anzuhalten."""
+    if METHODE == "isolation_forest":
+        ergebnis = predictive_models.akustik_anomalie_ml()
+        if ergebnis is not None:
+            return ergebnis
+        print(
+            "Kein trainiertes Isolation-Forest-Modell gefunden (ml_training/models/), "
+            "nutze zscore-Fallback. Erst 'python -m ml_training.train_isolation_forest_akustik' ausfuehren."
+        )
+
+    if QUELLE == "mariadb":
+        return db_service.pruefe_akustik_anomalie(fenster=20)
+    return db_service.pruefe_akustik_anomalie_influx(fenster=20)
 
 
 def pruefzyklus() -> None:
-    if QUELLE == "mariadb":
-                ergebnis = db_service.pruefe_akustik_anomalie(fenster=20)
-    else:
-                ergebnis = db_service.pruefe_akustik_anomalie_influx(fenster=20)
+    ergebnis = _ergebnis_ermitteln()
 
     if not ergebnis.get("anomalie"):
         return
 
-    if QUELLE == "mariadb":
+    if "bezug_id" in ergebnis:
         bezug_id = ergebnis["bezug_id"]
         aktuell_peak_db = ergebnis["aktuell_peak_db"]
     else:
@@ -61,7 +79,7 @@ def pruefzyklus() -> None:
 
 if __name__ == "__main__":
     print(
-        f"Anomalie-Poller gestartet (alle {INTERVALL_SEKUNDEN}s, Quelle: {QUELLE})."
+        f"Anomalie-Poller gestartet (alle {INTERVALL_SEKUNDEN}s, Quelle: {QUELLE}, Methode: {METHODE})."
     )
     while True:
         try:

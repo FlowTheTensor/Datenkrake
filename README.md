@@ -18,8 +18,12 @@ realen Lernanlage demonstriert:
 - **LAP** (Local Agent Protocol) — verbindet einen Agenten mit einem
   physischen Zusatzgerät (Wartungs-Agent), inklusive expliziter
   Sicherheitsbestätigung vor jeder Aktion.
-- **Agent Harness** — die Tool-Aufruf-Schleife, die aus einem rohen
-  Sprachmodell (lokal via LM Studio) überhaupt erst einen Agenten macht.
+
+Jeder dieser Agenten ist dabei bereits sein eigener **Harness**: die
+Schleife aus LLM-Aufruf, Tool-Ausführung und Gedächtnis, die aus einem
+rohen Sprachmodell überhaupt erst etwas macht, das selbstständig
+Werkzeuge benutzen kann. Harness ist also keine zusätzliche Komponente
+neben MCP/A2A/LAP, sondern eine Eigenschaft der Agenten selbst.
 
 Die interaktive Dokumentation und der Live-Leitstand liegen in
 [`index.html`](Raspberry/web/index.html): Architekturdiagramme, Agenten-Konsole,
@@ -70,7 +74,7 @@ Business bzw. Data Understanding zurückfließen.*
 | **SPS-Modellanlage** (optional) | z. B. S7-1500/ET200SP mit OPC-UA-Freigabe, 10 Stationen im Anlagen-Netz `192.168.36.0/24` | reale Prozesswerte via OPC-UA → Node-RED. Ohne echte Anlage übernimmt der mitgelieferte `opcua_demo_server` einen simulierten Tag |
 | **Windows-/Linux-PC oder Laptop** | mit Claude Desktop | MCP-Client, Anzeige des Leitstands, Bedienung der Agenten-Konsole |
 | **Optionaler zweiter Rechner** (Schulserver/Lehrer-PC) | mehrere GB freier RAM | eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) — bewusst **nicht** auf dem Pi, da deutlich ressourcenhungriger |
-| **LM Studio** (optional) | beliebiger Rechner mit genug RAM/VRAM für ein lokales LLM | Agent Harness (lokales Sprachmodell statt Claude) |
+| **LM Studio** (optional) | beliebiger Rechner mit genug RAM/VRAM für ein lokales LLM | lokales Sprachmodell für die Agenten (statt Cloud-API) |
 | **Netzwerk** | Ethernet zum Anlagen-Netz + optional WLAN als Client in ein bestehendes DMZ-Netz | Pi verbindet Anlagen-Netz und DMZ, ist dabei aber **kein eigener Access Point** |
 
 Beim Anschluss von USB-Mikrofon/Webcam über eine Dockingstation auf
@@ -141,8 +145,7 @@ Wartungs-Agent greift per LAP ausschließlich auf sein eigenes
 Diagnosegerät zu, nie auf die Produktionssteuerung. Rechts liest ein
 separater, stärkerer Rechner per Batch-Import den Data-Lake-Stack aus der
 MariaDB, während ein MCP-Server auf einem PC dieselbe MariaDB abfragt und
-die Daten per MCP an Claude Desktop und einen eigenständigen Agent
-Harness weiterreicht. Dieselbe Grafik lässt sich interaktiv mit
+die Daten per MCP an Claude Desktop weiterreicht. Dieselbe Grafik lässt sich interaktiv mit
 Detail-Overlay in `index.html` unter „Architektur" ansehen.
 
 ## Was das Projekt zeigt
@@ -156,8 +159,8 @@ Themenblöcke, die jeweils Erklärung und laufendes System verbinden:
 | **Datenerhebung** | Akustikdaten (Arduino UNO Q), SPS-Tags der Modellanlage (OPC-UA), Zusammenführung über MQTT/Node-RED | `ArduinoUnoQ/`, `Raspberry/nodered/`, `UAExpertExport/` |
 | **Kommunikation & Industrie 4.0** | MQTT als Publish/Subscribe-Protokoll, OPC-UA als Industriestandard, Node-RED als Übersetzer dazwischen | `Raspberry/mosquitto/`, `Raspberry/nodered/` |
 | **Datenhaltung und -analyse** | MariaDB als vollständige Quelle, InfluxDB als Operational Historian, Grafana und der Data-Lake-Stack (MinIO/Nessie/Spark) für Auswertung | `Raspberry/mariadb/`, `Raspberry/historian/`, `DataLake/` |
-| **Machine Learning** | Vergleich von ML-Verfahren, Anomalie-Detektor aus Akustikdaten, `anomalie_poller` als Brücke zur Agentenkette | `ArduinoUnoQ/`, `Agentensystem/anomalie_poller/` |
-| **Agentensysteme & KI-Integration** | MCP, A2A, LAP und Agent Harness im Zusammenspiel, live testbar über die Agenten-Konsole im Leitstand | `Agentensystem/`, `MCPLokalClaudDesktop/` |
+| **Machine Learning** | Vergleich von ML-Verfahren, Anomalie-Detektor aus Akustikdaten, `anomalie_poller` als Brücke zur Agentenkette, vorausschauende Instandhaltung (Isolation Forest, LSTM) zum Selbertrainieren | `ArduinoUnoQ/`, `Agentensystem/anomalie_poller/`, `Agentensystem/ml_training/` |
+| **Agentensysteme & KI-Integration** | MCP, A2A und LAP im Zusammenspiel, live testbar über die Agenten-Konsole im Leitstand | `Agentensystem/`, `MCPLokalClaudDesktop/` |
 
 Für die vollständige Architekturübersicht (alle Komponenten,
 Kommunikationsprotokolle und Richtungen) siehe
@@ -170,7 +173,7 @@ Raspberry/            IoT-Grundstack (Docker Compose): MQTT, MariaDB, Subscriber
                        Web-Dashboard, Historian, Grafana, Node-RED, OPC-UA-Demo-Server
 ArduinoUnoQ/           Audio-Erfassung, FFT, Web-UI, ML-Training/Inferenz auf dem Arduino UNO Q
 UAExpertExport/        OPC-UA-Exporte und Dokumentation der 10 Stationen der Modellanlage
-Agentensystem/         MCP-Erweiterung, A2A-Agenten (Orchestrator/DB/Report), LAP-Wartungs-Agent, Agent Harness
+Agentensystem/         MCP-Erweiterung, A2A-Agenten (Orchestrator/DB/Report), LAP-Wartungs-Agent
 MCPLokalClaudDesktop/  MCP-Server für Claude Desktop (lesender Zugriff auf die MariaDB)
 DataLake/              eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jupyter) für einen separaten Rechner
 Raspberry/web/         interaktiver Leitstand sowie Audio- und PLC-Datenübersichten
@@ -179,7 +182,7 @@ Raspberry/web/         interaktiver Leitstand sowie Audio- und PLC-Datenübersic
 ## Weiterführende Dokumentation
 
 - [`Agentensystem/README.md`](Agentensystem/README.md) — Setup und Umgebungsvariablen des Agentensystems
-- [`Agentensystem/agent_harness/README.md`](Agentensystem/agent_harness/README.md) — didaktische Einordnung des Agent Harness
+- [`Agentensystem/ml_training/README.md`](Agentensystem/ml_training/README.md) — Isolation Forest (Akustik) und LSTM (Durchlaufzeit) selbst trainieren
 - [`Raspberry/nodered/README.md`](Raspberry/nodered/README.md) — OPC-UA → Node-RED → MQTT
 - [`Raspberry/opcua_demo_server/README.md`](Raspberry/opcua_demo_server/README.md) — Testen ohne echte SPS
 - [`Raspberry/historian/README.md`](Raspberry/historian/README.md) — Operational Historian (InfluxDB)

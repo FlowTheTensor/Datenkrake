@@ -139,16 +139,19 @@ def pruefe_akustik_anomalie_influx(fenster: int = 20) -> dict:
 
 def get_letzte_spectrum_messung() -> dict | None:
     """Liefert die neueste Messung aus audio_spectrum fuer die operative
-    bezug_id (FK in audio_anomalien) und einen konsistenten peak_db-Wert."""
+    bezug_id (FK in audio_anomalien), einen konsistenten peak_db-Wert und
+    peak_freq (fuer das Isolation-Forest-Modell, siehe
+    shared/predictive_models.py)."""
     with _read_connection() as conn:
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, peak_db FROM audio_spectrum ORDER BY ts DESC LIMIT 1"
+            "SELECT id, peak_freq, peak_db FROM audio_spectrum ORDER BY ts DESC LIMIT 1"
         )
         row = cur.fetchone()
     if not row:
         return None
     row["peak_db"] = round(float(row["peak_db"]), 2)
+    row["peak_freq"] = round(float(row["peak_freq"]), 2)
     return row
 
 

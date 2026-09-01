@@ -54,9 +54,7 @@
 | **Server/PC · Data-Lake** (MinIO, Nessie, Spark + Jupyter) | Separater, stärkerer Rechner (nicht der Pi) | MariaDB | Batch Import | eingehend, periodisch |
 | **MCP-Server** (`mcpserver.py`) | Läuft lokal auf dem PC, stdio-Anbindung | MariaDB | SQL (Netzwerk) | eingehend |
 | | | Claude Desktop | MCP | ausgehend |
-| | | Agent Harness | MCP | ausgehend |
 | **Claude Desktop** | Fertige Chat-App mit MCP-Unterstützung, ein MCP-Client unter mehreren | MCP-Server | MCP | eingehend |
-| **Agent Harness** | Eigenständige Tool-Use-Schleife (z. B. die Agenten-Konsole), gleichwertiger MCP-Client neben Claude Desktop | MCP-Server | MCP | eingehend |
 | **Browser** | HTTP-Client | Webserver | HTTP | ausgehend |
 | | | Report-Agent | HTTP | ausgehend (Agenten-Konsole spricht Agent Card direkt an) |
 
@@ -75,3 +73,13 @@
 | **HTTP** | Web-Zugriff auf das Dashboard | Browser → Webserver |
 | **Flux-Query (HTTP API)** | Zeitreihen-Abfrage gegen InfluxDB | Anomalie-Poller → InfluxDB |
 | **Batch Import** | Periodische Massenübertragung in den Data-Lake | MariaDB → Data-Lake-Server |
+
+## Begriffsklärung: Harness ist keine eigene Komponente
+
+"Harness" taucht bewusst in keiner der Tabellen oben als eigenständiger
+Baustein auf. Ein Harness ist die Tool-Aufruf-Schleife (LLM aufrufen →
+bei Tool-Aufruf das Tool ausführen → Ergebnis zurückgeben → wiederholen,
+bis das Modell fertig ist) plus ein Gedächtnis für den bisherigen
+Verlauf – also eine Eigenschaft, die jeder Agent hier (Orchestrator-,
+DB-, Wartungs-, Report-Agent) selbst mitbringt, kein zusätzlicher
+Knoten im Diagramm. Ein Agent = Harness (Loop) + LLM + Tools + Memory.

@@ -19,10 +19,48 @@
         </div>
         <div class="ki-card">
           <div class="name">🏭 SPS-/Anlagen-Signale</div>
-          <div class="chart-note">OPC-UA-Knoten aus der Modellanlage werden über Node-RED in den Telemetriefluss gebracht.</div>
+          <div class="chart-note">OPC-UA-Knoten aus der Modellanlage werden über Node-RED in den Telemetriefluss gebracht. Motorlauf, Bandsensoren und Prozessstatus fließen stationsweise in die Datenhaltung.</div>
         </div>
     </div>
     <div class="chart-note">Die eigentliche Modellanwendung folgt im Abschnitt „Machine Learning" mit dem Übergang zum Anomalie-Poller und Agentensystem.</div>
   </div>
-</section>
 
+  <!-- Digitaler Zwilling – hervorgehobene Karte unter SPS-Signalen -->
+  <div class="panel twin-panel">
+    <div class="twin-feature">
+      <div class="twin-feature-main">
+        <div class="twin-eyebrow">Live-Schema · Demo-Replay</div>
+        <h3 class="twin-title">Digitaler Zwilling der Modellanlage</h3>
+        <p class="twin-lead">
+          Das Anlagenschema zeigt den Materialfluss von Palettenlager bis Abfüllen –
+          inklusive Transfersystemen und Hochregal-Ast. Im Demo-Modus lässt sich eine
+          aufgezeichnete Produktion (Seriennummer) abspielen: Rechtslauf, Linkslauf und
+          Bandsensoren leuchten zeitrichtig auf dem Schema und im Ereignisprotokoll.
+        </p>
+        <ul class="twin-points">
+          <li>Feste Stationsreihenfolge nach realem Layout</li>
+          <li>Replay aus <code>plc_daten.csv</code> (Play, Tempo, Scrubber)</li>
+          <li>Nur die relevanten Signale: Richtung &amp; Bandsensoren</li>
+        </ul>
+        <div class="twin-actions">
+          <a class="open-btn twin-btn" href="anlage-zwilling.html" target="_blank" rel="noopener">Digitalen Zwilling öffnen ↗</a>
+          <a class="twin-link-secondary" href="plcdaten.php" target="_blank" rel="noopener">Rohdaten PLC-Übersicht</a>
+        </div>
+      </div>
+      <div class="twin-feature-aside" aria-hidden="true">
+        <div class="twin-mini-schema">
+          <span class="tm s1">PL2</span>
+          <span class="tm s2">Presse</span>
+          <span class="tm s3">Handling</span>
+          <span class="tm s4">Qualität</span>
+          <span class="tm s5">TS‑R</span>
+          <span class="tm s6">Abfüllen</span>
+          <span class="tm s7">Rohlager</span>
+          <span class="tm s8">PL1</span>
+          <span class="tm flow">↻</span>
+        </div>
+        <div class="twin-aside-note">Schema · Stationen · Signale</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -7,3 +7,4 @@ pydantic
 pymysql
 typing_extensions
 influxdb-client
+langgraph
