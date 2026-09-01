@@ -17,7 +17,6 @@
       --signal-off: #c8c8c8;
       --signal-on: #28a745;
       --aktor-on: #007bff;
-      --meta-fill: #8b1a1a;
       --workpiece: #e67e22;
     }
     * { box-sizing: border-box; }
@@ -52,11 +51,13 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 10px 14px;
-      padding: 10px 12px;
+      gap: 8px 14px;
+      padding: 8px 12px;
       background: #f7f7f7;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto 12px;
     }
     .rb-btn {
       width: 40px;
@@ -118,7 +119,6 @@
     .rb-sep { margin: 0 2px; color: #aaa; }
     .rb-percent { color: #999; }
     .rb-serial select { min-width: 160px; }
-    .rb-hint { margin: 8px 2px 0; font-size: 12px; color: #888; }
     .load-error, .process-status.is-error {
       color: #b02a2a;
       font-weight: 600;
@@ -128,7 +128,7 @@
       .replay-bar { justify-content: center; }
     }
     #stage {
-      padding: 16px;
+      padding: 16px 16px 4px;
       overflow: auto;
     }
     svg.anlage {
@@ -165,19 +165,6 @@
       font-size: 10px;
       fill: #888;
       text-anchor: middle;
-    }
-    .meta-box {
-      fill: var(--meta-fill);
-      stroke: #5c0f0f;
-      stroke-width: 2;
-      rx: 10;
-    }
-    .meta-label {
-      font-size: 14px;
-      font-weight: 600;
-      fill: #fff;
-      text-anchor: middle;
-      pointer-events: none;
     }
     .flow-segment {
       fill: none;
@@ -371,46 +358,45 @@
       <h1>Digitaler Zwilling</h1>
       <span class="hint">SVG aus <code>anlage.json</code> · Demo-Replay aus plc_daten.csv</span>
     </div>
-    <div class="replay-bar" id="replayBar" aria-label="Replay-Steuerung">
-      <button type="button" class="rb-btn" id="btnRestart" title="Zum Anfang springen" disabled>
-        <span aria-hidden="true">⇺</span>
-      </button>
-      <button type="button" class="rb-btn primary" id="btnPlayPause" title="Play (Leertaste)" aria-label="Play" disabled>
-        <span aria-hidden="true">▶</span>
-      </button>
-      <label class="rb-speed" title="Geschwindigkeit">
-        <span>Tempo</span>
-        <select id="replaySpeed" disabled>
-          <option value="0.5">0,5×</option>
-          <option value="1" selected>1×</option>
-          <option value="2">2×</option>
-          <option value="5">5×</option>
-          <option value="10">10×</option>
-          <option value="20">20×</option>
-        </select>
-      </label>
-      <div class="rb-scrub">
-        <input type="range" id="replayScrub" min="0" max="1000" value="0" disabled
-               aria-label="Zeitposition">
-        <div class="rb-time">
-          <span id="replayTime">00:00</span>
-          <span class="rb-sep">/</span>
-          <span id="replayDuration">00:00</span>
-          <span class="rb-sep">·</span>
-          <span id="replayPercent" class="rb-percent">0%</span>
-        </div>
-      </div>
-      <label class="rb-serial">
-        <span>Seriennr.</span>
-        <select id="serialSelect" disabled>
-          <option value="">— Produktion wählen —</option>
-        </select>
-      </label>
-    </div>
-    <p class="rb-hint">Tipp: Leertaste = Play/Pause · ←/→ = 5 s zurück/vor</p>
   </header>
   <div id="stage">
     <p class="hint">Lade Konfiguration…</p>
+  </div>
+  <div class="replay-bar" id="replayBar" aria-label="Replay-Steuerung">
+    <button type="button" class="rb-btn" id="btnRestart" title="Zum Anfang springen" disabled>
+      <span aria-hidden="true">⇺</span>
+    </button>
+    <button type="button" class="rb-btn primary" id="btnPlayPause" title="Play (Leertaste)" aria-label="Play" disabled>
+      <span aria-hidden="true">▶</span>
+    </button>
+    <label class="rb-speed" title="Geschwindigkeit">
+      <span>Tempo</span>
+      <select id="replaySpeed" disabled>
+        <option value="0.5">0,5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="5">5×</option>
+        <option value="10">10×</option>
+        <option value="20">20×</option>
+      </select>
+    </label>
+    <div class="rb-scrub">
+      <input type="range" id="replayScrub" min="0" max="1000" value="0" disabled
+             aria-label="Zeitposition">
+      <div class="rb-time">
+        <span id="replayTime">00:00</span>
+        <span class="rb-sep">/</span>
+        <span id="replayDuration">00:00</span>
+        <span class="rb-sep">·</span>
+        <span id="replayPercent" class="rb-percent">0%</span>
+      </div>
+    </div>
+    <label class="rb-serial">
+      <span>Seriennr.</span>
+      <select id="serialSelect" disabled>
+        <option value="">— Produktion wählen —</option>
+      </select>
+    </label>
   </div>
 
   <section class="process-panel" id="processPanel" aria-label="Visualisierung der Prozessdaten">
@@ -473,7 +459,7 @@
   const gapX = L.gapX;
   const gapY = L.gapY;
   const pad = L.padding;
-  const metaH = 56;
+  const metaH = 74;
   const topExtra = 80;
 
   const gridW = L.cols * boxW + (L.cols - 1) * gapX;
@@ -715,28 +701,34 @@
     const metaY = pad;
     const g = el('g', {
       id: 'station-leitstand',
-      class: 'station meta',
+      class: 'station',
       'data-station': 'leitstand',
       'data-dbkey': config.meta.dbKey
     });
     g.appendChild(el('rect', {
-      class: 'meta-box',
+      class: 'station-box',
       x: metaX,
       y: metaY,
       width: metaW,
       height: metaH
     }));
     g.appendChild(el('text', {
-      class: 'meta-label',
+      class: 'station-label',
       x: metaX + metaW / 2,
-      y: metaY + 24
+      y: metaY + 22
     }, 'Leitstand'));
     g.appendChild(el('text', {
-      class: 'meta-label',
+      class: 'station-badge',
       x: metaX + metaW / 2,
-      y: metaY + 44,
-      'font-size': '12'
+      y: metaY + 40
     }, 'Seriennummer'));
+    g.appendChild(el('text', {
+      id: 'leitstand-serial-value',
+      class: 'station-label',
+      x: metaX + metaW / 2,
+      y: metaY + 60,
+      'font-size': '15'
+    }, '—'));
     layerStations.appendChild(g);
   }
 
@@ -1253,7 +1245,9 @@
     const metaEnd = document.getElementById('metaEnd');
     const metaEvents = document.getElementById('metaEvents');
     const status = document.getElementById('processStatus');
+    const leitstandSerial = document.getElementById('leitstand-serial-value');
     if (metaSerial) metaSerial.textContent = '#' + serial;
+    if (leitstandSerial) leitstandSerial.textContent = '#' + serial;
     if (metaStart) metaStart.textContent = prod.start.toLocaleString('de-DE');
     if (metaEnd) metaEnd.textContent = prod.end ? prod.end.toLocaleString('de-DE') : 'offen';
     if (metaEvents) metaEvents.textContent = String(replay.events.length);
