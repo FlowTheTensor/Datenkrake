@@ -218,18 +218,18 @@
     }
     .direction-arrow {
       fill: none;
-      stroke: #90caf9;
-      stroke-width: 2.5;
+      stroke: #1976d2;
+      stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;
-      opacity: 0.35;
+      opacity: 0;
+      transition: opacity .2s ease;
     }
     .direction-arrow.on-right,
     .direction-arrow.on-left {
       opacity: 1;
+      filter: drop-shadow(0 0 2px rgba(25, 118, 210, .5));
     }
-    .direction-arrow.on-right { stroke: #1976d2; }
-    .direction-arrow.on-left { stroke: #1976d2; }
     .workpiece {
       fill: var(--workpiece);
       stroke: #a85a12;
@@ -396,17 +396,8 @@
       <button type="button" class="rb-btn" id="btnRestart" title="Zum Anfang springen" disabled>
         <span aria-hidden="true">⇺</span>
       </button>
-      <button type="button" class="rb-btn" id="btnBack" title="5 Sekunden zurück" disabled>
-        <span aria-hidden="true">⏪</span>
-      </button>
-      <button type="button" class="rb-btn primary" id="btnPlay" title="Play (Leertaste)" disabled>
+      <button type="button" class="rb-btn primary" id="btnPlayPause" title="Play (Leertaste)" aria-label="Play" disabled>
         <span aria-hidden="true">▶</span>
-      </button>
-      <button type="button" class="rb-btn" id="btnPause" title="Pause (Leertaste)" disabled>
-        <span aria-hidden="true">⏸</span>
-      </button>
-      <button type="button" class="rb-btn" id="btnFwd" title="5 Sekunden vor" disabled>
-        <span aria-hidden="true">⏩</span>
       </button>
       <label class="rb-speed" title="Geschwindigkeit">
         <span>Tempo</span>
@@ -644,8 +635,23 @@
     m.appendChild(el('path', { d: 'M0,0 L9,3 L0,6 Z', fill: color }));
     return m;
   }
+  /** Schlankerer, leicht geschwungener Pfeilkopf für die Rechts-/Linkslauf-Anzeige */
+  function directionArrowMarker(id, color) {
+    const m = el('marker', {
+      id,
+      markerWidth: 12,
+      markerHeight: 12,
+      refX: 7.5,
+      refY: 4,
+      orient: 'auto',
+      markerUnits: 'userSpaceOnUse'
+    });
+    m.appendChild(el('path', { d: 'M0,0 L9,4 L0,8 Q3,4 0,0 Z', fill: color }));
+    return m;
+  }
   defs.appendChild(arrowMarker('arrowMain', '#555'));
   defs.appendChild(arrowMarker('arrowDashed', '#999'));
+  defs.appendChild(directionArrowMarker('arrowDirection', '#1976d2'));
   svg.appendChild(defs);
 
   // --- Layer 1: flows ---
@@ -808,11 +814,11 @@
       addBand('band_right', o.x + o.w - inset - sq, o.y + o.h / 2 - sq / 2);
     }
 
-    // Richtungs-Pfeil (Kreisbogen) in der Stationsmitte
+    // Richtungs-Pfeil (Kreisbogen) in der Stationsmitte, nur sichtbar wenn aktiv
     if (byRole.direction_right || byRole.direction_left) {
       const cx = o.x + o.w / 2;
       const cy = o.y + o.h / 2 + (station.orientation === 'vertical' ? 10 : 8);
-      const r = Math.min(16, o.w / 4, o.h / 4);
+      const r = Math.min(18, o.w / 4, o.h / 4);
       // Bogen nach rechts (Rechtslauf)
       if (byRole.direction_right) {
         const pathR = el('path', {
@@ -820,20 +826,11 @@
           d: `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`,
           'data-tag': byRole.direction_right.tag,
           'data-role': 'direction_right',
-          'data-station': station.id
+          'data-station': station.id,
+          'marker-end': 'url(#arrowDirection)'
         });
-        // Pfeilspitze rechts
         pathR.appendChild(el('title', {}, 'Rechtslauf'));
         sigG.appendChild(pathR);
-        sigG.appendChild(el('polygon', {
-          class: 'direction-arrow dir-right',
-          points: `${cx + r},${cy} ${cx + r - 6},${cy - 5} ${cx + r - 6},${cy + 5}`,
-          'data-tag': byRole.direction_right.tag,
-          'data-role': 'direction_right',
-          'data-station': station.id,
-          fill: '#90caf9',
-          stroke: 'none'
-        }));
       }
       // Bogen nach links (Linkslauf) – unterer Halbbogen
       if (byRole.direction_left) {
@@ -842,19 +839,11 @@
           d: `M ${cx + r} ${cy} A ${r} ${r} 0 0 1 ${cx - r} ${cy}`,
           'data-tag': byRole.direction_left.tag,
           'data-role': 'direction_left',
-          'data-station': station.id
+          'data-station': station.id,
+          'marker-end': 'url(#arrowDirection)'
         });
         pathL.appendChild(el('title', {}, 'Linkslauf'));
         sigG.appendChild(pathL);
-        sigG.appendChild(el('polygon', {
-          class: 'direction-arrow dir-left',
-          points: `${cx - r},${cy} ${cx - r + 6},${cy - 5} ${cx - r + 6},${cy + 5}`,
-          'data-tag': byRole.direction_left.tag,
-          'data-role': 'direction_left',
-          'data-station': station.id,
-          fill: '#90caf9',
-          stroke: 'none'
-        }));
       }
     }
 
@@ -899,18 +888,8 @@
       nodes.forEach(node => {
         node.classList.toggle('on', on);
         const role = node.getAttribute('data-role') || '';
-        if (role === 'direction_right') {
-          node.classList.toggle('on-right', on);
-          if (node.tagName === 'polygon') {
-            node.setAttribute('fill', on ? '#1976d2' : '#90caf9');
-          }
-        }
-        if (role === 'direction_left') {
-          node.classList.toggle('on-left', on);
-          if (node.tagName === 'polygon') {
-            node.setAttribute('fill', on ? '#1976d2' : '#90caf9');
-          }
-        }
+        if (role === 'direction_right') node.classList.toggle('on-right', on);
+        if (role === 'direction_left') node.classList.toggle('on-left', on);
       });
     },
 
@@ -1102,7 +1081,7 @@
   };
 
   function setControlsEnabled(on) {
-    ['btnPlay', 'btnPause', 'btnRestart', 'btnBack', 'btnFwd', 'replaySpeed', 'replayScrub', 'serialSelect']
+    ['btnPlayPause', 'btnRestart', 'replaySpeed', 'replayScrub', 'serialSelect']
       .forEach(id => {
         const el = document.getElementById(id);
         if (el) el.disabled = !on;
@@ -1201,11 +1180,9 @@
     replay.playing = false;
     applyEventsUpTo(0);
     updateTimeUi();
-    document.getElementById('btnPlay')?.removeAttribute('disabled');
-    document.getElementById('btnPause')?.removeAttribute('disabled');
+    updatePlayPauseUi();
+    document.getElementById('btnPlayPause')?.removeAttribute('disabled');
     document.getElementById('btnRestart')?.removeAttribute('disabled');
-    document.getElementById('btnBack')?.removeAttribute('disabled');
-    document.getElementById('btnFwd')?.removeAttribute('disabled');
     document.getElementById('replaySpeed')?.removeAttribute('disabled');
     document.getElementById('replayScrub')?.removeAttribute('disabled');
     const meta = document.getElementById('serialMeta');
@@ -1232,15 +1209,32 @@
     updateTimeUi();
     if (replay.pos >= replay.duration) {
       replay.playing = false;
+      updatePlayPauseUi();
       return;
     }
     replay.raf = requestAnimationFrame(tick);
+  }
+
+  function updatePlayPauseUi() {
+    const btn = document.getElementById('btnPlayPause');
+    if (!btn) return;
+    const icon = btn.querySelector('span');
+    if (replay.playing) {
+      if (icon) icon.textContent = '⏸';
+      btn.title = 'Pause (Leertaste)';
+      btn.setAttribute('aria-label', 'Pause');
+    } else {
+      if (icon) icon.textContent = '▶';
+      btn.title = 'Play (Leertaste)';
+      btn.setAttribute('aria-label', 'Play');
+    }
   }
 
   function play() {
     if (!replay.events.length) return;
     if (replay.pos >= replay.duration) replay.pos = 0;
     replay.playing = true;
+    updatePlayPauseUi();
     replay.lastTick = performance.now();
     replay.raf = requestAnimationFrame(tick);
   }
@@ -1248,6 +1242,7 @@
   function pause() {
     replay.playing = false;
     if (replay.raf) cancelAnimationFrame(replay.raf);
+    updatePlayPauseUi();
   }
 
   function seek(ms) {
@@ -1313,19 +1308,12 @@
   }
 
   // UI-Bindungen
-  document.getElementById('btnPlay')?.addEventListener('click', () => play());
-  document.getElementById('btnPause')?.addEventListener('click', () => pause());
+  document.getElementById('btnPlayPause')?.addEventListener('click', () => {
+    if (replay.playing) pause(); else play();
+  });
   document.getElementById('btnRestart')?.addEventListener('click', () => {
     pause();
     seek(0);
-  });
-  document.getElementById('btnBack')?.addEventListener('click', () => {
-    pause();
-    seek(replay.pos - 5000);
-  });
-  document.getElementById('btnFwd')?.addEventListener('click', () => {
-    pause();
-    seek(replay.pos + 5000);
   });
   document.getElementById('replaySpeed')?.addEventListener('change', (e) => {
     replay.speed = parseFloat(e.target.value) || 1;
@@ -1339,7 +1327,7 @@
     if (e.target.value) loadProduction(e.target.value);
   });
 
-  // Tastatursteuerung: Leertaste = Play/Pause, Pfeiltasten = 5s zurück/vor
+  // Tastatursteuerung: Leertaste = Play/Pause
   document.addEventListener('keydown', (e) => {
     const activeTag = (document.activeElement && document.activeElement.tagName || '').toLowerCase();
     if (activeTag === 'select' || activeTag === 'input' || activeTag === 'textarea') return;
@@ -1347,14 +1335,6 @@
     if (e.code === 'Space') {
       e.preventDefault();
       if (replay.playing) pause(); else play();
-    } else if (e.code === 'ArrowLeft') {
-      e.preventDefault();
-      pause();
-      seek(replay.pos - 5000);
-    } else if (e.code === 'ArrowRight') {
-      e.preventDefault();
-      pause();
-      seek(replay.pos + 5000);
     }
   });
 
