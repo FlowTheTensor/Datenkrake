@@ -27,9 +27,13 @@
         .page-nav { margin-bottom: 15px; }
         .page-nav a { color: #8b1a1a; font-size: 13px; margin-right: 15px; }
         .main-data-container { max-width: 1100px; margin: 0 auto; width: 100%; }
-        .actions { margin-bottom: 15px; }
+        .actions { margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
         .btn-danger { padding: 8px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
         .btn-danger:hover { background: #c82333; }
+        .btn-primary { padding: 8px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .btn-primary:hover { background: #0069d9; }
+        .import-group { display: flex; gap: 8px; align-items: center; }
+        .import-status { font-size: 13px; color: #555; }
 
         .station-grid {
             display: grid;
@@ -143,6 +147,11 @@
 
         <div class="actions">
             <button class="btn-danger" type="button" onclick="clearPlcDatabase()">PLC-Daten löschen</button>
+            <div class="import-group">
+                <input type="file" id="csvImportInput" accept=".csv,text/csv">
+                <button class="btn-primary" type="button" onclick="importPlcCsv()">CSV importieren</button>
+            </div>
+            <span class="import-status" id="importStatus"></span>
         </div>
 
         <div class="station-grid" id="stationGrid"></div>
@@ -259,6 +268,42 @@
             alert('Fehler: ' + error.message);
         }
     }
+
+    async function importPlcCsv() {
+        const input = document.getElementById('csvImportInput');
+        const statusEl = document.getElementById('importStatus');
+        if (!input.files || !input.files.length) {
+            alert('Bitte zuerst eine CSV-Datei auswählen.');
+            return;
+        }
+        const formData = new FormData();
+        formData.append('csv_file', input.files[0]);
+
+        statusEl.textContent = 'Import läuft …';
+        try {
+            const response = await fetch('api/plc.php?action=import', { method: 'POST', body: formData });
+            const data = await response.json();
+            if (data.error) {
+                alert('Fehler: ' + data.error);
+                statusEl.textContent = '';
+                return;
+            }
+            let message = `${data.inserted} Zeilen importiert, ${data.skipped} übersprungen.`;
+            if (data.errors && data.errors.length) {
+                message += '\n\nErste Fehler:\n' + data.errors.join('\n');
+            }
+            alert(message);
+            statusEl.textContent = `Letzter Import: ${data.inserted} importiert, ${data.skipped} übersprungen.`;
+            input.value = '';
+            Object.keys(charts).forEach(k => { charts[k].destroy(); delete charts[k]; });
+            knownStations = [];
+            loadPlcData(true);
+        } catch (error) {
+            alert('Fehler: ' + error.message);
+            statusEl.textContent = '';
+        }
+    }
+    window.importPlcCsv = importPlcCsv;
 
     async function fetchStationData(station, limit) {
         const url = 'api/plc.php?action=data'

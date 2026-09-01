@@ -256,6 +256,116 @@ try {
             throw new RuntimeException($connection->error);
         }
         echo json_encode(['success' => true, 'deleted' => $count]);
+
+    } elseif ($action === 'import' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($_FILES['csv_file']) || $_FILES['csv_file']['error'] !== UPLOAD_ERR_OK) {
+            throw new RuntimeException('Keine gültige CSV-Datei empfangen.');
+        }
+
+        $handle = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        if ($handle === false) {
+            throw new RuntimeException('Datei konnte nicht geöffnet werden.');
+        }
+
+        $delimiter = ';';
+        $header = fgetcsv($handle, 0, $delimiter);
+        if ($header === false || $header === null) {
+            fclose($handle);
+            throw new RuntimeException('CSV-Datei ist leer oder ungültig.');
+        }
+        $header = array_map(static fn ($name) => trim((string) $name), $header);
+
+        // id/created_at werden von der Datenbank vergeben und beim Import ignoriert
+        $allowedColumns = [
+            'ts', 'station', 'endpoint', 'node_id', 'tag', 'datatype',
+            'wert_num', 'wert_bool', 'wert_text', 'payload_json', 'mqtt_topic',
+        ];
+        $requiredColumns = ['ts', 'station', 'tag'];
+        $nullableIfEmpty = ['wert_num', 'wert_bool', 'wert_text', 'payload_json', 'datatype'];
+
+        $columnMap = [];
+        foreach ($header as $index => $name) {
+            if (in_array($name, $allowedColumns, true)) {
+                $columnMap[$index] = $name;
+            }
+        }
+
+        $missing = array_diff($requiredColumns, array_values($columnMap));
+        if (!empty($missing)) {
+            fclose($handle);
+            throw new RuntimeException('CSV-Datei fehlen Pflichtspalten: ' . implode(', ', $missing));
+        }
+
+        $columns = array_values($columnMap);
+        $placeholders = implode(', ', array_fill(0, count($columns), '?'));
+        $columnsSql = implode(', ', array_map(static fn ($c) => "`{$c}`", $columns));
+        $insertSql = "INSERT INTO plc_telemetry ({$columnsSql}) VALUES ({$placeholders})";
+
+        $statement = $connection->prepare($insertSql);
+        if ($statement === false) {
+            fclose($handle);
+            throw new RuntimeException('Prepare fehlgeschlagen: ' . $connection->error);
+        }
+        $types = str_repeat('s', count($columns));
+
+        $inserted = 0;
+        $skipped = 0;
+        $errors = [];
+        $maxErrors = 20;
+        $rowNumber = 1;
+
+        $connection->begin_transaction();
+        while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
+            $rowNumber++;
+            if ($row === [null]) {
+                continue;
+            }
+
+            $values = [];
+            $valid = true;
+            foreach ($columnMap as $index => $columnName) {
+                $raw = $row[$index] ?? null;
+                $raw = $raw === null ? '' : trim((string) $raw);
+
+                if ($raw === '' && in_array($columnName, $requiredColumns, true)) {
+                    $valid = false;
+                    break;
+                }
+                if ($raw === '' && in_array($columnName, $nullableIfEmpty, true)) {
+                    $raw = null;
+                }
+                $values[] = $raw;
+            }
+
+            if (!$valid) {
+                $skipped++;
+                if (count($errors) < $maxErrors) {
+                    $errors[] = "Zeile {$rowNumber}: Pflichtfeld fehlt.";
+                }
+                continue;
+            }
+
+            $statement->bind_param($types, ...$values);
+            if ($statement->execute()) {
+                $inserted++;
+            } else {
+                $skipped++;
+                if (count($errors) < $maxErrors) {
+                    $errors[] = "Zeile {$rowNumber}: " . $statement->error;
+                }
+            }
+        }
+        $connection->commit();
+        fclose($handle);
+        $statement->close();
+
+        echo json_encode([
+            'success' => true,
+            'inserted' => $inserted,
+            'skipped' => $skipped,
+            'errors' => $errors,
+        ]);
+
     } else {
         http_response_code(404);
         echo json_encode(['error' => 'Unbekannte PLC-API-Aktion.']);
