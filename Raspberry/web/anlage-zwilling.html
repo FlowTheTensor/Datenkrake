@@ -238,35 +238,14 @@
       pointer-events: none;
     }
     .workpiece.visible { opacity: 1; }
-    .legend-details {
-      max-width: 960px;
-      margin: 0 auto 24px;
-      padding: 0 16px;
-    }
-    .legend-details summary {
-      cursor: pointer;
+    .legend-title {
       font-size: 13px;
-      color: #8b1a1a;
       font-weight: 600;
-      -webkit-user-select: none;
-      user-select: none;
+      fill: #8b1a1a;
     }
-    .legend {
-      margin: 12px 0 0;
-      max-width: 960px;
+    .legend-item-label {
       font-size: 12px;
-      color: #555;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .legend span { display: inline-flex; align-items: center; gap: 6px; }
-    .legend i {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 1px solid #666;
+      fill: #555;
     }
     .process-panel {
       max-width: 1100px;
@@ -463,18 +442,6 @@
       </div>
     </div>
   </section>
-  <details class="legend-details" open>
-    <summary>Legende</summary>
-    <div class="legend">
-      <span><i style="background:#fff;border-radius:3px;"></i> Station mit Daten</span>
-      <span><i style="background:#e8e8e8;border-radius:3px;border-style:dashed;"></i> Platzhalter</span>
-      <span><i style="background:#4caf50;border-color:#1b5e20;border-radius:2px;"></i> Bandsensor aktiv</span>
-      <span><i style="background:#d0d0d0;border-color:#2e7d32;border-radius:2px;"></i> Bandsensor inaktiv</span>
-      <span style="color:#1976d2;">↻</span> Rechts-/Linkslauf
-      <span style="border-bottom:3px solid #555;width:24px;height:0;display:inline-block;"></span> Hauptkreis
-      <span style="border-bottom:3px dashed #999;width:24px;height:0;display:inline-block;"></span> Hochregal-Ast
-    </div>
-  </details>
 
 <script>
 /**
@@ -511,8 +478,41 @@
 
   const gridW = L.cols * boxW + (L.cols - 1) * gapX;
   const gridH = L.rows * boxH + (L.rows - 1) * gapY;
+
+  // Legende wird unten in die Abbildung eingebettet; Zeilenumbruch anhand grober Textbreite (kein echtes Textmaß verfügbar)
+  const LEGEND_ITEMS = [
+    { type: 'station', label: 'Station mit Daten' },
+    { type: 'station-empty', label: 'Platzhalter' },
+    { type: 'band-on', label: 'Bandsensor aktiv' },
+    { type: 'band-off', label: 'Bandsensor inaktiv' },
+    { type: 'direction', label: 'Rechts-/Linkslauf' },
+    { type: 'flow-main', label: 'Hauptkreis' },
+    { type: 'flow-hochregal', label: 'Hochregal-Ast' }
+  ];
+  const legendIconW = 26;
+  const legendGap = 22;
+  const legendRowH = 24;
+  const legendTitleH = 24;
+  const legendBottomPad = 12;
+  function estimateTextWidth(text) {
+    return text.length * 6.2;
+  }
+  let legendCursorX = 0;
+  let legendRow = 0;
+  const legendLayout = LEGEND_ITEMS.map(item => {
+    const width = legendIconW + 6 + estimateTextWidth(item.label);
+    if (legendCursorX > 0 && legendCursorX + width > gridW) {
+      legendCursorX = 0;
+      legendRow++;
+    }
+    const laidOut = { ...item, x: legendCursorX, row: legendRow };
+    legendCursorX += width + legendGap;
+    return laidOut;
+  });
+  const legendH = legendTitleH + (legendRow + 1) * legendRowH + legendBottomPad;
+
   const svgW = pad * 2 + gridW;
-  const svgH = pad * 2 + topExtra + gridH;
+  const svgH = pad * 2 + topExtra + gridH + legendH;
 
   /** Box-Größe einer Station (vertikale Transfersysteme = hochkant) */
   function stationSize(station) {
@@ -740,6 +740,10 @@
     layerStations.appendChild(g);
   }
 
+  // Diese Stationen liegen hinter 2 Kurven im Band, ihre Rechts-/Linkslauf-Pfeile
+  // müssen deshalb gegenüber der übrigen Anlage gespiegelt dargestellt werden.
+  const FLIPPED_DIRECTION_STATIONS = ['palettenlager2', 'presse', 'handling_saugarm', 'qualitaet_kamera'];
+
   config.stations.forEach(station => {
     const o = stationOrigin(station);
     const g = el('g', {
@@ -819,30 +823,34 @@
       const cx = o.x + o.w / 2;
       const cy = o.y + o.h / 2 + (station.orientation === 'vertical' ? 10 : 8);
       const r = Math.min(18, o.w / 4, o.h / 4);
-      // Bogen nach rechts (Rechtslauf)
-      if (byRole.direction_right) {
+      // Kamera, Handling, Presse und Palettenlager 2 laufen nach 2 Kurven körperlich verkehrt herum
+      const flipDirection = FLIPPED_DIRECTION_STATIONS.includes(station.id);
+      const arcRightSignal = flipDirection ? byRole.direction_left : byRole.direction_right;
+      const arcLeftSignal = flipDirection ? byRole.direction_right : byRole.direction_left;
+      // Bogen nach rechts (im Bild)
+      if (arcRightSignal) {
         const pathR = el('path', {
           class: 'direction-arrow dir-right',
           d: `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`,
-          'data-tag': byRole.direction_right.tag,
+          'data-tag': arcRightSignal.tag,
           'data-role': 'direction_right',
           'data-station': station.id,
           'marker-end': 'url(#arrowDirection)'
         });
-        pathR.appendChild(el('title', {}, 'Rechtslauf'));
+        pathR.appendChild(el('title', {}, arcRightSignal.label || arcRightSignal.tag));
         sigG.appendChild(pathR);
       }
-      // Bogen nach links (Linkslauf) – unterer Halbbogen
-      if (byRole.direction_left) {
+      // Bogen nach links (im Bild) – unterer Halbbogen
+      if (arcLeftSignal) {
         const pathL = el('path', {
           class: 'direction-arrow dir-left',
           d: `M ${cx + r} ${cy} A ${r} ${r} 0 0 1 ${cx - r} ${cy}`,
-          'data-tag': byRole.direction_left.tag,
+          'data-tag': arcLeftSignal.tag,
           'data-role': 'direction_left',
           'data-station': station.id,
           'marker-end': 'url(#arrowDirection)'
         });
-        pathL.appendChild(el('title', {}, 'Linkslauf'));
+        pathL.appendChild(el('title', {}, arcLeftSignal.label || arcLeftSignal.tag));
         sigG.appendChild(pathL);
       }
     }
@@ -871,6 +879,58 @@
     'data-segment': firstMain ? `${firstMain.from}->${firstMain.to}` : ''
   }));
   svg.appendChild(layerWp);
+
+  // --- Layer 5: Legende (unten in die Abbildung eingebettet) ---
+  function legendIcon(type, x, cy) {
+    switch (type) {
+      case 'station':
+        return el('rect', { class: 'station-box', x, y: cy - 8, width: 22, height: 16 });
+      case 'station-empty': {
+        const g = el('g', { class: 'station no-data' });
+        g.appendChild(el('rect', { class: 'station-box', x, y: cy - 8, width: 22, height: 16 }));
+        return g;
+      }
+      case 'band-on':
+        return el('rect', { class: 'band-sensor on', x, y: cy - 7, width: 14, height: 14, rx: 2 });
+      case 'band-off':
+        return el('rect', { class: 'band-sensor', x, y: cy - 7, width: 14, height: 14, rx: 2 });
+      case 'direction': {
+        const r = 9;
+        const cx = x + r;
+        return el('path', {
+          class: 'direction-arrow on-right',
+          d: `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`,
+          'marker-end': 'url(#arrowDirection)'
+        });
+      }
+      case 'flow-main':
+        return el('path', { class: 'flow-segment', d: `M ${x} ${cy} L ${x + 24} ${cy}` });
+      case 'flow-hochregal':
+        return el('path', { class: 'flow-segment hochregal', d: `M ${x} ${cy} L ${x + 24} ${cy}` });
+      default:
+        return null;
+    }
+  }
+
+  const layerLegend = el('g', { id: 'layer-legend', class: 'layer legend-layer' });
+  const legendAreaY = pad + topExtra + gridH;
+  layerLegend.appendChild(el('text', {
+    class: 'legend-title',
+    x: pad,
+    y: legendAreaY + 14
+  }, 'Legende'));
+  legendLayout.forEach(item => {
+    const rowY = legendAreaY + legendTitleH + item.row * legendRowH + legendRowH / 2;
+    const iconX = pad + item.x;
+    const icon = legendIcon(item.type, iconX, rowY);
+    if (icon) layerLegend.appendChild(icon);
+    layerLegend.appendChild(el('text', {
+      class: 'legend-item-label',
+      x: iconX + legendIconW + 6,
+      y: rowY + 4
+    }, item.label));
+  });
+  svg.appendChild(layerLegend);
 
   stage.innerHTML = '';
   stage.appendChild(svg);
