@@ -45,6 +45,9 @@
       color: #8b1a1a;
     }
     header .hint { font-size: 13px; color: #666; }
+    .page-nav { margin: 0 0 10px; }
+    .page-nav a { color: #8b1a1a; font-size: 13px; margin-right: 15px; text-decoration: none; }
+    .page-nav a:hover { text-decoration: underline; }
     .replay-bar {
       display: flex;
       flex-wrap: wrap;
@@ -113,7 +116,17 @@
       font-variant-numeric: tabular-nums;
     }
     .rb-sep { margin: 0 2px; color: #aaa; }
+    .rb-percent { color: #999; }
     .rb-serial select { min-width: 160px; }
+    .rb-hint { margin: 8px 2px 0; font-size: 12px; color: #888; }
+    .load-error, .process-status.is-error {
+      color: #b02a2a;
+      font-weight: 600;
+    }
+    @media (max-width: 560px) {
+      .rb-btn { width: 44px; height: 44px; }
+      .replay-bar { justify-content: center; }
+    }
     #stage {
       padding: 16px;
       overflow: auto;
@@ -225,15 +238,27 @@
       pointer-events: none;
     }
     .workpiece.visible { opacity: 1; }
+    .legend-details {
+      max-width: 960px;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+    }
+    .legend-details summary {
+      cursor: pointer;
+      font-size: 13px;
+      color: #8b1a1a;
+      font-weight: 600;
+      -webkit-user-select: none;
+      user-select: none;
+    }
     .legend {
-      margin: 12px auto 24px;
+      margin: 12px 0 0;
       max-width: 960px;
       font-size: 12px;
       color: #555;
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      padding: 0 16px;
     }
     .legend span { display: inline-flex; align-items: center; gap: 6px; }
     .legend i {
@@ -358,22 +383,30 @@
 </head>
 <body>
   <header>
+    <div class="page-nav">
+      <a href="index.html">→ Hauptseite</a>
+      <a href="plcdaten.php">→ PLC-Daten</a>
+      <a href="audiodaten.php">→ Audio-Daten</a>
+    </div>
     <div class="header-top">
       <h1>Digitaler Zwilling</h1>
       <span class="hint">SVG aus <code>anlage.json</code> · Demo-Replay aus plc_daten.csv</span>
     </div>
     <div class="replay-bar" id="replayBar" aria-label="Replay-Steuerung">
-      <button type="button" class="rb-btn" id="btnBack" title="Zurückspulen" disabled>
-        <span aria-hidden="true">⏮</span>
+      <button type="button" class="rb-btn" id="btnRestart" title="Zum Anfang springen" disabled>
+        <span aria-hidden="true">⇺</span>
       </button>
-      <button type="button" class="rb-btn primary" id="btnPlay" title="Play" disabled>
+      <button type="button" class="rb-btn" id="btnBack" title="5 Sekunden zurück" disabled>
+        <span aria-hidden="true">⏪</span>
+      </button>
+      <button type="button" class="rb-btn primary" id="btnPlay" title="Play (Leertaste)" disabled>
         <span aria-hidden="true">▶</span>
       </button>
-      <button type="button" class="rb-btn" id="btnPause" title="Pause" disabled>
+      <button type="button" class="rb-btn" id="btnPause" title="Pause (Leertaste)" disabled>
         <span aria-hidden="true">⏸</span>
       </button>
-      <button type="button" class="rb-btn" id="btnFwd" title="Vorspulen" disabled>
-        <span aria-hidden="true">⏭</span>
+      <button type="button" class="rb-btn" id="btnFwd" title="5 Sekunden vor" disabled>
+        <span aria-hidden="true">⏩</span>
       </button>
       <label class="rb-speed" title="Geschwindigkeit">
         <span>Tempo</span>
@@ -393,6 +426,8 @@
           <span id="replayTime">00:00</span>
           <span class="rb-sep">/</span>
           <span id="replayDuration">00:00</span>
+          <span class="rb-sep">·</span>
+          <span id="replayPercent" class="rb-percent">0%</span>
         </div>
       </div>
       <label class="rb-serial">
@@ -402,6 +437,7 @@
         </select>
       </label>
     </div>
+    <p class="rb-hint">Tipp: Leertaste = Play/Pause · ←/→ = 5 s zurück/vor</p>
   </header>
   <div id="stage">
     <p class="hint">Lade Konfiguration…</p>
@@ -436,15 +472,18 @@
       </div>
     </div>
   </section>
-  <div class="legend">
-    <span><i style="background:#fff;border-radius:3px;"></i> Station mit Daten</span>
-    <span><i style="background:#e8e8e8;border-radius:3px;border-style:dashed;"></i> Platzhalter</span>
-    <span><i style="background:#4caf50;border-color:#1b5e20;border-radius:2px;"></i> Bandsensor aktiv</span>
-    <span><i style="background:#d0d0d0;border-color:#2e7d32;border-radius:2px;"></i> Bandsensor inaktiv</span>
-    <span style="color:#1976d2;">↻</span> Rechts-/Linkslauf
-    <span style="border-bottom:3px solid #555;width:24px;height:0;display:inline-block;"></span> Hauptkreis
-    <span style="border-bottom:3px dashed #999;width:24px;height:0;display:inline-block;"></span> Hochregal-Ast
-  </div>
+  <details class="legend-details" open>
+    <summary>Legende</summary>
+    <div class="legend">
+      <span><i style="background:#fff;border-radius:3px;"></i> Station mit Daten</span>
+      <span><i style="background:#e8e8e8;border-radius:3px;border-style:dashed;"></i> Platzhalter</span>
+      <span><i style="background:#4caf50;border-color:#1b5e20;border-radius:2px;"></i> Bandsensor aktiv</span>
+      <span><i style="background:#d0d0d0;border-color:#2e7d32;border-radius:2px;"></i> Bandsensor inaktiv</span>
+      <span style="color:#1976d2;">↻</span> Rechts-/Linkslauf
+      <span style="border-bottom:3px solid #555;width:24px;height:0;display:inline-block;"></span> Hauptkreis
+      <span style="border-bottom:3px dashed #999;width:24px;height:0;display:inline-block;"></span> Hochregal-Ast
+    </div>
+  </details>
 
 <script>
 /**
@@ -1063,7 +1102,7 @@
   };
 
   function setControlsEnabled(on) {
-    ['btnPlay', 'btnPause', 'btnBack', 'btnFwd', 'replaySpeed', 'replayScrub', 'serialSelect']
+    ['btnPlay', 'btnPause', 'btnRestart', 'btnBack', 'btnFwd', 'replaySpeed', 'replayScrub', 'serialSelect']
       .forEach(id => {
         const el = document.getElementById(id);
         if (el) el.disabled = !on;
@@ -1074,8 +1113,13 @@
     const timeEl = document.getElementById('replayTime');
     const durEl = document.getElementById('replayDuration');
     const scrub = document.getElementById('replayScrub');
+    const percentEl = document.getElementById('replayPercent');
     if (timeEl) timeEl.textContent = formatMs(replay.pos);
     if (durEl) durEl.textContent = formatMs(replay.duration);
+    if (percentEl) {
+      const pct = replay.duration > 0 ? Math.round((replay.pos / replay.duration) * 100) : 0;
+      percentEl.textContent = pct + '%';
+    }
     if (scrub && replay.duration > 0) {
       scrub.max = String(replay.duration);
       scrub.value = String(Math.min(replay.pos, replay.duration));
@@ -1159,6 +1203,7 @@
     updateTimeUi();
     document.getElementById('btnPlay')?.removeAttribute('disabled');
     document.getElementById('btnPause')?.removeAttribute('disabled');
+    document.getElementById('btnRestart')?.removeAttribute('disabled');
     document.getElementById('btnBack')?.removeAttribute('disabled');
     document.getElementById('btnFwd')?.removeAttribute('disabled');
     document.getElementById('replaySpeed')?.removeAttribute('disabled');
@@ -1229,7 +1274,12 @@
     if (!text) {
       console.warn('plc_daten.csv nicht gefunden', lastErr);
       const hint = document.querySelector('header .hint');
-      if (hint) hint.textContent += ' · Demo-CSV fehlt (plc_daten.csv neben die HTML legen)';
+      if (hint) hint.textContent += ' · Demo-CSV fehlt (plc_daten.csv neben die HTML-Datei legen)';
+      const status = document.getElementById('processStatus');
+      if (status) {
+        status.textContent = 'Fehler: plc_daten.csv wurde nicht gefunden.';
+        status.classList.add('is-error');
+      }
       return;
     }
     replay.rows = parseCsv(text);
@@ -1258,12 +1308,17 @@
       status.textContent = replay.productions.length
         ? (replay.productions.length + ' Produktionen in plc_daten.csv')
         : 'CSV geladen, keine Seriennummern gefunden';
+      status.classList.toggle('is-error', replay.productions.length === 0);
     }
   }
 
   // UI-Bindungen
   document.getElementById('btnPlay')?.addEventListener('click', () => play());
   document.getElementById('btnPause')?.addEventListener('click', () => pause());
+  document.getElementById('btnRestart')?.addEventListener('click', () => {
+    pause();
+    seek(0);
+  });
   document.getElementById('btnBack')?.addEventListener('click', () => {
     pause();
     seek(replay.pos - 5000);
@@ -1284,6 +1339,25 @@
     if (e.target.value) loadProduction(e.target.value);
   });
 
+  // Tastatursteuerung: Leertaste = Play/Pause, Pfeiltasten = 5s zurück/vor
+  document.addEventListener('keydown', (e) => {
+    const activeTag = (document.activeElement && document.activeElement.tagName || '').toLowerCase();
+    if (activeTag === 'select' || activeTag === 'input' || activeTag === 'textarea') return;
+    if (!replay.events.length) return;
+    if (e.code === 'Space') {
+      e.preventDefault();
+      if (replay.playing) pause(); else play();
+    } else if (e.code === 'ArrowLeft') {
+      e.preventDefault();
+      pause();
+      seek(replay.pos - 5000);
+    } else if (e.code === 'ArrowRight') {
+      e.preventDefault();
+      pause();
+      seek(replay.pos + 5000);
+    }
+  });
+
   window.AnlageTwin.replay = replay;
   window.AnlageTwin.loadProduction = loadProduction;
   window.AnlageTwin.play = play;
@@ -1292,7 +1366,14 @@
   loadCsv();
 
   console.info('AnlageTwin bereit. Demo-Replay: Produktion wählen + Play');
-})();
+})().catch(err => {
+  console.error('anlage-zwilling: Initialisierung fehlgeschlagen', err);
+  const stage = document.getElementById('stage');
+  if (stage) {
+    stage.innerHTML = '<div class="error">Die Anlage konnte nicht geladen werden: '
+      + (err && err.message ? err.message : String(err)) + '</div>';
+  }
+});
 
 </script>
 </body>
