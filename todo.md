@@ -39,5 +39,38 @@ Füllstände:
         Dosenunterteile verkippt im Turm, ggf. per 3D-Druck Seitenteile als Führung
 
 
+Beobachtungen digitaler Zwilling
+    Seriennummer: 14220 (24.08.2026 09:32:48 - 09:34:56)
+    Palettenlager1 und Rohlager Bandsensoren nicht aktiv, aber gleichzeitig Rechtslauf aktiv
+    Rohlager Bandsensor rechts und Abfüllen Bandsensor links aktiv und bleiben aktiv
+    Transfersystem Roboert Bandsensor rechts bleibt aktiv, links wird nie aktiv
+    Kamera, Handling, Presse, Palettenlager2 Bandsensoren nie aktiv. Reihenfolge passt aber
 
-exportierte csv-Daten importierbar machen, die dann als Demo-Daten verwendet werden können. csv per github mit bereitstellen.
+    Code-Check (kein Bug gefunden): Stationszuordnung in Raspberry/web/anlage-zwilling.html
+    (EMBEDDED_CONFIG, stationByDbKey, RELEVANT_TAG_RE) und Node-Auswahl in
+    UAExpertExport/NodesAuswahl.txt sind für alle betroffenen Stationen identisch aufgebaut
+    (BG1_Bandsensor_Links/BG2_Bandsensor_Rechts/MA1.Rechtslauf/Linkslauf pro Station vorhanden,
+    Events werden korrekt per station+tag zugeordnet). Die Auffälligkeiten stecken also in den
+    realen PLC-Rohdaten dieser Produktion, nicht in der Zwilling-Visualisierung.
+
+    Update nach Subscribe-Experiment (September 2026):
+    Node-RED testweise von "read" (1s Polling) auf OPC-UA "subscribe" umgestellt
+    (Raspberry/nodered/data/flows_nodesauswahl_subscribe.json), dabei diverse echte Bugs
+    gefunden und behoben: fehlende Stations-/Tag-Zuordnung bei subscribe-Benachrichtigungen
+    (nur payload/topic/statusCode/Timestamps kommen durch, nicht die selbst mitgegebenen
+    Felder station/tag/nodeId/endpoint), fehlende Credentials bei neu vergebenen Endpoint-IDs,
+    fehlender Unsubscribe-Mechanismus (alte Tags bleiben nach Änderung an NodesAuswahl.txt aktiv
+    abonniert). Auch das PLC-eigene Statusbit sBandSensorLinks/sBandSensorRechts (Outputs) statt
+    des rohen Hardware-Eingangs +AL-BG1_Bandsensor_Links/+AL-BG2_Bandsensor_Rechts (Inputs)
+    verwendet, in der Annahme, dass dieses von der SPS-Logik abgeleitete Bit stabiler ist.
+    Trotzdem blieb die Bandsensor-Unzuverlässigkeit bestehen - verschiedene SamplingIntervals
+    (1s, 0.2s, 200ms, 0ms) brachten keine konsistente Verbesserung.
+    Entscheidender Test: Derselbe Produktionslauf mit dem alten "read"-Flow (flows.json,
+    Polling) lieferte exakt dieselben Daten wie mit "subscribe". Das belegt, dass die Ursache
+    nicht im Node-RED-Flow, OPC-UA-Client oder Sampling-Modus liegt, sondern schon so aus der
+    SPS kommt (Programmlogik oder Sensorik selbst) - außerhalb dessen, was von hier aus ohne
+    Zugriff auf das SPS-Programm behoben werden kann.
+    Konsequenz: "read"-Flow (flows.json) bleibt produktiv, subscribe-Variante bleibt als
+    Testflow liegen, nicht weiterverfolgt.
+
+

@@ -1,0 +1,58 @@
+[
+    {
+        "id": "opcua-client-36-10-sub",
+        "type": "OpcUa-Client",
+        "z": "tab-opcua-nodesauswahl-sub",
+        "endpoint": "cfg-endpoint-36-10-sub",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "0",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Transfer Hochregallager 192.168.36.10",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 1300,
+        "y": 780,
+        "wires": [
+            [
+                "chg-station-36-10-sub"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "cfg-endpoint-36-10-sub",
+        "type": "OpcUa-Endpoint",
+        "name": "10. Transfer Hochregallager",
+        "endpoint": "opc.tcp://192.168.36.10:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "none": false,
+        "login": true,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "845cad090e00260f",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-opcua": "0.2.355"
+        }
+    }
+]
