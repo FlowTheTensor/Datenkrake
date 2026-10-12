@@ -26,5 +26,45 @@ pre { margin: 0; min-height: 540px; padding: 18px; overflow: auto; font: .82rem/
 article { padding: 14px; }
 article h3 { font-size: 1rem; color: var(--accent); }
 article p { margin-bottom: 0; }
+h4 { margin: 14px 0 6px; font: 700 .75rem/1.2 Verdana, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.weg { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.weg li { padding: 3px 8px; border: 1px solid var(--line); font: .8rem/1.4 Consolas, monospace; }
+.weg li + li::before { content: "\2192"; margin: 0 6px 0 -2px; color: var(--accent); }
+.weg .rand { color: #6b7c8a; }
+.weg .frage { border-color: var(--accent); }
+.hinweise { margin: 12px 0 0; padding: 10px 10px 10px 28px; border-left: 4px solid var(--accent); background: #fbeee9; font-size: .9rem; }
+.endstatus { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 0; font-size: .9rem; }
+.endstatus dt { font-family: Consolas, monospace; }
+.endstatus dd { margin: 0; overflow-wrap: anywhere; }
+.endstatus .leer { color: #6b7c8a; font-style: italic; }
+.hinweis-text { color: var(--accent); }
 #status { font: .8rem Verdana, sans-serif; color: var(--accent); }
 @media (max-width: 850px) { main { grid-template-columns: 1fr; } pre { min-height: 360px; } }
+#diagramm pre { min-height: 0; }
+#hinweise { margin-bottom: 16px; }
+
+/* Live-Modus (AG-UI) */
+header a { color: var(--accent); }
+button:disabled { opacity: .5; cursor: default; }
+button.zweitrangig { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.steuerung { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.steuerung label { font: 700 .8rem Verdana, sans-serif; }
+select, .frage-antworten input { padding: 7px; border: 1px solid var(--line); font: inherit; background: var(--panel); color: var(--ink); }
+.frage-box { margin-bottom: 12px; padding: 14px; border: 2px solid var(--accent); background: var(--panel); }
+.frage-box h3 { font-size: 1rem; color: var(--accent); margin-bottom: 6px; }
+.frage-antworten { display: flex; flex-wrap: wrap; gap: 8px; }
+.nachricht { margin-top: 12px; padding: 12px 14px; border-left: 4px solid #3f7d58; background: var(--panel); }
+.nachricht.fehler { border-left-color: var(--accent); background: #fbeee9; }
+.protokoll { margin: 0; padding: 8px 8px 8px 40px; max-height: 80vh; overflow: auto; border: 1px solid var(--line); background: var(--panel); font: .78rem/1.45 Consolas, monospace; }
+.protokoll li { padding: 3px 0; border-bottom: 1px solid #eef1f3; overflow-wrap: anywhere; }
+.protokoll code { color: #44586a; }
+.typ { display: inline-block; margin-right: 8px; padding: 0 6px; color: white; background: #6b7c8a; font-weight: bold; }
+.typ-run { background: var(--ink); }
+.typ-step { background: #3a6ea5; }
+.typ-state { background: #3f7d58; }
+.typ-text { background: #8a5a9e; }
+/* Fuellfarben setzt live.js direkt am Knoten, hier nur die Rahmen */
+#diagramm g.node.knoten-aktiv .label-container { stroke: var(--accent) !important; stroke-width: 3px !important; }
+#diagramm g.node.knoten-fertig .label-container { stroke: #3f7d58 !important; }
+#diagramm g.node.knoten-wartet .label-container { stroke: #b8860b !important; stroke-width: 3px !important; }
+section > h2 { margin-top: 16px; }

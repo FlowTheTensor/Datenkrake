@@ -19,14 +19,12 @@ mitgelieferte Beispiel-Flow zeigt standardmäßig auf diesen Demo-Server.
 
 ## Setup
 
-1. `../setup_iot_stack.sh` legt `nodered/data/` an und kopiert die
-   Flow-Vorlage aus `flows/flows_nodesauswahl.json` dorthin (analog zu
-   `mosquitto.conf.example` → `mosquitto.conf`). **Wichtig:** Node-RED
-   läuft mit `--userDir /data`, das ist ein Bind-Mount vom Host – eine
-   Flow-Datei ausschließlich im Docker-Image (per `COPY`) würde beim
-   Start unsichtbar, weil der leere Host-Ordner sie überdeckt. Deshalb
-   liegt die Vorlage im Repo unter `flows/` und wird erst zur Laufzeit an
-   den echten Pfad kopiert.
+1. Der produktive Flow liegt versioniert unter `data/flows.json` und wird
+   per `git pull` aktualisiert. **Wichtig:** Node-RED läuft mit
+   `--userDir /data`, das ist ein Bind-Mount vom Host – eine Flow-Datei
+   ausschließlich im Docker-Image (per `COPY`) würde beim Start unsichtbar,
+   weil der Host-Ordner sie überdeckt. Fehlt `data/flows.json`, holt
+   `../setup_iot_stack.sh` den committeten Stand aus Git zurück.
 2. Editor öffnen: `http://datenkrake.local:1880`
 3. Im Flow den Endpoint-Node **"SPS-Endpoint"** auf die echte OPC-UA-Adresse
    umstellen (`opc.tcp://<plc-ip>:4840/...`) und im Item-Node
@@ -48,8 +46,10 @@ Das Skript erstellt zuerst ein Backup von MariaDB und dem Node-RED-
 Datenverzeichnis, aktualisiert die Container, spielt die MariaDB-Schemata
 für Agenten- und PLC-Telemetrie erneut ein und aktualisiert
 `NodesAuswahl.txt`. Bestehende Messdaten bleiben erhalten. Der aktive
-Node-RED-Flow bleibt standardmäßig ebenfalls erhalten. Soll die im Repository
-mitgelieferte `flows_nodesauswahl.json` aktiviert werden, ausdrücklich:
+Node-RED-Flow bleibt standardmäßig ebenfalls erhalten. Sollen Änderungen,
+die im Node-RED-Editor auf dem Raspberry gemacht wurden, verworfen und der im
+Repository committete Stand von `data/flows.json` wiederhergestellt werden,
+ausdrücklich:
 
 ```bash
 sudo ./Raspberry/update_iot_stack.sh --sync-nodered-flow
@@ -82,7 +82,8 @@ eingerichtet werden.
 ## Flow aus `NodesAuswahl.txt`
 
 Fuer den Unterricht mit mehreren Stationen gibt es einen vorbereiteten Import-
-Flow in `flows/flows_nodesauswahl.json`.
+Flow in `data/flows_nodesauswahl.json` (älterer Stand; produktiv läuft
+`data/flows.json`).
 
 Eigenschaften:
 
@@ -96,7 +97,7 @@ Eigenschaften:
 Import in Node-RED:
 
 1. Editor oeffnen (`http://datenkrake.local:1880`)
-2. Menu -> Import -> Datei `flows/flows_nodesauswahl.json` waehlen
+2. Menu -> Import -> Datei `data/flows_nodesauswahl.json` waehlen
 3. Deploy
 
 Hinweis zur Dateiablage:

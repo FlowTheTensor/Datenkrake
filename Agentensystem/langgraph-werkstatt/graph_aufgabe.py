@@ -2,14 +2,26 @@
 
 from typing import Literal, TypedDict
 
+from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
 
 
 class AgentenStatus(TypedDict):
+    # Jedes Feld, das ein Knoten zurueckgibt, muss hier eingetragen sein.
+    # Felder, die hier fehlen, verwirft LangGraph OHNE Fehlermeldung.
     anomalie: str
+    schwere: Literal["normal", "kritisch"]
     freigabe: Literal["freigeben", "ablehnen"]
     diagnose: str
     report: str
+
+
+# Jedes Szenario ist ein Durchlauf mit eigenem Startstatus. Nicht genannte
+# Felder starten leer. Fuer Aufgabe 4 hier weitere Szenarien ergaenzen.
+SZENARIEN = [
+    {"name": "Freigabe", "status": {"schwere": "normal", "freigabe": "freigeben"}},
+    {"name": "Ablehnung", "status": {"schwere": "normal", "freigabe": "ablehnen"}},
+]
 
 
 def anomaliestatus_lesen(status: AgentenStatus) -> dict:
@@ -17,6 +29,8 @@ def anomaliestatus_lesen(status: AgentenStatus) -> dict:
 
 
 def sicherheitsfreigabe(status: AgentenStatus) -> dict:
+    # Vereinfachung: Die menschliche Entscheidung steht schon im Szenario.
+    # Wie der Graph wirklich anhalten und fragen kann, zeigt die Zusatzaufgabe.
     return {}
 
 
@@ -39,13 +53,14 @@ def report_erstellen(status: AgentenStatus) -> dict:
 def build_graph():
     workflow = StateGraph(AgentenStatus)
 
-    # Aufgabe 1: Ergaenze einen eigenen Knoten und verbinde ihn mit dem Ablauf.
+    # Aufgabe 3 und 4: Neue Knoten hier mit add_node ergaenzen ...
     workflow.add_node("anomaliestatus", anomaliestatus_lesen)
     workflow.add_node("freigabe", sicherheitsfreigabe)
     workflow.add_node("diagnose", diagnose_ausfuehren)
     workflow.add_node("ablehnung", ablehnung_protokollieren)
     workflow.add_node("report", report_erstellen)
 
+    # ... und hier mit add_edge bzw. add_conditional_edges verbinden.
     workflow.add_edge(START, "anomaliestatus")
     workflow.add_edge("anomaliestatus", "freigabe")
     workflow.add_conditional_edges(
@@ -57,4 +72,7 @@ def build_graph():
     workflow.add_edge("ablehnung", "report")
     workflow.add_edge("report", END)
 
-    return workflow.compile()
+    # Der Checkpointer ist das Gedaechtnis des Graphen. Er merkt sich den
+    # Status nach jedem Schritt, damit ein Durchlauf anhalten und spaeter
+    # fortgesetzt werden kann (siehe Zusatzaufgabe).
+    return workflow.compile(checkpointer=InMemorySaver())

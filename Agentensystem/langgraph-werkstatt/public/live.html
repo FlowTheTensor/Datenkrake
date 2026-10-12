@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LangGraph-Werkstatt Live</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Ohne Internet bleibt window.mermaidBereit null, live.js zeigt dann den Mermaid-Quelltext.
+    window.mermaidBereit = import("https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs")
+      .then(({ default: mermaid }) => {
+        mermaid.initialize({ startOnLoad: false, theme: "neutral" });
+        return mermaid;
+      })
+      .catch(() => null);
+  </script>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Agentensysteme · Live-Modus mit AG-UI</p>
+    <h1>LangGraph-Werkstatt live</h1>
+    <p>Der Graph laeuft Schritt fuer Schritt. Jede Meldung, die der Agent an den Browser schickt, ist ein AG-UI-Ereignis. <a href="index.html">Zurueck zur Werkstatt</a></p>
+  </header>
+  <main>
+    <section aria-labelledby="ablauf-titel">
+      <div class="section-title">
+        <h2 id="ablauf-titel">Ablauf</h2>
+        <span id="status">Bereit</span>
+      </div>
+      <div class="steuerung">
+        <label for="szenario">Szenario</label>
+        <select id="szenario"></select>
+        <button id="starten">Starten</button>
+        <button id="neu-laden" class="zweitrangig" title="graph_aufgabe.py neu einlesen">Code neu laden</button>
+      </div>
+      <ul id="hinweise" class="hinweise" hidden></ul>
+      <div id="frage" class="frage-box" hidden>
+        <h3>Der Agent wartet auf dich</h3>
+        <p id="frage-text"></p>
+        <div id="frage-antworten" class="frage-antworten"></div>
+      </div>
+      <div id="diagramm" aria-live="polite"></div>
+      <div id="nachricht" class="nachricht" hidden></div>
+      <h2>Status</h2>
+      <dl id="zustand" class="endstatus"></dl>
+    </section>
+    <section aria-labelledby="protokoll-titel">
+      <div class="section-title">
+        <h2 id="protokoll-titel">AG-UI-Ereignisse</h2>
+        <button id="leeren" class="zweitrangig">Leeren</button>
+      </div>
+      <ol id="protokoll" class="protokoll"></ol>
+    </section>
+  </main>
+  <script src="live.js"></script>
+</body>
+</html>

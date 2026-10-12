@@ -5,7 +5,8 @@ Wartungs-Agent und meldet das Ergebnis per A2A an den Report-Agent.
 Ersetzt die vorherige for-Schleife in monitor.py - fachlich identisches
 Verhalten, jetzt als Graph sichtbar (siehe /graph/mermaid und zum
 Vergleich die didaktische Variante in langgraph-werkstatt/graph_aufgabe.py,
-die denselben Ablauf vereinfacht fuer den Unterricht nachbildet).
+die den Ablauf fuer den Unterricht vereinfacht: ohne Warteschlangen-Schleife
+und mit der Freigabe als eigenem Knoten, siehe deren README).
 
 Wichtig: die Sicherheitsentscheidung (Safety-Fence-Bestaetigung im
 Wartungs-Agent, siehe lap_common/base.py) bleibt bewusst außerhalb dieses

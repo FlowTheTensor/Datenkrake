@@ -24,7 +24,8 @@ Updates container images, applies repeatable MariaDB schema updates and
 refreshes the Node-RED input list. Existing data and active Node-RED flows
 are preserved by default.
 
-  --sync-nodered-flow  activate the repository's flows_nodesauswahl.json
+  --sync-nodered-flow  restore the committed nodered/data/flows.json (discarding
+                       changes made in the Node-RED editor on this device)
                        after backing up the current Node-RED data directory
 EOF
 }
@@ -96,14 +97,31 @@ backup_nodered_data() {
   tar -C "${SCRIPT_DIR}/nodered" -czf "${BACKUP_DIR}/nodered-data.tar.gz" data
 }
 
+restore_repo_flow() {
+  # flows.json ist im Repo versioniert und zugleich die aktive Datei im
+  # Bind-Mount. git als Repo-Besitzer ausführen, als root bricht git wegen
+  # "dubious ownership" ab.
+  local dest="${SCRIPT_DIR}/nodered/data/flows.json"
+  local -a as_user=()
+  if [[ ${TARGET_USER} != "root" ]]; then
+    as_user=(sudo -u "${TARGET_USER}")
+  fi
+
+  if ! "${as_user[@]}" git -C "${SCRIPT_DIR}" show HEAD:./nodered/data/flows.json > "${dest}.tmp"; then
+    rm -f "${dest}.tmp"
+    echo "Could not restore nodered/data/flows.json from git." >&2
+    exit 1
+  fi
+  mv "${dest}.tmp" "${dest}"
+}
+
 sync_nodered() {
   mkdir -p "${SCRIPT_DIR}/nodered/data"
   backup_nodered_data
 
   if [[ ${SYNC_NODERED_FLOW} -eq 1 ]]; then
-    log "Replacing the active Node-RED flow"
-    cp "${SCRIPT_DIR}/nodered/flows/flows_nodesauswahl.json" \
-      "${SCRIPT_DIR}/nodered/data/flows.json"
+    log "Restoring the committed Node-RED flow (nodered/data/flows.json)"
+    restore_repo_flow
   else
     log "Preserving the active Node-RED flow (use --sync-nodered-flow to replace it)"
   fi

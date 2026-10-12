@@ -5,16 +5,7 @@ opc-ua overlay überarbeiten
     agentensysteme genauer erklären
     harness genauer erklären
 
-Datenkrake.local als Webserver für alle:
-
-    Node-RED: eine gemeinsame Instanz und dieselben Flows
-    Grafana/InfluxDB: gemeinsame Daten und Dashboards
-    MariaDB/PHP-Dashboard: gemeinsame Messdaten
-    Jupyter/Data Lake: sofern zentral betrieben, ebenfalls gemeinsame Instanz beziehungsweise Datenablage
-    Leitstand: statisch, verursacht kaum Last
-    Das ist bei Node-RED besonders kritisch: Änderungen an Flows durch einen Schüler wirken für alle. Bei Jupyter können sich Schüler gegenseitig Dateien, Sessions oder Rechenleistung wegnehmen.
-
-    Für den Unterricht wäre daher sinnvoll:
+Für den Unterricht wäre daher sinnvoll:
 
         Gemeinsame zentrale Ansicht für Leitstand, Grafana und Messdaten.
         Getrennte Schülerinstanzen für Node-RED und Jupyter.
@@ -72,5 +63,36 @@ Beobachtungen digitaler Zwilling
     Zugriff auf das SPS-Programm behoben werden kann.
     Konsequenz: "read"-Flow (flows.json) bleibt produktiv, subscribe-Variante bleibt als
     Testflow liegen, nicht weiterverfolgt.
+
+
+Vorschläge Bandsensoren Ein-/Ausfahrt (Oktober 2026)
+    Ausgangslage: Magnetsensor am Band + Magnet am Werkstückträger, beim Vorbeifahren nur sehr
+    kurz aktiv. Vermutung: Der OPC-UA-Server der SPS erfasst/verschickt zu selten, kurze
+    Impulse fallen zwischen zwei Abtastungen durch.
+
+    Entscheidender Test (SPS oder Abgriffkette?):
+        In UAExpert einen einzelnen Bandsensor (z. B. sBandSensorLinks einer Station) allein
+        abonnieren, Sampling Interval 100 ms (bzw. kleinster erlaubter Wert), Queue Size > 1,
+        im Data Access View bzw. Trend View einen Werkstückträger vorbeifahren lassen.
+        - Impuls in UAExpert sichtbar -> Ursache liegt in der Kette dahinter (Node-RED/DB).
+        - Impuls auch in UAExpert nicht sichtbar -> OPC-UA-Server der SPS tastet zu langsam ab
+          bzw. der Impuls ist kürzer als das Abtastintervall.
+        Zusätzlich im TIA-Portal in den OPC-UA-Servereinstellungen der CPU nachsehen:
+        minimales Abtastintervall (Sampling) und minimales Publishing-Intervall. Der Server
+        rundet kleinere Client-Anfragen auf diese Werte hoch.
+        Hinweis: Bei Queue Size 1 überschreibt das "Aus" ein kurzes "Ein" innerhalb desselben
+        Publishing-Intervalls - der Impuls kommt dann trotz Subscribe nie beim Client an.
+
+    Robuste Lösung im SPS-Programm (unabhängig von Abtast-/Publishingrate):
+        - Flankenzähler: pro Sensor eine UDInt-Variable, die bei jeder steigenden Flanke (R_TRIG)
+          im SPS-Zyklus hochzählt. Node-RED liest nur den Zähler; jede Erhöhung = eine
+          Durchfahrt, auch wenn mehrere zwischen zwei Abfragen liegen.
+        - Alternativ Speicherbit mit Quittung: SPS setzt Bit bei Flanke, bleibt gesetzt, bis
+          Node-RED per OPC-UA-Write zurücksetzt (benötigt Schreibzugriff, ggf. kritisch).
+        - Optional: Zeitpunkt der letzten Flanke in der SPS mitschreiben (nur sinnvoll, wenn die
+          SPS-Uhr gestellt ist - aktuell stimmen die SPS-Zeitstempel nicht, z. T. falsches Jahr).
+        - In einem eigenen DB (z. B. "dbDatenkrake") ablegen, damit die Station unverändert
+          bleibt und nur ein zusätzlicher Baustein ergänzt wird.
+        - Gilt nicht für das Transfersystem Hochregallager (IPC, nicht programmierbar).
 
 

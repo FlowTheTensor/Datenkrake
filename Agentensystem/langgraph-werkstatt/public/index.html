@@ -4,18 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LangGraph-Werkstatt</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({ startOnLoad: false, theme: "neutral" });
-    window.mermaid = mermaid;
+  <script>
+    // Ohne Internet bleibt window.mermaidBereit null, app.js zeigt dann den Mermaid-Quelltext.
+    window.mermaidBereit = import("https://cdn.jsdelivr.net/npm/mermaid@11.6.0/dist/mermaid.esm.min.mjs")
+      .then(({ default: mermaid }) => {
+        mermaid.initialize({ startOnLoad: false, theme: "neutral" });
+        return mermaid;
+      })
+      .catch(() => null);
   </script>
 </head>
 <body>
   <header>
     <p class="eyebrow">Agentensysteme</p>
     <h1>LangGraph-Werkstatt</h1>
-    <p>Der Python-Quellcode definiert den Ablauf. Die Darstellung rechts wird daraus erzeugt.</p>
+    <p>Der Python-Quellcode definiert den Ablauf. Die Darstellung rechts wird daraus erzeugt. <a href="live.html">Live-Modus mit AG-UI</a></p>
   </header>
   <main>
     <section aria-labelledby="code-titel">
@@ -25,11 +30,9 @@
     <section aria-labelledby="graph-titel">
       <div class="section-title"><h2 id="graph-titel">Mermaid-Diagramm</h2><span id="status">Bereit</span></div>
       <div id="diagramm" aria-live="polite"></div>
+      <ul id="hinweise" class="hinweise" hidden></ul>
       <h2>Simulation</h2>
-      <div class="simulation">
-        <article><h3>Freigabe</h3><p id="freigabe">Lade ...</p></article>
-        <article><h3>Ablehnung</h3><p id="ablehnung">Lade ...</p></article>
-      </div>
+      <div id="szenarien" class="simulation"></div>
     </section>
   </main>
   <script src="app.js"></script>

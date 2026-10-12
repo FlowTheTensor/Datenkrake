@@ -123,7 +123,9 @@ Hinweis zu den Agent-Cards weiter unten) – der Leitstand
 und rendert es mit mermaid.js. Das ist bewusst dieselbe Technik wie im
 didaktischen `langgraph-werkstatt/` (dort mit fiktiven Beispielknoten zum
 Selberbauen) – dort können Schüler den Aufbau eines Graphen gefahrlos
-üben, bevor sie die echten Graphen hier lesen oder erweitern.
+üben, bevor sie die echten Graphen hier lesen oder erweitern. Der
+Live-Modus der Werkstatt zeigt zusätzlich das Protokoll AG-UI (Agent ↔
+Mensch) mit einer echten menschlichen Freigabe per `interrupt()`.
 Wartungs-Agent bleibt bewusst ohne eigenen Graphen: er ist kein A2A-
 Agent mit mehrstufiger Entscheidungslogik, sondern ein LAP-Instrument mit
 fester Aktionsausführung (siehe LLM-Anbindung oben).

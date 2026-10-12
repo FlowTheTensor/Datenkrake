@@ -38,6 +38,24 @@ install_docker() {
   fi
 }
 
+restore_repo_flow() {
+  # git als Repo-Besitzer ausführen, als root bricht git wegen
+  # "dubious ownership" ab.
+  local dest="${SCRIPT_DIR}/nodered/data/flows.json"
+  local -a as_user=()
+  if [[ ${TARGET_USER} != "root" ]]; then
+    as_user=(sudo -u "${TARGET_USER}")
+  fi
+
+  log "Restoring nodered/data/flows.json from git (HEAD)"
+  if ! "${as_user[@]}" git -C "${SCRIPT_DIR}" show HEAD:./nodered/data/flows.json > "${dest}.tmp"; then
+    rm -f "${dest}.tmp"
+    echo "Could not restore nodered/data/flows.json from git." >&2
+    exit 1
+  fi
+  mv "${dest}.tmp" "${dest}"
+}
+
 prepare_directories() {
   log "Ensuring local volume directories exist"
   mkdir -p "${SCRIPT_DIR}/mosquitto/data"
@@ -55,10 +73,11 @@ prepare_directories() {
 
   # Node-RED läuft mit --userDir /data (Bind-Mount). Für den produktiven
   # Anlagen-Flow werden die Nodes aus NodesAuswahl.txt automatisch geladen.
-  # Nur bei einer leeren Datenablage darf die Vorlage installiert werden,
+  # flows.json ist im Repo versioniert und zugleich die aktive Datei im
+  # Bind-Mount. Nur wenn sie fehlt, den committeten Stand zurückholen,
   # damit ein erneuter Setup-Lauf keine bestehenden Flows überschreibt.
-  if [[ ! -f "${SCRIPT_DIR}/nodered/data/flows.json" ]] && [[ -f "${SCRIPT_DIR}/nodered/flows/flows_nodesauswahl.json" ]]; then
-    cp "${SCRIPT_DIR}/nodered/flows/flows_nodesauswahl.json" "${SCRIPT_DIR}/nodered/data/flows.json"
+  if [[ ! -f "${SCRIPT_DIR}/nodered/data/flows.json" ]]; then
+    restore_repo_flow
   fi
 
   # Node-Auswahlliste fuer den dynamischen OPC-UA->MQTT-Flow bereitstellen.
