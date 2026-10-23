@@ -29,37 +29,24 @@
   <div class="panel twin-panel">
     <div class="twin-feature">
       <div class="twin-feature-main">
-        <div class="twin-eyebrow">Live-Schema · Demo-Replay</div>
+        <div class="twin-eyebrow">Live-Schema · Replay</div>
         <h3 class="twin-title">Digitaler Zwilling der Modellanlage</h3>
         <p class="twin-lead">
           Das Anlagenschema zeigt den Materialfluss von Palettenlager bis Abfüllen –
-          inklusive Transfersystemen und Hochregal-Ast. Im Demo-Modus lässt sich eine
-          aufgezeichnete Produktion (Seriennummer) abspielen: Rechtslauf, Linkslauf und
-          Bandsensoren leuchten zeitrichtig auf dem Schema und im Ereignisprotokoll.
+          inklusive Transfersystemen und Hochregal-Ast. Eine aufgezeichnete Produktion
+          (Seriennummer) lässt sich abspielen: Rechtslauf, Linkslauf und Bandsensoren
+          leuchten zeitrichtig auf dem Schema und im Ereignisprotokoll.
         </p>
         <ul class="twin-points">
           <li>Feste Stationsreihenfolge nach realem Layout</li>
-          <li>Replay aus <code>plc_daten.csv</code> (Play, Tempo, Scrubber)</li>
+          <li>Replay aus der Datenbank (Play, Tempo, Scrubber), ohne Raspberry als Demo aus <code>plc_daten.csv</code></li>
+          <li>Datenquelle wählbar: Produktion, alle Stationsteams oder ein einzelnes Team im Vergleich</li>
           <li>Nur die relevanten Signale: Richtung &amp; Bandsensoren</li>
         </ul>
         <div class="twin-actions">
           <a class="open-btn twin-btn" href="anlage-zwilling.html" target="_blank" rel="noopener">Digitalen Zwilling öffnen ↗</a>
           <a class="twin-link-secondary" href="plcdaten.php" target="_blank" rel="noopener">Rohdaten PLC-Übersicht</a>
         </div>
-      </div>
-      <div class="twin-feature-aside" aria-hidden="true">
-        <div class="twin-mini-schema">
-          <span class="tm s1">PL2</span>
-          <span class="tm s2">Presse</span>
-          <span class="tm s3">Handling</span>
-          <span class="tm s4">Qualität</span>
-          <span class="tm s5">TS‑R</span>
-          <span class="tm s6">Abfüllen</span>
-          <span class="tm s7">Rohlager</span>
-          <span class="tm s8">PL1</span>
-          <span class="tm flow">↻</span>
-        </div>
-        <div class="twin-aside-note">Schema · Stationen · Signale</div>
       </div>
     </div>
   </div>
