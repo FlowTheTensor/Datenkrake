@@ -15,6 +15,18 @@ function clamp_limit(int $limit, int $min, int $max): int
     return $limit;
 }
 
+// Herkunft filtern: produktion (Standard), team oder alle
+function append_quelle_filter(string &$sql, string &$types, array &$params): void
+{
+    $quelle = isset($_GET['quelle']) ? trim((string) $_GET['quelle']) : 'produktion';
+    if ($quelle === 'alle') {
+        return;
+    }
+    $sql .= ' AND quelle = ?';
+    $types .= 's';
+    $params[] = $quelle === 'team' ? 'team' : 'produktion';
+}
+
 try {
     $connection = database_connection();
     $action = $_GET['action'] ?? 'data';
@@ -26,10 +38,11 @@ try {
         $limit = clamp_limit((int) ($_GET['limit'] ?? 50), 1, 2000);
 
         $sql = 'SELECT id, ts, station, endpoint, node_id, tag, datatype, wert_num, '
-            . 'wert_bool, wert_text, payload_json, mqtt_topic, created_at '
+            . 'wert_bool, wert_text, payload_json, mqtt_topic, quelle, created_at '
             . 'FROM plc_telemetry WHERE 1=1';
         $types = '';
         $params = [];
+        append_quelle_filter($sql, $types, $params);
 
         if ($station !== '') {
             $sql .= ' AND station = ?';
@@ -80,6 +93,7 @@ try {
         $where = ' WHERE 1=1';
         $types = '';
         $params = [];
+        append_quelle_filter($where, $types, $params);
         if ($from !== '') {
             $where .= ' AND ts >= ?';
             $types .= 's';
@@ -154,6 +168,7 @@ try {
             . 'FROM plc_telemetry WHERE 1=1';
         $types = '';
         $params = [];
+        append_quelle_filter($sql, $types, $params);
 
         if ($station !== '') {
             $sql .= ' AND station = ?';
@@ -206,6 +221,7 @@ try {
         $result = $connection->query(
             "SELECT ts, wert_num FROM plc_telemetry "
             . "WHERE station = 'leitstand' AND tag = 'dbHMI_uiSeriennummer' "
+            . "AND quelle = 'produktion' "
             . "ORDER BY ts ASC, id ASC"
         );
         if ($result === false) {
@@ -246,6 +262,28 @@ try {
         $productions = array_reverse($productions);
         echo json_encode(['productions' => $productions]);
 
+    } elseif ($action === 'twin') {
+        // Daten für den digitalen Zwilling: Seriennummer, Motor und Bandsensoren
+        // aus Produktion und Stationsteams, die neuesten 200000 Zeilen
+        // (optional nur die letzten <tage> Tage).
+        $sql = "SELECT id, ts, station, tag, wert_num, wert_bool, quelle FROM plc_telemetry "
+            . "WHERE ((station = 'leitstand' AND tag = 'dbHMI_uiSeriennummer') "
+            . "OR tag LIKE '%Rechtslauf%' OR tag LIKE '%Linkslauf%' OR tag LIKE '%andsensor%')";
+        if (isset($_GET['tage'])) {
+            $tage = clamp_limit((int) $_GET['tage'], 1, 3650);
+            $sql .= " AND ts >= NOW() - INTERVAL {$tage} DAY";
+        }
+        $sql .= " ORDER BY ts DESC, id DESC LIMIT 200000";
+        $result = $connection->query($sql);
+        if ($result === false) {
+            throw new RuntimeException($connection->error);
+        }
+        $rows = [];
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = array_map(static fn ($value) => $value ?? '', $row);
+        }
+        echo json_encode(['quelle' => 'datenbank', 'rows' => array_reverse($rows)]);
+
     } elseif ($action === 'clear' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $connection->query('SELECT COUNT(*) AS count FROM plc_telemetry');
         if ($result === false) {
@@ -278,7 +316,7 @@ try {
         // id/created_at werden von der Datenbank vergeben und beim Import ignoriert
         $allowedColumns = [
             'ts', 'station', 'endpoint', 'node_id', 'tag', 'datatype',
-            'wert_num', 'wert_bool', 'wert_text', 'payload_json', 'mqtt_topic',
+            'wert_num', 'wert_bool', 'wert_text', 'payload_json', 'mqtt_topic', 'quelle',
         ];
         $requiredColumns = ['ts', 'station', 'tag'];
         $nullableIfEmpty = ['wert_num', 'wert_bool', 'wert_text', 'payload_json', 'datatype'];

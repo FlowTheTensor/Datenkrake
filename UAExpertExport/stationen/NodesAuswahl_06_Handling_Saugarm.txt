@@ -1,0 +1,11 @@
+// NodesAuswahl Station 6: Handling Saugarm
+// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>
+// Weitere Knoten findet ihr in UAExpertExport/Handling Saugarm.txt (Spalten 2, 3 und 7).
+// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.
+// Nur Knoten dieser Station (192.168.36.6:4840) eintragen, andere werden ignoriert.
+
+# Handling Saugarm
+192.168.36.6:4840	ns=3;s="sBandSensorLinks"	Boolean
+192.168.36.6:4840	ns=3;s="sBandSensorRechts"	Boolean
+192.168.36.6:4840	ns=3;s="+AL-MA1.Linkslauf"	Boolean
+192.168.36.6:4840	ns=3;s="+AL-MA1.Rechtslauf"	Boolean

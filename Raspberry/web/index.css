@@ -419,6 +419,7 @@
   .bg-ink-soft{background:var(--ink-soft);}
   .bg-accent-bright{background:var(--accent-bright);}
   .bg-plum{background:#6B4E71;}
+  .bg-teal{background:#2B7A78;}
   .bar-ink-soft{background:var(--ink-soft);}
   .bar-blue{background:#2A5F8A;}
   .bar-accent-2{background:var(--accent-2);}
@@ -436,20 +437,22 @@
   .uax-table th.num{text-align:right;}
   .uax-note-top{margin-top:10px;}
   .uax-list-compact{font-size:11.5px; color:var(--ink-soft); line-height:1.7; margin:0; padding-left:18px;}
-  .quiz-cat-a{color:#C81E3A;}
-  .quiz-cat-b{color:#B87A1C;}
-  .quiz-cat-c{color:#2F6B4F;}
-  .quiz-cat-d{color:#2A5F8A;}
-  .quiz-cat-e{color:#5B5852;}
-  .quiz-cat-f{color:#7A4E2D;}
-  .quiz-cat-g{color:#6B4E71;}
-  .quiz-border-a{border-left-color:#C81E3A;}
-  .quiz-border-b{border-left-color:#B87A1C;}
-  .quiz-border-c{border-left-color:#2F6B4F;}
-  .quiz-border-d{border-left-color:#2A5F8A;}
-  .quiz-border-e{border-left-color:#5B5852;}
-  .quiz-border-f{border-left-color:#7A4E2D;}
-  .quiz-border-g{border-left-color:#6B4E71;}
+  .quiz-cat-a{color:#2B7A78;}
+  .quiz-cat-b{color:#6B4E71;}
+  .quiz-cat-c{color:#5B5852;}
+  .quiz-cat-d{color:#B87A1C;}
+  .quiz-cat-e{color:#2A5F8A;}
+  .quiz-cat-f{color:#2F6B4F;}
+  .quiz-cat-g{color:#C81E3A;}
+  .quiz-cat-h{color:#C81E3A;}
+  .quiz-border-a{border-left-color:#2B7A78;}
+  .quiz-border-b{border-left-color:#6B4E71;}
+  .quiz-border-c{border-left-color:#5B5852;}
+  .quiz-border-d{border-left-color:#B87A1C;}
+  .quiz-border-e{border-left-color:#2A5F8A;}
+  .quiz-border-f{border-left-color:#2F6B4F;}
+  .quiz-border-g{border-left-color:#C81E3A;}
+  .quiz-border-h{border-left-color:#C81E3A;}
   .info-box{
     background:var(--surface-2); border:1px solid var(--line); border-left:4px solid var(--accent);
     border-radius:8px; padding:14px 18px; font-size:13.5px; color:var(--ink-soft); line-height:1.65;
@@ -460,6 +463,19 @@
   .info-box.d{border-left-color:#2A5F8A;}
   .info-box.e{border-left-color:var(--ink-soft);}
   .info-box.crispdm{border-left-color:#6B4E71;}
+  .info-box.projekt{border-left-color:#2B7A78;}
+
+  /* ---------- Agiles Arbeiten (Kapitel A) ---------- */
+  .kanban-cols{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px;}
+  .kanban-col{
+    border:1px solid var(--line); border-top:4px solid #2B7A78; border-radius:8px;
+    background:var(--surface-2); padding:10px 12px; font-size:12.5px; color:var(--ink-soft);
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .kanban-col b{font-family:"Quicksand",sans-serif; font-size:14px; color:var(--ink);}
+  .projekt-list{margin:0; padding-left:18px; font-size:13px; color:var(--ink-soft); line-height:1.6;}
+  .projekt-list b{color:var(--ink);}
+  @media (max-width:780px){.kanban-cols{grid-template-columns:1fr;}}
 
   /* ---------- Quiz ---------- */
   .quiz-score-bar{

@@ -23,3 +23,11 @@ nodered/data/*.log
 nodered/data/.npm/
 nodered/data/package-lock.json
 nodered/data/flows_cred.json   # Credentials besser nicht committen
+
+# Forgejo-Laufzeitdaten und erzeugte Zugangsdaten (nur auf dem Raspberry)
+Raspberry/forgejo/data/
+Raspberry/forgejo/konten-*.csv
+Raspberry/forgejo/schueler-*.txt
+
+# Bei der Wiederherstellung beiseitegelegte Ordner (siehe Raspberry/backup/README.md)
+*.vor-wiederherstellung-*/

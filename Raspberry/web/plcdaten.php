@@ -143,6 +143,12 @@
                 <option value="">– Live (alle Daten) –</option>
             </select>
             <span id="serialMeta" style="font-size:13px;color:#555;"></span>
+            <label for="quelleSelect" style="font-weight:600;color:#8b1a1a;margin-left:auto;">Datenquelle</label>
+            <select id="quelleSelect" style="padding:6px 10px;border:1px solid #ccc;border-radius:5px;">
+                <option value="produktion">Produktion (plc/#)</option>
+                <option value="team">Stationsteams (team/#)</option>
+                <option value="alle">Alle</option>
+            </select>
         </div>
 
         <div class="actions">
@@ -203,7 +209,8 @@
     }
 
     function timeQuery() {
-        let q = '';
+        const quelle = document.getElementById('quelleSelect');
+        let q = '&quelle=' + encodeURIComponent(quelle ? quelle.value : 'produktion');
         if (selectedFrom) q += '&from=' + encodeURIComponent(selectedFrom);
         if (selectedTo) q += '&to=' + encodeURIComponent(selectedTo);
         return q;
@@ -629,6 +636,8 @@
             setTimeout(() => { pauseRefresh = false; }, 300);
         });
     }
+
+    document.getElementById('quelleSelect')?.addEventListener('change', () => loadPlcData(true));
 
     loadPlcData(true);
     setInterval(() => {

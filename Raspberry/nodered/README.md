@@ -58,6 +58,90 @@ sudo ./Raspberry/update_iot_stack.sh --sync-nodered-flow
 Die Backups liegen danach unter `Raspberry/backups/<Zeitstempel>/`. Das
 Update-Skript führt keinen `git pull` selbst aus.
 
+## Flow-Verlauf (Änderungen der Schüler sichern)
+
+Jeder Deploy im Node-RED-Editor wird automatisch als Commit in einem
+eigenen, lokalen Git-Repo auf dem Raspberry gesichert:
+`~/nodered-verlauf`. Dieses Repo ist vom Datenkrake-Repo getrennt, es wird
+also nie automatisch etwas nach GitHub übertragen. Eingerichtet wird das
+von `setup_iot_stack.sh` bzw. `update_iot_stack.sh` (einzeln:
+`sudo ./Raspberry/nodered/verlauf/install_flows_verlauf.sh`). Technisch
+beobachtet die systemd-Unit `nodered-verlauf.path` die Datei
+`data/flows.json` und startet bei jeder Änderung `verlauf/flows_verlauf.sh`.
+
+Jeder Tab liegt im Verlauf als eigene Datei unter `flows/`
+(z. B. `flows/station-03-rohlager-dosen.json`), dazu
+`flows/_konfiguration.json` mit den Konfigurations-Nodes. Ändert ein Deploy
+mehrere Tabs, entsteht **pro Tab ein eigener Commit** mit dem Tab-Namen als
+Autor und einer Zusammenfassung wie `+2 / -0 / ~1 Nodes`
+(neu / gelöscht / geändert). Jedes Stationsteam hat so seinen eigenen
+Verlauf, obwohl alle im selben Node-RED arbeiten.
+
+```bash
+V=./Raspberry/nodered/verlauf
+
+$V/flows_wiederherstellen.sh                                   # letzte Deploys
+$V/flows_wiederherstellen.sh station-03-rohlager-dosen.json    # Verlauf eines Tabs
+git -C ~/nodered-verlauf show <commit>                         # genaue Änderungen
+
+$V/flows_wiederherstellen.sh <commit> station-03-rohlager-dosen.json  # nur diesen Tab zurück
+$V/flows_wiederherstellen.sh <commit>                                 # alle Tabs zurück
+```
+
+Beim Zurücksetzen eines einzelnen Tabs bleiben alle anderen Tabs, wie sie
+sind. Node-RED wird danach neu gestartet. Zurückspielen löscht nichts: Der
+wiederhergestellte Stand wird selbst wieder als neuer Commit gesichert.
+
+Externe Sicherung (optional): Im Verlauf-Repo ein Remote `origin`
+eintragen, z. B. ein separates **privates** Repo oder ein Ordner auf einem
+Netzlaufwerk. Danach pusht jeder Deploy automatisch dorthin:
+
+```bash
+git -C ~/nodered-verlauf remote add origin <url>
+```
+
+`flows_cred.json` (verschlüsselte Zugangsdaten der Nodes) wird bewusst
+nicht gesichert.
+
+## Stations-Tabs für die Stationsteams
+
+Neben dem produktiven Tab „OPC-UA NodesAuswahl -> MQTT“ gibt es in
+`data/flows.json` einen Tab pro SPS-Station („Station 01 Leitstand“ bis
+„Station 09 Transfersystem Roboter“). Jeder ist der Arbeitsbereich eines
+Stationsteams und enthält die vollständige Kette: Node-Auswahl, OPC-UA-Abfrage
+im Sekundentakt, Änderungsfilter und MQTT. Die Hochregallager-Station (.10)
+hat keinen Tab, dort steckt ein nicht programmierbarer IPC.
+
+| | Produktiver Tab | Stations-Tab |
+|---|---|---|
+| Node-Auswahl | `/data/NodesAuswahl.txt` | Template-Node **NodesAuswahl** im Tab, wird bei jedem Deploy als `/data/stationen/NodesAuswahl_<nr>_<station>.txt` gespeichert |
+| SPS | alle Stationen | nur die eigene (Tab-Umgebungsvariable `STATION_ENDPOINT`), Zeilen anderer Stationen werden ignoriert |
+| MQTT | `plc/<station>/<tag>` → MariaDB (`quelle = 'produktion'`), InfluxDB | `team/<station>/<tag>` → MariaDB (`quelle = 'team'`), nicht in InfluxDB |
+
+Startinhalt jeder Station sind Bandsensor links/rechts und Motor
+Rechts-/Linkslauf, beim Leitstand (ohne eigenes Band) die bisherigen
+HMI-/MES-Tags. Die Vorlagen liegen in `UAExpertExport/stationen/`. Die Teams
+ergänzen weitere Knoten direkt im Template-Node, Kandidaten stehen in den
+UAExpert-Exporten der jeweiligen Station (`UAExpertExport/<Station>.txt`).
+Die Liste wird nach dem Deploy sofort und danach jede Minute neu geladen.
+
+Die Teamdaten sind von den Produktionsdaten getrennt (Spalte `quelle` in
+`plc_telemetry`). In der PLC-Datenansicht (`plcdaten.php`) und im digitalen
+Zwilling lässt sich die Datenquelle wählen: Produktion, alle Stationsteams
+oder ein einzelnes Team. Bei einem einzelnen Team zeigt der Zwilling dessen
+Station mit den Teamdaten und alle anderen mit den Produktionsdaten, dazu
+die Zahl der Signalwechsel beider Quellen zum Vergleich. Die Produktionsläufe
+(Seriennummer) kommen immer aus der Produktion.
+
+Last: Jede SPS hat damit zwei OPC-UA-Sitzungen (produktiver Tab und
+Stations-Tab) und wird zweimal pro Sekunde gelesen. Das ist unkritisch,
+solange die Teams das Abfrage-Intervall nicht ohne Absprache verkürzen und
+nicht Hunderte Knoten eintragen.
+
+Um die Stations-Tabs auf einen Raspberry zu bringen, der bereits läuft, das
+Update mit `--sync-nodered-flow` ausführen. Der bisherige Editor-Stand wird
+dabei vorher gesichert (Backup-Ordner und Flow-Verlauf).
+
 ## ⚠️ Sicherheitshinweis
 
 Der Node-RED-Editor unter Port 1880 hat **standardmäßig keine

@@ -397,6 +397,12 @@
         <option value="">— Produktion wählen —</option>
       </select>
     </label>
+    <label class="rb-serial">
+      <span>Daten</span>
+      <select id="quelleSelect" disabled title="Keine Teamdaten vorhanden">
+        <option value="produktion">Produktion</option>
+      </select>
+    </label>
   </div>
 
   <section class="process-panel" id="processPanel" aria-label="Visualisierung der Prozessdaten">
@@ -412,6 +418,7 @@
           <div><dt>Start</dt><dd id="metaStart">—</dd></div>
           <div><dt>Ende</dt><dd id="metaEnd">—</dd></div>
           <div><dt>Events</dt><dd id="metaEvents">—</dd></div>
+          <div title="Signalwechsel der gewählten Teamstation in dieser Produktion"><dt>Vergleich</dt><dd id="metaVergleich">—</dd></div>
         </dl>
       </div>
       <div class="process-card">
@@ -1017,6 +1024,28 @@
 
   const RELEVANT_TAG_RE = /(Rechtslauf|Linkslauf|Bandsensor)/i;
 
+  // Die NodesAuswahl fragt statt der rohen Eingänge AL-BG1/AL-BG2 die
+  // SPS-Statusbits sBandSensorLinks/-Rechts ab. Beide zeigen dasselbe Signal.
+  const TAG_ALIAS = {
+    sBandSensorLinks: 'AL_BG1_Bandsensor_Links',
+    sBandSensorRechts: 'AL_BG2_Bandsensor_Rechts'
+  };
+
+  // Herkunft einer Zeile: 'produktion' (plc/#) oder 'team' (team/#).
+  // Ältere CSV-Exporte haben keine Spalte quelle, das sind Produktionsdaten.
+  function rowQuelle(r) {
+    return r.quelle === 'team' ? 'team' : 'produktion';
+  }
+
+  // Gewählte Datenquelle: 'produktion', 'team' (alle Stationsteams) oder
+  // 'team:<dbKey>' (diese Station aus Teamdaten, alle anderen aus der Produktion)
+  function quelleAktiv(r, auswahl) {
+    if (auswahl === 'produktion') return rowQuelle(r) === 'produktion';
+    if (auswahl === 'team') return rowQuelle(r) === 'team';
+    const teamStation = auswahl.slice(5);
+    return rowQuelle(r) === (r.station === teamStation ? 'team' : 'produktion');
+  }
+
   function parseCsv(text) {
     const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/).filter(Boolean);
     if (!lines.length) return [];
@@ -1064,7 +1093,8 @@
 
   function buildProductions(rows) {
     const serialEvents = rows
-      .filter(r => r.station === 'leitstand' && r.tag === 'dbHMI_uiSeriennummer')
+      // Produktionsläufe immer aus der Produktion, auch wenn Teamdaten gezeigt werden
+      .filter(r => r.station === 'leitstand' && r.tag === 'dbHMI_uiSeriennummer' && rowQuelle(r) === 'produktion')
       .map(r => ({ ts: parseTs(r.ts), value: Number(r.wert_num) }))
       .filter(e => e.ts && !isNaN(e.value))
       .sort((a, b) => a.ts - b.ts);
@@ -1089,12 +1119,13 @@
     return productions;
   }
 
-  function eventsInWindow(rows, start, end) {
+  function eventsInWindow(rows, start, end, auswahl) {
     const t0 = start.getTime();
     const t1 = end ? end.getTime() : Infinity;
     const events = [];
     rows.forEach(r => {
       if (!RELEVANT_TAG_RE.test(r.tag || '')) return;
+      if (!quelleAktiv(r, auswahl)) return;
       const ts = parseTs(r.ts);
       if (!ts) return;
       const t = ts.getTime();
@@ -1104,12 +1135,34 @@
         t: t - t0, // ms relative
         abs: t,
         station: stationId,
-        tag: r.tag,
+        tag: TAG_ALIAS[r.tag] || r.tag,
+        quelle: rowQuelle(r),
         value: boolVal(r)
       });
     });
     events.sort((a, b) => a.t - b.t);
     return events;
+  }
+
+  // Signalwechsel einer Station im Zeitfenster, getrennt nach Herkunft.
+  // Zeigt z. B., ob ein Team mehr Bandsensor-Impulse erfasst als die Produktion.
+  function zaehleWechsel(rows, start, end, dbKey) {
+    const t0 = start.getTime();
+    const t1 = end ? end.getTime() : Infinity;
+    const anzahl = { produktion: 0, team: 0 };
+    rows.forEach(r => {
+      if (r.station !== dbKey || !RELEVANT_TAG_RE.test(r.tag || '')) return;
+      const ts = parseTs(r.ts);
+      if (!ts || ts.getTime() < t0 || ts.getTime() > t1) return;
+      anzahl[rowQuelle(r)]++;
+    });
+    return anzahl;
+  }
+
+  function stationLabel(dbKey) {
+    const id = stationByDbKey[dbKey] || dbKey;
+    const st = config.stations.find(s => s.id === id);
+    return st ? st.label.replace(/\n/g, ' ') : dbKey;
   }
 
   function formatMs(ms) {
@@ -1129,8 +1182,14 @@
     speed: 1,
     raf: null,
     lastTick: 0,
-    appliedUntil: -1
+    appliedUntil: -1,
+    quelle: 'produktion', // siehe quelleAktiv()
+    herkunft: 'csv'       // 'datenbank' (Raspberry) oder 'csv' (Demo, z. B. GitHub Pages)
   };
+
+  function quellenName(ev) {
+    return ev.station + (ev.quelle === 'team' ? ' (Team)' : '');
+  }
 
   function setControlsEnabled(on) {
     ['btnPlayPause', 'btnRestart', 'replaySpeed', 'replayScrub', 'serialSelect']
@@ -1200,7 +1259,7 @@
     ul.innerHTML = items.map(ev => {
       const cls = ev.value ? 'on' : 'off';
       const val = ev.value ? 'AN' : 'AUS';
-      return '<li class="' + cls + '"><span>' + ev.station + ' · ' + ev.tag + '</span><span>' + val + '</span></li>';
+      return '<li class="' + cls + '"><span>' + quellenName(ev) + ' · ' + ev.tag + '</span><span>' + val + '</span></li>';
     }).join('');
   }
 
@@ -1216,7 +1275,7 @@
       const vcls = ev.value ? 'v-on' : 'v-off';
       const v = ev.value ? 'AN' : 'AUS';
       return '<div class="ev"><span class="t">' + formatMs(ev.t) + '</span><span class="st">' +
-        ev.station + '</span><span class="tag" title="' + ev.tag + '">' + ev.tag +
+        quellenName(ev) + '</span><span class="tag" title="' + ev.tag + '">' + ev.tag +
         '</span><span class="' + vcls + '">' + v + '</span></div>';
     }).join('');
     box.scrollTop = box.scrollHeight;
@@ -1226,7 +1285,7 @@
     const prod = replay.productions.find(p => p.serial === serial);
     if (!prod) return;
     const end = prod.end || new Date(prod.start.getTime() + 5 * 60 * 1000);
-    replay.events = eventsInWindow(replay.rows, prod.start, end);
+    replay.events = eventsInWindow(replay.rows, prod.start, end, replay.quelle);
     replay.duration = Math.max(1000, end.getTime() - prod.start.getTime());
     replay.pos = 0;
     replay.playing = false;
@@ -1251,7 +1310,22 @@
     if (metaStart) metaStart.textContent = prod.start.toLocaleString('de-DE');
     if (metaEnd) metaEnd.textContent = prod.end ? prod.end.toLocaleString('de-DE') : 'offen';
     if (metaEvents) metaEvents.textContent = String(replay.events.length);
-    if (status) status.textContent = 'Demo-Modus · ' + replay.events.length + ' relevante Signalwechsel';
+
+    const metaVergleich = document.getElementById('metaVergleich');
+    let quellenText = 'Produktion';
+    if (replay.quelle === 'team') {
+      quellenText = 'alle Stationsteams';
+    } else if (replay.quelle.startsWith('team:')) {
+      const key = replay.quelle.slice(5);
+      quellenText = 'Team ' + stationLabel(key) + ', übrige Stationen Produktion';
+      const n = zaehleWechsel(replay.rows, prod.start, end, key);
+      if (metaVergleich) metaVergleich.textContent = 'Team ' + n.team + ' · Produktion ' + n.produktion;
+    }
+    if (metaVergleich && !replay.quelle.startsWith('team:')) metaVergleich.textContent = '—';
+    if (status) {
+      status.textContent = (replay.herkunft === 'datenbank' ? 'Datenbank' : 'Demo-Modus') + ' · '
+        + quellenText + ' · ' + replay.events.length + ' relevante Signalwechsel';
+    }
   }
 
   function tick(now) {
@@ -1305,33 +1379,53 @@
     updateTimeUi();
   }
 
-  async function loadCsv() {
-    let text = null;
-    let lastErr = null;
-    for (const url of CSV_CANDIDATES) {
-      try {
-        const res = await fetch(url, { cache: 'no-store' });
-        if (res.ok) {
-          text = await res.text();
-          console.info('CSV geladen:', url);
-          break;
-        }
-      } catch (e) {
-        lastErr = e;
-      }
+  // Auf dem Raspberry liefert api/plc.php die Daten direkt aus der MariaDB.
+  // Ohne PHP (GitHub Pages, file://) bleibt es beim Demo-Replay aus der CSV.
+  async function loadDatenbank() {
+    try {
+      const res = await fetch('api/plc.php?action=twin', { cache: 'no-store' });
+      if (!res.ok || !(res.headers.get('content-type') || '').includes('json')) return null;
+      const data = await res.json();
+      return Array.isArray(data.rows) ? data.rows : null;
+    } catch (e) {
+      return null;
     }
-    if (!text) {
-      console.warn('plc_daten.csv nicht gefunden', lastErr);
+  }
+
+  function fillQuelleSelect() {
+    const sel = document.getElementById('quelleSelect');
+    if (!sel) return;
+    const teamStationen = [...new Set(replay.rows
+      .filter(r => rowQuelle(r) === 'team' && RELEVANT_TAG_RE.test(r.tag || ''))
+      .map(r => r.station))]
+      .filter(key => config.stations.some(s => s.id === (stationByDbKey[key] || key)))
+      .sort((a, b) => stationLabel(a).localeCompare(stationLabel(b), 'de'));
+    sel.innerHTML = '<option value="produktion">Produktion</option>';
+    if (teamStationen.length) {
+      sel.insertAdjacentHTML('beforeend', '<option value="team">Alle Stationsteams</option>');
+      teamStationen.forEach(key => {
+        const opt = document.createElement('option');
+        opt.value = 'team:' + key;
+        opt.textContent = 'Team ' + stationLabel(key);
+        sel.appendChild(opt);
+      });
+    }
+    sel.disabled = !teamStationen.length;
+    sel.title = teamStationen.length ? '' : 'Keine Teamdaten vorhanden';
+  }
+
+  async function loadDaten() {
+    const dbRows = await loadDatenbank();
+    if (dbRows) {
+      replay.herkunft = 'datenbank';
+      replay.rows = dbRows;
       const hint = document.querySelector('header .hint');
-      if (hint) hint.textContent += ' · Demo-CSV fehlt (plc_daten.csv neben die HTML-Datei legen)';
-      const status = document.getElementById('processStatus');
-      if (status) {
-        status.textContent = 'Fehler: plc_daten.csv wurde nicht gefunden.';
-        status.classList.add('is-error');
-      }
+      if (hint) hint.innerHTML = 'SVG aus <code>anlage.json</code> · Replay aus der Datenbank (Produktion und Stationsteams)';
+      console.info('Daten aus der Datenbank geladen:', dbRows.length, 'Zeilen');
+    } else if (!(await loadCsv())) {
       return;
     }
-    replay.rows = parseCsv(text);
+    fillQuelleSelect();
     replay.productions = buildProductions(replay.rows);
     const sel = document.getElementById('serialSelect');
     if (sel) {
@@ -1354,11 +1448,43 @@
     setControlsEnabled(true);
     const status = document.getElementById('processStatus');
     if (status) {
+      const quelle = replay.herkunft === 'datenbank' ? 'der Datenbank' : 'plc_daten.csv';
       status.textContent = replay.productions.length
-        ? (replay.productions.length + ' Produktionen in plc_daten.csv')
-        : 'CSV geladen, keine Seriennummern gefunden';
+        ? (replay.productions.length + ' Produktionen in ' + quelle)
+        : 'Daten geladen, keine Seriennummern gefunden';
       status.classList.toggle('is-error', replay.productions.length === 0);
     }
+  }
+
+  async function loadCsv() {
+    let text = null;
+    let lastErr = null;
+    for (const url of CSV_CANDIDATES) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) {
+          text = await res.text();
+          console.info('CSV geladen:', url);
+          break;
+        }
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    if (!text) {
+      console.warn('plc_daten.csv nicht gefunden', lastErr);
+      const hint = document.querySelector('header .hint');
+      if (hint) hint.textContent += ' · Demo-CSV fehlt (plc_daten.csv neben die HTML-Datei legen)';
+      const status = document.getElementById('processStatus');
+      if (status) {
+        status.textContent = 'Fehler: Weder Datenbank noch plc_daten.csv erreichbar.';
+        status.classList.add('is-error');
+      }
+      return false;
+    }
+    replay.rows = parseCsv(text);
+    replay.herkunft = 'csv';
+    return true;
   }
 
   // UI-Bindungen
@@ -1380,6 +1506,12 @@
     pause();
     if (e.target.value) loadProduction(e.target.value);
   });
+  document.getElementById('quelleSelect')?.addEventListener('change', (e) => {
+    pause();
+    replay.quelle = e.target.value || 'produktion';
+    const serial = document.getElementById('serialSelect')?.value;
+    if (serial) loadProduction(serial);
+  });
 
   // Tastatursteuerung: Leertaste = Play/Pause
   document.addEventListener('keydown', (e) => {
@@ -1397,9 +1529,9 @@
   window.AnlageTwin.play = play;
   window.AnlageTwin.pause = pause;
 
-  loadCsv();
+  loadDaten();
 
-  console.info('AnlageTwin bereit. Demo-Replay: Produktion wählen + Play');
+  console.info('AnlageTwin bereit. Replay: Produktion wählen + Play');
 })().catch(err => {
   console.error('anlage-zwilling: Initialisierung fehlgeschlagen', err);
   const stage = document.getElementById('stage');

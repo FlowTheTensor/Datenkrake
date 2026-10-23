@@ -30,7 +30,17 @@ Nach erfolgreicher Installation sind die wichtigsten Oberflaechen unter diesen A
 Weboberflaeche: http://<raspberry-ip>/
 Grafana:        http://<raspberry-ip>:3000/
 Node-RED:       http://<raspberry-ip>:1880/
+Forgejo:        http://<raspberry-ip>:3001/
 ```
+
+### Nach der Installation von Hand
+
+1. **Rechnername `datenkrake`** (am einfachsten schon im Raspberry Pi Imager setzen). Hauptseite, Forgejo und Zwilling verlinken auf `datenkrake.local`; das Setup-Skript weist darauf hin, wenn der Name nicht stimmt.
+2. **Ab- und wieder anmelden**, damit der Benutzer Docker ohne `sudo` nutzen kann.
+3. **Forgejo einrichten**: Lehrkraft-Konto, Projekt-Repo und Schuelerkonten, siehe [forgejo/README.md](forgejo/README.md#einrichtung-lehrkraft-einmalig).
+4. **USB-Stick `DATENKRAKE`** fuer die Datensicherung vorbereiten und einstecken, siehe [backup/README.md](backup/README.md).
+
+Voraussetzung ist ein **64-Bit**-Raspberry-Pi-OS: Das InfluxDB-2-Image gibt es nicht fuer 32 Bit. Der erste Start dauert einige Minuten, weil alle Images gebaut werden; Grafana braucht beim allerersten Start zusaetzlich etwa eine Minute fuer seine Datenbank.
 
 ## Update
 
@@ -49,7 +59,17 @@ Der aktive Node-RED-Flow bleibt standardmaessig erhalten. Soll stattdessen die F
 sudo ./Raspberry/update_iot_stack.sh --sync-nodered-flow
 ```
 
-Die Backups liegen unter `Raspberry/backups/<Zeitstempel>/`.
+Die Backups liegen unter `Raspberry/backups/<Zeitstempel>/`, also auf derselben SD-Karte. Gegen einen Ausfall von SD-Karte oder Pi schützt erst die Datensicherung auf USB-Stick.
+
+## Datensicherung
+
+Nach jeder Unterrichtsstunde von Hand und täglich um 17:00 automatisch auf einen USB-Stick mit der Bezeichnung `DATENKRAKE`:
+
+```bash
+sudo ./Raspberry/backup/datensicherung.sh --auswerfen
+```
+
+Stick vorbereiten, Inhalt der Sicherung und Wiederherstellung (auch auf einem neuen Pi): [backup/README.md](backup/README.md).
 
 ## Container und Ports
 
@@ -66,6 +86,7 @@ Alle Container sind im Docker-Netzwerk `iot-net` verbunden.
 | `grafana` | `grafana` | `3000` | Dashboards fuer InfluxDB-Daten |
 | `nodered` | `nodered` | `1880` | OPC-UA-Client und PLC-MQTT-Publisher |
 | `opcua_demo_server` | `opcua-demo-server` | `4840` | Simulierter OPC-UA-Server fuer Tests |
+| `forgejo` | `forgejo` | `3001`, `2222` | Backlog, Kanban-Board und Deploy-Verlauf fuer das agile Arbeiten |
 
 Die Portzuordnung ist in `compose/docker-compose.yml` definiert. Ein Eintrag "keine" bedeutet, dass der Dienst nur intern ueber das Docker-Netzwerk erreichbar ist.
 
@@ -88,4 +109,4 @@ Die Zugangsdaten in der Compose-Konfiguration enthalten Demo-Platzhalter wie `ch
 
 ## Wichtiger Hinweis zum systemd-Start
 
-Nach der Installation sollte der erzeugte Dienst `iot-stack.service` geprueft werden. Das Arbeitsverzeichnis muss auf den tatsaechlichen Pfad `Raspberry/compose` dieses Repositorys zeigen. Bei abweichendem Installationspfad ist die systemd-Konfiguration entsprechend anzupassen.
+Das Setup-Skript traegt im Dienst `iot-stack.service` als Arbeitsverzeichnis automatisch den Ordner `Raspberry/compose` des Checkouts ein, aus dem es gestartet wurde. Wird das Repository spaeter verschoben, das Setup-Skript erneut ausfuehren.

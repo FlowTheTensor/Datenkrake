@@ -50,7 +50,9 @@ compose() {
 
 prepare_directories() {
   mkdir -p "${SCRIPT_DIR}/grafana/data"
+  mkdir -p "${SCRIPT_DIR}/forgejo/data"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/grafana"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/forgejo"
   chown -R 472:472 "${SCRIPT_DIR}/grafana/data"
 }
 
@@ -133,13 +135,17 @@ sync_nodered() {
 
 log "Pulling/rebuilding images and recreating services"
 prepare_directories
-compose pull historian grafana
+compose pull historian grafana forgejo
 compose build --pull
 compose up -d
 repair_database_permissions
 wait_for_database
 backup_database
 apply_schema_updates
+# Vor sync_nodered: sichert den aktuellen Editor-Stand, bevor
+# --sync-nodered-flow ihn ersetzt.
+bash "${SCRIPT_DIR}/nodered/verlauf/install_flows_verlauf.sh"
+bash "${SCRIPT_DIR}/backup/install_datensicherung.sh"
 sync_nodered
 compose restart nodered subscriber historian_bridge web
 

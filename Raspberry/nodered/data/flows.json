@@ -7,6 +7,132 @@
         "info": "Liest /data/NodesAuswahl.txt ein, fragt alle dort gelisteten NodeIds zyklisch ab und sendet nur Aenderungen per MQTT auf plc/<station>/<tag>."
     },
     {
+        "id": "st01-tab",
+        "type": "tab",
+        "label": "Station 01 Leitstand",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 1 (Leitstand).\n\nFragt nur die SPS 192.168.36.1:4840 ab und veröffentlicht Änderungen auf `team/leitstand/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.1:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st02-tab",
+        "type": "tab",
+        "label": "Station 02 Palettenlager1",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 2 (Palettenlager1).\n\nFragt nur die SPS 192.168.36.2:4840 ab und veröffentlicht Änderungen auf `team/palettenlager1/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.2:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st03-tab",
+        "type": "tab",
+        "label": "Station 03 Rohlager Dosen",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 3 (Rohlager Dosen).\n\nFragt nur die SPS 192.168.36.3:4840 ab und veröffentlicht Änderungen auf `team/rohlager_dosen/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.3:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st04-tab",
+        "type": "tab",
+        "label": "Station 04 Abfüllen",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 4 (Abfüllen).\n\nFragt nur die SPS 192.168.36.4:4840 ab und veröffentlicht Änderungen auf `team/abf_llen/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.4:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st05-tab",
+        "type": "tab",
+        "label": "Station 05 Qualität Kamera",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 5 (Qualität Kamera).\n\nFragt nur die SPS 192.168.36.5:4840 ab und veröffentlicht Änderungen auf `team/qualit_t_kamera/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.5:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st06-tab",
+        "type": "tab",
+        "label": "Station 06 Handling Saugarm",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 6 (Handling Saugarm).\n\nFragt nur die SPS 192.168.36.6:4840 ab und veröffentlicht Änderungen auf `team/handling_saugarm/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.6:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st07-tab",
+        "type": "tab",
+        "label": "Station 07 Presse",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 7 (Presse).\n\nFragt nur die SPS 192.168.36.7:4840 ab und veröffentlicht Änderungen auf `team/presse/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.7:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st08-tab",
+        "type": "tab",
+        "label": "Station 08 Palettenlager2",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 8 (Palettenlager2).\n\nFragt nur die SPS 192.168.36.8:4840 ab und veröffentlicht Änderungen auf `team/palettenlager2/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.8:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "st09-tab",
+        "type": "tab",
+        "label": "Station 09 Transfersystem Roboter",
+        "disabled": false,
+        "info": "Arbeitsbereich des Stationsteams 9 (Transfersystem Roboter).\n\nFragt nur die SPS 192.168.36.9:4840 ab und veröffentlicht Änderungen auf `team/transfersystem_roboter/<tag>`. Der Subscriber speichert sie mit der Quelle `team` in der MariaDB, getrennt von den Produktionsdaten; im digitalen Zwilling sind sie als Team auswählbar. Der produktive Tab bleibt unberührt.\n\nJeder Deploy wird automatisch als eigener Commit dieses Tabs gesichert.",
+        "env": [
+            {
+                "name": "STATION_ENDPOINT",
+                "value": "192.168.36.9:4840",
+                "type": "str"
+            }
+        ]
+    },
+    {
         "id": "cfg-mqtt-broker-nodesauswahl",
         "type": "mqtt-broker",
         "name": "Mosquitto (Datenkrake)",
@@ -799,6 +925,2535 @@
         "statusType": "auto",
         "x": 2730,
         "y": 600,
+        "wires": []
+    },
+    {
+        "id": "st01-hinweis",
+        "type": "comment",
+        "z": "st01-tab",
+        "name": "Station 01 Leitstand: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.1:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Leitstand.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_01_Leitstand.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/leitstand/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st01-inject-config",
+        "type": "inject",
+        "z": "st01-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st01-template"
+            ]
+        ]
+    },
+    {
+        "id": "st01-template",
+        "type": "template",
+        "z": "st01-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 1: Leitstand\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Leitstand.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.1:4840) eintragen, andere werden ignoriert.\n\n# Leitstand\n192.168.36.1:4840\tns=3;s=\"dbHMI\".\"uiHMIKugelnBlau\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbHMI\".\"uiHMIKugelnGruen\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbHMI\".\"uiHMIKugelnRot\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbHMI\".\"uiSeriennummer\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbMESLeitstand\".\"Auftragsnummer\"\tInt16\n192.168.36.1:4840\tns=3;s=\"dbMESLeitstand\".\"Farbe\"\tByte\n192.168.36.1:4840\tns=3;s=\"dbMESLeitstand\".\"Inhalt\"\tByte\n192.168.36.1:4840\tns=3;s=\"dbMESLeitstand\".\"MengeInhalt1\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbMESLeitstand\".\"MengeInhalt2\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbMESLeitstand\".\"MengeInhalt3\"\tUInt16\n192.168.36.1:4840\tns=3;s=\"dbTransferV2\".\"xHMIProduktFehlerhaft\"\tBoolean\n192.168.36.1:4840\tns=3;s=\"dbTransferV2\".\"xHMIProduktOK\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st01-datei",
+                "st01-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st01-datei",
+        "type": "file",
+        "z": "st01-tab",
+        "name": "NodesAuswahl_01_Leitstand.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_01_Leitstand.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st01-parse",
+        "type": "function",
+        "z": "st01-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st01-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st01-debug-config",
+        "type": "debug",
+        "z": "st01-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st01-inject-poll",
+        "type": "inject",
+        "z": "st01-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st01-build"
+            ]
+        ]
+    },
+    {
+        "id": "st01-build",
+        "type": "function",
+        "z": "st01-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st01-client"
+            ]
+        ]
+    },
+    {
+        "id": "st01-client",
+        "type": "OpcUa-Client",
+        "z": "st01-tab",
+        "endpoint": "cfg-endpoint-36-1",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Leitstand 192.168.36.1",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st01-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st01-normalize",
+        "type": "function",
+        "z": "st01-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st01-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st01-filter",
+        "type": "function",
+        "z": "st01-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st01-json"
+            ]
+        ]
+    },
+    {
+        "id": "st01-json",
+        "type": "function",
+        "z": "st01-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st01-mqtt",
+                "st01-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st01-mqtt",
+        "type": "mqtt out",
+        "z": "st01-tab",
+        "name": "-> team/leitstand/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st01-debug-mqtt",
+        "type": "debug",
+        "z": "st01-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st02-hinweis",
+        "type": "comment",
+        "z": "st02-tab",
+        "name": "Station 02 Palettenlager1: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.2:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Palettenlager1.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_02_Palettenlager1.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/palettenlager1/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st02-inject-config",
+        "type": "inject",
+        "z": "st02-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st02-template"
+            ]
+        ]
+    },
+    {
+        "id": "st02-template",
+        "type": "template",
+        "z": "st02-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 2: Palettenlager1\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Palettenlager1.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.2:4840) eintragen, andere werden ignoriert.\n\n# Palettenlager1\n192.168.36.2:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.2:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.2:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.2:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st02-datei",
+                "st02-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st02-datei",
+        "type": "file",
+        "z": "st02-tab",
+        "name": "NodesAuswahl_02_Palettenlager1.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_02_Palettenlager1.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st02-parse",
+        "type": "function",
+        "z": "st02-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st02-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st02-debug-config",
+        "type": "debug",
+        "z": "st02-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st02-inject-poll",
+        "type": "inject",
+        "z": "st02-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st02-build"
+            ]
+        ]
+    },
+    {
+        "id": "st02-build",
+        "type": "function",
+        "z": "st02-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st02-client"
+            ]
+        ]
+    },
+    {
+        "id": "st02-client",
+        "type": "OpcUa-Client",
+        "z": "st02-tab",
+        "endpoint": "cfg-endpoint-36-2",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Palettenlager1 192.168.36.2",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st02-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st02-normalize",
+        "type": "function",
+        "z": "st02-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st02-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st02-filter",
+        "type": "function",
+        "z": "st02-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st02-json"
+            ]
+        ]
+    },
+    {
+        "id": "st02-json",
+        "type": "function",
+        "z": "st02-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st02-mqtt",
+                "st02-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st02-mqtt",
+        "type": "mqtt out",
+        "z": "st02-tab",
+        "name": "-> team/palettenlager1/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st02-debug-mqtt",
+        "type": "debug",
+        "z": "st02-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st03-hinweis",
+        "type": "comment",
+        "z": "st03-tab",
+        "name": "Station 03 Rohlager Dosen: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.3:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Rohlager Dosen.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_03_Rohlager_Dosen.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/rohlager_dosen/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st03-inject-config",
+        "type": "inject",
+        "z": "st03-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st03-template"
+            ]
+        ]
+    },
+    {
+        "id": "st03-template",
+        "type": "template",
+        "z": "st03-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 3: Rohlager Dosen\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Rohlager Dosen.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.3:4840) eintragen, andere werden ignoriert.\n\n# Rohlager Dosen\n192.168.36.3:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.3:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.3:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.3:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st03-datei",
+                "st03-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st03-datei",
+        "type": "file",
+        "z": "st03-tab",
+        "name": "NodesAuswahl_03_Rohlager_Dosen.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_03_Rohlager_Dosen.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st03-parse",
+        "type": "function",
+        "z": "st03-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st03-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st03-debug-config",
+        "type": "debug",
+        "z": "st03-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st03-inject-poll",
+        "type": "inject",
+        "z": "st03-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st03-build"
+            ]
+        ]
+    },
+    {
+        "id": "st03-build",
+        "type": "function",
+        "z": "st03-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st03-client"
+            ]
+        ]
+    },
+    {
+        "id": "st03-client",
+        "type": "OpcUa-Client",
+        "z": "st03-tab",
+        "endpoint": "cfg-endpoint-36-3",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Rohlager Dosen 192.168.36.3",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st03-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st03-normalize",
+        "type": "function",
+        "z": "st03-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st03-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st03-filter",
+        "type": "function",
+        "z": "st03-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st03-json"
+            ]
+        ]
+    },
+    {
+        "id": "st03-json",
+        "type": "function",
+        "z": "st03-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st03-mqtt",
+                "st03-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st03-mqtt",
+        "type": "mqtt out",
+        "z": "st03-tab",
+        "name": "-> team/rohlager_dosen/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st03-debug-mqtt",
+        "type": "debug",
+        "z": "st03-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st04-hinweis",
+        "type": "comment",
+        "z": "st04-tab",
+        "name": "Station 04 Abfüllen: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.4:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Abfüllen.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_04_Abfuellen.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/abf_llen/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st04-inject-config",
+        "type": "inject",
+        "z": "st04-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st04-template"
+            ]
+        ]
+    },
+    {
+        "id": "st04-template",
+        "type": "template",
+        "z": "st04-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 4: Abfüllen\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Abfüllen.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.4:4840) eintragen, andere werden ignoriert.\n\n# Abfüllen\n192.168.36.4:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.4:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.4:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.4:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st04-datei",
+                "st04-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st04-datei",
+        "type": "file",
+        "z": "st04-tab",
+        "name": "NodesAuswahl_04_Abfuellen.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_04_Abfuellen.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st04-parse",
+        "type": "function",
+        "z": "st04-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st04-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st04-debug-config",
+        "type": "debug",
+        "z": "st04-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st04-inject-poll",
+        "type": "inject",
+        "z": "st04-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st04-build"
+            ]
+        ]
+    },
+    {
+        "id": "st04-build",
+        "type": "function",
+        "z": "st04-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st04-client"
+            ]
+        ]
+    },
+    {
+        "id": "st04-client",
+        "type": "OpcUa-Client",
+        "z": "st04-tab",
+        "endpoint": "cfg-endpoint-36-4",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Abfüllen 192.168.36.4",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st04-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st04-normalize",
+        "type": "function",
+        "z": "st04-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st04-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st04-filter",
+        "type": "function",
+        "z": "st04-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st04-json"
+            ]
+        ]
+    },
+    {
+        "id": "st04-json",
+        "type": "function",
+        "z": "st04-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st04-mqtt",
+                "st04-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st04-mqtt",
+        "type": "mqtt out",
+        "z": "st04-tab",
+        "name": "-> team/abf_llen/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st04-debug-mqtt",
+        "type": "debug",
+        "z": "st04-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st05-hinweis",
+        "type": "comment",
+        "z": "st05-tab",
+        "name": "Station 05 Qualität Kamera: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.5:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Qualität Kamera.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_05_Qualitaet_Kamera.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/qualit_t_kamera/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st05-inject-config",
+        "type": "inject",
+        "z": "st05-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st05-template"
+            ]
+        ]
+    },
+    {
+        "id": "st05-template",
+        "type": "template",
+        "z": "st05-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 5: Qualität Kamera\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Qualität Kamera.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.5:4840) eintragen, andere werden ignoriert.\n\n# Qualität Kamera\n192.168.36.5:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.5:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.5:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.5:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st05-datei",
+                "st05-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st05-datei",
+        "type": "file",
+        "z": "st05-tab",
+        "name": "NodesAuswahl_05_Qualitaet_Kamera.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_05_Qualitaet_Kamera.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st05-parse",
+        "type": "function",
+        "z": "st05-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st05-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st05-debug-config",
+        "type": "debug",
+        "z": "st05-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st05-inject-poll",
+        "type": "inject",
+        "z": "st05-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st05-build"
+            ]
+        ]
+    },
+    {
+        "id": "st05-build",
+        "type": "function",
+        "z": "st05-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st05-client"
+            ]
+        ]
+    },
+    {
+        "id": "st05-client",
+        "type": "OpcUa-Client",
+        "z": "st05-tab",
+        "endpoint": "cfg-endpoint-36-5",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Qualität Kamera 192.168.36.5",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st05-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st05-normalize",
+        "type": "function",
+        "z": "st05-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st05-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st05-filter",
+        "type": "function",
+        "z": "st05-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st05-json"
+            ]
+        ]
+    },
+    {
+        "id": "st05-json",
+        "type": "function",
+        "z": "st05-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st05-mqtt",
+                "st05-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st05-mqtt",
+        "type": "mqtt out",
+        "z": "st05-tab",
+        "name": "-> team/qualit_t_kamera/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st05-debug-mqtt",
+        "type": "debug",
+        "z": "st05-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st06-hinweis",
+        "type": "comment",
+        "z": "st06-tab",
+        "name": "Station 06 Handling Saugarm: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.6:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Handling Saugarm.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_06_Handling_Saugarm.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/handling_saugarm/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st06-inject-config",
+        "type": "inject",
+        "z": "st06-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st06-template"
+            ]
+        ]
+    },
+    {
+        "id": "st06-template",
+        "type": "template",
+        "z": "st06-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 6: Handling Saugarm\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Handling Saugarm.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.6:4840) eintragen, andere werden ignoriert.\n\n# Handling Saugarm\n192.168.36.6:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.6:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.6:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.6:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st06-datei",
+                "st06-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st06-datei",
+        "type": "file",
+        "z": "st06-tab",
+        "name": "NodesAuswahl_06_Handling_Saugarm.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_06_Handling_Saugarm.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st06-parse",
+        "type": "function",
+        "z": "st06-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st06-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st06-debug-config",
+        "type": "debug",
+        "z": "st06-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st06-inject-poll",
+        "type": "inject",
+        "z": "st06-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st06-build"
+            ]
+        ]
+    },
+    {
+        "id": "st06-build",
+        "type": "function",
+        "z": "st06-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st06-client"
+            ]
+        ]
+    },
+    {
+        "id": "st06-client",
+        "type": "OpcUa-Client",
+        "z": "st06-tab",
+        "endpoint": "cfg-endpoint-36-6",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Handling Saugarm 192.168.36.6",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st06-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st06-normalize",
+        "type": "function",
+        "z": "st06-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st06-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st06-filter",
+        "type": "function",
+        "z": "st06-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st06-json"
+            ]
+        ]
+    },
+    {
+        "id": "st06-json",
+        "type": "function",
+        "z": "st06-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st06-mqtt",
+                "st06-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st06-mqtt",
+        "type": "mqtt out",
+        "z": "st06-tab",
+        "name": "-> team/handling_saugarm/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st06-debug-mqtt",
+        "type": "debug",
+        "z": "st06-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st07-hinweis",
+        "type": "comment",
+        "z": "st07-tab",
+        "name": "Station 07 Presse: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.7:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Presse.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_07_Presse.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/presse/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st07-inject-config",
+        "type": "inject",
+        "z": "st07-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st07-template"
+            ]
+        ]
+    },
+    {
+        "id": "st07-template",
+        "type": "template",
+        "z": "st07-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 7: Presse\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Presse.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.7:4840) eintragen, andere werden ignoriert.\n\n# Presse\n192.168.36.7:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.7:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.7:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.7:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st07-datei",
+                "st07-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st07-datei",
+        "type": "file",
+        "z": "st07-tab",
+        "name": "NodesAuswahl_07_Presse.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_07_Presse.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st07-parse",
+        "type": "function",
+        "z": "st07-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st07-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st07-debug-config",
+        "type": "debug",
+        "z": "st07-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st07-inject-poll",
+        "type": "inject",
+        "z": "st07-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st07-build"
+            ]
+        ]
+    },
+    {
+        "id": "st07-build",
+        "type": "function",
+        "z": "st07-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st07-client"
+            ]
+        ]
+    },
+    {
+        "id": "st07-client",
+        "type": "OpcUa-Client",
+        "z": "st07-tab",
+        "endpoint": "cfg-endpoint-36-7",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Presse 192.168.36.7",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st07-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st07-normalize",
+        "type": "function",
+        "z": "st07-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st07-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st07-filter",
+        "type": "function",
+        "z": "st07-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st07-json"
+            ]
+        ]
+    },
+    {
+        "id": "st07-json",
+        "type": "function",
+        "z": "st07-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st07-mqtt",
+                "st07-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st07-mqtt",
+        "type": "mqtt out",
+        "z": "st07-tab",
+        "name": "-> team/presse/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st07-debug-mqtt",
+        "type": "debug",
+        "z": "st07-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st08-hinweis",
+        "type": "comment",
+        "z": "st08-tab",
+        "name": "Station 08 Palettenlager2: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.8:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Palettenlager2.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_08_Palettenlager2.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/palettenlager2/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st08-inject-config",
+        "type": "inject",
+        "z": "st08-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st08-template"
+            ]
+        ]
+    },
+    {
+        "id": "st08-template",
+        "type": "template",
+        "z": "st08-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 8: Palettenlager2\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Palettenlager2.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.8:4840) eintragen, andere werden ignoriert.\n\n# Palettenlager2\n192.168.36.8:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.8:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.8:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.8:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st08-datei",
+                "st08-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st08-datei",
+        "type": "file",
+        "z": "st08-tab",
+        "name": "NodesAuswahl_08_Palettenlager2.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_08_Palettenlager2.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st08-parse",
+        "type": "function",
+        "z": "st08-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st08-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st08-debug-config",
+        "type": "debug",
+        "z": "st08-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st08-inject-poll",
+        "type": "inject",
+        "z": "st08-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st08-build"
+            ]
+        ]
+    },
+    {
+        "id": "st08-build",
+        "type": "function",
+        "z": "st08-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st08-client"
+            ]
+        ]
+    },
+    {
+        "id": "st08-client",
+        "type": "OpcUa-Client",
+        "z": "st08-tab",
+        "endpoint": "cfg-endpoint-36-8",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Palettenlager2 192.168.36.8",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st08-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st08-normalize",
+        "type": "function",
+        "z": "st08-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st08-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st08-filter",
+        "type": "function",
+        "z": "st08-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st08-json"
+            ]
+        ]
+    },
+    {
+        "id": "st08-json",
+        "type": "function",
+        "z": "st08-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st08-mqtt",
+                "st08-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st08-mqtt",
+        "type": "mqtt out",
+        "z": "st08-tab",
+        "name": "-> team/palettenlager2/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st08-debug-mqtt",
+        "type": "debug",
+        "z": "st08-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "st09-hinweis",
+        "type": "comment",
+        "z": "st09-tab",
+        "name": "Station 09 Transfersystem Roboter: so arbeitet ihr hier",
+        "info": "1. **Knoten ergänzen:** Template-Node *NodesAuswahl* öffnen und Zeilen ergänzen (Format: `192.168.36.9:4840<TAB>NodeId<TAB>Datentyp`). Kandidaten stehen in `UAExpertExport/Transfersystem Roboter.txt`.\n2. **Deploy:** Die Liste wird gespeichert, neu geladen (Status am Node *NodesAuswahl parsen*) und als `/data/stationen/NodesAuswahl_09_Transfersystem_Roboter.txt` abgelegt.\n3. **Prüfen:** Debug-Node *MQTT-Ausgabe* einschalten oder MQTT `team/transfersystem_roboter/#` abonnieren.\n\nNur diesen Tab ändern. Abfrage-Intervall bitte nicht unter 1 s setzen, ohne es mit der Lehrkraft abzusprechen: Die SPS wird auch vom produktiven Tab abgefragt.",
+        "x": 260,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "st09-inject-config",
+        "type": "inject",
+        "z": "st09-tab",
+        "name": "Liste laden (Deploy + jede Minute)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "st09-template"
+            ]
+        ]
+    },
+    {
+        "id": "st09-template",
+        "type": "template",
+        "z": "st09-tab",
+        "name": "NodesAuswahl",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "plain",
+        "template": "// NodesAuswahl Station 9: Transfersystem Roboter\n// Eine Zeile pro OPC-UA-Knoten: <IP:Port> <TAB> <NodeId> <TAB> <Datentyp>\n// Weitere Knoten findet ihr in UAExpertExport/Transfersystem Roboter.txt (Spalten 2, 3 und 7).\n// Zeilen mit // sind Kommentare. Die Zeile mit # ist der Stationsname, nicht ändern.\n// Nur Knoten dieser Station (192.168.36.9:4840) eintragen, andere werden ignoriert.\n\n# Transfersystem Roboter\n192.168.36.9:4840\tns=3;s=\"sBandSensorLinks\"\tBoolean\n192.168.36.9:4840\tns=3;s=\"sBandSensorRechts\"\tBoolean\n192.168.36.9:4840\tns=3;s=\"+AL-MA1.Linkslauf\"\tBoolean\n192.168.36.9:4840\tns=3;s=\"+AL-MA1.Rechtslauf\"\tBoolean\n",
+        "output": "str",
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "st09-datei",
+                "st09-parse"
+            ]
+        ]
+    },
+    {
+        "id": "st09-datei",
+        "type": "file",
+        "z": "st09-tab",
+        "name": "NodesAuswahl_09_Transfersystem_Roboter.txt speichern",
+        "filename": "/data/stationen/NodesAuswahl_09_Transfersystem_Roboter.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "st09-parse",
+        "type": "function",
+        "z": "st09-tab",
+        "name": "NodesAuswahl parsen",
+        "func": "const text = String(msg.payload || \"\");\nconst lines = text.split(/\\r?\\n/);\n\nfunction stationKey(name) {\n return String(name || \"unbekannt\")\n .toLowerCase()\n .trim()\n .replace(/[^a-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nfunction topicTagFromNodeId(nodeId) {\n const m = String(nodeId).match(/^ns=\\d+;s=(.*)$/);\n if (!m) return String(nodeId).replace(/[^A-Za-z0-9]+/g, \"_\");\n const raw = m[1].replace(/^\"+|\"+$/g, \"\");\n return raw\n .replace(/[^A-Za-z0-9]+/g, \"_\")\n .replace(/^_+|_+$/g, \"\");\n}\n\nlet stationName = \"unbekannt\";\nconst items = [];\nconst seen = new Set();\nlet ignoriert = 0;\n\nfor (const rawLine of lines) {\n const line = rawLine.trim();\n if (!line) continue;\n\n if (line.startsWith(\"#\")) {\n stationName = line.replace(/^#+/, \"\").trim() || stationName;\n continue;\n }\n\n const m = line.match(/^(\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+)\\s+(ns=\\d+;[sigb]=[^\\s]+)\\s+([A-Za-z0-9]+)$/i);\n if (!m) continue;\n\n const endpoint = m[1];\n if (endpoint !== env.get(\"STATION_ENDPOINT\")) { ignoriert++; continue; }\n const nodeId = m[2].trim();\n const datatype = m[3].trim();\n const station = stationKey(stationName);\n const tag = topicTagFromNodeId(nodeId);\n\n const dedupKey = `${endpoint}|${nodeId}`;\n if (seen.has(dedupKey)) continue;\n seen.add(dedupKey);\n\n items.push({ endpoint, nodeId, datatype, station, tag });\n}\n\nflow.set(\"nodesAuswahlItems\", items);\nmsg.payload = { loaded: items.length };\nnode.status({ fill: ignoriert ? \"yellow\" : \"green\", shape: \"dot\",\n text: `${items.length} Nodes geladen` + (ignoriert ? `, ${ignoriert} fremde ignoriert` : \"\") });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 140,
+        "wires": [
+            [
+                "st09-debug-config"
+            ]
+        ]
+    },
+    {
+        "id": "st09-debug-config",
+        "type": "debug",
+        "z": "st09-tab",
+        "name": "Liste geladen",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "st09-inject-poll",
+        "type": "inject",
+        "z": "st09-tab",
+        "name": "Jede Sekunde abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "st09-build"
+            ]
+        ]
+    },
+    {
+        "id": "st09-build",
+        "type": "function",
+        "z": "st09-tab",
+        "name": "Read-Messages erzeugen",
+        "func": "const items = flow.get(\"nodesAuswahlItems\") || [];\nif (!items.length) {\n node.status({ fill: \"yellow\", shape: \"ring\", text: \"Keine Nodes geladen\" });\n return null;\n}\n\nconst messages = items.map((it) => ({\n endpoint: it.endpoint,\n station: it.station,\n tag: it.tag,\n datatype: it.datatype,\n nodeId: it.nodeId,\n topic: it.nodeId,\n payload: \"\"\n}));\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "st09-client"
+            ]
+        ]
+    },
+    {
+        "id": "st09-client",
+        "type": "OpcUa-Client",
+        "z": "st09-tab",
+        "endpoint": "cfg-endpoint-36-9",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": 1,
+        "time": "1",
+        "timeUnit": "s",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "useTransport": false,
+        "maxChunkCount": "",
+        "maxMessageSize": "",
+        "receiveBufferSize": "",
+        "sendBufferSize": "",
+        "setstatusandtime": false,
+        "keepsessionalive": true,
+        "name": "Transfersystem Roboter 192.168.36.9",
+        "applicationName": "",
+        "applicationUri": "",
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "st09-normalize"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "st09-normalize",
+        "type": "function",
+        "z": "st09-tab",
+        "name": "Wert normalisieren + MQTT-Topic",
+        "func": "let value = msg.payload;\n\nif (Array.isArray(value) && value.length > 0) {\n const first = value[0];\n if (first && typeof first === \"object\" && first.value !== undefined) {\n value = first.value;\n } else {\n value = first;\n }\n} else if (value && typeof value === \"object\" && value.value !== undefined) {\n value = value.value;\n}\n\nif (!msg.station) {\n msg.station = String(msg.endpoint || \"unbekannt\").replace(/[:.]/g, \"_\");\n}\n\nif (!msg.tag && msg.nodeId) {\n const m = String(msg.nodeId).match(/^ns=\\d+;s=(.*)$/);\n const rawTag = m ? m[1].replace(/^\"+|\"+$/g, \"\") : String(msg.nodeId);\n msg.tag = rawTag.replace(/[^A-Za-z0-9]+/g, \"_\").replace(/^_+|_+$/g, \"\");\n}\n\nmsg.payload = value;\n// Stations-Tabs schreiben auf team/#, nicht auf plc/#: Der Subscriber speichert\n// das mit quelle='team', getrennt von den Produktionsdaten.\nmsg.topic = `team/${msg.station}/${msg.tag || \"unknown\"}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 240,
+        "wires": [
+            [
+                "st09-filter"
+            ]
+        ]
+    },
+    {
+        "id": "st09-filter",
+        "type": "function",
+        "z": "st09-tab",
+        "name": "Aenderungsfilter (typabhaengig)",
+        "func": "// Deadband (Mindestabweichung) fuer numerische Analogwerte.\n// Bei Bedarf pro Tag anpassen, z.B. wenn ein Fuellstand staerker rauscht als ein anderer.\nconst DEFAULT_DEADBAND = 35;\n\n// Optional: abweichende Schwellwerte fuer einzelne Tags (Key = \"station/tag\")\nconst DEADBAND_OVERRIDES = {\n    // \"palettenlager1/AN_BL2_F_llstand\": 15,\n    // \"palettenlager2/AM_BL1_F_llstand\": 15,\n};\n\n// Datentypen, die als \"analog/numerisch\" behandelt werden (Deadband statt exakter Gleichheit)\nconst ANALOG_TYPES = new Set([\n    \"Int16\", \"UInt16\", \"Int32\", \"UInt32\", \"Int64\", \"UInt64\",\n    \"Float\", \"Double\", \"Real\"\n]);\n\nconst key = msg.topic; // eindeutig durch station+tag (siehe fn-normalize-value)\nconst datatype = msg.datatype;\nconst value = msg.payload;\n\n// Letzte Werte pro Topic im flow-Kontext vorhalten\nlet lastValues = flow.get(\"lastValues\") || {};\nconst hadPrevious = Object.prototype.hasOwnProperty.call(lastValues, key);\nconst prevValue = lastValues[key];\n\nlet isChange = false;\n\nif (!hadPrevious) {\n    // Erster Wert fuer dieses Topic: immer durchlassen (wie bisher bei rbe)\n    isChange = true;\n} else if (ANALOG_TYPES.has(datatype) && typeof value === \"number\" && typeof prevValue === \"number\") {\n    // Numerischer Analogwert: Deadband-Vergleich\n    const overrideKey = `${msg.station}/${msg.tag}`;\n    const deadband = DEADBAND_OVERRIDES[overrideKey] ?? DEFAULT_DEADBAND;\n    isChange = Math.abs(value - prevValue) >= deadband;\n} else {\n    // Boolean, String, Byte, oder unbekannter Typ: exakte Gleichheit\n    isChange = value !== prevValue;\n}\n\nif (isChange) {\n    lastValues[key] = value;\n    flow.set(\"lastValues\", lastValues);\n    return msg;\n} else {\n    return null; // Nachricht verwerfen, keine Aenderung relevant\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 240,
+        "wires": [
+            [
+                "st09-json"
+            ]
+        ]
+    },
+    {
+        "id": "st09-json",
+        "type": "function",
+        "z": "st09-tab",
+        "name": "MQTT-JSON bauen",
+        "func": "msg.payload = JSON.stringify({\n station: msg.station,\n endpoint: msg.endpoint,\n nodeId: msg.nodeId,\n tag: msg.tag,\n datatype: msg.datatype,\n wert: msg.payload,\n zeitstempel: new Date().toISOString()\n});\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 240,
+        "wires": [
+            [
+                "st09-mqtt",
+                "st09-debug-mqtt"
+            ]
+        ]
+    },
+    {
+        "id": "st09-mqtt",
+        "type": "mqtt out",
+        "z": "st09-tab",
+        "name": "-> team/transfersystem_roboter/<tag>",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cfg-mqtt-broker-nodesauswahl",
+        "x": 1680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "st09-debug-mqtt",
+        "type": "debug",
+        "z": "st09-tab",
+        "name": "MQTT-Ausgabe",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1660,
+        "y": 280,
         "wires": []
     }
 ]

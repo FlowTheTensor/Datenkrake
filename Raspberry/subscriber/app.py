@@ -9,7 +9,8 @@ print("Starting audio spectrum subscriber...")
 # MQTT settings
 MQTT_BROKER = "mqtt"
 MQTT_PORT = 1883
-MQTT_TOPICS = ["audio/spectrum", "plc/#"]
+# plc/# = produktiver Node-RED-Tab, team/# = Stations-Tabs der Stationsteams
+MQTT_TOPICS = ["audio/spectrum", "plc/#", "team/#"]
 
 # DB settings
 DB_HOST = "db"
@@ -57,6 +58,7 @@ def insert_audio_spectrum(payload):
 
 
 def insert_plc_telemetry(topic, payload):
+    quelle = "team" if topic.startswith("team/") else "produktion"
     station = payload.get("station", "unbekannt")
     endpoint = payload.get("endpoint", "")
     node_id = payload.get("nodeId", "")
@@ -88,20 +90,20 @@ def insert_plc_telemetry(topic, payload):
 
     if ts:
         sql = """INSERT INTO plc_telemetry
-                 (ts, station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, payload_json, mqtt_topic)
-                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        params = (ts, station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, json.dumps(payload), topic)
+                 (ts, station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, payload_json, mqtt_topic, quelle)
+                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        params = (ts, station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, json.dumps(payload), topic, quelle)
     else:
         sql = """INSERT INTO plc_telemetry
-                 (ts, station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, payload_json, mqtt_topic)
-                 VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        params = (station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, json.dumps(payload), topic)
+                 (ts, station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, payload_json, mqtt_topic, quelle)
+                 VALUES (NOW(), %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        params = (station, endpoint, node_id, tag, datatype, wert_num, wert_bool, wert_text, json.dumps(payload), topic, quelle)
 
     cursor.execute(sql, params)
     conn.commit()
     cursor.close()
     conn.close()
-    print(f"PLC value saved: {station}/{tag} = {wert}")
+    print(f"PLC value saved ({quelle}): {station}/{tag} = {wert}")
 
 def wait_for_db():
     print("Waiting for DB...")
@@ -132,7 +134,7 @@ def on_message(client, userdata, msg):
 
         if msg.topic == "audio/spectrum":
             insert_audio_spectrum(payload)
-        elif msg.topic.startswith("plc/"):
+        elif msg.topic.startswith(("plc/", "team/")):
             insert_plc_telemetry(msg.topic, payload)
         else:
             print(f"Skipping unsupported topic: {msg.topic}")

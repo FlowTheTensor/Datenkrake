@@ -66,6 +66,7 @@ prepare_directories() {
   mkdir -p "${SCRIPT_DIR}/historian/data"
   mkdir -p "${SCRIPT_DIR}/grafana/data"
   mkdir -p "${SCRIPT_DIR}/nodered/data"
+  mkdir -p "${SCRIPT_DIR}/forgejo/data"
 
   if [[ ! -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf" ]] && [[ -f "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" ]]; then
     cp "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf.example" "${SCRIPT_DIR}/mosquitto/config/mosquitto.conf"
@@ -90,6 +91,7 @@ prepare_directories() {
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/historian"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/grafana"
   chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/nodered"
+  chown -R "${TARGET_USER}:${TARGET_USER}" "${SCRIPT_DIR}/forgejo"
 
   # Grafana läuft im Container als UID/GID 472 (interner "grafana" User) und
   # braucht Schreibrechte auf sein Datenverzeichnis, unabhängig vom Host-User.
@@ -118,16 +120,21 @@ post_install_notes() {
   echo "Next steps:"
   echo "  - Verify containers with: (cd ${COMPOSE_DIR} && docker compose ps)"
   echo "  - Access the web interface at: http://localhost"
+  echo "  - Forgejo (Backlog/Kanban): http://localhost:3001 - Konten anlegen siehe Raspberry/forgejo/README.md"
   if [[ ${NEED_RELOGIN} -eq 1 ]]; then
     echo "  - Log out and back in so ${TARGET_USER} can use docker without sudo."
+  fi
+  # Hauptseite, Forgejo (ROOT_URL) und Zwilling verlinken auf datenkrake.local
+  if [[ "$(hostname)" != "datenkrake" ]]; then
+    echo "  - HINWEIS: Der Rechner heisst '$(hostname)', die Links der Hauptseite und von"
+    echo "    Forgejo erwarten 'datenkrake.local'. Umbenennen: sudo hostnamectl set-hostname datenkrake"
+    echo "    (zusaetzlich in /etc/hosts den alten Namen ersetzen, dann neu starten)."
   fi
 }
 
 setup_systemd_service() {
   log "Setting up systemd service for automatic container startup"
   local service_file="/etc/systemd/system/iot-stack.service"
-  local user_home
-  user_home=$(eval echo "~${TARGET_USER}")
 
   cat > "${service_file}" << EOF
 [Unit]
@@ -138,7 +145,8 @@ After=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=${user_home}/Datenkrake-Container/compose
+# Pfad des Compose-Ordners dieses Checkouts, unabhängig vom Klon-Ordner
+WorkingDirectory=${COMPOSE_DIR}
 ExecStart=/usr/bin/docker compose up -d
 ExecStop=/usr/bin/docker compose down
 TimeoutStartSec=300
@@ -156,4 +164,8 @@ install_docker
 prepare_directories
 build_and_start
 setup_systemd_service
+# Jeder Deploy im Node-RED-Editor wird als Commit in ~/nodered-verlauf gesichert.
+bash "${SCRIPT_DIR}/nodered/verlauf/install_flows_verlauf.sh"
+# Tägliche Datensicherung um 17:00 auf USB-Stick (siehe backup/README.md)
+bash "${SCRIPT_DIR}/backup/install_datensicherung.sh"
 post_install_notes

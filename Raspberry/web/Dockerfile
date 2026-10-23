@@ -7,6 +7,8 @@ RUN docker-php-ext-install mysqli
 COPY Raspberry/web/audiodaten.php /var/www/html/
 COPY Raspberry/web/plcdaten.php /var/www/html/
 COPY Raspberry/web/index.html /var/www/html/
+COPY Raspberry/web/anlage-zwilling.html /var/www/html/
+COPY Raspberry/web/plc_daten.csv /var/www/html/
 COPY Raspberry/web/index.css /var/www/html/index.css
 COPY Raspberry/web/index.js /var/www/html/index.js
 COPY Raspberry/web/content-loader.js /var/www/html/content-loader.js

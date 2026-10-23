@@ -1,0 +1,82 @@
+<section class="theme-section" id="thema-projekt" aria-labelledby="thema-projekt-heading">
+  <div class="theme-head">
+    <div class="theme-letter bg-teal">A</div>
+    <div><h2 id="thema-projekt-heading">Agiles Arbeiten: Scrum light &amp; Kanban</h2>
+    <div class="eyebrow">Raspberry/forgejo/, Raspberry/nodered/verlauf/</div></div>
+  </div>
+  <div class="info-box projekt">
+    Die Datenkrake ist nicht fertig — und genau daran arbeiten wir weiter. Alle Aufgaben stehen als
+    <b>Issues</b> im <b>Backlog</b>, ihr Stand ist auf einem <b>Kanban-Board</b> sichtbar. Beides läuft in
+    <b>Forgejo</b> auf dem Raspberry, nur im Schulnetz. Ihr könnt selbst Ideen und Fehler als Issue
+    einstellen. Jeder <b>Deploy im Node-RED-Editor</b> wird automatisch gesichert und erscheint in Forgejo
+    als Commit, den ihr in eurem Issue verlinkt. Gearbeitet wird in <b>Sprints</b> von 3–4 Unterrichtsblöcken.
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Zugänge</h2></div>
+    <div class="ki-links ki-links-grid">
+      <div class="ki-card">
+        <div class="name">🗂 Forgejo (Backlog &amp; Kanban-Board)</div>
+        <input id="forgejoUrl" placeholder="http://datenkrake.local:3001" value="http://datenkrake.local:3001">
+        <a class="open-btn" id="forgejoOpen" href="#" target="_blank" rel="noopener">Forgejo öffnen ↗</a>
+      </div>
+      <div class="ki-card">
+        <div class="name">🔌 Node-RED-Editor (hier wird gearbeitet)</div>
+        <input id="noderedProjektUrl" placeholder="http://datenkrake.local:1880" value="http://datenkrake.local:1880">
+        <a class="open-btn" id="noderedProjektOpen" href="#" target="_blank" rel="noopener">Editor öffnen ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Das Board</h2></div>
+    <div class="kanban-cols">
+      <div class="kanban-col"><b>Backlog</b><span>alle Ideen und Aufgaben</span></div>
+      <div class="kanban-col"><b>Bereit</b><span>Akzeptanzkriterien klar, im Sprint geplant</span></div>
+      <div class="kanban-col"><b>In Arbeit</b><span>max. 1 Issue pro Team</span></div>
+      <div class="kanban-col"><b>Test</b><span>ein anderes Team prüft</span></div>
+      <div class="kanban-col"><b>Erledigt</b><span>vom Product Owner abgenommen</span></div>
+    </div>
+  </div>
+
+  <div class="ki-links-grid">
+    <div class="panel">
+      <div class="panel-head"><h2>Rollen</h2></div>
+      <ul class="projekt-list">
+        <li><b>Product Owner</b> — die Lehrkraft: priorisiert das Backlog, nimmt Ergebnisse ab.</li>
+        <li><b>Scrum Master</b> — wechselt jeden Sprint: moderiert Stand-up und Retro, hält das Board aktuell.</li>
+        <li><b>Stationsteams</b> aus 2–3 Personen, je eins pro SPS-Station: setzen Issues um und testen sich gegenseitig.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Rhythmus</h2></div>
+      <ul class="projekt-list">
+        <li><b>Sprint Planning</b> zu Sprintbeginn: Issues schätzen (S/M/L), Sprintziel festlegen.</li>
+        <li><b>Stand-up</b> zu Beginn jedes Blocks: geschafft? heute? wo hängt es?</li>
+        <li><b>Abschluss</b> jedes Blocks: Board aktualisieren, Kommentar ins Issue.</li>
+        <li><b>Review</b> am Sprintende: Vorführung an der Anlage, danach <b>Retro</b> (Start/Stop/Continue).</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Definition of Done</h2></div>
+      <ul class="projekt-list">
+        <li>deployt, Deploy-Commit im Issue verlinkt</li>
+        <li>alle Akzeptanzkriterien abgehakt</li>
+        <li>von einem anderen Team getestet</li>
+        <li>kurz dokumentiert</li>
+        <li>vom Product Owner abgenommen</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box projekt">
+    <b>Spielregeln in Node-RED:</b> Jedes Team betreut eine SPS-Station und arbeitet nur in deren Tab
+    (z. B. „Station 03 Rohlager Dosen“). Startpunkt sind Bandsensor links/rechts und Motor Rechts-/Linkslauf;
+    weitere Knoten ergänzt ihr im Template-Node <b>NodesAuswahl</b>. Eure Daten erscheinen auf MQTT
+    <code>team/&lt;station&gt;/&lt;tag&gt;</code> und landen getrennt von den Produktionsdaten in der Datenbank.
+    Im <b>digitalen Zwilling</b> wählt ihr unter „Daten“ euer Team und vergleicht es mit der Produktion. Jeder Deploy wird als
+    Commit eures Teams gesichert. Meldet der Editor beim Deploy, dass die Flows auf dem Server geändert wurden,
+    zuerst <b>zusammenführen</b> statt überschreiben. Das Abfrage-Intervall nur nach Absprache verkürzen.
+    Die vollständige Anleitung steht in <code>Raspberry/forgejo/README.md</code>.
+  </div>
+</section>

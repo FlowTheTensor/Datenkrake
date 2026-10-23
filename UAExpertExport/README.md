@@ -132,6 +132,15 @@ Für eine robuste Ablage sind drei Tabellen vorgesehen:
 4. Labels aus Fehlern, Ereignissen und Qualitätsbits für KI-Modelle ableiten.
 5. Für `heartbeat` MQTT-Retain verwenden; `process_io` nicht retainen.
 
+## NodesAuswahl pro Station
+
+`stationen/NodesAuswahl_<nr>_<station>.txt` sind die Startlisten der
+Stations-Tabs in Node-RED (agiles Arbeiten der Stationsteams): Bandsensor
+links/rechts und Motor Rechts-/Linkslauf, beim Leitstand die HMI-/MES-Tags.
+Gleiches Format wie `NodesAuswahl.txt`, Zeilen mit `//` sind Kommentare.
+Bearbeitet werden die Listen im jeweiligen Stations-Tab, siehe
+[Raspberry/nodered/README.md](../Raspberry/nodered/README.md#stations-tabs-für-die-stationsteams).
+
 ## Detaildokumente
 
 - [Vollständige OPC-UA-Signaldokumentation](Dokumentation_OPC_UA_Stationen.md)
