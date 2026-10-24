@@ -48,13 +48,35 @@ cp schueler.beispiel.txt schueler-efs02.txt   # Namen eintragen
 Schritt 3 schreibt die Startpasswörter in `konten-<datum>.csv`. Die Datei
 ausdrucken bzw. verteilen und danach löschen. Beim ersten Login muss jeder
 sein Passwort ändern. Für die Benutzernamen reichen Vornamen oder Kürzel,
-z. B. `team2-cem`. Namenslisten und CSV-Dateien sind per `.gitignore`
+z. B. `anna.m`, ohne Team im Namen: Die Teams werden später zugeordnet
+(siehe [Teams zuordnen](#teams-zuordnen)). Kommen Schüler dazu, die Liste
+ergänzen und den Befehl erneut ausführen; bestehende Konten bleiben
+unverändert. Namenslisten und CSV-Dateien sind per `.gitignore`
 vom Commit ausgeschlossen.
 
 Schritt 2 setzt außerdem einen Branchschutz: Auf `main` im Projekt-Repo darf
 nur der Verlauf-Dienst pushen, Schüler arbeiten ausschließlich mit Issues und
 Board. Dateien in diesem Repo deshalb **nicht** über die Weboberfläche ändern,
 sonst schlägt der automatische Push des Deploy-Verlaufs fehl.
+
+### Teams zuordnen
+
+Ein Team ist eine Station. Konten müssen dafür nicht geändert werden, die
+Zuordnung entsteht an drei Stellen:
+
+- **Issues und Board:** Label `station/…` der Station setzen und die
+  Teammitglieder als *Zuständige* (Assignees) eintragen. Über den
+  Label-Filter sieht jedes Team seine Karten.
+- **Node-RED:** Das Team arbeitet im Tab seiner Station; die Commits im
+  Deploy-Verlauf tragen automatisch den Tab-Namen als Autor.
+- **Teameinteilung festhalten:** in einem angepinnten Issue, z. B.
+  „Teameinteilung Sprint 1“, mit einer Tabelle Station → Schüler. Bei neuer
+  Einteilung ein neues Issue anlegen, dann bleibt nachvollziehbar, wer wann
+  in welchem Team war.
+
+Konten, die schon mit einem Team im Namen angelegt wurden, lassen sich als
+Admin umbenennen: *Website-Administration → Benutzerkonten → Konto
+bearbeiten → Benutzername*.
 
 ### Kanban-Board anlegen (in der Weboberfläche)
 

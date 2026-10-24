@@ -1,8 +1,10 @@
-# Ein Benutzername pro Zeile (nur a-z, 0-9, . _ -), keine echten Nachnamen nötig.
+# Ein Benutzername pro Zeile (nur a-z, 0-9, . _ -, also keine Umlaute und
+# Leerzeichen), z. B. Vorname plus Initial. Kein Team im Namen: Die Teams
+# werden später über Stations-Labels und Zuständige an den Issues zugeordnet.
 # Kopieren nach z. B. schueler-efs02.txt und mit
 #   ./forgejo_einrichten.sh schueler schueler-efs02.txt <lehrkraft>
 # einlesen. Die echten Listen nicht ins Repo committen.
-team1-anna
-team1-ben
-team2-cem
-team2-dana
+anna.m
+ben.k
+cem.y
+dana.s

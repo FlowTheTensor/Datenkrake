@@ -112,11 +112,12 @@ der Sicherung. Messwerte, die seitdem dazugekommen sind, gehen dabei verloren.
 1. **Raspberry Pi OS** auf eine neue SD-Karte schreiben, mit demselben
    Benutzernamen wie vorher (steht in `info.txt` unter „Benutzer“), und den
    Pi wieder `datenkrake` nennen, damit `datenkrake.local` funktioniert.
-2. **Repo klonen**, in denselben Ordner wie vorher (`info.txt`, „Repo-Pfad“):
+2. **Repo klonen**, in denselben Ordner wie vorher (`info.txt`, „Repo-Pfad“,
+   z. B. `/home/pi/Datenkrake`):
 
    ```bash
-   git clone https://github.com/FlowTheTensor/Datenkrake.git ~/Datenkrake-Container
-   cd ~/Datenkrake-Container
+   git clone --branch main https://github.com/FlowTheTensor/Datenkrake.git /home/pi/Datenkrake
+   cd /home/pi/Datenkrake
    ```
 
 3. **Stack einrichten.** Das legt alle Container mit leeren Daten an:
