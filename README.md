@@ -10,7 +10,7 @@ Auf GitHub Pages läuft der Zwilling als Demo mit einer aufgezeichneten Produkti
 
 # Für Lehrkräfte: [Ausbaustufen – was brauche ich mindestens?](AUSBAUSTUFEN.md)
 
-Eine eigene Modellanlage ist nicht nötig. Die Ausbaustufen zeigen, was vom reinen Browser bis zum vollen Agentensystem jeweils gebraucht wird und welche Kapitel damit möglich sind.
+Eine eigene Modellanlage ist nicht nötig. Die Ausbaustufen zeigen, was vom reinen Browser bis zum vollen Agentensystem jeweils gebraucht wird und welche Kapitel damit möglich sind. Die [Handreichung](Handreichung/README.md) enthält zu jedem Kapitel Lernziele, Zeitbedarf, einen Ablaufvorschlag, Musterlösungen und Bewertungshinweise.
 
 # Datenkrake — Agentensystem (MCP · A2A · LAP)
 
@@ -304,6 +304,7 @@ DataLake/              eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jup
 ## Weiterführende Dokumentation
 
 - [`AUSBAUSTUFEN.md`](AUSBAUSTUFEN.md) — für Lehrkräfte: Einstieg in Stufen, vom Browser bis zum Data Lake
+- [`Handreichung/`](Handreichung/README.md) — für Lehrkräfte: pro Kapitel Lernziele, Ablauf, Musterlösungen, Bewertung
 - [`Raspberry/README.md`](Raspberry/README.md) — Installation, Update, Container und Ports des IoT-Stacks
 - [`Raspberry/forgejo/README.md`](Raspberry/forgejo/README.md) — Agiles Arbeiten: Forgejo, Scrum light, Kanban, Startbacklog
 - [`Raspberry/backup/README.md`](Raspberry/backup/README.md) — Datensicherung auf USB-Stick und Wiederherstellung
@@ -315,3 +316,21 @@ DataLake/              eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jup
 - [`Agentensystem/ml_training/README.md`](Agentensystem/ml_training/README.md) — Isolation Forest (Akustik) und LSTM (Durchlaufzeit) selbst trainieren
 - [`DataLake/README.md`](DataLake/README.md) — Lakehouse-Stack (MinIO/Nessie/Spark)
 - [`architektur-komponenten.md`](architektur-komponenten.md) — vollständige Komponenten- und Protokollübersicht
+
+## Hinweis zur Entstehung: Einsatz von KI
+
+Dieses Projekt wurde **mit Unterstützung von KI-Werkzeugen** umgesetzt, unter
+anderem mit Claude von Anthropic. Mit KI-Hilfe entstanden große Teile des
+Programmcodes, der Webseiten (Leitstand, Glossar, Lernpfade, „Die Reise eines
+Messwerts“), der Dokumentation und der [Handreichung](Handreichung/README.md).
+
+Konzeption, Aufbau der Anlage, didaktische Entscheidungen sowie die fachliche
+Prüfung und Verantwortung für alle Inhalte liegen bei der Lehrkraft. Inhalte,
+die mit KI-Hilfe erstellt wurden, sind durchgesehen, können aber trotzdem Fehler
+enthalten. Hinweise bitte als [Issue](https://github.com/FlowTheTensor/Datenkrake/issues).
+Commits, an denen ein KI-Assistent beteiligt war, sind in der Git-Historie mit
+einer `Co-Authored-By`-Zeile gekennzeichnet.
+
+Der Hinweis dient der Transparenz im Sinne des EU AI Act (Verordnung (EU)
+2024/1689). Unabhängig davon ist KI hier auch Unterrichtsgegenstand: Das
+Agentensystem in Kapitel H zeigt, wie KI-Agenten arbeiten und wo ihre Grenzen liegen.

@@ -20,6 +20,9 @@ Die Zeiten sind grobe Richtwerte für jemanden, der schon einmal mit der
 Kommandozeile gearbeitet hat. Stufe 2 und Stufe 3 sind unabhängig voneinander,
 man kann also auch mit der SPS anfangen und die Akustik weglassen.
 
+Wie man die Kapitel dann im Unterricht umsetzt, mit Lernzielen, Ablauf und
+Musterlösungen, steht in der [Handreichung](Handreichung/README.md).
+
 ## Welche Kapitel gehen ab welcher Stufe?
 
 Der Leitstand gliedert das Projekt in die Kapitel A–H. „Lesen“ heißt: Erklärungen,
