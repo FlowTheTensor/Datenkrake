@@ -36,13 +36,10 @@
   li.passiert .halt .nr{border-color:var(--accent); color:var(--accent);}
   li.aktiv .halt .nr{background:var(--accent); border-color:var(--accent); color:#fff; transform:scale(1.12);}
   li.aktiv .halt .name{color:var(--ink); font-weight:600;}
-  .gepaeck-live{margin-top:12px; border-top:1px dashed var(--line); padding-top:10px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start;}
-  .gepaeck-live .lbl{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding-top:3px;}
-  .gepaeck-live pre{margin:0; font-size:11.5px; max-height:5.6em; overflow:auto;}
 
   /* Schritte */
   .schritte{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
-  .schritt{display:grid; grid-template-columns:44px 1fr; gap:0 16px; scroll-margin-top:250px;}
+  .schritt{display:grid; grid-template-columns:44px 1fr; gap:0 16px; scroll-margin-top:150px;}
   .schritt-nr{width:36px; height:36px; border-radius:50%; display:grid; place-items:center; color:#fff; font-family:"Quicksand",sans-serif; font-weight:700; font-size:15px; margin-top:16px;}
   .schritt .panel{display:flex; flex-direction:column; gap:12px;}
   .schritt h3{font-size:16px;}
@@ -66,7 +63,6 @@
     .schritt-nr{margin:0 0 -6px; width:30px; height:30px; font-size:13px;}
     .strecke-panel{position:static;}
     .schritt{scroll-margin-top:16px;}
-    .gepaeck-live{grid-template-columns:1fr;}
   }
   @media (prefers-reduced-motion: reduce){ .halt .nr{transition:none;} li.aktiv .halt .nr{transform:none;} }
 </style>
@@ -151,15 +147,13 @@
           gepaeckKopf:'beim Broker', gepaeck:'Topic:   plc/abf_llen/AL_BG2_Bandsensor_Rechts\nQoS:     0   (höchstens einmal zustellen)\nRetain:  nein\n→ subscriber          (abonniert plc/#, team/#, audio/spectrum)\n→ historian_bridge    (abonniert plc/#, audio/spectrum)',
           stolper:'<b>QoS 0 bedeutet: keine zweite Chance.</b> Läuft der Subscriber gerade nicht, etwa beim Neustart des Containers, ist die Nachricht für ihn verloren. Der Broker speichert sie nicht.',
           kapitel:['E'], repo:'Raspberry/mosquitto/' },
-        { kurz:'MariaDB', titel:'Der Subscriber schreibt eine Zeile in die MariaDB', ort:'Container subscriber · Tabelle plc_telemetry',
-          text:'Der Subscriber packt das JSON aus und entscheidet am Typ des Werts, in welche Spalte er gehört: Wahrheitswerte nach <code>wert_bool</code>, Zahlen nach <code>wert_num</code>, Text nach <code>wert_text</code>. Am Topic erkennt er die Herkunft: <code>plc/…</code> ist Produktion, <code>team/…</code> stammt von einem Stationsteam. Die komplette Nachricht wird zusätzlich als JSON aufbewahrt.',
-          gepaeckKopf:'neue Zeile in plc_telemetry', gepaeck:'ts          2026-09-07 13:25:40\nstation     abf_llen\ntag         AL_BG2_Bandsensor_Rechts\ndatatype    Boolean\nwert_num    NULL\nwert_bool   1\nmqtt_topic  plc/abf_llen/AL_BG2_Bandsensor_Rechts\nquelle      produktion\n\n-- selbst nachsehen:\nSELECT ts, wert_bool FROM plc_telemetry\nWHERE station = \'abf_llen\' AND tag LIKE \'%Bandsensor%\'\nORDER BY ts DESC LIMIT 10;',
-          stolper:'<b>Die Millisekunden gehen verloren.</b> Die Spalte <code>ts</code> speichert nur ganze Sekunden. Passieren zwei Ereignisse in derselben Sekunde, lässt sich ihre Reihenfolge nur noch über die laufende <code>id</code> erkennen oder über den Zeitstempel im gespeicherten JSON.',
-          kapitel:['F'], repo:'Raspberry/subscriber/', live:['PLC-Übersicht öffnen','http://datenkrake.local/plcdaten.php'] },
-        { kurz:'InfluxDB', titel:'Parallel: Die Historian-Bridge schreibt in InfluxDB', ort:'Container historian_bridge · Measurement plc_telemetry',
-          text:'Dieselbe Nachricht landet ein zweites Mal, diesmal im <b>Operational Historian</b> InfluxDB. Der ist auf Zeitreihen spezialisiert: Station, Tag und Datentyp werden zu Schlagwörtern, nach denen man schnell filtern kann. <b>Grafana</b> liest von hier und zeichnet Verläufe. Zwei Datenbanken für dieselben Werte, jede für das, was sie gut kann.',
-          gepaeckKopf:'Messpunkt in InfluxDB', gepaeck:'measurement  plc_telemetry\ntags         station=abf_llen, tag=AL_BG2_Bandsensor_Rechts,\n             datatype=Boolean, mqtt_topic=plc/abf_llen/…\nfield        wert = true\ntime         2026-09-07T13:25:40.429Z',
-          kapitel:['F'], repo:'Raspberry/historian_bridge/', live:['Grafana öffnen','http://datenkrake.local:3000'] },
+        { kurz:'Datenbanken', titel:'Die Nachricht landet in zwei Datenbanken', ort:'subscriber → MariaDB · historian_bridge → InfluxDB',
+          text:'Beide Abonnenten schreiben den Wert in „ihre“ Datenbank. Der <b>Subscriber</b> packt das JSON aus und legt eine Zeile in der <b>MariaDB</b> an. Am Typ des Werts entscheidet er die Spalte: Wahrheitswerte kommen nach <code>wert_bool</code>, Zahlen nach <code>wert_num</code>, Text nach <code>wert_text</code>. Am Topic erkennt er die Herkunft: <code>plc/…</code> ist Produktion, <code>team/…</code> stammt von einem Stationsteam. Gleichzeitig schreibt die <b>Historian-Bridge</b> denselben Wert als Messpunkt in <b>InfluxDB</b>, den Operational Historian. Der ist auf Zeitreihen spezialisiert, und <b>Grafana</b> zeichnet daraus Verläufe. Zwei Datenbanken für dieselben Werte, jede für das, was sie gut kann.',
+          pakete:[['MariaDB · neue Zeile in plc_telemetry','ts          2026-09-07 13:25:40\nstation     abf_llen\ntag         AL_BG2_Bandsensor_Rechts\ndatatype    Boolean\nwert_num    NULL\nwert_bool   1\nmqtt_topic  plc/abf_llen/AL_BG2_Bandsensor_Rechts\nquelle      produktion\n\n-- selbst nachsehen:\nSELECT ts, wert_bool FROM plc_telemetry\nWHERE station = \'abf_llen\' AND tag LIKE \'%Bandsensor%\'\nORDER BY ts DESC LIMIT 10;'],
+            ['InfluxDB · Messpunkt', 'measurement  plc_telemetry\ntags         station=abf_llen, tag=AL_BG2_Bandsensor_Rechts,\n             datatype=Boolean, mqtt_topic=plc/abf_llen/…\nfield        wert = true\ntime         2026-09-07T13:25:40.429Z']],
+          stolper:'<b>Die Millisekunden gehen verloren</b>, allerdings nur in der MariaDB. Die Spalte <code>ts</code> speichert nur ganze Sekunden. Passieren zwei Ereignisse in derselben Sekunde, lässt sich ihre Reihenfolge nur noch über die laufende <code>id</code> erkennen oder über den Zeitstempel im gespeicherten JSON.',
+          kapitel:['F'], repo:['Raspberry/subscriber/','Raspberry/historian_bridge/'],
+          live:[['PLC-Übersicht öffnen','http://datenkrake.local/plcdaten.php'],['Grafana öffnen','http://datenkrake.local:3000']] },
         { kurz:'Am Ziel', titel:'Am Ziel: Zwilling, Webseiten und KI', ort:'Webserver · api/plc.php · MCP-Server',
           text:'Ab jetzt kann jeder den Wert lesen. Der <b>digitale Zwilling</b> holt sich alle Motor- und Sensorwerte über <code>api/plc.php?action=twin</code> und lässt den Bandsensor auf dem Anlagenschema zum richtigen Zeitpunkt aufleuchten. Die PLC-Übersicht zeigt die Rohdaten. Über den <b>MCP-Server</b> darf auch ein Sprachmodell die Tabelle lesen, mit einem eigenen Benutzer, der nur lesen darf.',
           gepaeckKopf:'im digitalen Zwilling', gepaeck:'13:25:38  Abfüllen  Bandsensor rechts  aus\n13:25:40  Abfüllen  Bandsensor rechts  an   ● leuchtet',
@@ -231,10 +225,6 @@
     kopf.appendChild(play);
     panel.appendChild(kopf);
     var strecke = el('ol', 'strecke');
-    var live = el('div', 'gepaeck-live');
-    live.appendChild(txt('span', 'lbl', 'Unterwegs'));
-    var livePre = txt('pre', null, 'Halt anklicken oder „Reise abspielen“');
-    live.appendChild(livePre);
 
     var schritte = el('ol', 'schritte');
     var halte = [];
@@ -248,9 +238,9 @@
       b.appendChild(txt('span', 'name', s.kurz));
       b.title = s.titel;
       b.addEventListener('click', function(){
-        stop();
+        pausieren();
         setzeHalt(i);
-        document.getElementById(id).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+        zeigeSchritt(i);
       });
       li.appendChild(b);
       strecke.appendChild(li);
@@ -269,10 +259,13 @@
       h.appendChild(ort);
       p.appendChild(h);
       p.appendChild(el('p', null, s.text));
-      var g = el('div', 'gepaeck');
-      g.appendChild(txt('div', 'kopf', s.gepaeckKopf));
-      g.appendChild(txt('pre', null, s.gepaeck));
-      p.appendChild(g);
+      // ein Halt kann mehrere Wertkästen haben (pakete), sonst gepaeckKopf/gepaeck
+      (s.pakete || [[s.gepaeckKopf, s.gepaeck]]).forEach(function(pk){
+        var g = el('div', 'gepaeck');
+        g.appendChild(txt('div', 'kopf', pk[0]));
+        g.appendChild(txt('pre', null, pk[1]));
+        p.appendChild(g);
+      });
       if(s.stolper) p.appendChild(el('div', 'stolper', '⚠ Stolperstelle: '+s.stolper));
       var fuss = el('div', 'schritt-fuss');
       s.kapitel.forEach(function(k){
@@ -280,66 +273,94 @@
         a.href = 'index.html#'+KAPITEL[k][0];
         fuss.appendChild(a);
       });
-      var repo = txt('a', null, '📁 '+s.repo);
-      repo.href = REPO + s.repo;
-      repo.target = '_blank'; repo.rel = 'noopener';
-      fuss.appendChild(repo);
-      if(s.live){
-        var l = txt('a', null, '↗ '+s.live[0]);
-        l.href = s.live[1];
+      [].concat(s.repo).forEach(function(pfad){
+        var repo = txt('a', null, '📁 '+pfad);
+        repo.href = REPO + pfad;
+        repo.target = '_blank'; repo.rel = 'noopener';
+        fuss.appendChild(repo);
+      });
+      // live: ein Paar [Text, URL] oder eine Liste solcher Paare
+      var lives = !s.live ? [] : (Array.isArray(s.live[0]) ? s.live : [s.live]);
+      lives.forEach(function(lv){
+        var l = txt('a', null, '↗ '+lv[0]);
+        l.href = lv[1];
         l.target = '_blank'; l.rel = 'noopener';
         fuss.appendChild(l);
-      }
+      });
       p.appendChild(fuss);
       item.appendChild(p);
       schritte.appendChild(item);
     });
 
     panel.appendChild(strecke);
-    panel.appendChild(live);
     sektion.appendChild(panel);
     sektion.appendChild(schritte);
     var fazit = el('div', 'info-box fazit', '<b>Was man daraus lernt:</b> '+r.fazit);
     fazit.setAttribute('data-glossar-bereich', '');
     sektion.appendChild(fazit);
 
+    var timer = null;
+    var pos = -1;            // aktuell markierter Halt
+    var gestartet = false;   // wurde die Reise schon einmal abgespielt?
+    var letzter = r.schritte.length - 1;
+    var scrollRuheBis = 0;   // während automatischen Scrollens nicht vom Scrollen umschalten lassen
+    var TAKT = 5000;         // Millisekunden pro Halt beim Abspielen
+
     function setzeHalt(i){
+      pos = i;
       halte.forEach(function(li, j){
         li.classList.toggle('aktiv', j === i);
         li.classList.toggle('passiert', j < i);
       });
-      livePre.textContent = r.schritte[i].gepaeck;
-      halte[i].scrollIntoView({block:'nearest', inline:'center'});
+      // nur die Streckenleiste waagerecht nachführen, die Seite nicht verschieben
+      var mitte = halte[i].offsetLeft - strecke.offsetLeft + halte[i].offsetWidth / 2;
+      strecke.scrollLeft = Math.max(0, mitte - strecke.clientWidth / 2);
+      beschriften();
     }
 
-    var timer = null;
-    function stop(){
+    function zeigeSchritt(i){
+      scrollRuheBis = Date.now() + 1500;
+      document.getElementById(key+'-'+(i+1)).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+    }
+
+    function beschriften(){
+      if(timer) play.textContent = '⏸ Pause';
+      else if(gestartet && pos === letzter) play.textContent = '↺ Nochmal abspielen';
+      else if(gestartet && pos >= 0) play.textContent = '▶ Weiter';
+      else play.textContent = '▶ Reise abspielen';
+    }
+
+    // Pause behält den aktuellen Halt, „Weiter“ macht dort weiter
+    function pausieren(){
       clearInterval(timer); timer = null;
-      play.textContent = '▶ Reise abspielen';
+      beschriften();
+    }
+    function abspielen(){
+      if(!gestartet || pos < 0 || pos === letzter) setzeHalt(0);
+      gestartet = true;
+      zeigeSchritt(pos);
+      timer = setInterval(function(){
+        setzeHalt(pos + 1);
+        zeigeSchritt(pos);
+        if(pos === letzter) pausieren();
+      }, TAKT);
+      beschriften();
     }
     play.addEventListener('click', function(){
-      if(timer){ stop(); return; }
-      var i = 0;
-      setzeHalt(i);
-      play.textContent = '■ anhalten';
-      timer = setInterval(function(){
-        i++;
-        if(i >= r.schritte.length){ stop(); return; }
-        setzeHalt(i);
-      }, 2600);
+      if(timer) pausieren(); else abspielen();
     });
 
     // beim Scrollen den Halt markieren, der gerade gelesen wird
     if('IntersectionObserver' in window){
       var obs = new IntersectionObserver(function(eintraege){
-        if(timer) return;
+        if(timer || Date.now() < scrollRuheBis) return;
         eintraege.forEach(function(e){
           if(e.isIntersecting) setzeHalt(Number(e.target.id.split('-').pop()) - 1);
         });
       }, {rootMargin:'-45% 0px -50% 0px'});
       schritte.querySelectorAll('.schritt').forEach(function(s){ obs.observe(s); });
     }
-    sektion.stoppen = stop;
+    sektion.stoppen = pausieren;
   }
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -364,13 +385,16 @@
     t.addEventListener('click', function(){ zeige(t.id.replace('tab-',''), true); });
   });
   // #akustik zeigt die Reise, #akustik-5 zusätzlich einen bestimmten Halt
-  var start = (location.hash || '').replace('#','');
-  var reise = start.split('-')[0];
-  if(REISEN[reise]){
+  function folgeHash(){
+    var start = (location.hash || '').replace('#','');
+    var reise = start.split('-')[0];
+    if(!REISEN[reise]) return;
     zeige(reise, false);
     var halt = document.getElementById(start);
     if(halt && halt !== document.getElementById('reise-'+reise)) halt.scrollIntoView();
   }
+  folgeHash();
+  window.addEventListener('hashchange', folgeHash);
 })();
 </script>
 <script src="glossar.js"></script>

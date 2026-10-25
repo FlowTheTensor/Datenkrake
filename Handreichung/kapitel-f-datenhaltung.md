@@ -34,7 +34,7 @@ den Data Lake ab Stufe 5.
 | Einstieg | 15 min | Kapitel F: Warum zwei Datenbanken? |
 | MariaDB | 45 min | PLC- und Audio-Übersicht ansehen, Spalten erklären, erste SQL-Abfragen |
 | InfluxDB/Grafana | 30 min | Verlauf eines Signals in Grafana, Vergleich mit derselben Abfrage in SQL |
-| Vertiefung | 30 min | „Reise eines Messwerts“, Halt 6–7 |
+| Vertiefung | 30 min | „Reise eines Messwerts“, Halt 6 (Datenbanken) |
 | Sicherung | 15 min | Quiz Kapitel F |
 
 ## Aufgaben und Musterlösungen
@@ -111,5 +111,5 @@ Woran man Verständnis erkennt:
 - [`Raspberry/subscriber/`](../Raspberry/subscriber) und [`Raspberry/historian_bridge/`](../Raspberry/historian_bridge): die beiden Brücken
 - [`Raspberry/historian/README.md`](../Raspberry/historian/README.md): InfluxDB
 - [`DataLake/`](../DataLake): Lakehouse mit Notebook
-- „Reise eines Messwerts“, Halte 6 und 7
+- „Reise eines Messwerts“, Halt 6 (Datenbanken)
 - Quiz Kapitel F auf der Hauptseite
