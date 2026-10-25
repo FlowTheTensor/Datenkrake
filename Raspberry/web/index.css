@@ -343,6 +343,70 @@
   .mcp-list .v{font-size:11.5px; color:var(--ink-soft); margin-top:3px;}
   .mcp-sub{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;}
 
+  /* ---------- Lernpfade ---------- */
+  .lp-wahl{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px;}
+  .lp-karte{
+    display:flex; flex-direction:column; gap:8px; text-align:left; cursor:pointer;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px;
+    font:inherit; color:var(--ink); transition:border-color .15s, box-shadow .15s;
+  }
+  .lp-karte:hover{border-color:var(--ink-faint);}
+  .lp-karte[aria-selected="true"]{border-color:var(--accent); box-shadow:0 0 0 2px var(--accent) inset;}
+  .lp-karte-kopf{display:flex; align-items:center; gap:9px;}
+  .lp-icon{font-size:22px; line-height:1;}
+  .lp-karte-titel{font-family:"Quicksand",sans-serif; font-weight:700; font-size:15.5px;}
+  .lp-karte-fuer{font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
+  .lp-karte-fuss{display:flex; justify-content:space-between; gap:8px; margin-top:auto; font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint);}
+  .lp-karte-stand{color:var(--accent);}
+  .lp-karte-stand.fertig{color:#2F6B4F; font-weight:500;}
+
+  .lp-pfad{display:flex; flex-direction:column; gap:10px; scroll-margin-top:90px;}
+  .lp-pfad[hidden]{display:none;}
+  .lp-pfad-kopf{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
+  .lp-pfad-kopf h3{font-size:17px;}
+  .lp-klein{align-self:flex-start; background:none; border:0; padding:0; color:var(--ink-faint); font-family:"JetBrains Mono",monospace; font-size:11px; text-decoration:underline; cursor:pointer;}
+  .lp-klein:hover{color:var(--accent);}
+  .lp-balken{height:8px; border-radius:999px; background:var(--surface-2); border:1px solid var(--line); overflow:hidden;}
+  .lp-balken-fuellung{height:100%; background:var(--accent); transition:width .3s;}
+  .lp-stand{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-faint); margin-top:-4px;}
+  .lp-geschafft{display:flex; align-items:center; gap:14px; background:#EEF5F0; border:1px solid #CFE3D6; border-radius:8px; padding:12px 16px; font-size:13px; color:var(--ink-soft);}
+  .lp-geschafft b{color:var(--ink); font-size:14px;}
+  .lp-geschafft-icon{font-size:34px; line-height:1;}
+
+  .lp-schritte{list-style:none; margin:4px 0 0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .lp-schritt{display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line); border-radius:8px; padding:12px 14px; background:var(--surface-2); scroll-margin-top:90px;}
+  .lp-schritt.naechster{border-color:var(--accent); background:var(--surface);}
+  .lp-schritt.fertig{opacity:.72;}
+  .lp-schritt.fertig .lp-schritt-titel label{text-decoration:line-through; text-decoration-color:var(--ink-faint);}
+  .lp-schritt input[type=checkbox]{width:18px; height:18px; margin:2px 0 0; accent-color:var(--accent); flex:none; cursor:pointer;}
+  .lp-schritt-inhalt{display:flex; flex-direction:column; gap:6px; min-width:0; flex:1;}
+  .lp-schritt-titel{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .lp-schritt-titel label{font-weight:600; font-size:14px; cursor:pointer;}
+  .lp-nr{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--accent);}
+  .lp-kap{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint); border:1px solid var(--line); border-radius:4px; padding:0 6px; background:var(--surface);}
+  .lp-aufgabe{margin:0; font-size:13px; color:var(--ink-soft); line-height:1.55;}
+  .lp-aktionen{display:flex; flex-wrap:wrap; gap:6px;}
+  .lp-btn{
+    display:inline-block; border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
+    border-radius:5px; padding:3px 9px; font-family:"JetBrains Mono",monospace; font-size:11px;
+    text-decoration:none; cursor:pointer;
+  }
+  .lp-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .lp-quiz.gut{border-color:#9CC5AC; color:#2F6B4F;}
+  .lp-abzeichen{display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
+  .lp-abzeichen[hidden]{display:none;}
+  .lp-abzeichen-lbl{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);}
+  .lp-badge{display:inline-flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:4px 12px 4px 8px; font-size:12.5px; font-weight:600;}
+  .lp-hinweis{margin:0; font-size:11.5px; color:var(--ink-faint);}
+  .lp-chip{
+    margin-left:auto; align-self:center; font-family:"JetBrains Mono",monospace; font-size:11px;
+    color:var(--accent); text-decoration:none; border:1px solid var(--accent); border-radius:999px;
+    padding:3px 10px; background:var(--surface); white-space:nowrap;
+  }
+  .lp-chip:hover{background:var(--accent); color:#fff;}
+  .lp-chip.fertig{color:#2F6B4F; border-color:#9CC5AC;}
+  @media (max-width:640px){.theme-head:has(.lp-chip){flex-wrap:wrap;} .lp-chip{margin-left:0; white-space:normal;}}
+
   /* ---------- Vertiefungs-Links (z. B. Reise eines Messwerts) ---------- */
   .vertiefung-link{
     align-self:flex-start; display:inline-block; margin-top:-6px;

@@ -424,6 +424,7 @@
     topicOrder.forEach(function(cat){
       var topic = document.createElement('details');
       topic.className = 'quiz-topic';
+      topic.id = 'quizTopic'+cat;
       topic.dataset.cat = cat;
       topic.innerHTML = '<summary>'+ 
         '<h3 class="quiz-topic-title quiz-cat-'+cat.toLowerCase()+'">'+QUIZ_TOPICS[cat]+'</h3>'+
@@ -487,6 +488,8 @@
     document.getElementById('quizScore').textContent =
       correct+' von '+answered+' richtig ('+total+' Fragen insgesamt)';
 
+    // Stand pro Kapitel, auch für die Lernpfade (lernpfade.js)
+    var stand = {};
     Object.keys(QUIZ_TOPICS).forEach(function(cat){
       var topicQuestions = QUIZ.filter(function(item){ return item.cat === cat; });
       var topicAnswered = 0;
@@ -500,7 +503,10 @@
       });
       document.getElementById('quizTopicScore'+cat).textContent =
         topicCorrect+' von '+topicAnswered+' richtig ('+topicQuestions.length+' Fragen)';
+      stand[cat] = { richtig: topicCorrect, beantwortet: topicAnswered, gesamt: topicQuestions.length };
     });
+    window.datenkrakeQuizStand = stand;
+    document.dispatchEvent(new CustomEvent('quiz-stand', { detail: stand }));
 
     var floatScore = document.getElementById('quizFloatScore');
     var floatSub = document.getElementById('quizFloatSub');

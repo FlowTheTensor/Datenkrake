@@ -274,7 +274,12 @@ die jeweils Erklärung und laufendes System verbinden:
 | **G Machine Learning** | Vergleich von ML-Verfahren, Anomalie-Detektor aus Akustikdaten, `anomalie_poller` als Brücke zur Agentenkette, vorausschauende Instandhaltung (Isolation Forest, LSTM) zum Selbertrainieren | `ArduinoUnoQ/`, `Agentensystem/anomalie_poller/`, `Agentensystem/ml_training/` |
 | **H Agentensysteme & KI-Integration** | MCP, A2A und LAP im Zusammenspiel, live testbar über die Agenten-Konsole im Leitstand | `Agentensystem/`, `MCPLokalClaudeDesktop/` |
 
-Zu jedem Kapitel gibt es zehn Quizfragen.
+Zu jedem Kapitel gibt es zehn Quizfragen. Wer nicht von A bis H durcharbeiten
+will, wählt oben einen von vier **Lernpfaden** (Erster Überblick,
+Automatisierer, Datenanalyst, KI-Agenten-Bauer). Er schlägt eine Reihenfolge
+mit konkreten Aufgaben vor, zeigt den Quiz-Stand und vergibt am Ende ein
+Abzeichen. Anpassen lassen sich die Pfade in
+[`Raspberry/web/content/lernpfade.json`](Raspberry/web/content/lernpfade.json).
 
 Für die vollständige Architekturübersicht (alle Komponenten,
 Kommunikationsprotokolle und Richtungen) siehe

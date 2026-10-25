@@ -3,6 +3,7 @@
 
   const fragments = [
     ['heroContent', 'content/hero.html'],
+    ['mainContent', 'content/lernpfade.html'],
     ['mainContent', 'content/thema-projekt.html'],
     ['mainContent', 'content/thema-crispdm.html'],
     ['mainContent', 'content/chat.html'],
@@ -32,6 +33,10 @@
     const glossar = document.createElement('script');
     glossar.src = 'glossar.js';
     document.body.appendChild(glossar);
+
+    const lernpfade = document.createElement('script');
+    lernpfade.src = 'lernpfade.js';
+    document.body.appendChild(lernpfade);
   } catch (error) {
     document.body.insertAdjacentHTML(
       'beforeend', `<p class="content-error">Seiteninhalte konnten nicht geladen werden: ${error.message}</p>`

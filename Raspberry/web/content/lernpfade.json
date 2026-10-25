@@ -1,0 +1,179 @@
+{
+  "_hinweis": "Lernpfade der Hauptseite. Jeder Schritt hat entweder 'kapitel' (Buchstabe A–H, verlinkt das Kapitel und zeigt den Quiz-Stand) oder nur 'link'. Optional: 'aktion' = {text, klick: id eines Buttons, der beim Klick geöffnet wird} oder {text, link}. 'anker' springt zu einer Stelle im Kapitel statt an den Anfang.",
+  "pfade": [
+    {
+      "id": "ueberblick",
+      "icon": "🧭",
+      "titel": "Erster Überblick",
+      "fuer": "Für alle, die zuerst verstehen wollen, worum es überhaupt geht. Gut als Start, bevor ihr einen der anderen Pfade wählt.",
+      "dauer": "ca. 1 Doppelstunde",
+      "abzeichen": { "icon": "🐙", "name": "Kraken-Kenner" },
+      "schritte": [
+        {
+          "kapitel": "B",
+          "titel": "Warum gibt es die Datenkrake?",
+          "aufgabe": "Lest die sechs Phasen von CRISP-DM. Formuliert in einem Satz, welches Problem die Datenkrake lösen soll."
+        },
+        {
+          "kapitel": "C",
+          "titel": "Was steht wo?",
+          "aufgabe": "Öffnet die Architektur. Zählt, welche Geräte beteiligt sind, und zeigt auf den Rechner, der „die Datenkrake“ ist.",
+          "aktion": { "text": "Architektur öffnen", "klick": "archOverlayBtn" }
+        },
+        {
+          "titel": "Einen Messwert begleiten",
+          "aufgabe": "Spielt die Reise eines Sensorimpulses ab. Wie viele Halte braucht ein Wert vom Sensor bis in den Zwilling?",
+          "link": "reise-eines-messwerts.html#sps",
+          "linkText": "Die Reise eines Messwerts"
+        },
+        {
+          "kapitel": "D",
+          "anker": "twin-panel",
+          "titel": "Die Anlage in Bewegung sehen",
+          "aufgabe": "Öffnet den digitalen Zwilling und spielt eine Produktion ab. Beobachtet, in welcher Reihenfolge die Stationen arbeiten.",
+          "aktion": { "text": "Zwilling öffnen", "link": "anlage-zwilling.html" }
+        },
+        {
+          "kapitel": "H",
+          "titel": "Wo kommt die KI ins Spiel?",
+          "aufgabe": "Lest die Einleitung zu den Agentensystemen. Was ist der Unterschied zwischen MCP, A2A und LAP? Je ein Satz."
+        }
+      ]
+    },
+    {
+      "id": "automatisierer",
+      "icon": "🔧",
+      "titel": "Automatisierer",
+      "fuer": "Für alle, die wissen wollen, wie Daten aus einer Maschine herauskommen: SPS, OPC-UA, Node-RED und MQTT.",
+      "dauer": "ca. 3 Doppelstunden",
+      "abzeichen": { "icon": "📡", "name": "Signaljäger" },
+      "schritte": [
+        {
+          "kapitel": "C",
+          "titel": "Zwei Netze, ein Pi",
+          "aufgabe": "Seht euch die Netzwerktopologie an. Warum hängt der Raspberry in zwei Netzen, und warum kommt euer Laptop nicht direkt an die SPS?"
+        },
+        {
+          "kapitel": "D",
+          "anker": "twin-panel",
+          "titel": "Welche Signale gibt es?",
+          "aufgabe": "Spielt im Zwilling eine Produktion ab. Notiert für eure Station, welche Signale (Motor, Bandsensoren) wann aktiv werden.",
+          "aktion": { "text": "Zwilling öffnen", "link": "anlage-zwilling.html" }
+        },
+        {
+          "kapitel": "E",
+          "titel": "OPC-UA: die Adresse eines Werts",
+          "aufgabe": "Öffnet die OPC-UA-Signaldokumentation. Sucht für eure Station den Endpoint und die NodeId eines Bandsensors heraus.",
+          "aktion": { "text": "Signaldokumentation öffnen", "klick": "uaxOverlayBtn" }
+        },
+        {
+          "titel": "Wo gehen Impulse verloren?",
+          "aufgabe": "Lest auf der Reise eines Messwerts die Halte 3 und 4. Erklärt, warum ein kurzer Sensorimpuls fehlen kann, und was ein Zähler in der SPS daran ändert.",
+          "link": "reise-eines-messwerts.html#sps-3",
+          "linkText": "Reise eines Messwerts, Halt 3"
+        },
+        {
+          "kapitel": "E",
+          "titel": "MQTT: senden, ohne den Empfänger zu kennen",
+          "aufgabe": "Erklärt Publish/Subscribe mit eigenen Worten. Wie heißt das Topic, unter dem der Bandsensor eurer Station gesendet wird?"
+        },
+        {
+          "kapitel": "F",
+          "titel": "Der Wert ist angekommen",
+          "aufgabe": "Sucht in der PLC-Übersicht (nur im Schulnetz) die letzten Werte eurer Station. Passen sie zu dem, was ihr im Zwilling gesehen habt?",
+          "aktion": { "text": "PLC-Übersicht öffnen", "link": "plcdaten.php" }
+        },
+        {
+          "kapitel": "A",
+          "titel": "Selbst verbessern",
+          "aufgabe": "Stellt im Backlog ein Issue ein: Was würdet ihr am Abgriff eurer Station verbessern? Formuliert Akzeptanzkriterien."
+        }
+      ]
+    },
+    {
+      "id": "datenanalyst",
+      "icon": "📊",
+      "titel": "Datenanalyst",
+      "fuer": "Für alle, die herausfinden wollen, was in den Daten steckt: Datenbanken, CRISP-DM und Machine Learning.",
+      "dauer": "ca. 3 Doppelstunden",
+      "abzeichen": { "icon": "🔍", "name": "Musterfinder" },
+      "schritte": [
+        {
+          "kapitel": "B",
+          "titel": "Erst die Frage, dann die Daten",
+          "aufgabe": "Ordnet jeder CRISP-DM-Phase einen konkreten Schritt der Datenkrake zu. In welcher Phase steckt ihr gerade?"
+        },
+        {
+          "kapitel": "D",
+          "titel": "Was wird eigentlich gemessen?",
+          "aufgabe": "Lest, welche Akustikwerte der Arduino liefert. Was bedeuten peak_freq, peak_db und das Label gut/schlecht?"
+        },
+        {
+          "titel": "Vom Schall zur Zahl",
+          "aufgabe": "Begleitet eine Akustikmessung bis zum Anomalie-Poller. Wie viele Zahlen pro Sekunde kommen am Mikrofon an, und wie viele bleiben am Ende übrig?",
+          "link": "reise-eines-messwerts.html#akustik",
+          "linkText": "Reise einer Akustikmessung"
+        },
+        {
+          "kapitel": "F",
+          "titel": "Zwei Datenbanken für dieselben Werte",
+          "aufgabe": "Warum speichert die Datenkrake in MariaDB und InfluxDB? Nennt für jede eine Aufgabe, für die sie besser geeignet ist."
+        },
+        {
+          "kapitel": "G",
+          "titel": "Verfahren vergleichen",
+          "aufgabe": "Ladet die Audiodaten als CSV herunter und bearbeitet den Arbeitsauftrag zum Vergleich der ML-Verfahren."
+        },
+        {
+          "kapitel": "G",
+          "titel": "Taugt die Regel?",
+          "aufgabe": "Lest, wie der Anomalie-Poller entscheidet. Denkt euch zwei Situationen aus, in denen er falschen Alarm gibt, und eine, die er übersieht.",
+          "aktion": { "text": "Poller-Erklärung öffnen", "klick": "pollerOverlayBtn" }
+        }
+      ]
+    },
+    {
+      "id": "agentenbauer",
+      "icon": "🤖",
+      "titel": "KI-Agenten-Bauer",
+      "fuer": "Für alle, die verstehen wollen, wie eine KI selbstständig Werkzeuge benutzt und mit anderen Agenten zusammenarbeitet.",
+      "dauer": "ca. 3 Doppelstunden",
+      "abzeichen": { "icon": "🧠", "name": "Agentenflüsterer" },
+      "schritte": [
+        {
+          "kapitel": "C",
+          "titel": "Wer redet mit wem?",
+          "aufgabe": "Öffnet die Architektur und verfolgt die Pfeile zwischen den Agenten. Welche Verbindung ist MCP, welche A2A, welche LAP?",
+          "aktion": { "text": "Architektur öffnen", "klick": "archOverlayBtn" }
+        },
+        {
+          "kapitel": "G",
+          "titel": "Der Auslöser",
+          "aufgabe": "Lest den Übergang vom Anomalie-Detektor zum Agentensystem. Was muss passieren, damit die Agenten überhaupt aktiv werden?"
+        },
+        {
+          "kapitel": "H",
+          "titel": "MCP: Werkzeuge für ein Sprachmodell",
+          "aufgabe": "Seht euch die MCP-Werkzeuge an. Welche Frage könnte ein Sprachmodell mit welchem Werkzeug beantworten? Drei Beispiele."
+        },
+        {
+          "kapitel": "H",
+          "titel": "Sicherheit zuerst",
+          "aufgabe": "Warum verlangt der Wartungs-Agent vor jeder Aktion eine Bestätigung, und warum darf er nie an die Produktionssteuerung?"
+        },
+        {
+          "titel": "Selbst einen Ablauf bauen",
+          "aufgabe": "Ladet die LangGraph-Werkstatt herunter und verändert einen Agentenablauf. Lasst euch den Graphen anzeigen und erklärt ihn eurem Nachbarteam.",
+          "link": "https://github.com/FlowTheTensor/Datenkrake/tree/main/Agentensystem/langgraph-werkstatt",
+          "linkText": "LangGraph-Werkstatt"
+        },
+        {
+          "kapitel": "H",
+          "anker": "chatConsolePanel",
+          "titel": "Die echten Agenten fragen",
+          "aufgabe": "Sprecht in der Agenten-Konsole (nur im Schulnetz) mit dem Orchestrator. Vergleicht seinen Graphen mit eurem aus der Werkstatt."
+        }
+      ]
+    }
+  ]
+}

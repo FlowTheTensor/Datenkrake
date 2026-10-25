@@ -363,8 +363,14 @@
   tabs.forEach(function(t){
     t.addEventListener('click', function(){ zeige(t.id.replace('tab-',''), true); });
   });
+  // #akustik zeigt die Reise, #akustik-5 zusätzlich einen bestimmten Halt
   var start = (location.hash || '').replace('#','');
-  if(REISEN[start]) zeige(start, false);
+  var reise = start.split('-')[0];
+  if(REISEN[reise]){
+    zeige(reise, false);
+    var halt = document.getElementById(start);
+    if(halt && halt !== document.getElementById('reise-'+reise)) halt.scrollIntoView();
+  }
 })();
 </script>
 <script src="glossar.js"></script>

@@ -15,9 +15,34 @@ Die Hauptseite ist bewusst in drei Dateien getrennt:
 - `index.js` enthaelt Interaktionen, API-Aufrufe, Agent-Cards und Quizlogik.
 - `content/hero.html` enthaelt den Einstiegsbereich.
 - `content/chat.html`, `content/thema-*.html`, `content/quiz.html` und `content/glossar.html` enthalten die einzelnen Inhaltsbereiche.
-- `content-loader.js` laedt die HTML-Fragmente und startet danach `index.js` und `glossar.js`.
+- `content-loader.js` laedt die HTML-Fragmente und startet danach `index.js`, `glossar.js` und `lernpfade.js`.
 - `content/glossar.json` enthaelt alle Glossarbegriffe, `glossar.js` baut daraus den Glossar-Bereich und die Tooltips.
 - `reise-eines-messwerts.html` ist eine eigenstaendige Vertiefungsseite (SPS-Impuls und Akustikmessung Schritt fuer Schritt). Die Inhalte stehen als Liste `REISEN` im Skript der Seite. Bereiche mit `data-glossar-bereich` bekommen ebenfalls Glossar-Tooltips.
+
+## Lernpfade anpassen
+
+Die Lernpfade („Erster Überblick“, „Automatisierer“, „Datenanalyst“,
+„KI-Agenten-Bauer“) stehen in `content/lernpfade.json`, die Logik in
+`lernpfade.js`. Ein Schritt sieht so aus:
+
+```json
+{
+  "kapitel": "E",
+  "titel": "OPC-UA: die Adresse eines Werts",
+  "aufgabe": "Was die Schueler in diesem Schritt tun sollen.",
+  "aktion": { "text": "Signaldokumentation oeffnen", "klick": "uaxOverlayBtn" }
+}
+```
+
+- `kapitel` (A–H) verlinkt das Kapitel, zeigt dort einen Hinweis „Schritt x von y“
+  und im Pfad den Quiz-Stand dieses Kapitels.
+- Ohne `kapitel` braucht der Schritt einen `link` (mit `linkText`), z. B. auf
+  `reise-eines-messwerts.html#sps-3`.
+- `anker` springt statt zum Kapitelanfang zu einer id oder Klasse im Kapitel.
+- `aktion` ist ein Zusatzknopf: `klick` drueckt einen vorhandenen Button (Overlay
+  oeffnen), `link` oeffnet eine Seite in neuem Tab.
+- Der Fortschritt liegt nur im `localStorage` des jeweiligen Browsers
+  (Schluessel `datenkrake-lernpfade-v1`).
 
 ## Glossar erweitern
 
