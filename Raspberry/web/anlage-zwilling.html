@@ -1416,13 +1416,25 @@
 
   async function loadDaten() {
     const dbRows = await loadDatenbank();
-    if (dbRows) {
+    // Ohne Anlagendaten (z. B. Pi ohne SPS) hat die Datenbank keine Produktionen,
+    // dann lieber die Demo-Aufzeichnung abspielen als ein leeres Schema zeigen.
+    const dbHatProduktionen = dbRows && buildProductions(dbRows).length > 0;
+    if (dbHatProduktionen) {
       replay.herkunft = 'datenbank';
       replay.rows = dbRows;
       const hint = document.querySelector('header .hint');
       if (hint) hint.innerHTML = 'SVG aus <code>anlage.json</code> · Replay aus der Datenbank (Produktion und Stationsteams)';
       console.info('Daten aus der Datenbank geladen:', dbRows.length, 'Zeilen');
-    } else if (!(await loadCsv())) {
+    } else if (await loadCsv()) {
+      if (dbRows) {
+        const hint = document.querySelector('header .hint');
+        if (hint) hint.innerHTML = 'SVG aus <code>anlage.json</code> · Datenbank enthält noch keine Produktionen, Demo-Replay aus plc_daten.csv';
+        console.info('Datenbank ohne Produktionen (' + dbRows.length + ' Zeilen), Demo-CSV wird abgespielt');
+      }
+    } else if (dbRows) {
+      replay.herkunft = 'datenbank';
+      replay.rows = dbRows;
+    } else {
       return;
     }
     fillQuelleSelect();

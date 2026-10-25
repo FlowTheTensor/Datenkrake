@@ -8,6 +8,10 @@ Diese wird auch angezeigt, wenn man datenkrake.local im Browser aufruft, sobald 
 
 Auf GitHub Pages läuft der Zwilling als Demo mit einer aufgezeichneten Produktion. Auf dem Raspberry (`http://datenkrake.local/anlage-zwilling.html`) spielt er die echten Daten aus der Datenbank ab, wahlweise die der Produktion oder die der Stationsteams.
 
+# Für Lehrkräfte: [Ausbaustufen – was brauche ich mindestens?](AUSBAUSTUFEN.md)
+
+Eine eigene Modellanlage ist nicht nötig. Die Ausbaustufen zeigen, was vom reinen Browser bis zum vollen Agentensystem jeweils gebraucht wird und welche Kapitel damit möglich sind.
+
 # Datenkrake — Agentensystem (MCP · A2A · LAP)
 
 IoT-Grundstack der Datenkrake sind Audioerfassung, MQTT, MariaDB und
@@ -293,6 +297,7 @@ DataLake/              eigenständiger Data-Lake-Stack (MinIO, Nessie, Spark/Jup
 
 ## Weiterführende Dokumentation
 
+- [`AUSBAUSTUFEN.md`](AUSBAUSTUFEN.md) — für Lehrkräfte: Einstieg in Stufen, vom Browser bis zum Data Lake
 - [`Raspberry/README.md`](Raspberry/README.md) — Installation, Update, Container und Ports des IoT-Stacks
 - [`Raspberry/forgejo/README.md`](Raspberry/forgejo/README.md) — Agiles Arbeiten: Forgejo, Scrum light, Kanban, Startbacklog
 - [`Raspberry/backup/README.md`](Raspberry/backup/README.md) — Datensicherung auf USB-Stick und Wiederherstellung
