@@ -170,10 +170,14 @@
     // pro Kapitel bzw. Overlay nur das erste Vorkommen markieren
     var bereits = new Map();
     function bereichVon(node){
-      return node.closest('[id$="Overlay"]') || node.closest('main > section') || node.closest('#heroContent');
+      return node.closest('[data-glossar-bereich]') || node.closest('[id$="Overlay"]') ||
+        node.closest('main > section') || node.closest('#heroContent');
     }
 
-    [document.getElementById('heroContent'), document.getElementById('mainContent')].forEach(function(wurzel){
+    // Hauptseite: Einstieg und Kapitel; andere Seiten markieren ihre Bereiche mit data-glossar-bereich
+    var wurzeln = [document.getElementById('heroContent'), document.getElementById('mainContent')]
+      .concat(Array.prototype.slice.call(document.querySelectorAll('[data-glossar-bereich]')));
+    wurzeln.forEach(function(wurzel){
       if(!wurzel) return;
       var walker = document.createTreeWalker(wurzel, NodeFilter.SHOW_TEXT, {
         acceptNode: function(n){
@@ -242,8 +246,14 @@
       fixiert = fix;
       tipTitel.textContent = b.begriff;
       tipText.textContent = b.kurz;
-      tipLink.href = '#glossar-'+b.id;
-      tipLink.onclick = function(e){ e.preventDefault(); schliessen(); zeigeEintrag(b.id); };
+      if(document.getElementById('glossar')){
+        tipLink.href = '#glossar-'+b.id;
+        tipLink.onclick = function(e){ e.preventDefault(); schliessen(); zeigeEintrag(b.id); };
+      } else {
+        // Unterseite ohne eigenes Glossar: zur Hauptseite springen
+        tipLink.href = 'index.html#glossar-'+b.id;
+        tipLink.onclick = null;
+      }
       term.setAttribute('aria-expanded', 'true');
       term.setAttribute('aria-describedby', 'glTip');
       tip.hidden = false;

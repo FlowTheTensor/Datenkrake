@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reise eines Messwerts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+<style>
+  .reise-main{max-width:1060px; margin:0 auto;}
+  .reise-intro{font-size:14px; color:var(--ink-soft); line-height:1.65; max-width:76ch; margin:0;}
+  .reise-intro b{color:var(--ink);}
+
+  .reise-tabs{display:flex; gap:6px; flex-wrap:wrap;}
+  .reise-tab{border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); border-radius:999px; padding:7px 14px; font:inherit; font-size:13px; cursor:pointer;}
+  .reise-tab:hover{border-color:var(--ink-faint); color:var(--ink);}
+  .reise-tab[aria-selected="true"]{background:var(--ink); border-color:var(--ink); color:#fff;}
+  .reise[hidden]{display:none;}
+  .reise{display:flex; flex-direction:column; gap:22px;}
+
+  /* Streckenübersicht */
+  .strecke-panel{position:sticky; top:0; z-index:10; box-shadow:0 6px 18px rgba(29,29,28,.06);}
+  .strecke-head{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;}
+  .strecke-head h2{font-size:15px;}
+  .play-btn{border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:6px; padding:6px 12px; font-family:"JetBrains Mono",monospace; font-size:11.5px; cursor:pointer;}
+  .play-btn:hover{background:var(--accent-bright);}
+  .strecke{list-style:none; margin:0; padding:0; display:flex; gap:0; overflow-x:auto; scrollbar-width:thin;}
+  .strecke li{flex:1 0 auto; display:flex; align-items:center;}
+  .strecke li + li::before{content:""; flex:1 0 14px; min-width:14px; height:2px; background:var(--line);}
+  .strecke li.passiert + li::before, .strecke li.aktiv::before{background:var(--accent);}
+  .halt{display:flex; flex-direction:column; align-items:center; gap:5px; background:none; border:0; padding:2px 4px; cursor:pointer; color:var(--ink-soft); font:inherit;}
+  .halt .nr{width:28px; height:28px; border-radius:50%; display:grid; place-items:center; border:2px solid var(--line); background:var(--surface); font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-faint); transition:all .25s;}
+  .halt .name{font-size:11px; white-space:nowrap; max-width:110px; overflow:hidden; text-overflow:ellipsis;}
+  .halt:hover .nr{border-color:var(--ink-faint);}
+  li.passiert .halt .nr{border-color:var(--accent); color:var(--accent);}
+  li.aktiv .halt .nr{background:var(--accent); border-color:var(--accent); color:#fff; transform:scale(1.12);}
+  li.aktiv .halt .name{color:var(--ink); font-weight:600;}
+  .gepaeck-live{margin-top:12px; border-top:1px dashed var(--line); padding-top:10px; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:start;}
+  .gepaeck-live .lbl{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding-top:3px;}
+  .gepaeck-live pre{margin:0; font-size:11.5px; max-height:5.6em; overflow:auto;}
+
+  /* Schritte */
+  .schritte{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
+  .schritt{display:grid; grid-template-columns:44px 1fr; gap:0 16px; scroll-margin-top:250px;}
+  .schritt-nr{width:36px; height:36px; border-radius:50%; display:grid; place-items:center; color:#fff; font-family:"Quicksand",sans-serif; font-weight:700; font-size:15px; margin-top:16px;}
+  .schritt .panel{display:flex; flex-direction:column; gap:12px;}
+  .schritt h3{font-size:16px;}
+  .schritt .ort{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-faint); margin-top:2px;}
+  .schritt p{margin:0; font-size:13.5px; line-height:1.65; color:var(--ink-soft);}
+  .schritt p b{color:var(--ink);}
+  .schritt code{font-family:"JetBrains Mono",monospace; font-size:.9em; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:4px; padding:0 4px;}
+  .gepaeck{border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .gepaeck .kopf{background:var(--surface-2); padding:6px 12px; font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); border-bottom:1px solid var(--line);}
+  pre{margin:0; padding:10px 12px; font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.55; color:var(--ink); white-space:pre-wrap; word-break:break-word; background:var(--surface);}
+  .stolper{background:#FFF6E8; border:1px solid #F0DDBB; border-left:4px solid var(--accent-2); border-radius:8px; padding:10px 14px; font-size:13px; line-height:1.6; color:var(--ink-soft);}
+  .stolper b{color:var(--ink);}
+  .schritt-fuss{display:flex; flex-wrap:wrap; gap:6px 14px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-faint); align-items:center;}
+  .schritt-fuss a{color:var(--ink-soft);}
+  .schritt-fuss .kap{text-decoration:none; border:1px solid var(--line); border-radius:4px; padding:1px 6px; background:var(--surface);}
+  .schritt-fuss .kap:hover{border-color:var(--accent); color:var(--accent);}
+  .fazit{font-size:13.5px;}
+
+  @media (max-width:640px){
+    .schritt{grid-template-columns:1fr;}
+    .schritt-nr{margin:0 0 -6px; width:30px; height:30px; font-size:13px;}
+    .strecke-panel{position:static;}
+    .schritt{scroll-margin-top:16px;}
+    .gepaeck-live{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){ .halt .nr{transition:none;} li.aktiv .halt .nr{transform:none;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="krake_klein.png" alt="">
+    <div class="titles">
+      <h1>Die Reise eines <i>Messwerts</i></h1>
+      <div class="eyebrow">Vertiefung · vom Sensor bis zum Agenten</div>
+    </div>
+  </div>
+  <a class="status-pill" href="index.html" style="text-decoration:none">← zurück zur Hauptseite</a>
+</header>
+
+<main class="reise-main">
+  <p class="reise-intro" data-glossar-bereich>
+    In den Kapiteln der Hauptseite stehen die einzelnen Bausteine der Datenkrake nebeneinander.
+    Hier verfolgen wir <b>einen einzigen Messwert</b> auf seinem ganzen Weg durch das System.
+    Bei jedem Halt seht ihr, <b>wie der Wert dort aussieht</b>, wo das im Repo liegt und
+    <b>was an dieser Stelle schiefgehen kann</b>. Die Beispielwerte stammen aus einer echten
+    Aufzeichnung der Modellanlage.
+  </p>
+
+  <div class="reise-tabs" role="tablist" aria-label="Welche Reise?">
+    <button class="reise-tab" role="tab" id="tab-sps" aria-controls="reise-sps" aria-selected="true">🏭 Sensorimpuls aus der SPS</button>
+    <button class="reise-tab" role="tab" id="tab-akustik" aria-controls="reise-akustik" aria-selected="false">🎤 Akustikmessung vom Arduino</button>
+  </div>
+
+  <section class="reise" id="reise-sps" role="tabpanel" aria-labelledby="tab-sps" data-reise="sps"></section>
+  <section class="reise" id="reise-akustik" role="tabpanel" aria-labelledby="tab-akustik" data-reise="akustik" hidden></section>
+</main>
+
+<footer>
+  <a href="index.html">← zurück zur Hauptseite</a> · Datenkrake · Jakob-Preh-Schule · Links auf datenkrake.local funktionieren nur im Schulnetz
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var KAPITEL = {
+    A:['thema-projekt','Agiles Arbeiten','bg-teal'], B:['thema-crispdm','Theoretischer Unterbau','bg-plum'],
+    C:['thema-e','Infrastruktur','bg-ink-soft'], D:['thema-b','Datenerhebung','bg-accent-2'],
+    E:['thema-d','Kommunikation','bg-blue'], F:['thema-c','Datenhaltung und -analyse','bg-green'],
+    G:['thema-ml','Machine Learning','bg-accent'], H:['thema-a','Agentensysteme','bg-accent']
+  };
+  var REPO = 'https://github.com/FlowTheTensor/Datenkrake/tree/main/';
+
+  /* Jede Reise: Titel, Einleitung, Schritte. Felder eines Schritts:
+     kurz (Name in der Streckenübersicht), titel, ort, text (HTML), gepaeckKopf, gepaeck (Text),
+     stolper (HTML, optional), kapitel, repo (Pfad), live ([Text, URL], optional) */
+  var REISEN = {
+    sps: {
+      titel: 'Ein Werkstückträger fährt am Bandsensor vorbei',
+      einleitung: 'Station <b>Abfüllen</b>, 7. September 2026, kurz nach 13:25 Uhr: Ein Werkstückträger fährt nach rechts aus. Der Bandsensor <code>BG2</code> meldet ihn. Diesen einen Impuls verfolgen wir bis in den digitalen Zwilling.',
+      schritte: [
+        { kurz:'Sensor', titel:'Der Sensor erkennt den Werkstückträger', ort:'an der Anlage · Station Abfüllen',
+          text:'Unter jedem Werkstückträger sitzt ein <b>Magnet</b>. Am Rand des Transfersystems sitzt ein <b>Magnetsensor</b> (Betriebsmittelkennzeichen <code>BG2</code>, rechte Seite). Fährt der Magnet vorbei, schaltet der Sensor kurz durch und legt 24 V an einen Eingang der SPS.',
+          gepaeckKopf:'So sieht der Wert hier aus', gepaeck:'elektrisches Signal am SPS-Eingang\n0 V  ──────┐▔▔▔▔┌──────  0 V\n           24 V (nur Sekundenbruchteile)',
+          stolper:'<b>Der Impuls ist sehr kurz.</b> Er dauert nur so lange, wie der Magnet unter dem Sensor ist. Alles, was danach kommt, muss diesen kurzen Moment irgendwie mitbekommen. Das wird an Halt 3 wichtig.',
+          kapitel:['D'], repo:'UAExpertExport/' },
+        { kurz:'SPS + OPC-UA', titel:'Die SPS stellt den Wert per OPC-UA bereit', ort:'S7-1500 · 192.168.36.4 · Port 4840',
+          text:'Die SPS liest ihre Eingänge in jedem Zyklus und legt den Zustand in einer Variable ab. Ihr eingebauter <b>OPC-UA-Server</b> bietet diese Variable als <b>Knoten</b> an. Jeder Knoten hat eine eindeutige Adresse, die NodeId. Mit UAExpert kann man sich alle Knoten einer Station ansehen.',
+          gepaeckKopf:'Knoten auf dem OPC-UA-Server', gepaeck:'Endpoint:  opc.tcp://192.168.36.4:4840\nNodeId:    ns=3;s="+AL-BG2_Bandsensor_Rechts"\nDatentyp:  Boolean\nWert:      true',
+          stolper:'<b>Die Uhr der SPS stimmt nicht.</b> OPC-UA liefert zu jedem Wert einen Zeitstempel mit, bei einigen Stationen aber mit falschem Jahr. Deshalb verwendet die Datenkrake diesen Zeitstempel bewusst nicht (siehe Halt 4).',
+          kapitel:['D','E'], repo:'UAExpertExport/' },
+        { kurz:'Node-RED fragt', titel:'Node-RED fragt die SPS ab', ort:'Node-RED · Tab „OPC-UA NodesAuswahl → MQTT“',
+          text:'Node-RED weiß aus einer Liste, welche Knoten es abfragen soll. Jede Zeile nennt Station, Endpoint, NodeId und Datentyp. <b>Jede Sekunde</b> erzeugt Node-RED für jeden Knoten eine Leseanfrage. Eine Drossel begrenzt das auf 20 Anfragen pro Sekunde. Ein Verteiler schickt jede Anfrage an den OPC-UA-Client der richtigen Station, der den aktuellen Wert liest.',
+          gepaeckKopf:'Zeile in NodesAuswahl.txt', gepaeck:'# Abfüllen\n192.168.36.4:4840 ns=3;s="+AL-BG2_Bandsensor_Rechts" Boolean',
+          stolper:'<b>Hier gehen Impulse verloren.</b> Node-RED schaut nur einmal pro Sekunde nach, bei vielen Knoten wegen der Drossel sogar seltener. Ist der Impuls kürzer als der Abstand zwischen zwei Abfragen, sieht Node-RED ihn nie. In der Aufzeichnung liegen zwischen „aus“ (13:25:38) und „an“ (13:25:40) zwei Sekunden. Abhilfe wäre ein <b>Zähler in der SPS</b>, der bei jeder steigenden Flanke hochzählt. Den Zählerstand kann man auch langsam abfragen, ohne dass ein Impuls fehlt.',
+          kapitel:['E'], repo:'Raspberry/nodered/', live:['Node-RED-Editor öffnen','http://datenkrake.local:1880'] },
+        { kurz:'Node-RED verpackt', titel:'Node-RED filtert und verpackt den Wert', ort:'Node-RED · drei Funktionsbausteine',
+          text:'Zuerst bekommt der Wert eine <b>MQTT-Adresse</b> (Topic) aus Station und Tag. Aus „Abfüllen“ wird dabei <code>abf_llen</code>, weil Umlaute ersetzt werden. Dann prüft ein <b>Änderungsfilter</b>: Ist der Wert genauso wie beim letzten Mal, wird er verworfen. Bei Zahlen muss er sich um mindestens 35 ändern (Deadband). Nur Änderungen gehen weiter. Zuletzt wird alles als <b>JSON</b> verpackt, mit einem Zeitstempel von Node-RED selbst.',
+          gepaeckKopf:'Nachricht · Topic plc/abf_llen/AL_BG2_Bandsensor_Rechts', gepaeck:'{\n  "station": "abf_llen",\n  "endpoint": "192.168.36.4:4840",\n  "nodeId": "ns=3;s=\\"+AL-BG2_Bandsensor_Rechts\\"",\n  "tag": "AL_BG2_Bandsensor_Rechts",\n  "datatype": "Boolean",\n  "wert": true,\n  "zeitstempel": "2026-09-07T13:25:40.429Z"\n}',
+          stolper:'<b>Funkstille heißt „nichts geändert“, nicht „kaputt“.</b> Wegen des Änderungsfilters kommt für einen Sensor oft minutenlang keine Nachricht. Wer in der Datenbank nach dem Zustand zu einem bestimmten Zeitpunkt sucht, muss die letzte Änderung davor nehmen.',
+          kapitel:['E'], repo:'Raspberry/nodered/' },
+        { kurz:'MQTT-Broker', titel:'Der MQTT-Broker verteilt die Nachricht', ort:'Mosquitto · Raspberry · Port 1883',
+          text:'Node-RED <b>veröffentlicht</b> die Nachricht unter ihrem Topic beim Broker. Es weiß nicht, wer sie bekommt. Zwei Dienste haben <code>plc/#</code> abonniert, also alles unterhalb von <code>plc/</code>: der <b>Subscriber</b> für die MariaDB und die <b>Historian-Bridge</b> für InfluxDB. Der Broker schickt jedem eine Kopie.',
+          gepaeckKopf:'beim Broker', gepaeck:'Topic:   plc/abf_llen/AL_BG2_Bandsensor_Rechts\nQoS:     0   (höchstens einmal zustellen)\nRetain:  nein\n→ subscriber          (abonniert plc/#, team/#, audio/spectrum)\n→ historian_bridge    (abonniert plc/#, audio/spectrum)',
+          stolper:'<b>QoS 0 bedeutet: keine zweite Chance.</b> Läuft der Subscriber gerade nicht, etwa beim Neustart des Containers, ist die Nachricht für ihn verloren. Der Broker speichert sie nicht.',
+          kapitel:['E'], repo:'Raspberry/mosquitto/' },
+        { kurz:'MariaDB', titel:'Der Subscriber schreibt eine Zeile in die MariaDB', ort:'Container subscriber · Tabelle plc_telemetry',
+          text:'Der Subscriber packt das JSON aus und entscheidet am Typ des Werts, in welche Spalte er gehört: Wahrheitswerte nach <code>wert_bool</code>, Zahlen nach <code>wert_num</code>, Text nach <code>wert_text</code>. Am Topic erkennt er die Herkunft: <code>plc/…</code> ist Produktion, <code>team/…</code> stammt von einem Stationsteam. Die komplette Nachricht wird zusätzlich als JSON aufbewahrt.',
+          gepaeckKopf:'neue Zeile in plc_telemetry', gepaeck:'ts          2026-09-07 13:25:40\nstation     abf_llen\ntag         AL_BG2_Bandsensor_Rechts\ndatatype    Boolean\nwert_num    NULL\nwert_bool   1\nmqtt_topic  plc/abf_llen/AL_BG2_Bandsensor_Rechts\nquelle      produktion\n\n-- selbst nachsehen:\nSELECT ts, wert_bool FROM plc_telemetry\nWHERE station = \'abf_llen\' AND tag LIKE \'%Bandsensor%\'\nORDER BY ts DESC LIMIT 10;',
+          stolper:'<b>Die Millisekunden gehen verloren.</b> Die Spalte <code>ts</code> speichert nur ganze Sekunden. Passieren zwei Ereignisse in derselben Sekunde, lässt sich ihre Reihenfolge nur noch über die laufende <code>id</code> erkennen oder über den Zeitstempel im gespeicherten JSON.',
+          kapitel:['F'], repo:'Raspberry/subscriber/', live:['PLC-Übersicht öffnen','http://datenkrake.local/plcdaten.php'] },
+        { kurz:'InfluxDB', titel:'Parallel: Die Historian-Bridge schreibt in InfluxDB', ort:'Container historian_bridge · Measurement plc_telemetry',
+          text:'Dieselbe Nachricht landet ein zweites Mal, diesmal im <b>Operational Historian</b> InfluxDB. Der ist auf Zeitreihen spezialisiert: Station, Tag und Datentyp werden zu Schlagwörtern, nach denen man schnell filtern kann. <b>Grafana</b> liest von hier und zeichnet Verläufe. Zwei Datenbanken für dieselben Werte, jede für das, was sie gut kann.',
+          gepaeckKopf:'Messpunkt in InfluxDB', gepaeck:'measurement  plc_telemetry\ntags         station=abf_llen, tag=AL_BG2_Bandsensor_Rechts,\n             datatype=Boolean, mqtt_topic=plc/abf_llen/…\nfield        wert = true\ntime         2026-09-07T13:25:40.429Z',
+          kapitel:['F'], repo:'Raspberry/historian_bridge/', live:['Grafana öffnen','http://datenkrake.local:3000'] },
+        { kurz:'Am Ziel', titel:'Am Ziel: Zwilling, Webseiten und KI', ort:'Webserver · api/plc.php · MCP-Server',
+          text:'Ab jetzt kann jeder den Wert lesen. Der <b>digitale Zwilling</b> holt sich alle Motor- und Sensorwerte über <code>api/plc.php?action=twin</code> und lässt den Bandsensor auf dem Anlagenschema zum richtigen Zeitpunkt aufleuchten. Die PLC-Übersicht zeigt die Rohdaten. Über den <b>MCP-Server</b> darf auch ein Sprachmodell die Tabelle lesen, mit einem eigenen Benutzer, der nur lesen darf.',
+          gepaeckKopf:'im digitalen Zwilling', gepaeck:'13:25:38  Abfüllen  Bandsensor rechts  aus\n13:25:40  Abfüllen  Bandsensor rechts  an   ● leuchtet',
+          stolper:'<b>Ein Zwilling ist nur so gut wie seine Daten.</b> Jede Stolperstelle unterwegs zeigt sich hier: Ein verlorener Impuls aus Halt 3 fehlt auch im Zwilling. Darum vergleicht man im Sprint Review die Teamdaten mit der Produktion.',
+          kapitel:['D','H'], repo:'Raspberry/web/', live:['Digitalen Zwilling öffnen','anlage-zwilling.html'] }
+      ],
+      fazit:'Vom Magnet bis zum Zwilling ist der Wert durch die SPS, Node-RED, den Broker, den Subscriber, die Datenbank und den Webserver gewandert. Dabei hat er dreimal seine Form gewechselt: vom elektrischen Signal zum OPC-UA-Knoten, zur JSON-Nachricht und schließlich zur Tabellenzeile. An jeder Übergabe kann etwas verloren gehen. Genau dort lohnt sich die Fehlersuche.'
+    },
+
+    akustik: {
+      titel:'Die Anlage klingt plötzlich anders',
+      einleitung:'Das Mikrofon am <b>Arduino UNO Q</b> hört der Anlage zu. Auf diesem Weg wird aus Schall eine Zahlenreihe, aus der Zahlenreihe ein Verdacht und aus dem Verdacht eine Reaktion der Agenten. Die Zahlenwerte unten sind ein Beispiel.',
+      schritte: [
+        { kurz:'Mikrofon', titel:'Das Mikrofon nimmt den Schall auf', ort:'USB-Mikrofon/Webcam · Arduino UNO Q',
+          text:'Das Mikrofon misst den Schalldruck <b>16 000-mal pro Sekunde</b> (Abtastrate 16 kHz). Der Arduino sammelt immer <b>2048 Abtastwerte</b> zu einem Block. Das sind 0,128 Sekunden Klang.',
+          gepaeckKopf:'ein Block Rohdaten', gepaeck:'2048 Zahlen zwischen -32768 und 32767\n[ 112, 98, -45, -230, -198, 31, 260, … ]',
+          stolper:'<b>Die Reihenfolge beim Anschließen zählt.</b> Erst die Dockingstation an den Strom, dann die Webcam, zuletzt den Arduino. Sonst findet der Arduino das Mikrofon nicht.',
+          kapitel:['C','D'], repo:'ArduinoUnoQ/' },
+        { kurz:'FFT', titel:'Der Arduino zerlegt den Klang in Frequenzen', ort:'ArduinoUnoQ/Python/main.py',
+          text:'Eine <b>FFT</b> rechnet aus, wie laut jede Frequenz im Block ist. Vorher werden die Werte normiert und mit einem Fenster weich ausgeblendet, damit die Ränder des Blocks nicht stören. Behalten werden die Frequenzen bis 5000 Hz in Schritten von knapp 8 Hz, das ergibt 641 Werte, das <b>Spektrum</b>. Dazu sucht der Arduino die lauteste Frequenz (<code>peak_freq</code>) und ihre Lautstärke (<code>peak_db</code>).',
+          gepaeckKopf:'Ergebnis eines Blocks (Beispiel)', gepaeck:'peak_freq  1210.9 Hz\npeak_db    -23.4 dB\nspectrum   [ -61.2, -58.7, -55.0, … ]   641 Werte',
+          stolper:'<b>Das Label setzt ein Mensch.</b> Ob eine Messung „gut“ oder „schlecht“ ist, stellt ihr in der Web-Oberfläche des Arduino ein. Ein falsch gesetztes Label landet genauso in der Datenbank und bringt später einem Modell das Falsche bei.',
+          kapitel:['D','G'], repo:'ArduinoUnoQ/Python/' },
+        { kurz:'MQTT', titel:'Einmal pro Sekunde geht eine Nachricht raus', ort:'MQTT · Topic audio/spectrum',
+          text:'Läuft die Aufnahme, schickt der Arduino <b>einmal pro Sekunde</b> eine Nachricht an den Broker auf dem Raspberry, nicht für jeden Block. Das schont Netz und Datenbank.',
+          gepaeckKopf:'Nachricht · Topic audio/spectrum', gepaeck:'{\n  "timestamp": "2026-10-25T10:14:03.512",\n  "label": "gut",\n  "peak_freq": 1210.9,\n  "peak_db": -23.4,\n  "spectrum": [ -61.2, -58.7, … ],\n  "sample_rate": 16000\n}',
+          kapitel:['E'], repo:'ArduinoUnoQ/Python/' },
+        { kurz:'Datenbanken', titel:'MariaDB bekommt alles, InfluxDB nur die Kennwerte', ort:'subscriber → audio_spectrum · historian_bridge → InfluxDB',
+          text:'Der Subscriber speichert die <b>komplette Messung</b> mit Spektrum in der Tabelle <code>audio_spectrum</code>. Das wird fürs Trainieren gebraucht. Die Historian-Bridge schreibt nach InfluxDB nur <b>Label, Frequenz und Pegel</b>, keine 641 Werte. Für Verläufe in Grafana reicht das, und InfluxDB bleibt schnell.',
+          gepaeckKopf:'neue Zeile in audio_spectrum', gepaeck:'ts           2026-10-25 10:14:03\nlabel        gut\npeak_freq    1210.9\npeak_db      -23.4\nspectrum     [641 Werte]\nsample_rate  16000',
+          kapitel:['F'], repo:'Raspberry/subscriber/', live:['Audio-Übersicht öffnen','http://datenkrake.local/audiodaten.php'] },
+        { kurz:'Anomalie?', titel:'Der Anomalie-Poller vergleicht mit den letzten Messungen', ort:'Agentensystem/anomalie_poller · alle 15 s',
+          text:'Alle 15 Sekunden nimmt der Poller die <b>letzten 20 Messungen</b>. Aus den 19 älteren berechnet er Mittelwert und Standardabweichung von <code>peak_db</code>. Weicht die neueste Messung um mehr als das <b>2,5-Fache der Standardabweichung</b> vom Mittelwert ab, gilt sie als auffällig. Dann schreibt er einen Eintrag in <code>audio_anomalien</code>. Statt dieser einfachen Statistik kann er auch ein selbst trainiertes Modell nutzen (Isolation Forest).',
+          gepaeckKopf:'Prüfung (Beispiel)', gepaeck:'Mittelwert der letzten 19:  -23.1 dB\nStandardabweichung:         0.6 dB\nGrenze:                     ± 1.5 dB\nneueste Messung:            -18.2 dB   → 4.9 dB daneben\nErgebnis:                   AUFFÄLLIG → neuer Eintrag in audio_anomalien',
+          stolper:'<b>Auffällig ist nicht gleich defekt.</b> Eine zuschlagende Tür oder ein lautes Gespräch neben dem Mikrofon reichen für einen Treffer. Ob die Regel taugt, muss man an echten Daten prüfen. Das ist die Evaluation-Phase von CRISP-DM.',
+          kapitel:['G','B'], repo:'Agentensystem/anomalie_poller/' },
+        { kurz:'Agenten', titel:'Die Agenten reagieren', ort:'Orchestrator · Wartungs-Agent · Report-Agent',
+          text:'Der <b>Orchestrator</b> schaut alle 20 Sekunden nach offenen Anomalien. Für jede fordert er beim <b>Wartungs-Agenten</b> über <b>LAP</b> einen Schmierzyklus an. Der Wartungs-Agent führt ihn erst nach einer ausdrücklichen Bestätigung aus. Danach markiert der Orchestrator die Anomalie als erledigt und schickt einen Bericht per <b>A2A</b> an den <b>Report-Agenten</b>.',
+          gepaeckKopf:'Bericht (Beispiel)', gepaeck:'Anomalie #17 bearbeitet\npeak_db -18.2 dB statt ca. -23.1 dB\nWartungs-Agent: Schmierzyklus nach Bestätigung ausgeführt\nErgebnis: …',
+          stolper:'<b>Die KI fasst die Anlage nicht an.</b> Der Wartungs-Agent darf nur sein eigenes Diagnosegerät bedienen, nie die Produktionssteuerung, und auch das nur nach Bestätigung.',
+          kapitel:['H'], repo:'Agentensystem/' }
+      ],
+      fazit:'Aus 16 000 Zahlen pro Sekunde werden 641 Frequenzwerte, daraus eine einzige Zahl, die gegen eine Grenze geprüft wird, und daraus eine Entscheidung. Jede Verdichtung wirft Information weg. Die Frage ist immer, ob es die richtige war.'
+    }
+  };
+
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(html != null) e.innerHTML = html;
+    return e;
+  }
+  function txt(tag, cls, text){ var e = el(tag, cls); e.textContent = text; return e; }
+
+  function baueReise(sektion){
+    var key = sektion.getAttribute('data-reise');
+    var r = REISEN[key];
+
+    var intro = el('div', 'info-box', '<b>'+r.titel+'.</b> '+r.einleitung);
+    intro.setAttribute('data-glossar-bereich', '');
+    sektion.appendChild(intro);
+
+    // Streckenübersicht
+    var panel = el('div', 'panel strecke-panel');
+    var kopf = el('div', 'strecke-head');
+    kopf.appendChild(txt('h2', null, 'Die Strecke'));
+    var play = txt('button', 'play-btn', '▶ Reise abspielen');
+    play.type = 'button';
+    kopf.appendChild(play);
+    panel.appendChild(kopf);
+    var strecke = el('ol', 'strecke');
+    var live = el('div', 'gepaeck-live');
+    live.appendChild(txt('span', 'lbl', 'Unterwegs'));
+    var livePre = txt('pre', null, 'Halt anklicken oder „Reise abspielen“');
+    live.appendChild(livePre);
+
+    var schritte = el('ol', 'schritte');
+    var halte = [];
+
+    r.schritte.forEach(function(s, i){
+      var id = key+'-'+(i+1);
+      var li = el('li');
+      var b = el('button', 'halt');
+      b.type = 'button';
+      b.appendChild(txt('span', 'nr', String(i+1)));
+      b.appendChild(txt('span', 'name', s.kurz));
+      b.title = s.titel;
+      b.addEventListener('click', function(){
+        stop();
+        setzeHalt(i);
+        document.getElementById(id).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+      });
+      li.appendChild(b);
+      strecke.appendChild(li);
+      halte.push(li);
+
+      var item = el('li', 'schritt');
+      item.id = id;
+      var farbe = (KAPITEL[s.kapitel[0]] || [,, 'bg-accent'])[2];
+      item.appendChild(txt('div', 'schritt-nr '+farbe, String(i+1)));
+      var p = el('div', 'panel');
+      p.setAttribute('data-glossar-bereich', '');
+      var h = el('div');
+      h.appendChild(txt('h3', null, s.titel));
+      var ort = txt('div', 'ort', s.ort);
+      ort.setAttribute('data-kein-glossar', '');
+      h.appendChild(ort);
+      p.appendChild(h);
+      p.appendChild(el('p', null, s.text));
+      var g = el('div', 'gepaeck');
+      g.appendChild(txt('div', 'kopf', s.gepaeckKopf));
+      g.appendChild(txt('pre', null, s.gepaeck));
+      p.appendChild(g);
+      if(s.stolper) p.appendChild(el('div', 'stolper', '⚠ Stolperstelle: '+s.stolper));
+      var fuss = el('div', 'schritt-fuss');
+      s.kapitel.forEach(function(k){
+        var a = txt('a', 'kap', 'Kapitel '+k+' · '+KAPITEL[k][1]);
+        a.href = 'index.html#'+KAPITEL[k][0];
+        fuss.appendChild(a);
+      });
+      var repo = txt('a', null, '📁 '+s.repo);
+      repo.href = REPO + s.repo;
+      repo.target = '_blank'; repo.rel = 'noopener';
+      fuss.appendChild(repo);
+      if(s.live){
+        var l = txt('a', null, '↗ '+s.live[0]);
+        l.href = s.live[1];
+        l.target = '_blank'; l.rel = 'noopener';
+        fuss.appendChild(l);
+      }
+      p.appendChild(fuss);
+      item.appendChild(p);
+      schritte.appendChild(item);
+    });
+
+    panel.appendChild(strecke);
+    panel.appendChild(live);
+    sektion.appendChild(panel);
+    sektion.appendChild(schritte);
+    var fazit = el('div', 'info-box fazit', '<b>Was man daraus lernt:</b> '+r.fazit);
+    fazit.setAttribute('data-glossar-bereich', '');
+    sektion.appendChild(fazit);
+
+    function setzeHalt(i){
+      halte.forEach(function(li, j){
+        li.classList.toggle('aktiv', j === i);
+        li.classList.toggle('passiert', j < i);
+      });
+      livePre.textContent = r.schritte[i].gepaeck;
+      halte[i].scrollIntoView({block:'nearest', inline:'center'});
+    }
+
+    var timer = null;
+    function stop(){
+      clearInterval(timer); timer = null;
+      play.textContent = '▶ Reise abspielen';
+    }
+    play.addEventListener('click', function(){
+      if(timer){ stop(); return; }
+      var i = 0;
+      setzeHalt(i);
+      play.textContent = '■ anhalten';
+      timer = setInterval(function(){
+        i++;
+        if(i >= r.schritte.length){ stop(); return; }
+        setzeHalt(i);
+      }, 2600);
+    });
+
+    // beim Scrollen den Halt markieren, der gerade gelesen wird
+    if('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(eintraege){
+        if(timer) return;
+        eintraege.forEach(function(e){
+          if(e.isIntersecting) setzeHalt(Number(e.target.id.split('-').pop()) - 1);
+        });
+      }, {rootMargin:'-45% 0px -50% 0px'});
+      schritte.querySelectorAll('.schritt').forEach(function(s){ obs.observe(s); });
+    }
+    sektion.stoppen = stop;
+  }
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sektionen = document.querySelectorAll('.reise');
+  sektionen.forEach(baueReise);
+
+  // Reiter
+  var tabs = document.querySelectorAll('.reise-tab');
+  function zeige(key, hashSetzen){
+    tabs.forEach(function(t){
+      var an = t.id === 'tab-'+key;
+      t.setAttribute('aria-selected', an ? 'true' : 'false');
+    });
+    sektionen.forEach(function(s){
+      var an = s.getAttribute('data-reise') === key;
+      if(!an && s.stoppen) s.stoppen();
+      s.hidden = !an;
+    });
+    if(hashSetzen && history.replaceState) history.replaceState(null, '', '#'+key);
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ zeige(t.id.replace('tab-',''), true); });
+  });
+  var start = (location.hash || '').replace('#','');
+  if(REISEN[start]) zeige(start, false);
+})();
+</script>
+<script src="glossar.js"></script>
+</body>
+</html>

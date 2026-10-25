@@ -17,6 +17,7 @@ Die Hauptseite ist bewusst in drei Dateien getrennt:
 - `content/chat.html`, `content/thema-*.html`, `content/quiz.html` und `content/glossar.html` enthalten die einzelnen Inhaltsbereiche.
 - `content-loader.js` laedt die HTML-Fragmente und startet danach `index.js` und `glossar.js`.
 - `content/glossar.json` enthaelt alle Glossarbegriffe, `glossar.js` baut daraus den Glossar-Bereich und die Tooltips.
+- `reise-eines-messwerts.html` ist eine eigenstaendige Vertiefungsseite (SPS-Impuls und Akustikmessung Schritt fuer Schritt). Die Inhalte stehen als Liste `REISEN` im Skript der Seite. Bereiche mit `data-glossar-bereich` bekommen ebenfalls Glossar-Tooltips.
 
 ## Glossar erweitern
 

@@ -144,6 +144,7 @@ dann meldet sich die Dockingstation korrekt als USB-Hub/Host an.
    | --- | --- |
    | `http://datenkrake.local` | Leitstand (`index.html`, siehe unten) |
    | `http://datenkrake.local/anlage-zwilling.html` | Digitaler Zwilling |
+   | `http://datenkrake.local/reise-eines-messwerts.html` | Vertiefung: ein Messwert Schritt für Schritt vom Sensor bis zum Agenten |
    | `http://datenkrake.local/audiodaten.php` | Audio-Live-Dashboard |
    | `http://datenkrake.local/plcdaten.php` | PLC-Telemetrie-Übersicht |
    | `http://datenkrake.local:1880` | Node-RED-Editor |
