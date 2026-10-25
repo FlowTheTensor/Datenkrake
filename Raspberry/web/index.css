@@ -343,13 +343,50 @@
   .mcp-list .v{font-size:11.5px; color:var(--ink-soft); margin-top:3px;}
   .mcp-sub{font-family:"JetBrains Mono",monospace; font-size:10.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;}
 
-  /* ---------- Technology grid ---------- */
-  .tech-groups{display:flex; flex-direction:column; gap:22px;}
-  .tech-group h3{font-size:11px; color:var(--ink-faint); letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; font-family:"JetBrains Mono",monospace; font-weight:500;}
-  .tech-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px;}
-  .tech-card{border:1px solid var(--line); border-radius:8px; padding:11px 13px; background:var(--surface-2);}
-  .tech-card .t{font-family:"JetBrains Mono",monospace; font-size:12.5px; color:var(--accent); margin-bottom:5px;}
-  .tech-card .d{font-size:11.5px; color:var(--ink-soft); line-height:1.5;}
+  /* ---------- Glossar ---------- */
+  #glossar{scroll-margin-top:64px;}
+  .gl-count{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-faint);}
+  .gl-intro{margin:0 0 14px; font-size:13px; color:var(--ink-soft); max-width:72ch;}
+  .gl-tools{display:flex; flex-direction:column; gap:10px; margin-bottom:16px;}
+  #glossarSuche{width:100%; max-width:420px; background:var(--surface); border:1px solid var(--line); color:var(--ink); border-radius:6px; padding:8px 11px; font:inherit; font-size:13px;}
+  #glossarSuche:focus{border-color:var(--accent); outline:none;}
+  .gl-filter{display:flex; flex-wrap:wrap; gap:6px;}
+  .gl-chip{border:1px solid var(--line); background:var(--surface-2); color:var(--ink-soft); border-radius:999px; padding:4px 11px; font-family:"JetBrains Mono",monospace; font-size:11px; cursor:pointer;}
+  .gl-chip:hover{border-color:var(--ink-faint); color:var(--ink);}
+  .gl-chip.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .gl-list{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px;}
+  .gl-card{border:1px solid var(--line); border-radius:8px; padding:12px 14px; background:var(--surface-2); scroll-margin-top:90px; display:flex; flex-direction:column; gap:7px;}
+  .gl-card[hidden]{display:none;}
+  .gl-card-head{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
+  .gl-card-title{font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:500; color:var(--accent);}
+  .gl-card-cat{font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); text-align:right;}
+  .gl-card-kurz{margin:0; font-size:12.5px; color:var(--ink); line-height:1.5;}
+  .gl-card-dk{margin:0; font-size:12px; color:var(--ink-soft); line-height:1.5;}
+  .gl-card-dk b{font-weight:600; color:var(--ink-soft);}
+  .gl-card-foot{display:flex; flex-wrap:wrap; gap:5px 10px; margin-top:auto; padding-top:4px; font-family:"JetBrains Mono",monospace; font-size:10.5px;}
+  .gl-kap{color:var(--ink-soft); text-decoration:none; border:1px solid var(--line); border-radius:4px; padding:1px 6px; background:var(--surface);}
+  .gl-kap:hover{border-color:var(--accent); color:var(--accent);}
+  .gl-siehe{color:var(--accent); text-decoration:none;}
+  .gl-siehe:hover{text-decoration:underline;}
+  .gl-card.gl-flash{animation:glFlash 1.6s ease-out;}
+  @keyframes glFlash{0%,30%{box-shadow:0 0 0 3px var(--accent-bright); border-color:var(--accent);} 100%{box-shadow:0 0 0 0 transparent;}}
+
+  /* markierte Begriffe im Fließtext */
+  .gl-term{
+    all:unset; display:inline; cursor:help; color:inherit; font:inherit;
+    text-decoration:underline dotted var(--accent); text-decoration-thickness:1.5px; text-underline-offset:3px;
+  }
+  .gl-term:hover,.gl-term[aria-expanded="true"]{color:var(--accent);}
+  .gl-term:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-radius:2px;}
+  .gl-tip{
+    position:fixed; z-index:1100; max-width:min(320px, calc(100vw - 32px));
+    background:var(--ink); color:#F4F1EB; border-radius:8px; padding:10px 12px;
+    box-shadow:0 6px 24px rgba(29,29,28,.22); font-size:12.5px; line-height:1.5;
+  }
+  .gl-tip[hidden]{display:none;}
+  .gl-tip-title{font-family:"JetBrains Mono",monospace; font-size:11.5px; color:#FF8A9C; margin-bottom:4px;}
+  .gl-tip-link{display:inline-block; margin-top:6px; color:#fff; font-size:11.5px; font-weight:600;}
+  @media (prefers-reduced-motion: reduce){.gl-card.gl-flash{animation:none; border-color:var(--accent);}}
 
   footer{
     padding:20px clamp(16px,4vw,48px) 40px; color:var(--ink-faint); font-size:11.5px;

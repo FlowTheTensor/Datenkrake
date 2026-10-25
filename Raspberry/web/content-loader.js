@@ -13,7 +13,7 @@
     ['mainContent', 'content/thema-d.html'],
     ['mainContent', 'content/thema-e.html'],
     ['mainContent', 'content/quiz.html'],
-    ['mainContent', 'content/technologien.html']
+    ['mainContent', 'content/glossar.html']
   ];
 
   try {
@@ -28,6 +28,10 @@
     const script = document.createElement('script');
     script.src = 'index.js';
     document.body.appendChild(script);
+
+    const glossar = document.createElement('script');
+    glossar.src = 'glossar.js';
+    document.body.appendChild(glossar);
   } catch (error) {
     document.body.insertAdjacentHTML(
       'beforeend', `<p class="content-error">Seiteninhalte konnten nicht geladen werden: ${error.message}</p>`

@@ -690,47 +690,4 @@
     }
   }
   document.getElementById('graphLoad').addEventListener('click', ladeAgentGraph);
-
-  /* ---------------- Technologie-Übersicht ---------------- */
-  var TECH = [
-    { group:'Protokolle & Kommunikation', items:[
-      ['MCP','Verbindet ein KI-Modell mit externen Werkzeugen und Daten — Tools, Resources, Prompts. Die "vertikale" Kante.'],
-      ['JSON-RPC','Leichtgewichtiges Aufrufprotokoll über JSON — technische Basis von MCP und A2A.'],
-      ['A2A','Verbindet mehrere eigenständige Agenten über Agent Cards, Skills und Tasks. Die "horizontale" Kante.'],
-      ['LAP','Verbindet einen Agenten mit einem physischen Gerät — Reservation, Safety-Fence, MeasurementResult.'],
-      ['MQTT','Publish/Subscribe-Protokoll für IoT-Geräte — verbindet Arduino und Raspberry Pi.']
-    ]},
-    { group:'Daten & KI', items:[
-      ['Neuronale Netze','Lernen aus Beispieldaten (z. B. Audiospektren), um Muster wie Anomalien zu erkennen.'],
-      ['YOLO','Echtzeit-Objekterkennung auf Kamerabildern, hier zur Erkennung des Werkstückträger-Durchlaufs.'],
-      ['SQL','Abfragesprache für relationale Datenbanken wie die MariaDB der Datenkrake.'],
-      ['Operational Historian','Spezialisierte Zeitreihen-Datenbank für Prozess- und Sensordaten.'],
-      ['Kafka','Verteiltes Streaming-System für hohe Datenmengen in Echtzeit.'],
-      ['MinIO','S3-kompatibler Objektspeicher, z. B. für Rohdaten oder Modelldateien.'],
-      ['Nessie','Git-artige Versionierung für Data-Lake-Tabellen.'],
-      ['Spark','Verteiltes Framework für die Verarbeitung großer Datenmengen.']
-    ]},
-    { group:'Hardware & Infrastruktur', items:[
-      ['RFID','Funkbasierte Kennzeichnung, hier zur Rückverfolgung der Werkstückträger.'],
-      ['Docker','Containerisierung — jeder Dienst läuft isoliert und reproduzierbar.'],
-      ['Arduino UNO Q','Mikrocontroller mit Linux-Anteil, erfasst hier Audio und rechnet KI-Inferenz.'],
-      ['Raspberry Pi','Kleincomputer, hier als "Datenkrake" — sammelt und speichert Sensordaten.'],
-      ['IoT','Vernetzte Sensoren und Geräte, die Daten automatisiert austauschen.']
-    ]},
-    { group:'Sprachmodelle & Zugriff', items:[
-      ['Lokale LLMs (LM Studio)','Sprachmodelle, die auf eigener Hardware laufen statt in der Cloud.'],
-      ['API-Key','Geheimer Schlüssel zur Authentifizierung gegenüber einer Schnittstelle.']
-    ]}
-  ];
-  var techEl = document.getElementById('techGroups');
-  TECH.forEach(function(g){
-    var wrap = document.createElement('div');
-    wrap.className = 'tech-group';
-    var grid = g.items.map(function(it){
-      return '<div class="tech-card"><div class="t">'+it[0]+'</div><div class="d">'+it[1]+'</div></div>';
-    }).join('');
-    wrap.innerHTML = '<h3>'+g.group+'</h3><div class="tech-grid">'+grid+'</div>';
-    techEl.appendChild(wrap);
-  });
-
 })();

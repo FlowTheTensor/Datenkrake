@@ -1,0 +1,805 @@
+{
+  "_hinweis": "Glossar der Datenkrake. Neuer Begriff: Eintrag in 'begriffe' ergänzen. 'treffer' sind die Schreibweisen, die in den Kapiteln automatisch markiert werden (Groß-/Kleinschreibung zählt, Mehrzahl extra eintragen). 'kapitel' sind die Kapitelbuchstaben A–H. 'siehe' verweist auf die id anderer Einträge.",
+  "kategorien": [
+    "Agiles Arbeiten",
+    "Vorgehen",
+    "Infrastruktur & Hardware",
+    "Anlage & Datenerhebung",
+    "Kommunikation",
+    "Datenhaltung & Analyse",
+    "Machine Learning",
+    "KI & Agenten"
+  ],
+  "begriffe": [
+    {
+      "id": "scrum",
+      "begriff": "Scrum",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Agiles Vorgehen, bei dem ein Team in kurzen, festen Zeitabschnitten (Sprints) arbeitet und danach das Ergebnis zeigt.",
+      "datenkrake": "Wir nutzen „Scrum light“: Sprints über mehrere Unterrichtsblöcke, Stand-up, Review und Retro – aber ohne den vollen Regelapparat.",
+      "treffer": ["Scrum", "Scrum light"],
+      "kapitel": ["A"],
+      "siehe": ["sprint", "kanban", "product-owner", "scrum-master"]
+    },
+    {
+      "id": "kanban",
+      "begriff": "Kanban-Board",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Tafel mit Spalten (z. B. Backlog → In Arbeit → Erledigt), auf der jede Aufgabe als Karte sichtbar weiterwandert.",
+      "datenkrake": "Das Board liegt in Forgejo. Spalten: Backlog, Bereit, In Arbeit (max. 1 Issue pro Team), Test, Erledigt.",
+      "treffer": ["Kanban-Board", "Kanban"],
+      "kapitel": ["A"],
+      "siehe": ["backlog", "issue", "forgejo"]
+    },
+    {
+      "id": "sprint",
+      "begriff": "Sprint",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Fester Zeitabschnitt, in dem das Team sich ein Ziel setzt und eine Auswahl an Aufgaben fertigstellt.",
+      "datenkrake": "Ein Sprint dauert mehrere Unterrichtsblöcke. Er beginnt mit dem Sprint Planning und endet mit Review und Retro.",
+      "treffer": ["Sprint", "Sprints", "Sprint Planning"],
+      "kapitel": ["A"],
+      "siehe": ["scrum", "retrospektive"]
+    },
+    {
+      "id": "backlog",
+      "begriff": "Backlog",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Sortierte Liste aller Ideen, Wünsche und Fehler, die irgendwann erledigt werden sollen.",
+      "datenkrake": "Jeder darf Ideen und Fehler als Issue ins Backlog stellen. Die Lehrkraft als Product Owner legt die Reihenfolge fest.",
+      "treffer": ["Backlog"],
+      "kapitel": ["A"],
+      "siehe": ["issue", "product-owner"]
+    },
+    {
+      "id": "issue",
+      "begriff": "Issue",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Eine einzelne Aufgabe oder Fehlermeldung mit Beschreibung, Kommentaren und Status – wie eine digitale Karteikarte.",
+      "datenkrake": "Issues liegen in Forgejo. Den passenden Deploy-Commit aus Node-RED verlinkt ihr im Issue.",
+      "treffer": ["Issue", "Issues"],
+      "kapitel": ["A"],
+      "siehe": ["backlog", "commit", "akzeptanzkriterien"]
+    },
+    {
+      "id": "akzeptanzkriterien",
+      "begriff": "Akzeptanzkriterien",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Prüfbare Bedingungen, an denen man erkennt, ob eine Aufgabe wirklich erfüllt ist.",
+      "datenkrake": "Erst wenn die Akzeptanzkriterien klar sind, darf ein Issue in die Spalte „Bereit“.",
+      "treffer": ["Akzeptanzkriterien"],
+      "kapitel": ["A"],
+      "siehe": ["definition-of-done"]
+    },
+    {
+      "id": "definition-of-done",
+      "begriff": "Definition of Done",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Gemeinsame Checkliste, die für jede Aufgabe gilt, bevor sie als „erledigt“ zählt.",
+      "datenkrake": "Bei uns: deployt und Commit verlinkt, Akzeptanzkriterien abgehakt, von einem anderen Team getestet, kurz dokumentiert, vom Product Owner abgenommen.",
+      "treffer": ["Definition of Done"],
+      "kapitel": ["A"],
+      "siehe": ["akzeptanzkriterien"]
+    },
+    {
+      "id": "product-owner",
+      "begriff": "Product Owner",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Rolle, die entscheidet, was als Nächstes gebaut wird, und fertige Ergebnisse abnimmt.",
+      "datenkrake": "Diese Rolle übernimmt die Lehrkraft.",
+      "treffer": ["Product Owner", "Product Owners"],
+      "kapitel": ["A"],
+      "siehe": ["scrum-master", "backlog"]
+    },
+    {
+      "id": "scrum-master",
+      "begriff": "Scrum Master",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Rolle, die darauf achtet, dass das Vorgehen funktioniert: moderiert Treffen und räumt Hindernisse aus dem Weg.",
+      "datenkrake": "Wechselt jeden Sprint, moderiert Stand-up und Retro und hält das Board aktuell.",
+      "treffer": ["Scrum Master"],
+      "kapitel": ["A"],
+      "siehe": ["stand-up", "retrospektive"]
+    },
+    {
+      "id": "stand-up",
+      "begriff": "Stand-up",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Kurzes Treffen im Stehen: Was habe ich geschafft? Was mache ich heute? Wo hänge ich fest?",
+      "datenkrake": "Zu Beginn jedes Unterrichtsblocks.",
+      "treffer": ["Stand-up", "Stand-ups"],
+      "kapitel": ["A"],
+      "siehe": ["scrum-master"]
+    },
+    {
+      "id": "retrospektive",
+      "begriff": "Retrospektive (Retro)",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Rückblick am Sprintende auf die Zusammenarbeit: Was beginnen wir, was lassen wir, was behalten wir bei?",
+      "datenkrake": "Nach dem Review, im Format Start/Stop/Continue.",
+      "treffer": ["Retrospektive", "Retro"],
+      "kapitel": ["A"],
+      "siehe": ["sprint"]
+    },
+    {
+      "id": "forgejo",
+      "begriff": "Forgejo",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Freie, selbst betriebene Plattform für Git-Repositories mit Issues und Boards – ähnlich wie GitHub, aber auf eigenem Rechner.",
+      "datenkrake": "Läuft als Container auf dem Raspberry (Port 3001) und enthält Backlog, Kanban-Board und die automatisch gesicherten Node-RED-Deploys.",
+      "treffer": ["Forgejo"],
+      "kapitel": ["A"],
+      "siehe": ["commit", "kanban"]
+    },
+    {
+      "id": "commit",
+      "begriff": "Commit",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Gespeicherter Zwischenstand in einer Versionsverwaltung (Git), mit Zeitpunkt, Autor und Beschreibung.",
+      "datenkrake": "Jeder Deploy im Node-RED-Editor wird automatisch als Commit eures Stations-Tabs gesichert und ist in Forgejo sichtbar.",
+      "treffer": ["Commit", "Commits", "Deploy-Commit"],
+      "kapitel": ["A"],
+      "siehe": ["deploy", "forgejo"]
+    },
+    {
+      "id": "deploy",
+      "begriff": "Deploy",
+      "kategorie": "Agiles Arbeiten",
+      "kurz": "Eine Änderung „scharf schalten“, also vom Entwurf in den laufenden Betrieb übernehmen.",
+      "datenkrake": "In Node-RED ist das der rote Deploy-Knopf. Danach laufen eure Flows sofort mit echten Anlagendaten.",
+      "treffer": ["Deploy", "Deploys", "deployt"],
+      "kapitel": ["A", "E"],
+      "siehe": ["node-red", "commit"]
+    },
+    {
+      "id": "crisp-dm",
+      "begriff": "CRISP-DM",
+      "kategorie": "Vorgehen",
+      "kurz": "Standard-Vorgehensmodell für Datenprojekte in sechs Phasen: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation, Deployment.",
+      "datenkrake": "Das ganze Projekt folgt diesem Kreislauf – von der Frage „Warum überwachen wir die Anlage?“ bis zur Reaktion der Agenten.",
+      "treffer": ["CRISP-DM"],
+      "kapitel": ["B"],
+      "siehe": ["anomalie"]
+    },
+    {
+      "id": "raspberry-pi",
+      "begriff": "Raspberry Pi",
+      "kategorie": "Infrastruktur & Hardware",
+      "kurz": "Kleiner, günstiger Einplatinencomputer mit Linux.",
+      "datenkrake": "Er ist die eigentliche „Datenkrake“: Auf ihm laufen Broker, Datenbanken, Node-RED, Grafana, Forgejo und diese Webseite (datenkrake.local).",
+      "treffer": ["Raspberry Pi", "Raspberry"],
+      "kapitel": ["C"],
+      "siehe": ["docker", "edge"]
+    },
+    {
+      "id": "arduino-uno-q",
+      "begriff": "Arduino UNO Q",
+      "kategorie": "Infrastruktur & Hardware",
+      "kurz": "Board, das einen Mikrocontroller mit einem kleinen Linux-Rechner kombiniert.",
+      "datenkrake": "Nimmt mit einem USB-Mikrofon den Klang der Anlage auf, berechnet das Spektrum (FFT) und kann selbst KI-Inferenz ausführen.",
+      "treffer": ["Arduino UNO Q", "Arduino"],
+      "kapitel": ["C", "D"],
+      "siehe": ["fft", "edge", "inferenz"]
+    },
+    {
+      "id": "docker",
+      "begriff": "Docker / Container",
+      "kategorie": "Infrastruktur & Hardware",
+      "kurz": "Software läuft in abgeschotteten „Containern“, die alles Nötige mitbringen – dadurch überall gleich und leicht neu aufzusetzen.",
+      "datenkrake": "Jeder Dienst auf dem Raspberry (MariaDB, Mosquitto, Node-RED, Grafana …) ist ein eigener Container, zusammen gestartet mit Docker Compose.",
+      "treffer": ["Docker-Stack", "Docker", "Container"],
+      "kapitel": ["C"],
+      "siehe": ["raspberry-pi"]
+    },
+    {
+      "id": "edge",
+      "begriff": "Edge Computing / Edge AI",
+      "kategorie": "Infrastruktur & Hardware",
+      "kurz": "Daten werden direkt dort verarbeitet, wo sie entstehen – nahe an der Maschine statt in einem entfernten Rechenzentrum.",
+      "datenkrake": "Der Raspberry ist der Edge-Server der Anlage. Der Arduino UNO Q rechnet KI direkt am Sensor (Edge AI).",
+      "treffer": ["Edge AI", "Edge-Gerät", "Edge-Server", "Edge-Servers", "Edge Computing"],
+      "kapitel": ["C"],
+      "siehe": ["arduino-uno-q", "inferenz"]
+    },
+    {
+      "id": "dmz",
+      "begriff": "DMZ",
+      "kategorie": "Infrastruktur & Hardware",
+      "kurz": "„Demilitarisierte Zone“: abgetrenntes Netz zwischen geschütztem Innennetz und der Außenwelt.",
+      "datenkrake": "Der Raspberry hängt per Ethernet im Anlagen-Netz und per WLAN im DMZ-Netz der Schule. So erreicht ihr die Webseiten, ohne direkt an die SPSen zu kommen.",
+      "treffer": ["DMZ"],
+      "kapitel": ["C"],
+      "siehe": ["sps"]
+    },
+    {
+      "id": "iot",
+      "begriff": "IoT (Internet of Things)",
+      "kategorie": "Infrastruktur & Hardware",
+      "kurz": "Vernetzte Sensoren und Geräte, die selbstständig Daten austauschen.",
+      "datenkrake": "Arduino, SPS-Stationen und Raspberry bilden zusammen einen kleinen IoT-Stack.",
+      "treffer": ["IoT"],
+      "kapitel": ["C"],
+      "siehe": ["mqtt"]
+    },
+    {
+      "id": "sps",
+      "begriff": "SPS",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Speicherprogrammierbare Steuerung: robuster Industrierechner, der Sensoren einliest und Motoren, Ventile usw. steuert.",
+      "datenkrake": "Die Modellanlage hat Siemens-S7-1500-Steuerungen (192.168.36.1–9), die ihre Werte per OPC-UA bereitstellen.",
+      "treffer": ["SPS", "SPSen", "S7-1500", "PLC"],
+      "kapitel": ["D"],
+      "siehe": ["opc-ua", "flanke"]
+    },
+    {
+      "id": "opc-ua",
+      "begriff": "OPC-UA",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Herstellerunabhängiger Industriestandard, mit dem Maschinen ihre Daten strukturiert (als Baum von Knoten) anbieten.",
+      "datenkrake": "Node-RED liest die SPS-Knoten per OPC-UA (Port 4840) einmal pro Sekunde und schickt sie weiter per MQTT.",
+      "treffer": ["OPC-UA", "OPC UA"],
+      "kapitel": ["D", "E"],
+      "siehe": ["sps", "uaexpert", "node-red"]
+    },
+    {
+      "id": "uaexpert",
+      "begriff": "UAExpert",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Kostenloses Programm, mit dem man OPC-UA-Server durchsuchen und einzelne Werte live beobachten kann.",
+      "datenkrake": "Damit wurden die Knotenlisten der Stationen exportiert (Ordner UAExpertExport/). Gut geeignet, um nachzuprüfen, was die SPS wirklich liefert.",
+      "treffer": ["UAExpert"],
+      "kapitel": ["D"],
+      "siehe": ["opc-ua"]
+    },
+    {
+      "id": "transfersystem",
+      "begriff": "Transfersystem",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Förderband-Abschnitt, auf dem Werkstückträger von Station zu Station fahren.",
+      "datenkrake": "Magnetsensoren am Band melden, wenn ein Werkstückträger ein- oder ausfährt. Dazu kommen Motor-Rechts- und -Linkslauf.",
+      "treffer": ["Transfersystem", "Transfersysteme", "Transfersystemen"],
+      "kapitel": ["D"],
+      "siehe": ["flanke", "digitaler-zwilling"]
+    },
+    {
+      "id": "ipc",
+      "begriff": "IPC",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Industrie-PC: robuster PC für den Einsatz in der Fertigung.",
+      "datenkrake": "Das Hochregallager wird von einem IPC gesteuert, der nicht programmierbar ist. Deshalb wird es nicht per OPC-UA abgefragt.",
+      "treffer": ["IPC"],
+      "kapitel": ["C", "D"],
+      "siehe": ["sps"]
+    },
+    {
+      "id": "flanke",
+      "begriff": "Flanke",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Der Moment, in dem ein Signal umschaltet: steigende Flanke 0 → 1, fallende Flanke 1 → 0.",
+      "datenkrake": "Fährt ein Werkstückträger am Bandsensor vorbei, entsteht nur ein sehr kurzer Impuls. Wird zu selten abgefragt, geht er verloren – ein echtes Problem bei der Datenerhebung.",
+      "treffer": ["Flanke", "Flanken", "Flankenwechsel"],
+      "kapitel": ["D"],
+      "siehe": ["sps", "transfersystem"]
+    },
+    {
+      "id": "digitaler-zwilling",
+      "begriff": "Digitaler Zwilling",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Digitales Abbild einer realen Anlage, das ihren Zustand anhand echter Messdaten nachzeichnet.",
+      "datenkrake": "Unser Zwilling spielt eine Produktion auf dem Anlagenschema ab: Motoren und Bandsensoren leuchten zeitrichtig auf. Auf dem Pi wahlweise mit Produktions- oder Teamdaten.",
+      "treffer": ["Digitaler Zwilling", "digitaler Zwilling", "digitalen Zwilling", "Digitalen Zwilling", "Zwilling"],
+      "kapitel": ["D"],
+      "siehe": ["transfersystem"]
+    },
+    {
+      "id": "fft",
+      "begriff": "FFT / Spektrum",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Die Fast Fourier Transform zerlegt ein Geräusch in seine Frequenzanteile. Das Ergebnis heißt Spektrum.",
+      "datenkrake": "Der Arduino berechnet aus dem Mikrofonsignal FFT-Bänder. An ihnen sieht man, ob die Anlage „anders klingt“ als sonst.",
+      "treffer": ["FFT", "Spektrum", "Spektren", "Audio-Spektren"],
+      "kapitel": ["D", "G"],
+      "siehe": ["arduino-uno-q", "anomalie"]
+    },
+    {
+      "id": "yolo",
+      "begriff": "YOLO",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "„You Only Look Once“: neuronales Netz, das Objekte in Kamerabildern in Echtzeit erkennt.",
+      "datenkrake": "Geplant für die optische Erkennung der durchfahrenden Werkstückträger.",
+      "treffer": ["YOLO", "YOLO-System"],
+      "kapitel": ["D"],
+      "siehe": ["neuronales-netz"]
+    },
+    {
+      "id": "rfid",
+      "begriff": "RFID",
+      "kategorie": "Anlage & Datenerhebung",
+      "kurz": "Funkbasierte Kennzeichnung: Ein kleiner Chip wird berührungslos ausgelesen.",
+      "datenkrake": "Dient zur Rückverfolgung der Werkstückträger.",
+      "treffer": ["RFID"],
+      "kapitel": ["D"],
+      "siehe": []
+    },
+    {
+      "id": "mqtt",
+      "begriff": "MQTT",
+      "kategorie": "Kommunikation",
+      "kurz": "Schlankes Nachrichtenprotokoll nach dem Publish/Subscribe-Prinzip: Absender veröffentlichen unter einem Topic, Empfänger abonnieren es.",
+      "datenkrake": "Arduino und Node-RED schicken ihre Werte an den Mosquitto-Broker, z. B. unter plc/<station>/<tag> oder team/<station>/<tag>.",
+      "treffer": ["MQTT"],
+      "kapitel": ["E"],
+      "siehe": ["broker", "topic", "publish-subscribe"]
+    },
+    {
+      "id": "publish-subscribe",
+      "begriff": "Publish/Subscribe",
+      "kategorie": "Kommunikation",
+      "kurz": "Kommunikationsmuster, bei dem Sender und Empfänger sich nicht kennen: Der Sender „ruft hinaus“, wer Interesse hat, hört zu.",
+      "datenkrake": "Der Subscriber-Dienst abonniert plc/# und team/# und schreibt alles in die MariaDB.",
+      "treffer": ["Publish/Subscribe", "Subscriber", "Subscribe"],
+      "kapitel": ["E"],
+      "siehe": ["mqtt", "broker"]
+    },
+    {
+      "id": "broker",
+      "begriff": "Broker",
+      "kategorie": "Kommunikation",
+      "kurz": "Vermittler bei MQTT: Er nimmt alle Nachrichten an und verteilt sie an die passenden Abonnenten.",
+      "datenkrake": "Bei uns ist das Mosquitto, als Container auf dem Raspberry.",
+      "treffer": ["MQTT-Broker", "Mosquitto-Broker", "Broker"],
+      "kapitel": ["E"],
+      "siehe": ["mosquitto", "mqtt"]
+    },
+    {
+      "id": "mosquitto",
+      "begriff": "Mosquitto",
+      "kategorie": "Kommunikation",
+      "kurz": "Weit verbreiteter, freier MQTT-Broker.",
+      "datenkrake": "Läuft als Container auf dem Raspberry (Ordner Raspberry/mosquitto/).",
+      "treffer": ["Mosquitto"],
+      "kapitel": ["E"],
+      "siehe": ["broker"]
+    },
+    {
+      "id": "topic",
+      "begriff": "Topic",
+      "kategorie": "Kommunikation",
+      "kurz": "„Adresse“ einer MQTT-Nachricht, aufgebaut wie ein Pfad mit Schrägstrichen. # abonniert alles darunter.",
+      "datenkrake": "plc/<station>/<tag> für die Produktion, team/<station>/<tag> für die Stationsteams.",
+      "treffer": ["Topic", "Topics", "Topic-Namensraum"],
+      "kapitel": ["E"],
+      "siehe": ["mqtt"]
+    },
+    {
+      "id": "retain",
+      "begriff": "Retain",
+      "kategorie": "Kommunikation",
+      "kurz": "MQTT-Option: Der Broker merkt sich die letzte Nachricht eines Topics und gibt sie neuen Abonnenten sofort.",
+      "datenkrake": "Nur für den Heartbeat sinnvoll, nicht für schnell wechselnde Prozesswerte.",
+      "treffer": ["Retain"],
+      "kapitel": ["E"],
+      "siehe": ["mqtt", "broker"]
+    },
+    {
+      "id": "node-red",
+      "begriff": "Node-RED",
+      "kategorie": "Kommunikation",
+      "kurz": "Werkzeug, mit dem man Datenflüsse im Browser aus Bausteinen (Nodes) zusammenklickt, statt sie zu programmieren.",
+      "datenkrake": "Übersetzt zwischen OPC-UA und MQTT. Jedes Stationsteam arbeitet in seinem eigenen Tab (Port 1880).",
+      "treffer": ["Node-RED"],
+      "kapitel": ["E", "A"],
+      "siehe": ["opc-ua", "mqtt", "deploy"]
+    },
+    {
+      "id": "json",
+      "begriff": "JSON",
+      "kategorie": "Kommunikation",
+      "kurz": "Einfaches Textformat für strukturierte Daten, z. B. {\"temp\": 21.5}.",
+      "datenkrake": "Die meisten Nachrichten zwischen Diensten und Agenten sind JSON.",
+      "treffer": ["JSON"],
+      "kapitel": ["E", "H"],
+      "siehe": ["json-rpc"]
+    },
+    {
+      "id": "json-rpc",
+      "begriff": "JSON-RPC",
+      "kategorie": "Kommunikation",
+      "kurz": "Leichtgewichtiges Protokoll, um über JSON-Nachrichten Funktionen auf einem anderen Rechner aufzurufen.",
+      "datenkrake": "Technische Grundlage von MCP und A2A.",
+      "treffer": ["JSON-RPC"],
+      "kapitel": ["H"],
+      "siehe": ["mcp", "a2a"]
+    },
+    {
+      "id": "mariadb",
+      "begriff": "MariaDB",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Freie relationale Datenbank (Abzweigung von MySQL), die Daten in Tabellen speichert.",
+      "datenkrake": "Die vollständige Datenquelle: Tabellen wie plc_telemetry und audio_spectrum, inklusive kompletter Spektren fürs Training.",
+      "treffer": ["MariaDB"],
+      "kapitel": ["F"],
+      "siehe": ["sql", "historian"]
+    },
+    {
+      "id": "sql",
+      "begriff": "SQL",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Abfragesprache für relationale Datenbanken, z. B. SELECT * FROM plc_telemetry.",
+      "datenkrake": "Damit fragen Webseiten, Agenten und eure Auswertungen die MariaDB ab.",
+      "treffer": ["SQL"],
+      "kapitel": ["F"],
+      "siehe": ["mariadb"]
+    },
+    {
+      "id": "historian",
+      "begriff": "Operational Historian",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Datenbank speziell für Prozess- und Sensorwerte über die Zeit, optimiert für viele kleine Messpunkte.",
+      "datenkrake": "InfluxDB übernimmt diese Rolle. Die Historian-Bridge schreibt nur skalare Werte hinein, keine kompletten FFT-Arrays.",
+      "treffer": ["Operational Historian", "Historian-Bridge", "Historian"],
+      "kapitel": ["F"],
+      "siehe": ["influxdb", "zeitreihe"]
+    },
+    {
+      "id": "influxdb",
+      "begriff": "InfluxDB",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Verbreitete Zeitreihen-Datenbank, abgefragt mit der Sprache Flux.",
+      "datenkrake": "Unser Operational Historian. Grafana und der Anomalie-Poller lesen daraus.",
+      "treffer": ["InfluxDB"],
+      "kapitel": ["F"],
+      "siehe": ["historian", "grafana"]
+    },
+    {
+      "id": "zeitreihe",
+      "begriff": "Zeitreihe",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Folge von Messwerten mit Zeitstempel, z. B. Lautstärke jede Sekunde.",
+      "datenkrake": "Fast alle Anlagendaten sind Zeitreihen. Wichtig ist ein verlässlicher Zeitstempel – darum setzt Node-RED ihn selbst, weil die SPS-Uhren nicht stimmen.",
+      "treffer": ["Zeitreihe", "Zeitreihen", "Zeitreihenanalysen", "Zeitreihen-Datenbank"],
+      "kapitel": ["F"],
+      "siehe": ["historian"]
+    },
+    {
+      "id": "telemetrie",
+      "begriff": "Telemetrie",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Automatisches Erfassen und Übertragen von Messwerten aus der Ferne.",
+      "datenkrake": "Die SPS-Werte landen in der Tabelle plc_telemetry. Die Spalte quelle unterscheidet Produktion und Teams.",
+      "treffer": ["Telemetrie", "Telemetriefluss"],
+      "kapitel": ["F"],
+      "siehe": ["mariadb"]
+    },
+    {
+      "id": "grafana",
+      "begriff": "Grafana",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Werkzeug für Dashboards: zeigt Messwerte als Diagramme, live und im Verlauf.",
+      "datenkrake": "Läuft auf Port 3000 und liest aus InfluxDB.",
+      "treffer": ["Grafana"],
+      "kapitel": ["F"],
+      "siehe": ["influxdb"]
+    },
+    {
+      "id": "data-lake",
+      "begriff": "Data Lake",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Großer Speicher, in dem Rohdaten aller Art gesammelt werden, um sie später flexibel auszuwerten.",
+      "datenkrake": "Läuft bewusst auf einem stärkeren Rechner (nicht dem Pi) mit MinIO, Nessie und Spark/Jupyter und holt seine Daten per Batch-Import aus der MariaDB.",
+      "treffer": ["Data-Lake-Stack", "Data Lake", "Data-Lake"],
+      "kapitel": ["F"],
+      "siehe": ["minio", "nessie", "spark", "jupyter"]
+    },
+    {
+      "id": "minio",
+      "begriff": "MinIO",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Objektspeicher, der wie Amazon S3 funktioniert – ein Ablageort für Dateien jeder Größe.",
+      "datenkrake": "Speicherschicht des Data Lakes, z. B. für Rohdaten und Modelldateien.",
+      "treffer": ["MinIO"],
+      "kapitel": ["F"],
+      "siehe": ["data-lake"]
+    },
+    {
+      "id": "nessie",
+      "begriff": "Nessie",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Versionsverwaltung für Datentabellen – wie Git, nur für Daten.",
+      "datenkrake": "Merkt sich im Data Lake, welcher Tabellenstand wann galt.",
+      "treffer": ["Nessie"],
+      "kapitel": ["F"],
+      "siehe": ["data-lake"]
+    },
+    {
+      "id": "spark",
+      "begriff": "Spark",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Framework, das große Datenmengen auf viele Rechenkerne oder Rechner verteilt verarbeitet.",
+      "datenkrake": "Rechenmotor des Data Lakes, gesteuert aus Jupyter.",
+      "treffer": ["Spark"],
+      "kapitel": ["F"],
+      "siehe": ["jupyter", "data-lake"]
+    },
+    {
+      "id": "jupyter",
+      "begriff": "Jupyter",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Notebook im Browser, in dem Code, Ergebnisse, Diagramme und Erklärtext zusammen stehen.",
+      "datenkrake": "Hier wertet ihr die exportierten Daten aus und vergleicht ML-Verfahren.",
+      "treffer": ["Jupyter"],
+      "kapitel": ["F", "G"],
+      "siehe": ["spark"]
+    },
+    {
+      "id": "kafka",
+      "begriff": "Kafka",
+      "kategorie": "Datenhaltung & Analyse",
+      "kurz": "Verteiltes Streaming-System für sehr große Datenmengen in Echtzeit.",
+      "datenkrake": "Wird nicht eingesetzt – MQTT reicht für die Datenmengen der Modellanlage. Gut als Vergleich: Wann bräuchte man so etwas?",
+      "treffer": ["Kafka"],
+      "kapitel": ["F"],
+      "siehe": ["mqtt"]
+    },
+    {
+      "id": "anomalie",
+      "begriff": "Anomalie-Erkennung",
+      "kategorie": "Machine Learning",
+      "kurz": "Automatisches Erkennen von Messwerten, die deutlich vom Normalverhalten abweichen.",
+      "datenkrake": "Ziel des ganzen Projekts: Klingt die Anlage ungewöhnlich, wird eine Anomalie gemeldet und die Agentenkette reagiert.",
+      "treffer": ["Anomalieerkennung", "Anomalie-Erkennung", "Anomalie-Detektor", "Anomalien", "Anomalie"],
+      "kapitel": ["G"],
+      "siehe": ["anomalie-poller", "fft"]
+    },
+    {
+      "id": "feature",
+      "begriff": "Feature",
+      "kategorie": "Machine Learning",
+      "kurz": "Eingangsgröße für ein ML-Modell, also eine messbare Eigenschaft, z. B. die Lautstärke in einem Frequenzband.",
+      "datenkrake": "Bei der Akustik z. B. FFT-Bänder und peak_db.",
+      "treffer": ["Feature", "Features", "Feature-Store"],
+      "kapitel": ["G"],
+      "siehe": ["label"]
+    },
+    {
+      "id": "label",
+      "begriff": "Label",
+      "kategorie": "Machine Learning",
+      "kurz": "Die „richtige Antwort“ zu einem Trainingsbeispiel, z. B. gut oder schlecht.",
+      "datenkrake": "Akustikmessungen werden mit gut/schlecht gelabelt, damit ein Modell daraus lernen kann.",
+      "treffer": ["Label", "Labels"],
+      "kapitel": ["G"],
+      "siehe": ["feature", "trainingsdaten"]
+    },
+    {
+      "id": "trainingsdaten",
+      "begriff": "Trainingsdaten",
+      "kategorie": "Machine Learning",
+      "kurz": "Beispieldaten, aus denen ein Modell lernt. Getestet wird mit anderen Daten, die es noch nicht kennt.",
+      "datenkrake": "Kommen aus der MariaDB (CSV-Export) und werden lokal oder in Jupyter verarbeitet.",
+      "treffer": ["Trainingsdaten", "Training"],
+      "kapitel": ["G"],
+      "siehe": ["overfitting"]
+    },
+    {
+      "id": "overfitting",
+      "begriff": "Overfitting",
+      "kategorie": "Machine Learning",
+      "kurz": "Ein Modell lernt die Trainingsdaten auswendig, statt das Muster dahinter – und versagt bei neuen Daten.",
+      "datenkrake": "Typisches Risiko bei Entscheidungsbäumen und wenigen Messdaten.",
+      "treffer": ["Overfitting", "overfitting"],
+      "kapitel": ["G"],
+      "siehe": ["trainingsdaten", "entscheidungsbaum"]
+    },
+    {
+      "id": "klassifikation",
+      "begriff": "Klassifikation",
+      "kategorie": "Machine Learning",
+      "kurz": "ML-Aufgabe, bei der jedes Beispiel einer Klasse zugeordnet wird, z. B. „gut“ oder „schlecht“.",
+      "datenkrake": "Die Akustikbewertung gut/schlecht ist eine Klassifikation.",
+      "treffer": ["Klassifikation"],
+      "kapitel": ["G"],
+      "siehe": ["regression", "label"]
+    },
+    {
+      "id": "regression",
+      "begriff": "Regression",
+      "kategorie": "Machine Learning",
+      "kurz": "Lineare Regression sagt eine Zahl vorher. Logistische Regression berechnet trotz des Namens eine Wahrscheinlichkeit für eine Klasse.",
+      "datenkrake": "Beide stehen im Vergleich der ML-Verfahren als gut erklärbare Einstiegsmodelle.",
+      "treffer": ["Lineare Regression", "Logistische Regression", "Regression"],
+      "kapitel": ["G"],
+      "siehe": ["klassifikation"]
+    },
+    {
+      "id": "entscheidungsbaum",
+      "begriff": "Entscheidungsbaum",
+      "kategorie": "Machine Learning",
+      "kurz": "Modell aus vielen Wenn-dann-Fragen, die wie ein Baum verzweigen. Gut nachvollziehbar.",
+      "datenkrake": "Teil des Verfahrensvergleichs in Kapitel G.",
+      "treffer": ["Entscheidungsbaum", "Entscheidungsbäume"],
+      "kapitel": ["G"],
+      "siehe": ["overfitting"]
+    },
+    {
+      "id": "knn",
+      "begriff": "kNN",
+      "kategorie": "Machine Learning",
+      "kurz": "k-nächste-Nachbarn: Ein neuer Wert bekommt die Klasse, die die meisten seiner k ähnlichsten Beispiele haben.",
+      "datenkrake": "Teil des Verfahrensvergleichs. Vorsicht: Merkmale müssen vorher skaliert werden.",
+      "treffer": ["kNN"],
+      "kapitel": ["G"],
+      "siehe": ["klassifikation"]
+    },
+    {
+      "id": "naiver-bayes",
+      "begriff": "Naiver Bayes",
+      "kategorie": "Machine Learning",
+      "kurz": "Schnelles Wahrscheinlichkeitsmodell, das „naiv“ annimmt, alle Merkmale seien voneinander unabhängig.",
+      "datenkrake": "Teil des Verfahrensvergleichs in Kapitel G.",
+      "treffer": ["Naiver Bayes", "Naive Bayes"],
+      "kapitel": ["G"],
+      "siehe": ["klassifikation"]
+    },
+    {
+      "id": "neuronales-netz",
+      "begriff": "Neuronales Netz",
+      "kategorie": "Machine Learning",
+      "kurz": "Modell aus vielen verknüpften Rechenknoten, das komplexe Muster aus Beispielen lernt.",
+      "datenkrake": "Grundlage von YOLO und der Akustik-KI auf dem Arduino.",
+      "treffer": ["Neuronale Netze", "neuronale Netze", "Neuronales Netz", "neuronales Netz"],
+      "kapitel": ["G"],
+      "siehe": ["yolo", "inferenz"]
+    },
+    {
+      "id": "inferenz",
+      "begriff": "Inferenz",
+      "kategorie": "Machine Learning",
+      "kurz": "Das Anwenden eines fertig trainierten Modells auf neue Daten, also das eigentliche „Vorhersagen“.",
+      "datenkrake": "Der Arduino UNO Q kann Inferenz direkt am Mikrofon rechnen. Später sollen seine Ergebnisse den Anomalie-Poller ersetzen.",
+      "treffer": ["KI-Inferenz", "Inferenz", "Inferenz-Events"],
+      "kapitel": ["G"],
+      "siehe": ["edge"]
+    },
+    {
+      "id": "ki-agent",
+      "begriff": "KI-Agent",
+      "kategorie": "KI & Agenten",
+      "kurz": "Programm, das mit einem Sprachmodell selbstständig entscheidet, welche Werkzeuge es nutzt, um ein Ziel zu erreichen.",
+      "datenkrake": "Es gibt Orchestrator-, DB-, Report- und Wartungs-Agent, die über MCP, A2A und LAP zusammenarbeiten.",
+      "treffer": ["KI-Agenten", "KI-Agent", "Agentensystem", "Agentenkette"],
+      "kapitel": ["H"],
+      "siehe": ["harness", "orchestrator", "llm"]
+    },
+    {
+      "id": "llm",
+      "begriff": "LLM / Sprachmodell",
+      "kategorie": "KI & Agenten",
+      "kurz": "Large Language Model: KI, die mit riesigen Textmengen trainiert wurde und Text versteht und erzeugt.",
+      "datenkrake": "Wahlweise Claude (Cloud) oder ein lokales Modell über LM Studio.",
+      "treffer": ["LLMs", "LLM", "Sprachmodelle", "Sprachmodell", "Sprachmodells"],
+      "kapitel": ["H"],
+      "siehe": ["lm-studio", "ki-agent"]
+    },
+    {
+      "id": "lm-studio",
+      "begriff": "LM Studio",
+      "kategorie": "KI & Agenten",
+      "kurz": "Programm, mit dem man Sprachmodelle auf dem eigenen Rechner laufen lässt – ohne Cloud.",
+      "datenkrake": "Stellt den Agenten ein lokales LLM bereit (Standard: Port 1234). Keine Daten verlassen das Schulnetz.",
+      "treffer": ["LM Studio"],
+      "kapitel": ["H"],
+      "siehe": ["llm"]
+    },
+    {
+      "id": "harness",
+      "begriff": "Harness",
+      "kategorie": "KI & Agenten",
+      "kurz": "Die Schleife um ein Sprachmodell: LLM aufrufen, gewünschtes Werkzeug ausführen, Ergebnis zurückgeben, merken – und wieder von vorn.",
+      "datenkrake": "Kein Extra-Baustein: Jeder unserer Agenten ist sein eigener Harness.",
+      "treffer": ["Harness"],
+      "kapitel": ["H"],
+      "siehe": ["ki-agent", "tool"]
+    },
+    {
+      "id": "tool",
+      "begriff": "Tool (Werkzeug)",
+      "kategorie": "KI & Agenten",
+      "kurz": "Funktion, die ein Sprachmodell aufrufen darf, z. B. „Datenbank abfragen“. Das Modell entscheidet, wann.",
+      "datenkrake": "Der MCP-Server bietet z. B. get_stats() an: Kennzahlen je Label.",
+      "treffer": ["MCP-Werkzeuge", "Tools", "Tool"],
+      "kapitel": ["H"],
+      "siehe": ["mcp", "harness"]
+    },
+    {
+      "id": "prompt",
+      "begriff": "Prompt",
+      "kategorie": "KI & Agenten",
+      "kurz": "Die Eingabe bzw. Anweisung an ein Sprachmodell.",
+      "datenkrake": "In der Agenten-Konsole schreibt ihr Prompts an den Orchestrator.",
+      "treffer": ["Prompts", "Prompt"],
+      "kapitel": ["H"],
+      "siehe": ["llm"]
+    },
+    {
+      "id": "mcp",
+      "begriff": "MCP (Model Context Protocol)",
+      "kategorie": "KI & Agenten",
+      "kurz": "Protokoll, das ein Sprachmodell mit Werkzeugen, Daten und Prompt-Vorlagen verbindet – die „vertikale“ Kante.",
+      "datenkrake": "Claude Desktop greift über einen lokalen MCP-Server auf die MariaDB zu.",
+      "treffer": ["MCP-Server", "MCP"],
+      "kapitel": ["H"],
+      "siehe": ["tool", "a2a", "lap"]
+    },
+    {
+      "id": "a2a",
+      "begriff": "A2A (Agent-to-Agent)",
+      "kategorie": "KI & Agenten",
+      "kurz": "Protokoll, über das eigenständige Agenten miteinander sprechen und sich Aufgaben übergeben – die „horizontale“ Kante.",
+      "datenkrake": "Der Orchestrator delegiert per A2A an DB- und Report-Agent.",
+      "treffer": ["A2A"],
+      "kapitel": ["H"],
+      "siehe": ["agent-card", "orchestrator", "mcp"]
+    },
+    {
+      "id": "lap",
+      "begriff": "LAP (Local Agent Protocol)",
+      "kategorie": "KI & Agenten",
+      "kurz": "Protokoll, das einen Agenten mit einem physischen Gerät verbindet – mit Reservierung und Sicherheitsabfrage vor jeder Aktion.",
+      "datenkrake": "Der Wartungs-Agent ist ein LAP-Instrument. Vor jeder Aktion verlangt er eine ausdrückliche Bestätigung (Safety-Fence).",
+      "treffer": ["LAP"],
+      "kapitel": ["H"],
+      "siehe": ["a2a", "mcp"]
+    },
+    {
+      "id": "agent-card",
+      "begriff": "Agent Card",
+      "kategorie": "KI & Agenten",
+      "kurz": "„Visitenkarte“ eines A2A-Agenten im JSON-Format: Name, Adresse und welche Skills er kann.",
+      "datenkrake": "Die Agenten-Konsole liest die Agent Cards direkt ab – gut zum Testen mit curl.",
+      "treffer": ["Agent Cards", "Agent Card"],
+      "kapitel": ["H"],
+      "siehe": ["a2a"]
+    },
+    {
+      "id": "orchestrator",
+      "begriff": "Orchestrator",
+      "kategorie": "KI & Agenten",
+      "kurz": "Agent, der eine Aufgabe zerlegt und die Teile an spezialisierte Agenten verteilt – wie ein Dirigent.",
+      "datenkrake": "Wird durch neue Anomalien ausgelöst und verteilt an DB-, Report- und Wartungs-Agent (Port 9200).",
+      "treffer": ["Orchestrator-Agent", "Orchestrator"],
+      "kapitel": ["H"],
+      "siehe": ["a2a", "ki-agent"]
+    },
+    {
+      "id": "langgraph",
+      "begriff": "LangGraph",
+      "kategorie": "KI & Agenten",
+      "kurz": "Bibliothek, mit der man den Ablauf eines Agenten als Graph aus Schritten und Verzweigungen beschreibt.",
+      "datenkrake": "Orchestrator, DB- und Report-Agent sind als LangGraph-Graph gebaut. In der LangGraph-Werkstatt könnt ihr das selbst ausprobieren.",
+      "treffer": ["LangGraph-Graph", "LangGraph"],
+      "kapitel": ["H"],
+      "siehe": ["ki-agent"]
+    },
+    {
+      "id": "anomalie-poller",
+      "begriff": "Anomalie-Poller",
+      "kategorie": "KI & Agenten",
+      "kurz": "Dienst, der in festen Abständen nachsieht, ob es Neues gibt („pollen“), statt auf eine Meldung zu warten.",
+      "datenkrake": "Prüft alle 15 Sekunden die Akustikdaten statistisch und schreibt Treffer in audio_anomalien – das löst die Agentenkette aus.",
+      "treffer": ["Anomalie-Poller", "anomalie_poller", "Poller"],
+      "kapitel": ["G", "H"],
+      "siehe": ["anomalie", "orchestrator"]
+    },
+    {
+      "id": "api-key",
+      "begriff": "API-Key",
+      "kategorie": "KI & Agenten",
+      "kurz": "Geheimer Schlüssel, mit dem sich ein Programm bei einer Schnittstelle ausweist. Gehört nie in öffentlichen Code.",
+      "datenkrake": "Nötig für Cloud-LLMs. Lokale Modelle über LM Studio brauchen meist keinen.",
+      "treffer": ["API-Key", "API-Keys"],
+      "kapitel": ["H"],
+      "siehe": ["llm"]
+    }
+  ]
+}
