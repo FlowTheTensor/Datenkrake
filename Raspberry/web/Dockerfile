@@ -16,6 +16,7 @@ COPY Raspberry/web/content-loader.js /var/www/html/content-loader.js
 COPY Raspberry/web/glossar.js /var/www/html/glossar.js
 COPY Raspberry/web/lernpfade.js /var/www/html/lernpfade.js
 COPY Raspberry/web/content /var/www/html/content
+COPY Raspberry/web/vendor /var/www/html/vendor
 COPY Images/DatenbankAkustik.jpg /var/www/html/DatenbankAkustik.jpg
 COPY Images/DatenbankPLC.jpg /var/www/html/DatenbankPLC.jpg
 COPY Images/krake_klein.jpg /var/www/html/krake_klein.jpg

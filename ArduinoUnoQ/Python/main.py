@@ -136,9 +136,10 @@ HTML = '''
 <head>
     <title>Audio-Spektrum Sammler</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <!-- Bibliotheken liegen lokal in Python/static (DSGVO: keine Verbindung zu einem CDN). -->
+    <script src="/static/chart.umd.min.js"></script>
+    <script src="/static/tf.min.js"></script>
+    <script src="/static/anime.min.js"></script>
     <style>
         body { font-family: Arial; background: #fff; color: #333; margin: 20px; max-width: 100vw; overflow-x: hidden; }
         h1 { color: #8b1a1a; margin: 0; }

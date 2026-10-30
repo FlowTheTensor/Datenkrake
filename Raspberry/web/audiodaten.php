@@ -7,7 +7,7 @@ if (!isset($GLOBALS['__DASHBOARD_RENDERED__'])) {
 <head>
     <meta charset="UTF-8">
     <title>Audio-Spektrum Dashboard - Live</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="vendor/chart.umd.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; background: #f8f8f8; }
         .audio-hero-image { display: block; width: 100%; max-width: 1100px; height: 180px; object-fit: contain; object-position: center; margin: 0 auto 14px; }
